@@ -285,6 +285,7 @@ $button-size: 1.5rem;
 
 /* Large feature header image */
 .image-wrap {
+	background: black;
 	position: relative;
 	margin-bottom: 2em;
 	@include clearfix;
@@ -309,10 +310,12 @@ $button-size: 1.5rem;
 		}
 	}
 	img {
-		width: 100%;
-		height: auto;
+		
+		max-width: 100%;
+		max-height: 100%;
 		-ms-interpolation-mode: bicubic;
 	}
+	
 	.headline-wrap {
 		position: absolute;
 		bottom: 25px;

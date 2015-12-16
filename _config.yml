@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title:            Site Title
+title:            ChrisMaughan.com
 locale:           en_US
-url:
+url: http://localhost:4000
 
 
 # Jekyll configuration
@@ -25,36 +25,37 @@ kramdown:
 
 # Site owner
 owner:
-  name: Your Name
+  name: Chris Maughan
   avatar: bio-photo.jpg
-  bio: "Describe your self."
-  email:
-  disqus-shortname:
-  twitter: #username
-  facebook: #username
-  google:
-    plus: #username
-    analytics:
-    verify:
-    ad-client:
-    ad-slot:
-  bing-verify:
-  github: #username
-  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: #username
-  xing: #username
-  instagram: #username
-  lastfm: #username
-  tumblr: #username
-  pinterest: #username
-  foursquare: #username
-  steam: #username
-  dribbble: #username
-  youtube: #username
-  soundcloud: #username
-  weibo: #username
-  flickr: #username
-  codepen: #username
+  bio: "A coder for NVIDIA, and triathlete when my body lets me.  I like to learn new things."
+  #email: 
+  #disqus-shortname:
+  twitter: cmaughan
+  github: cmaughan
+  facebook: mornymorny
+  #google:
+  #  plus: #username
+  #  analytics:
+  #  verify:
+  #  ad-client:
+  #  ad-slot:
+  #bing-verify:
+  
+  #stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
+  #linkedin: #username
+  #xing: #username
+  #instagram: #username
+  #lastfm: #username
+  #tumblr: #username
+  #pinterest: #username
+  #foursquare: #username
+  #steam: #username
+  #dribbble: #username
+  #youtube: #username
+  #soundcloud: #username
+  #weibo: #username
+  #flickr: #username
+  #codepen: #username
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]

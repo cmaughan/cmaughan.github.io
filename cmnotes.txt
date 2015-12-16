@@ -1,0 +1,4 @@
+setpath.cmd in the jekyll directory
+gem install bundler
+
+octopress new post "Title" --dir posts
