@@ -1,6 +1,6 @@
 ---
 layout: home
-excerpt: "A minimal Jekyll theme for your blog by designer Michael Rose."
+excerpt: "The blog of Chris Maughan, programmer."
 tags: [Jekyll, theme, responsive, blog, template]
 image:
   feature: hand_door.png
