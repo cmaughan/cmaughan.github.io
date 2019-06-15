@@ -6,19 +6,31 @@
     <description>Recent content in Portfolios on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Nov 2016 18:25:22 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 05 Nov 2017 18:25:22 +0530</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Boardz</title>
-      <link>https://chrismaughan.com/portfolio/boardz/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
+      <title>Game Of Life</title>
+      <link>https://chrismaughan.com/portfolio/gameoflife/</link>
+      <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/boardz/</guid>
-      <description>&lt;p&gt;Boardz was a collection of turn based board games which I released for iPhone and iPad.  It included a server, player matching &amp;amp; chat.
-&lt;/p&gt;</description>
+      <guid>https://chrismaughan.com/portfolio/gameoflife/</guid>
+      <description>&lt;p&gt;Implementing Game of Life is a classic programming challenge.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mgfx</title>
+      <link>https://chrismaughan.com/portfolio/mgfx/</link>
+      <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/mgfx/</guid>
+      <description>&lt;p&gt;Mgfx is a teaching framework I&amp;rsquo;ve used at York Developers.  It has a simple support for building 2D and 3D applications in C++, with cross platform support.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -33,48 +45,14 @@
     </item>
     
     <item>
-      <title>Game</title>
-      <link>https://chrismaughan.com/portfolio/game/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/game/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Game Of Life</title>
-      <link>https://chrismaughan.com/portfolio/gameoflife/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/gameoflife/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MapMindz</title>
-      <link>https://chrismaughan.com/portfolio/mapmindz/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/mapmindz/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Mazes</title>
       <link>https://chrismaughan.com/portfolio/mazes/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mazes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NanoVg (D3D Backend)</title>
-      <link>https://chrismaughan.com/portfolio/nanovg/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/nanovg/</guid>
-      <description></description>
+      <description>&lt;p&gt;Generating Mazes in code is a fun challenge.  I&amp;rsquo;ve taught this at the York Code Dojo a couple of times.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -83,7 +61,9 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/raytracer_aa/</guid>
-      <description></description>
+      <description>&lt;p&gt;Every graphics engineer should write a ray tracer at some point.  I&amp;rsquo;ve done this a couple of times in C++ and Python.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,6 +72,48 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/stocks/</guid>
+      <description>&lt;p&gt;Understanding how Option Trades evolve over time is key to being able to trade them effectively.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MapMindz</title>
+      <link>https://chrismaughan.com/portfolio/mapmindz/</link>
+      <pubDate>Tue, 05 Nov 2013 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/mapmindz/</guid>
+      <description>&lt;p&gt;MapMindz was a little application I wrote for Microsoft Surface 1.  You could use it to build a Mind Map.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Boardz</title>
+      <link>https://chrismaughan.com/portfolio/boardz/</link>
+      <pubDate>Sat, 05 Nov 2011 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/boardz/</guid>
+      <description>&lt;p&gt;Boardz was a collection of turn based board games released for iPhone and iPad.  It included a server, player matching &amp;amp; chat.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Game</title>
+      <link>https://chrismaughan.com/portfolio/game/</link>
+      <pubDate>Fri, 05 Nov 2010 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/game/</guid>
+      <description>I like to tinker at Game Development occasionally; my hex planet app shown here is one such example.
+ I sadly don&amp;rsquo;t have time to build a game - this is probably a retirement project ;) The screenshot below shows the game inside an engine based on ImGui. The shader implements an atmospheric scattering algorithm, which you can read about here.</description>
+    </item>
+    
+    <item>
+      <title>NanoVg (D3D Backend)</title>
+      <link>https://chrismaughan.com/portfolio/nanovg/</link>
+      <pubDate>Wed, 05 Nov 2008 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/nanovg/</guid>
       <description></description>
     </item>
     
@@ -112,7 +134,7 @@
       <pubDate>Thu, 01 Jan 2004 18:25:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/dxsas/</guid>
-      <description>&lt;p&gt;To support our developers in implementing DXSAS shader semantics, I wrote a little tool that implemented just the SAS processing.&lt;/p&gt;
+      <description>&lt;p&gt;To support our developers in implementing DXSAS shader semantics, I developed an example tool that implemented the SAS processing and allowed you to combine full screen effects.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
