@@ -6,10 +6,21 @@
     <description>Recent content on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Nov 2017 18:25:22 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 18:25:22 +0530</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Nsight Graphics</title>
+      <link>https://chrismaughan.com/portfolio/gputrace/</link>
+      <pubDate>Sun, 05 May 2019 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/gputrace/</guid>
+      <description>&lt;p&gt;I currently work on the Nsight Graphics Team at NVIDIA.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Game Of Life</title>
