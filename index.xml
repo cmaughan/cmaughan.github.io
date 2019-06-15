@@ -17,7 +17,8 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/boardz/</guid>
-      <description></description>
+      <description>&lt;p&gt;Boardz was a collection of turn based board games which I released for iPhone and iPad.  It included a server, player matching &amp;amp; chat.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,16 +27,9 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/connect4/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DXSAS</title>
-      <link>https://chrismaughan.com/portfolio/dxsas/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/dxsas/</guid>
-      <description></description>
+      <description>&lt;p&gt;At the York Code Dojo, we spent an evening writing a connect 4 player.  We pitched the results against each other to see which could play the best.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -75,42 +69,6 @@
     </item>
     
     <item>
-      <title>NVIDIA Effects Browser</title>
-      <link>https://chrismaughan.com/portfolio/nveffectsbrowser/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NVIDIA FX Composer</title>
-      <link>https://chrismaughan.com/portfolio/fxcomposer/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/fxcomposer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NVIDIA Shader Debugger</title>
-      <link>https://chrismaughan.com/portfolio/nvshaderdebugger/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/nvshaderdebugger/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NVLink</title>
-      <link>https://chrismaughan.com/portfolio/nvlink/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/nvlink/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>NanoVg (D3D Backend)</title>
       <link>https://chrismaughan.com/portfolio/nanovg/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
@@ -135,6 +93,62 @@
       
       <guid>https://chrismaughan.com/portfolio/stocks/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Early Shader Debugger</title>
+      <link>https://chrismaughan.com/portfolio/nvshaderdebugger/</link>
+      <pubDate>Thu, 01 Jan 2004 18:26:22 +0532</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/nvshaderdebugger/</guid>
+      <description>&lt;p&gt;Older versions of the DXSDK came with a reference rasterizer, that could simulate hardware shaders.  It was very slow, but it had the advantage that you could use it to debug shaders.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DXSAS</title>
+      <link>https://chrismaughan.com/portfolio/dxsas/</link>
+      <pubDate>Thu, 01 Jan 2004 18:25:22 +0532</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/dxsas/</guid>
+      <description>&lt;p&gt;To support our developers in implementing DXSAS shader semantics, I wrote a little tool that implemented just the SAS processing.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NVIDIA FX Composer</title>
+      <link>https://chrismaughan.com/portfolio/fxcomposer/</link>
+      <pubDate>Tue, 01 Jan 2002 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/fxcomposer/</guid>
+      <description>&lt;p&gt;FX Composer 2.5 is a powerful integrated development environment for shader authoring.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NV Shader Linker</title>
+      <link>https://chrismaughan.com/portfolio/nvlink/</link>
+      <pubDate>Sat, 01 Jan 2000 18:30:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/nvlink/</guid>
+      <description>&lt;p&gt;NV Shader Linker was an attempt to build a traditional fixed function graphics pipeline using a series of shader fragments.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NVIDIA Effects Browser</title>
+      <link>https://chrismaughan.com/portfolio/nveffectsbrowser/</link>
+      <pubDate>Sat, 01 Jan 2000 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
+      <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders - which were shortly going to be available in hardware.
+I worked on the NVIDIA Effects Browser which became part of the NVIDIA SDK.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

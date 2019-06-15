@@ -1,1 +1,14 @@
 /* your styles go here */
+.content-column-content p,
+.content-column-content li {
+  color: #444444;
+}
+.sidebar-p {
+  color: #666666;
+  font-size: 14px;
+}
+
+.box-masonry .box-masonry-text p {
+  color: #666666;
+  font-size: 14px;
+}

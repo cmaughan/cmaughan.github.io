@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>NVIDIA Shader Debugger</title>
+<title>Early Shader Debugger</title>
 <meta name="description" content="ChrisMaughan.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
@@ -40,6 +40,8 @@
     <h1 class="sidebar-heading"><a href="https://chrismaughan.com">ChrisMaughan.com</a></h1>
     
       <p class="sidebar-p">I'm a programmer, working for NVIDIA.</p>
+    
+      <p class="sidebar-p">This site contains screenshots of personal & professional projects.</p>
     
       <p class="sidebar-p">Based in York, UK</p>
     
@@ -104,9 +106,16 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="content-column-content">
-         <h1>NVIDIA Shader Debugger</h1>
-         <p><img src="/img/portfolio/nvshaderdebugger/nvshaderdebugger.jpg" alt="NVSHADERDEBUGGER" /></p>
+         <h1>Early Shader Debugger</h1>
+         <p>Older versions of the DXSDK came with a reference rasterizer, that could simulate hardware shaders.  It was very slow, but it had the advantage that you could use it to debug shaders.</p>
 
+<p></p>
+
+<p>Using custom debug API&rsquo;s from microsoft, I built a simple C++/Windows application that showed the contents of teh shader registers, inputs and constants.  You could step through the shader and see the results.</p>
+
+<p>This method of shader debugging is no longer supported, and with good reason - it was too slow to be very practical.</p>
+
+<p><img src="/img/portfolio/nvshaderdebugger/nvshaderdebugger.jpg" alt="NVSHADERDEBUGGER" /></p>
          
       </div>
     </div>

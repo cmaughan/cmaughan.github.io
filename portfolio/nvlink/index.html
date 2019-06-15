@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>NVLink</title>
+<title>NV Shader Linker</title>
 <meta name="description" content="ChrisMaughan.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
@@ -40,6 +40,8 @@
     <h1 class="sidebar-heading"><a href="https://chrismaughan.com">ChrisMaughan.com</a></h1>
     
       <p class="sidebar-p">I'm a programmer, working for NVIDIA.</p>
+    
+      <p class="sidebar-p">This site contains screenshots of personal & professional projects.</p>
     
       <p class="sidebar-p">Based in York, UK</p>
     
@@ -104,9 +106,18 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="content-column-content">
-         <h1>NVLink</h1>
-         <p><img src="/img/portfolio/nvlink/nvlink.jpg" alt="NVLINK" /></p>
+         <h1>NV Shader Linker</h1>
+         <p>NV Shader Linker was an attempt to build a traditional fixed function graphics pipeline using a series of shader fragments.</p>
 
+<p></p>
+
+<p>I built this tool to show developers how to implement fixed function shading on modern hardware without those facilities.  The demo let you pick the number and type of lights you wanted to use, and then generated a working shader supporting them.  The demo also applied the results to a model in NVIDIA Effects Browser.  Skinning was supported, though I don&rsquo;t recall if that was done in the shader!</p>
+
+<p>The fun part of this project was figuring out how to declare shader &lsquo;fragments&rsquo; and sew them together at runtime.  Additionally, I did some rudimentary optimization to remove dead code and reduce register usage.</p>
+
+<p>Not long after this, Microsoft shipped a similar system in their SDK, which was very similar to this one.</p>
+
+<p><img src="/img/portfolio/nvlink/nvlink.jpg" alt="NVLINK" /></p>
          
       </div>
     </div>
