@@ -104,8 +104,9 @@
       <pubDate>Fri, 05 Nov 2010 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/game/</guid>
-      <description>I like to tinker at Game Development occasionally; my hex planet app shown here is one such example.
- I sadly don&amp;rsquo;t have time to build a game - this is probably a retirement project ;) The screenshot below shows the game inside an engine based on ImGui. The shader implements an atmospheric scattering algorithm, which you can read about here.</description>
+      <description>&lt;p&gt;I like to tinker at Game Development occasionally; my hex planet app shown here is one such example.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
