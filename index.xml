@@ -67,12 +67,34 @@
     </item>
     
     <item>
+      <title>Gestures</title>
+      <link>https://chrismaughan.com/portfolio/gestures/</link>
+      <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/gestures/</guid>
+      <description>&lt;p&gt;Recognizing gestures for a spell casting game idea.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Mgfx</title>
       <link>https://chrismaughan.com/portfolio/mgfx/</link>
       <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mgfx/</guid>
       <description>&lt;p&gt;Mgfx is a teaching framework I&amp;rsquo;ve used at York Developers.  It has a simple support for building 2D and 3D applications in C++, with cross platform support.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Voxels</title>
+      <link>https://chrismaughan.com/portfolio/voxels/</link>
+      <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/voxels/</guid>
+      <description>&lt;p&gt;Most graphics programmers have played with Voxels/Minecraft style of rendering.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
