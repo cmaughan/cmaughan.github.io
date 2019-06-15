@@ -50,7 +50,7 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mazes/</guid>
-      <description>&lt;p&gt;Generating Mazes in code is a fun challenge.  I&amp;rsquo;ve taught this at the York Code Dojo a couple of times.&lt;/p&gt;
+      <description>&lt;p&gt;Generating Mazes in code is a fun challenge.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -83,9 +83,8 @@
       <pubDate>Tue, 05 Nov 2013 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mapmindz/</guid>
-      <description>&lt;p&gt;MapMindz was a little application I wrote for Microsoft Surface 1.  You could use it to build a Mind Map.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;MapMindz was a little application I wrote for Microsoft Surface 1.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -115,7 +114,9 @@
       <pubDate>Wed, 05 Nov 2008 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nanovg/</guid>
-      <description></description>
+      <description>&lt;p&gt;NanoVg is a 2D Vector Library.  I contributed a D3D backend to the effort - just for fun.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -124,7 +125,7 @@
       <pubDate>Thu, 01 Jan 2004 18:26:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nvshaderdebugger/</guid>
-      <description>&lt;p&gt;Older versions of the DXSDK came with a reference rasterizer, that could simulate hardware shaders.  It was very slow, but it had the advantage that you could use it to debug shaders.&lt;/p&gt;
+      <description>&lt;p&gt;An early shader debugger for the DirectX Reference Rasterizer&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -168,8 +169,7 @@
       <pubDate>Sat, 01 Jan 2000 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
-      <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders - which were shortly going to be available in hardware.
-I worked on the NVIDIA Effects Browser which became part of the NVIDIA SDK.&lt;/p&gt;
+      <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
