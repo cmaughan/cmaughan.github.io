@@ -6,10 +6,21 @@
     <description>Recent content in Portfolios on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 May 2019 18:26:22 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 15 Jun 2019 18:25:22 +0532</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jorvik</title>
+      <link>https://chrismaughan.com/portfolio/jorvik/</link>
+      <pubDate>Sat, 15 Jun 2019 18:25:22 +0532</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/jorvik/</guid>
+      <description>&lt;p&gt;Jorvik is my current Code &amp;amp; Coffee project.  It is intended to be a live shader editing tool for Algorave and Interactive applications.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Zep</title>
