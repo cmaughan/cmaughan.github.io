@@ -6,10 +6,21 @@
     <description>Recent content in Portfolios on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 May 2019 18:25:22 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 18:26:22 +0530</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Zep</title>
+      <link>https://chrismaughan.com/portfolio/zep/</link>
+      <pubDate>Sun, 05 May 2019 18:26:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/zep/</guid>
+      <description>&lt;p&gt;Zep is a lightweight editor, designed to be used inside a 3D engine.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Nsight Graphics</title>
