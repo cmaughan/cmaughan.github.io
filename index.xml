@@ -2,138 +2,138 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ChrisMaughan.com</title>
-    <link>https://chrismaughan.com/</link>
+    <link>https://chrismaughan.com/portfolio/</link>
     <description>Recent content on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 Nov 2016 18:25:22 +0530</lastBuildDate>
     
-	<atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Boardz</title>
-      <link>https://chrismaughan.com/portfolio/boardz/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/boardz/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/boardz/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/boardz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Connect4</title>
-      <link>https://chrismaughan.com/portfolio/connect4/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/connect4/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/connect4/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/connect4/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DXSAS</title>
-      <link>https://chrismaughan.com/portfolio/dxsas/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/dxsas/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/dxsas/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/dxsas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Game</title>
-      <link>https://chrismaughan.com/portfolio/game/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/game/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/game/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/game/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Game Of Life</title>
-      <link>https://chrismaughan.com/portfolio/gameoflife/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/gameoflife/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/gameoflife/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/gameoflife/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MapMindz</title>
-      <link>https://chrismaughan.com/portfolio/mapmindz/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/mapmindz/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/mapmindz/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/mapmindz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mazes</title>
-      <link>https://chrismaughan.com/portfolio/mazes/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/mazes/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/mazes/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/mazes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NVIDIA Effects Browser</title>
-      <link>https://chrismaughan.com/portfolio/nveffectsbrowser/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/nveffectsbrowser/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/nveffectsbrowser/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NVIDIA FX Composer</title>
-      <link>https://chrismaughan.com/portfolio/fxcomposer/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/fxcomposer/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/fxcomposer/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/fxcomposer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NVIDIA Shader Debugger</title>
-      <link>https://chrismaughan.com/portfolio/nvshaderdebugger/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/nvshaderdebugger/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/nvshaderdebugger/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/nvshaderdebugger/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NVLink</title>
-      <link>https://chrismaughan.com/portfolio/nvlink/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/nvlink/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/nvlink/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/nvlink/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NanoVg (D3D Backend)</title>
-      <link>https://chrismaughan.com/portfolio/nanovg/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/nanovg/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/nanovg/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/nanovg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ray Tracer</title>
-      <link>https://chrismaughan.com/portfolio/raytracer_aa/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/raytracer_aa/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/raytracer_aa/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/raytracer_aa/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Stocks</title>
-      <link>https://chrismaughan.com/portfolio/stocks/</link>
+      <link>https://chrismaughan.com/portfolio/portfolio/stocks/</link>
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
-      <guid>https://chrismaughan.com/portfolio/stocks/</guid>
+      <guid>https://chrismaughan.com/portfolio/portfolio/stocks/</guid>
       <description></description>
     </item>
     

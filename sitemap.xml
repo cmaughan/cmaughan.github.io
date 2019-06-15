@@ -3,93 +3,87 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://chrismaughan.com/contact/</loc>
+    <loc>https://chrismaughan.com/portfolio/contact/</loc>
     <lastmod>2016-11-06T13:00:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/about/</loc>
+    <loc>https://chrismaughan.com/portfolio/about/</loc>
     <lastmod>2016-11-05T21:05:33+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/boardz/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/boardz/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/connect4/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/connect4/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/dxsas/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/dxsas/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/game/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/game/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/gameoflife/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/gameoflife/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/mapmindz/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/mapmindz/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/mazes/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/mazes/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/nveffectsbrowser/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/nveffectsbrowser/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/fxcomposer/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/fxcomposer/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/nvshaderdebugger/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/nvshaderdebugger/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/nvlink/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/nvlink/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/nanovg/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/nanovg/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/raytracer_aa/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/raytracer_aa/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/portfolio/stocks/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/stocks/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/</loc>
-    <lastmod>2016-11-05T18:25:22+05:30</lastmod>
+    <loc>https://chrismaughan.com/portfolio/categories/</loc>
     <priority>0</priority>
   </url>
   
@@ -100,7 +94,13 @@
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/tags/</loc>
+    <loc>https://chrismaughan.com/portfolio/portfolio/</loc>
+    <lastmod>2016-11-05T18:25:22+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/portfolio/tags/</loc>
     <priority>0</priority>
   </url>
   
