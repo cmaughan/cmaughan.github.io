@@ -48,6 +48,15 @@
     </item>
     
     <item>
+      <title>Advent Of Code - Day 10, 2018</title>
+      <link>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</link>
+      <pubDate>Mon, 10 Dec 2018 13:20:02 +0100</pubDate>
+      
+      <guid>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s my solution to day 10 of Advent Of Code; inside the asteroids game&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Easy Render</title>
       <link>https://chrismaughan.com/portfolio/easyrender/</link>
       <pubDate>Mon, 01 Jan 2018 18:25:22 +0532</pubDate>
@@ -126,6 +135,15 @@
       
       <guid>https://chrismaughan.com/portfolio/stocks/</guid>
       <description>&lt;p&gt;Understanding how Option Trades evolve over time is key to being able to trade them effectively.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scheme</title>
+      <link>https://chrismaughan.com/portfolio/scheme/</link>
+      <pubDate>Fri, 08 May 2015 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/scheme/</guid>
+      <description>&lt;p&gt;Building a lisp interpreter is an interesting exercise, especially if you are new to functional programming.&lt;/p&gt;</description>
     </item>
     
     <item>
