@@ -17,9 +17,7 @@
       <pubDate>Sat, 15 Jun 2019 18:25:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/jorvik/</guid>
-      <description>&lt;p&gt;Jorvik is my current Code &amp;amp; Coffee project.  It is intended to be a live shader editing tool for Algorave and Interactive applications.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Jorvik is my current Code &amp;amp; Coffee project.  It is intended to be a live shader editing tool for Algorave and Interactive applications.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,9 +26,7 @@
       <pubDate>Sun, 05 May 2019 18:26:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/zep/</guid>
-      <description>&lt;p&gt;Zep is a lightweight editor, designed to be used inside a 3D engine.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Zep is a lightweight editor, designed to be used inside a 3D engine.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,9 +35,7 @@
       <pubDate>Sun, 05 May 2019 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/gputrace/</guid>
-      <description>&lt;p&gt;I currently work on the Nsight Graphics Team at NVIDIA.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I currently work on the Nsight Graphics Team at NVIDIA.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,9 +44,7 @@
       <pubDate>Mon, 01 Jan 2018 18:25:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/easyrender/</guid>
-      <description>&lt;p&gt;Easy Render is a lightweight sample of how to do simple CPU drawing to a Windows Window.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Easy Render is a lightweight sample of how to do simple CPU drawing to a Windows Window.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,9 +53,7 @@
       <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/gameoflife/</guid>
-      <description>&lt;p&gt;Implementing Game of Life is a classic programming challenge.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Implementing Game of Life is a classic programming challenge.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,9 +62,7 @@
       <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/gestures/</guid>
-      <description>&lt;p&gt;Recognizing gestures for a spell casting game idea.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recognizing gestures for a spell casting game idea.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -83,9 +71,7 @@
       <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mgfx/</guid>
-      <description>&lt;p&gt;Mgfx is a teaching framework I&amp;rsquo;ve used at York Developers.  It has a simple support for building 2D and 3D applications in C++, with cross platform support.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Mgfx is a teaching framework I&amp;rsquo;ve used at York Developers.  It has a simple support for building 2D and 3D applications in C++, with cross platform support.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -94,9 +80,7 @@
       <pubDate>Sun, 05 Nov 2017 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/voxels/</guid>
-      <description>&lt;p&gt;Most graphics programmers have played with Voxels/Minecraft style of rendering.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Most graphics programmers have played with Voxels/Minecraft style of rendering.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -105,9 +89,7 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/connect4/</guid>
-      <description>&lt;p&gt;At the York Code Dojo, we spent an evening writing a connect 4 player.  We pitched the results against each other to see which could play the best.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;At the York Code Dojo, we spent an evening writing a connect 4 player.  We pitched the results against each other to see which could play the best.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -116,9 +98,7 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mazes/</guid>
-      <description>&lt;p&gt;Generating Mazes in code is a fun challenge.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Generating Mazes in code is a fun challenge.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -127,9 +107,7 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/raytracer_aa/</guid>
-      <description>&lt;p&gt;Every graphics engineer should write a ray tracer at some point.  I&amp;rsquo;ve done this a couple of times in C++ and Python.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Every graphics engineer should write a ray tracer at some point.  I&amp;rsquo;ve done this a couple of times in C++ and Python.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -138,9 +116,7 @@
       <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/stocks/</guid>
-      <description>&lt;p&gt;Understanding how Option Trades evolve over time is key to being able to trade them effectively.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Understanding how Option Trades evolve over time is key to being able to trade them effectively.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -149,9 +125,7 @@
       <pubDate>Tue, 05 Nov 2013 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/asteroids/</guid>
-      <description>&lt;p&gt;Asteroids is a fun an easy game to build.  This one is part of the MGFX teaching framework I built.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Asteroids is a fun an easy game to build.  This one is part of the MGFX teaching framework I built.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -160,8 +134,7 @@
       <pubDate>Tue, 05 Nov 2013 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/mapmindz/</guid>
-      <description>&lt;p&gt;MapMindz was a little application I wrote for Microsoft Surface 1.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;MapMindz was a little application I wrote for Microsoft Surface 1.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -170,8 +143,7 @@
       <pubDate>Sat, 05 Nov 2011 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/boardz/</guid>
-      <description>&lt;p&gt;Boardz was a collection of turn based board games released for iPhone and iPad.  It included a server, player matching &amp;amp; chat.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Boardz was a collection of turn based board games released for iPhone and iPad.  It included a server, player matching &amp;amp; chat.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -180,9 +152,7 @@
       <pubDate>Fri, 05 Nov 2010 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/game/</guid>
-      <description>&lt;p&gt;I like to tinker at Game Development occasionally; my hex planet app shown here is one such example.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I like to tinker at Game Development occasionally; my hex planet app shown here is one such example.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -191,9 +161,7 @@
       <pubDate>Wed, 05 Nov 2008 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nanovg/</guid>
-      <description>&lt;p&gt;NanoVg is a 2D Vector Library.  I contributed a D3D backend to the effort - just for fun.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;NanoVg is a 2D Vector Library.  I contributed a D3D backend to the effort - just for fun.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -202,9 +170,7 @@
       <pubDate>Thu, 01 Jan 2004 18:26:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nvshaderdebugger/</guid>
-      <description>&lt;p&gt;An early shader debugger for the DirectX Reference Rasterizer&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;An early shader debugger for the DirectX Reference Rasterizer&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -213,9 +179,7 @@
       <pubDate>Thu, 01 Jan 2004 18:25:22 +0532</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/dxsas/</guid>
-      <description>&lt;p&gt;To support our developers in implementing DXSAS shader semantics, I developed an example tool that implemented the SAS processing and allowed you to combine full screen effects.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;To support our developers in implementing DXSAS shader semantics, I developed an example tool that implemented the SAS processing and allowed you to combine full screen effects.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -224,9 +188,7 @@
       <pubDate>Tue, 01 Jan 2002 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/foxbear/</guid>
-      <description>&lt;p&gt;At 3DLabs, I ran the DirectX Driver team.  I worked on DirectX 2,3,5,7 and 8 drivers - mostly for Permedia &amp;amp; Glint chips.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;At 3DLabs, I ran the DirectX Driver team.  I worked on DirectX 2,3,5,7 and 8 drivers - mostly for Permedia &amp;amp; Glint chips.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -235,9 +197,7 @@
       <pubDate>Tue, 01 Jan 2002 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/fxcomposer/</guid>
-      <description>&lt;p&gt;FX Composer 2.5 is a powerful integrated development environment for shader authoring.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;FX Composer 2.5 is a powerful integrated development environment for shader authoring.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -246,9 +206,7 @@
       <pubDate>Sat, 01 Jan 2000 18:30:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nvlink/</guid>
-      <description>&lt;p&gt;NV Shader Linker was an attempt to build a traditional fixed function graphics pipeline using a series of shader fragments.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;NV Shader Linker was an attempt to build a traditional fixed function graphics pipeline using a series of shader fragments.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -257,9 +215,7 @@
       <pubDate>Sat, 01 Jan 2000 18:25:22 +0530</pubDate>
       
       <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
-      <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders.&lt;/p&gt;</description>
     </item>
     
   </channel>

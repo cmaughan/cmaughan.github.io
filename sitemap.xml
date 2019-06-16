@@ -3,8 +3,20 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chrismaughan.com/</loc>
+    <lastmod>2019-06-15T18:25:22+05:32</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/jorvik/</loc>
     <lastmod>2019-06-15T18:25:22+05:32</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/portfolio/</loc>
+    <lastmod>2019-06-15T18:25:22+05:32</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -129,18 +141,6 @@
   
   <url>
     <loc>https://chrismaughan.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/</loc>
-    <lastmod>2019-06-15T18:25:22+05:32</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/portfolio/</loc>
-    <lastmod>2019-06-15T18:25:22+05:32</lastmod>
     <priority>0</priority>
   </url>
   

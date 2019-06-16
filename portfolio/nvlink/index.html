@@ -30,6 +30,17 @@
 <link rel="shortcut icon" href="https://chrismaughan.com/img/favicon.png">
 
 
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142140471-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 </head>
 <body>
   <div id="all">
@@ -108,8 +119,6 @@
       <div class="content-column-content">
          <h1>NV Shader Linker</h1>
          <p>NV Shader Linker was an attempt to build a traditional fixed function graphics pipeline using a series of shader fragments.</p>
-
-<p></p>
 
 <p>I built this tool to show developers how to implement fixed function shading on modern hardware without those facilities.  The demo let you pick the number and type of lights you wanted to use, and then generated a working shader supporting them.  The demo also applied the results to a model in NVIDIA Effects Browser.  Skinning was supported, though I don&rsquo;t recall if that was done in the shader!</p>
 
