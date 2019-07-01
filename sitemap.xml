@@ -4,14 +4,19 @@
   
   <url>
     <loc>https://chrismaughan.com/blog/</loc>
-    <lastmod>2019-06-16T12:32:23+01:00</lastmod>
+    <lastmod>2019-07-01T08:32:23+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chrismaughan.com/</loc>
-    <lastmod>2019-06-16T12:32:23+01:00</lastmod>
+    <lastmod>2019-07-01T08:32:23+01:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/blog/coding/2019_07_01_graphviz/</loc>
+    <lastmod>2019-07-01T08:32:23+01:00</lastmod>
   </url>
   
   <url>
