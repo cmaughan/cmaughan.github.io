@@ -3,3 +3,4 @@
 2019-08-01T09:01:54+01:00	Qt sucks. Mostly.
 2019-08-01T18:45:59+01:00	Looking at Open Sound Control for the first time. Seems simple enough.
 2019-08-02T10:37:31+01:00	Hooked up TouchOSC on my iPad to Jorvik. First step in external control.
+2019-08-03T00:04:31+01:00	@leo - all good I think :)
