@@ -6,3 +6,4 @@
 2019-08-03T00:04:31+01:00	@leo - all good I think :)
 2019-08-03T00:10:11+01:00	@<leo https://www.gkbrk.com/twtxt.txt> - I guess I need to follow before a mention is properly expanded?
 2019-08-04T18:24:28+01:00	/lab Some down-time in the sun, and a bit of work on my audio synth.
+2019-08-11T18:58:02+01:00	/lab Feels good to add long overdue features to my text editor. It's almost useful now ;)
