@@ -6,10 +6,19 @@
     <description>Recent content in Portfolios on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Jun 2019 18:25:22 +0532</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jan 2020 18:25:22 +0530</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sonic Pi</title>
+      <link>https://chrismaughan.com/portfolio/sonicpi/</link>
+      <pubDate>Sun, 05 Jan 2020 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/sonicpi/</guid>
+      <description>&lt;p&gt;I contributed a pair of scopes to the latest version of Sonic Pi 3.2, which has now shipped.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Jorvik</title>
