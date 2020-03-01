@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Links</title>
+      <link>https://chrismaughan.com/wiki/links/</link>
+      <pubDate>Sun, 16 Jun 2019 12:32:23 +0100</pubDate>
+      
+      <guid>https://chrismaughan.com/wiki/links/</guid>
+      <description>Live Coding Orca And SonicPi Nice demo of hookup between Orca and Sonic Pi A 3d programming language</description>
+    </item>
+    
+    <item>
       <title>Regular Expressions</title>
       <link>https://chrismaughan.com/blog/coding/2019_06_16_regex/</link>
       <pubDate>Sun, 16 Jun 2019 12:32:23 +0100</pubDate>

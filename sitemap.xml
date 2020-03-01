@@ -20,8 +20,19 @@
   </url>
   
   <url>
+    <loc>https://chrismaughan.com/wiki/links/</loc>
+    <lastmod>2019-06-16T12:32:23+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/blog/coding/2019_06_16_regex/</loc>
     <lastmod>2019-06-16T12:32:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/wiki/</loc>
+    <lastmod>2019-06-16T12:32:23+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
