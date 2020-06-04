@@ -167,6 +167,8 @@ Error message and password prompt
 
 <li>$:/config/Plugins/Disabled/$:/plugins/rmnvsl/krystal</li>
 
+<li>$:/config/RelinkOnRename</li>
+
 <li>$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/close-others</li>
 
 <li>$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/fold-bar</li>
@@ -221,13 +223,15 @@ Error message and password prompt
 
 <li>$:/temp/info-plugin</li>
 
+<li>$:/temp/NewTagName</li>
+
 <li>$:/themes/tiddlywiki/snowwhite</li>
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
 <li>3rd June 2020</li>
 
-<li>Draft of 'Live Coding'</li>
+<li>Lisp Languages</li>
 
 <li>Live Coding</li>
 
@@ -285,6 +289,9 @@ Error message and password prompt
 </div>
 <div created="20200603085350489" modified="20200603092237069" title="$:/config/Plugins/Disabled/$:/plugins/rmnvsl/krystal">
 <pre>no</pre>
+</div>
+<div created="20200604075835892" modified="20200604075835892" title="$:/config/RelinkOnRename">
+<pre>yes</pre>
 </div>
 <div created="20200603093906400" modified="20200603093906400" title="$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/close-others">
 <pre>show</pre>
@@ -10716,7 +10723,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[Live Coding]]" title="$:/StoryList">
+<div created="20200604075804751" list="[[Live Coding]] [[Lisp Languages]]" modified="20200604075804751" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10776,6 +10783,9 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20200604075901070" modified="20200604075901964" title="$:/temp/NewTagName">
+<pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.22">
 <pre>{
@@ -10889,67 +10899,40 @@ Error message and password prompt
 <div created="20200603092811474" modified="20200603092821079" tags="Journal" title="3rd June 2020">
 <pre>Testing</pre>
 </div>
-<div created="20200603094139854" draft.of="Live Coding" draft.title="Live Coding" modified="20200603094654909" tags="live-coding" title="Draft of 'Live Coding'" type="text/vnd.tiddlywiki">
-<pre>* Sonic Pi Forum: https://in-thread.sonic-pi.net/
-* Sonic Pi On Stack Overflow Blog: https://stackoverflow.blog/2020/01/29/the-live-coding-language-that-lets-you-be-an-actual-rock-star/
-* Kortex: https://mindbuffer.net/kortex
-* ImiTone https://www.kickstarter.com/projects/evanbalster/imitone-mind-to-melody
-* GridSound: https://gridsound.com/#/
-* Audio Vis: https://github.com/willianjusten/awesome-audio-visualization
-* Software for Graphics Thread on lines: https://llllllll.co/t/software-to-create-procedural-graphics/27660/10
-* Hydra Book https://naotohieda.com/blog/hydra-book/
-* Interactive Shader Format: https://www.interactiveshaderformat.com/
-* Lua + OSC bindings for Open Frameworks https://github.com/danomatika/loaf
-* EarSketch, Georgia Tech: https://earsketch.gatech.edu/landing/#/
-* xi LiveCode: https://github.com/xi-livecode/xi
-* Sequencer, unknown demo from HMH: https://www.youtube.com/watch?v=x7c-9dXZouo&amp;feature=youtu.be
-* Sketch Synth: https://github.com/jeonghopark/SketchSynth-Simple
-* Live coding in Rust: https://nannou.cc/
-* KodeLife: https://hexler.net/products/kodelife
-* Future Of Coding projects: https://github.com/pel-daniel/mind-bicycles
-* Alive Coding: https://s-ol.nu/alivecoding
-* Max MSP: https://cycling74.com/products/max/
-* WDL-OL for VST: https://github.com/justinfrankel/WDL
-* PureData: http://msp.ucsd.edu/Pd_documentation/
-* Layered Graph Drawing: https://en.wikipedia.org/wiki/Layered_graph_drawing
-* Automatic graph layout: https://en.wikipedia.org/wiki/Microsoft_Automatic_Graph_Layout
-* CEPL https://github.com/cbaggers/cepl
-* Projection Boxes: http://cseweb.ucsd.edu/~lerner/papers/projection-boxes-chi2020.pdf
-* Glamorous Toolkit: https://gtoolkit.com/
-* Cellular Automation Demo: https://movablefeastmachine.org/
-* ShaderToy launcher for Vulkan: https://github.com/danilw/vulkan-shadertoy-launcher
-* Fe: https://github.com/rxi/fe</pre>
+<div created="20200604075809465" modified="20200604075904519" tags="lisp scheme" title="Lisp Languages">
+<pre>* ''Fe'' https://github.com/rxi/fe</pre>
 </div>
-<div created="20200603094139854" modified="20200603094638718" tags="live-coding" title="Live Coding" type="text/vnd.tiddlywiki">
-<pre>* Sonic Pi Forum: https://in-thread.sonic-pi.net/
-* Sonic Pi On Stack Overflow Blog: https://stackoverflow.blog/2020/01/29/the-live-coding-language-that-lets-you-be-an-actual-rock-star/
-* Kortex: https://mindbuffer.net/kortex
-* ImiTone https://www.kickstarter.com/projects/evanbalster/imitone-mind-to-melody
-* GridSound: https://gridsound.com/#/
-* Audio Vis: https://github.com/willianjusten/awesome-audio-visualization
-* Software for Graphics Thread on lines: https://llllllll.co/t/software-to-create-procedural-graphics/27660/10
-* Hydra Book https://naotohieda.com/blog/hydra-book/
-* Interactive Shader Format: https://www.interactiveshaderformat.com/
-* Lua + OSC bindings for Open Frameworks https://github.com/danomatika/loaf
-* EarSketch, Georgia Tech: https://earsketch.gatech.edu/landing/#/
-* xi LiveCode: https://github.com/xi-livecode/xi
-* Sequencer, unknown demo from HMH: https://www.youtube.com/watch?v=x7c-9dXZouo&amp;feature=youtu.be
-* Sketch Synth: https://github.com/jeonghopark/SketchSynth-Simple
-* Live coding in Rust: https://nannou.cc/
-* KodeLife: https://hexler.net/products/kodelife
-* Future Of Coding projects: https://github.com/pel-daniel/mind-bicycles
-* Alive Coding: https://s-ol.nu/alivecoding
-* Max MSP: https://cycling74.com/products/max/
-* WDL-OL for VST: https://github.com/justinfrankel/WDL
-* PureData: http://msp.ucsd.edu/Pd_documentation/
-* Layered Graph Drawing: https://en.wikipedia.org/wiki/Layered_graph_drawing
-* Automatic graph layout: https://en.wikipedia.org/wiki/Microsoft_Automatic_Graph_Layout
-* CEPL https://github.com/cbaggers/cepl
-* Projection Boxes: http://cseweb.ucsd.edu/~lerner/papers/projection-boxes-chi2020.pdf
-* Glamorous Toolkit: https://gtoolkit.com/
-* Cellular Automation Demo: https://movablefeastmachine.org/
-* ShaderToy launcher for Vulkan: https://github.com/danilw/vulkan-shadertoy-launcher
-* Fe: https://github.com/rxi/fe</pre>
+<div created="20200603094139854" modified="20200604075943340" tags="live-coding" title="Live Coding" type="text/vnd.tiddlywiki">
+<pre>* [[Lisp Languages]]
+* ''Sonic Pi'' Forum: https://in-thread.sonic-pi.net/
+* ''Sonic Pi'' On Stack Overflow Blog: https://stackoverflow.blog/2020/01/29/the-live-coding-language-that-lets-you-be-an-actual-rock-star/
+* ''Kortex'' https://mindbuffer.net/kortex
+* ''Imi Tone'' https://www.kickstarter.com/projects/evanbalster/imitone-mind-to-melody
+* ''Grid Sound'' https://gridsound.com/#/
+* ''Audio'' Vis https://github.com/willianjusten/awesome-audio-visualization
+* ''Software for Graphics Thread on lines'' https://llllllll.co/t/software-to-create-procedural-graphics/27660/10
+* ''Hydra Book'' https://naotohieda.com/blog/hydra-book/
+* ''Interactive Shader Format'' https://www.interactiveshaderformat.com/
+* ''Lua + OSC bindings for Open Frameworks'' https://github.com/danomatika/loaf
+* ''Ear Sketch, Georgia Tech'' https://earsketch.gatech.edu/landing/#/
+* ''xi LiveCode'' https://github.com/xi-livecode/xi
+* ''Sequencer, unknown demo HMH'' https://www.youtube.com/watch?v=x7c-9dXZouo&amp;feature=youtu.be
+* ''Sketch Synth'' https://github.com/jeonghopark/SketchSynth-Simple
+* ''Live coding in Rust'' https://nannou.cc/
+* ''Kode Life'' https://hexler.net/products/kodelife
+* ''Future Of Coding projects'' https://github.com/pel-daniel/mind-bicycles
+* ''Alive Coding'' https://s-ol.nu/alivecoding
+* ''Max MSP'' https://cycling74.com/products/max/
+* ''WDL-OL for VST'' https://github.com/justinfrankel/WDL
+* ''Pure Data'' http://msp.ucsd.edu/Pd_documentation/
+* ''Layered Graph Drawing'' https://en.wikipedia.org/wiki/Layered_graph_drawing
+* ''Automatic graph layout'' https://en.wikipedia.org/wiki/Microsoft_Automatic_Graph_Layout
+* ''CEPL'' https://github.com/cbaggers/cepl
+* ''Projection Boxes'' http://cseweb.ucsd.edu/~lerner/papers/projection-boxes-chi2020.pdf
+* ''Glamorous Toolkit'' https://gtoolkit.com/
+* ''Cellular Automation Demo'' https://movablefeastmachine.org/
+* ''Shader Toy launcher for Vulkan'' https://github.com/danilw/vulkan-shadertoy-launcher
+</pre>
 </div>
 <div created="20200603092341586" modified="20200603092347144" tags="" title="New Tiddler">
 <pre></pre>
