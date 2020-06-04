@@ -6,10 +6,19 @@
     <description>Recent content in Portfolios on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Jan 2020 18:25:22 +0530</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2020 09:00:22 +0532</lastBuildDate>
     
 	<atom:link href="https://chrismaughan.com/portfolio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MAudio</title>
+      <link>https://chrismaughan.com/portfolio/maudio/</link>
+      <pubDate>Thu, 04 Jun 2020 09:00:22 +0532</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/maudio/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been working on a graph-based synthesizer for some time, as part of my larger live coding project.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Sonic Pi</title>

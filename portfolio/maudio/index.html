@@ -119,16 +119,15 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8">
       <div class="content-column-content">
-         <h1>Sonic Pi</h1>
-         <p>I contributed a pair of scopes to the latest version of Sonic Pi 3.2, which has now shipped.</p>
+         <h1>MAudio</h1>
+         <p>I&rsquo;ve been working on a graph-based synthesizer for some time, as part of my larger live coding project.</p>
 
-<p>In order to learn a bit more about a live coding language, I built and played with sonic pi.  I found that the graphs provided in the tool were using a toolkit called Qwt.  This is an old Qt toolkit, which was not really doing anything other than drawing a simple line graph - as well as making the build of the product more complicated.  I showed Sam (the creator of Sonic Pi) how to replace the Qwt library with simple paint commands.  I then contributed two nicer scopes; a &lsquo;mirror stereo&rsquo; effect showing the live audio waveform, and a spectrum analyzer.  My live coding work meant I already had source to generate a frequency analysis using an FFT (Fast Fourier Transform), so it wasn&rsquo;t much effort to make a scope for that.  It&rsquo;s now the default shipping scope in sonic pi, and works great.  It&rsquo;s been nice to see so many users streaming performances with the new scopes on display!</p>
+<p>When finished, it will be possible to reconfigure the synthesizer using script.  This should make it flexible enough to generate a wide range of sounds.  Here&rsquo;s a video of it in action:</p>
 
-<p>In addition to the scopes, I showed Sam how to move his build over to CMake to enable a more effortless build process.</p>
 
-<p><a href="https://sonic-pi.net">Sonic Pi 3.2</a></p>
-
-<p><img src="/img/portfolio/sonicpi/sonicpi.png" alt="SonicPi" /></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/CmTfwoxM_gQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
          <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
