@@ -119,13 +119,15 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8">
       <div class="content-column-content">
-         <h1>Mazes</h1>
-         <p>Generating Mazes in code is a fun challenge.</p>
-<p>The first screenshot shows a generated maze and an optimized path through it.  The coloring indicates the distance of squares from the start. We used Djekstra&rsquo;s algorithm of the path search.</p>
-<p>The second screenshot shows a simple voxel renderer I made, with a circular maze generator.</p>
-<p>We taught Maze generation on two occasions at York Code Dojo</p>
-<p><img src="/img/portfolio/mazes/mazes.png" alt="Mazes"></p>
-<p><img src="/img/portfolio/mazes/mazes_2.png" alt="Mazes"></p>
+         <h1>Sonic Pi Shader</h1>
+         <p>I added a simple API to the Sonic Pi code base.</p>
+<p>The API is designed to make it easy to add alternative user interfaces and seperate the the UI from the Sonic Pi server more cleanly.  To test the API I built a simple ImGui front end that can also show 3D rendering using pixel shaders.  When I next have some free time I intend to cleanup the existing user interface code further; this API was the first step.  There are many OSC calls that can be made to the server, and these are currently used ad-hoc; that&rsquo;s the next thing to fix.</p>
+<p>In the video, the generated audio is run through an FFT to generate a frequency spectrum (this was already in place when I added the new Frequency visualizer).  The frequency data is sent onward to the GPU where it is used during rendering to make the pattern respond to the music.
+The UI is intended as a test and demo, not a replacement for the existing Sonic Pi API.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/cl1ABJLMvRc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
          <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
