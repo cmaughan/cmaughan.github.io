@@ -59,7 +59,7 @@ if (!doNotTrack) {
       
         <li><a href="https://chrismaughan.com/portfolio/">Projects</a></li>
       
-        <li><a href="https://chrismaughan.com/wiki/">Wiki</a></li>
+        <li><a href="https://chrismaughan.com/secondbrain/">Wiki</a></li>
       
         <li><a href="https://chrismaughan.com/about/">About</a></li>
       
@@ -121,9 +121,10 @@ if (!doNotTrack) {
       <div class="content-column-content">
          <h1>Lens Flare</h1>
          <p>Texture Masking for Faster Lens Flare</p>
+
 <p>I wrote up this technique for the book GPU Gems 2.  My approach was to create a scene view that contained the sun and draw it into a small 16x16 texture.  Then the texture was sampled into a single texel and &lsquo;accumulated&rsquo; based on if the sun was visible or not.  Later on, the intensity map that was generated could be multiplied by the lens flare.  In this way, no read back from the GPU was required.</p>
-<p>![TEXTUREMASKING][1]
-[1]: /img/portfolio/texturemasking/texturemasking.png</p>
+
+<p><img src="/img/portfolio/texturemasking/texturemasking.png" alt="TEXTUREMASKING" /></p>
          <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {

@@ -1,117 +1,198 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://chrismaughan.com/</loc>
     <lastmod>2021-01-22T09:00:22+05:32</lastmod>
-  </url><url>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/</loc>
     <lastmod>2021-01-22T09:00:22+05:32</lastmod>
-  </url><url>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/sonic_shader/</loc>
     <lastmod>2021-01-22T09:00:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/maudio/</loc>
     <lastmod>2020-06-04T09:00:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/sonicpi/</loc>
     <lastmod>2020-01-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/blog/</loc>
     <lastmod>2019-07-01T08:32:23+01:00</lastmod>
-  </url><url>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/blog/coding/2019_07_01_graphviz/</loc>
     <lastmod>2019-07-01T08:32:23+01:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/blog/coding/2019_06_16_regex/</loc>
     <lastmod>2019-06-16T12:32:23+01:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/jorvik/</loc>
     <lastmod>2019-06-15T18:25:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/zep/</loc>
     <lastmod>2019-05-05T18:26:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/gputrace/</loc>
     <lastmod>2019-05-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</loc>
     <lastmod>2018-12-10T13:20:02+01:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/easyrender/</loc>
     <lastmod>2018-01-01T18:25:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/gameoflife/</loc>
     <lastmod>2017-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/gestures/</loc>
     <lastmod>2017-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/mgfx/</loc>
     <lastmod>2017-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/voxels/</loc>
     <lastmod>2017-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/contact/</loc>
     <lastmod>2016-11-06T13:00:25+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/about/</loc>
     <lastmod>2016-11-05T21:05:33+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/connect4/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/mazes/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/raytracer_aa/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/stocks/</loc>
     <lastmod>2016-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/scheme/</loc>
     <lastmod>2015-05-08T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/asteroids/</loc>
     <lastmod>2013-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/mapmindz/</loc>
     <lastmod>2013-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/boardz/</loc>
     <lastmod>2011-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/game/</loc>
     <lastmod>2010-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/nanovg/</loc>
     <lastmod>2008-11-05T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/nvshaderdebugger/</loc>
     <lastmod>2004-01-01T18:26:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/dxsas/</loc>
     <lastmod>2004-01-01T18:25:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/foxbear/</loc>
     <lastmod>2002-01-01T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/fxcomposer/</loc>
     <lastmod>2002-01-01T18:25:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/texturemasking/</loc>
     <lastmod>2001-06-01T18:26:22+05:32</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/nvlink/</loc>
     <lastmod>2000-01-01T18:30:22+05:30</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://chrismaughan.com/portfolio/nveffectsbrowser/</loc>
     <lastmod>2000-01-01T18:25:22+05:30</lastmod>
-  </url><url>
-    <loc>https://chrismaughan.com/categories/</loc>
-  </url><url>
-    <loc>https://chrismaughan.com/tags/</loc>
   </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
 </urlset>
