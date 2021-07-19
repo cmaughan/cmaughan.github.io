@@ -30,22 +30,6 @@
   </url>
   
   <url>
-    <loc>https://chrismaughan.com/blog/</loc>
-    <lastmod>2019-07-01T08:32:23+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/blog/coding/2019_07_01_graphviz/</loc>
-    <lastmod>2019-07-01T08:32:23+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/blog/coding/2019_06_16_regex/</loc>
-    <lastmod>2019-06-16T12:32:23+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chrismaughan.com/portfolio/jorvik/</loc>
     <lastmod>2019-06-15T18:25:22+05:32</lastmod>
   </url>
@@ -58,11 +42,6 @@
   <url>
     <loc>https://chrismaughan.com/portfolio/gputrace/</loc>
     <lastmod>2019-05-05T18:25:22+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</loc>
-    <lastmod>2018-12-10T13:20:02+01:00</lastmod>
   </url>
   
   <url>

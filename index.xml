@@ -39,24 +39,6 @@
     </item>
     
     <item>
-      <title>GraphViz</title>
-      <link>https://chrismaughan.com/blog/coding/2019_07_01_graphviz/</link>
-      <pubDate>Mon, 01 Jul 2019 08:32:23 +0100</pubDate>
-      
-      <guid>https://chrismaughan.com/blog/coding/2019_07_01_graphviz/</guid>
-      <description>&lt;p&gt;GraphViz is an awesome way to visualize your code when debugging problems, and it is trivial to setup.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Regular Expressions</title>
-      <link>https://chrismaughan.com/blog/coding/2019_06_16_regex/</link>
-      <pubDate>Sun, 16 Jun 2019 12:32:23 +0100</pubDate>
-      
-      <guid>https://chrismaughan.com/blog/coding/2019_06_16_regex/</guid>
-      <description>&lt;p&gt;Regular Expressions are something I often struggle with.  I need to level-up.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Jorvik</title>
       <link>https://chrismaughan.com/portfolio/jorvik/</link>
       <pubDate>Sat, 15 Jun 2019 18:25:22 +0532</pubDate>
@@ -81,15 +63,6 @@
       
       <guid>https://chrismaughan.com/portfolio/gputrace/</guid>
       <description>&lt;p&gt;I currently work on the Nsight Graphics Team at NVIDIA.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Advent Of Code - Day 10, 2018</title>
-      <link>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</link>
-      <pubDate>Mon, 10 Dec 2018 13:20:02 +0100</pubDate>
-      
-      <guid>https://chrismaughan.com/blog/coding/2018_12_10_aoc_asteroids/</guid>
-      <description>&lt;p&gt;Here&amp;rsquo;s my solution to day 10 of Advent Of Code; inside the asteroids game&lt;/p&gt;</description>
     </item>
     
     <item>
