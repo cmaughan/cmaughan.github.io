@@ -228,15 +228,6 @@
     </item>
     
     <item>
-      <title>DX Driver</title>
-      <link>https://chrismaughan.com/portfolio/foxbear/</link>
-      <pubDate>Tue, 01 Jan 2002 18:25:22 +0530</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/foxbear/</guid>
-      <description>&lt;p&gt;At 3DLabs, I ran the DirectX Driver team.  I worked on DirectX 2,3,5,7 and 8 drivers - mostly for Permedia &amp;amp; Glint chips.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>NVIDIA FX Composer</title>
       <link>https://chrismaughan.com/portfolio/fxcomposer/</link>
       <pubDate>Tue, 01 Jan 2002 18:25:22 +0530</pubDate>
@@ -270,6 +261,15 @@
       
       <guid>https://chrismaughan.com/portfolio/nveffectsbrowser/</guid>
       <description>&lt;p&gt;My first job at NVIDIA was writing a tool to enable developers to understand vertex and pixel shaders.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DX Driver</title>
+      <link>https://chrismaughan.com/portfolio/foxbear/</link>
+      <pubDate>Wed, 01 Jan 1997 18:25:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/foxbear/</guid>
+      <description>&lt;p&gt;At 3DLabs, I ran the DirectX Driver team.  I worked on DirectX 2,3,5,7 and 8 drivers - mostly for Permedia &amp;amp; Glint chips.&lt;/p&gt;</description>
     </item>
     
   </channel>
