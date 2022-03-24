@@ -4,19 +4,24 @@
   
   <url>
     <loc>https://chrismaughan.com/</loc>
-    <lastmod>2021-07-01T18:25:22+05:30</lastmod>
+    <lastmod>2022-03-01T18:25:22+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/portfolio/gaia_hr/</loc>
+    <lastmod>2022-03-01T18:25:22+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrismaughan.com/portfolio/</loc>
+    <lastmod>2022-03-01T18:25:22+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chrismaughan.com/portfolio/crypto/</loc>
     <lastmod>2021-07-01T18:25:22+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrismaughan.com/portfolio/</loc>
-    <lastmod>2021-07-01T18:25:22+05:30</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
