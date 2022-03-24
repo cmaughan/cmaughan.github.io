@@ -126,14 +126,16 @@ if (!doNotTrack) {
          <h1>Gaia Herzsprung-Russell Diagram</h1>
          <p>As part of an astronomy course I&rsquo;m doing, I generated a Herszprung Russell diagram from Gaia satellite data</p>
 
-<p>A Herzsprung-Russell diagram shows the nature of a collection of stars.  To plot it you need to calculate the intensity of each star and the temperature.  The Gaia satellite data gives you the measured intensity of the star and its distance.  Using the distance you can calculate the absolute intensity of the star.  The color index is provided as bp_rp in the database.  I wanted to convert the star color index to a temperature and calculate an approximate color for the star.
-I started off by downloading the Gaia excel files (a small portion of them!) and calculating absolute magnitude from them.  It quickly became apparent that the data needed additional processing and filtering to get a better result.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Hertzsprung%E2%80%93Russell_diagram">Herzsprung-Russell diagram</a> shows the nature of a collection of stars by plotting absolute magnitude against effective temperature.  The Gaia satellite data is publicly available, and an amazing resource.  The databaase contains the measured intensity of the star through various filters and its distance based on parallax measurements.  Using the distance and the observed intensity in a given wavelength, it is possible to calculate the absolute intensity of the star.  I wanted to convert the star color index to a temperature and calculate an approximate color for the star; something I hadn&rsquo;t seen on any of the published diagrams.
+I started off by downloading the Gaia excel files (a small portion of them!) and calculating absolute magnitude.  It quickly became apparent that the data needed additional processing and filtering to get a better result.</p>
 
-<p>After some searching, I found a blog post by Vlas Sokolov containing the query I needed to make to the Gaia database, to return a list of good quality star data.  The key to getting good data was to use the error thresholds to extract the more accurate readings.  The script was a bit old, but didn&rsquo;t take much to fix, and I had data I needed.  (You can see Vlas&rsquo; post here: <a href="https://vlas.dev/post/gaia-dr2-hrd/">https://vlas.dev/post/gaia-dr2-hrd/</a>)</p>
+<p>After some searching, I found a blog post by Vlas Sokolov containing the query I needed to make to the Gaia database, which returns a list of good quality star data.  The key to getting good data was to use the error thresholds to extract the more accurate readings.  The script was a bit old, but didn&rsquo;t take much to fix, and I had data I needed.  (You can see Vlas&rsquo; post here: <a href="https://vlas.dev/post/gaia-dr2-hrd/">https://vlas.dev/post/gaia-dr2-hrd/</a>).  I wanted a representative set, so to get around the download limits I &lsquo;chunked&rsquo; the data and downloaded a set of csv files which were later combinded into a pandas data table.</p>
 
 <p>Once I had a working diagram with a nice histogram view, I found a lookup table from temperature to black-body color.  I used that to create a mapping function and generated the HR plot based on that.  The code is available here:</p>
 
 <p><a href="https://github.com/cmaughan/gaia_hr">https://github.com/cmaughan/gaia_hr</a></p>
+
+<p>The following images are from a selection of 30 Million stars, in the nearest 500 parsecs.  Many features of the HR diagram are visible, including the <a href="https://en.wikipedia.org/wiki/Red_clump">Red Clump</a>.  The central strip of stars is known as the &lsquo;Main Sequence&rsquo;, and contains stars that are fusing Hydrogen into Helium.  The top of the plots contain stars that are Red Giants or Super Giants.  The bottom left are the white dwarfs.</p>
 
 <p><img src="/img/portfolio/gaia_hr/gaia_hr.png" alt="Gaia HR" /></p>
 
