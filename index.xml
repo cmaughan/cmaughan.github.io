@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ChrisMaughan.com</title>
@@ -6,10 +6,15 @@
     <description>Recent content on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Mar 2022 18:25:22 +0530</lastBuildDate>
-    
-	<atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 10 Jun 2023 12:03:22 +0530</lastBuildDate><atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Zing</title>
+      <link>https://chrismaughan.com/portfolio/zing/</link>
+      <pubDate>Sat, 10 Jun 2023 12:03:22 +0530</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/zing/</guid>
+      <description>&lt;p&gt;Zing is a simple audio integration library.  It is designed to work inside an ImGui app and give you access to various audio features.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Gaia Herzsprung-Russell Diagram</title>
