@@ -6,7 +6,16 @@
     <description>Recent content on ChrisMaughan.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Jun 2023 12:03:22 +0530</lastBuildDate><atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Sep 2023 18:18:22 +0532</lastBuildDate><atom:link href="https://chrismaughan.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rezonality</title>
+      <link>https://chrismaughan.com/portfolio/jorvik/</link>
+      <pubDate>Wed, 13 Sep 2023 18:18:22 +0532</pubDate>
+      
+      <guid>https://chrismaughan.com/portfolio/jorvik/</guid>
+      <description>&lt;p&gt;Rezonality is the current iteration of my live coding tool.  It is intended to be used for Algorave and Interactive applications.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Zing</title>
       <link>https://chrismaughan.com/portfolio/zing/</link>
@@ -59,15 +68,6 @@
       
       <guid>https://chrismaughan.com/portfolio/sonicpi/</guid>
       <description>&lt;p&gt;I contributed a pair of scopes to the latest version of Sonic Pi 3.2, which has now shipped.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Jorvik</title>
-      <link>https://chrismaughan.com/portfolio/jorvik/</link>
-      <pubDate>Sat, 15 Jun 2019 18:25:22 +0532</pubDate>
-      
-      <guid>https://chrismaughan.com/portfolio/jorvik/</guid>
-      <description>&lt;p&gt;Jorvik is my current Code &amp;amp; Coffee project.  It is intended to be a live shader editing tool for Algorave and Interactive applications.&lt;/p&gt;</description>
     </item>
     
     <item>

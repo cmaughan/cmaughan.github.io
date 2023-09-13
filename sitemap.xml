@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://chrismaughan.com/</loc>
-    <lastmod>2023-06-10T12:03:22+05:30</lastmod>
+    <lastmod>2023-09-13T18:18:22+05:32</lastmod>
   </url><url>
     <loc>https://chrismaughan.com/portfolio/</loc>
-    <lastmod>2023-06-10T12:03:22+05:30</lastmod>
+    <lastmod>2023-09-13T18:18:22+05:32</lastmod>
+  </url><url>
+    <loc>https://chrismaughan.com/portfolio/jorvik/</loc>
+    <lastmod>2023-09-13T18:18:22+05:32</lastmod>
   </url><url>
     <loc>https://chrismaughan.com/portfolio/zing/</loc>
     <lastmod>2023-06-10T12:03:22+05:30</lastmod>
@@ -25,9 +28,6 @@
   </url><url>
     <loc>https://chrismaughan.com/portfolio/sonicpi/</loc>
     <lastmod>2020-01-05T18:25:22+05:30</lastmod>
-  </url><url>
-    <loc>https://chrismaughan.com/portfolio/jorvik/</loc>
-    <lastmod>2019-06-15T18:25:22+05:32</lastmod>
   </url><url>
     <loc>https://chrismaughan.com/portfolio/zep/</loc>
     <lastmod>2019-05-05T18:26:22+05:30</lastmod>
