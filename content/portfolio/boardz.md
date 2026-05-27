@@ -12,7 +12,7 @@ Boardz was a collection of turn based board games released for iPhone and iPad. 
 
 The host was written in C++ and Objective-C, with the server running Ruby on Rails on Heroku. It was a nice little full-stack project: mobile UI, rules engines for several classic games, remote matchmaking, and all the awkward edge cases that appear the moment two humans are allowed to take turns at different speeds.
 
-I also built a Go AI so players could play against the computer. It acted like a small teacher inside the game, making moves and commenting on the board so there was always someone to play, even when no human opponent was around.
+I also built a Go AI so players could play against the computer when no human opponent was around. Separately, Boardz supported teaching games between people: the Go screenshot shows a human teacher using the in-game chat to talk to a student about the position.
 
 Games available were:
 
@@ -22,7 +22,7 @@ Games available were:
 - Shogi
 - Chinese Chess
 
-![The iPad version of Boardz][1]
+![Boardz Go teaching game on iPad][1]
 
 ![Boardz chess on iPhone][2]
 
