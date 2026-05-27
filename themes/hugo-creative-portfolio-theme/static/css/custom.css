@@ -14,26 +14,23 @@
 }
 
 .box-masonry-featured {
-  background: #eaf5ff;
-  border: 1px solid #a8cdea;
-  box-shadow: inset 4px 0 0 rgba(72, 144, 198, 0.34), 0 0 7px rgba(72, 119, 158, 0.32);
-}
-
-.box-masonry-featured .box-masonry-image.with-hover-overlay:before {
-  background: #5aa7d7;
-  opacity: 0.13;
+  background: #fff;
+  box-shadow: 0 0 7px rgba(72, 119, 158, 0.32);
 }
 
 .box-masonry-featured .box-masonry-text {
   background: #eaf5ff;
+  border-top: 1px solid #a8cdea;
+  box-shadow: inset 4px 0 0 rgba(72, 144, 198, 0.34);
 }
 
 .box-masonry-featured:hover {
-  box-shadow: inset 4px 0 0 rgba(72, 144, 198, 0.5), 0 0 10px rgba(62, 105, 140, 0.45);
+  box-shadow: 0 0 10px rgba(62, 105, 140, 0.45);
 }
 
-.box-masonry-featured:hover .box-masonry-image.with-hover-overlay:before {
-  opacity: 0.2;
+.box-masonry-featured:hover .box-masonry-text {
+  background: #e3f1ff;
+  box-shadow: inset 4px 0 0 rgba(72, 144, 198, 0.5);
 }
 
 .sidebar-heading {
