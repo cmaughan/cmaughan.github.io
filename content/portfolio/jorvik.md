@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/jorvik/jorvik_1.png"
+image = "img/portfolio/jorvik/rezonality.png"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
 weight = 0
@@ -18,15 +18,15 @@ The nice trick is the live feedback loop: edit the scene or shader, evaluate it,
 The editor you see running in the window is Zep ( {{< ref "zep" >}}).
 The tool is a work in progress, and available on GitHub: https://github.com/cmaughan/vklive
 
-![Jorvik][1]
+![Earlier Rezonality screenshot][1]
 
-![Jorvik][2]
+![Rezonality render view][2]
 
-![Jorvik][3]
+![Rezonality scene view][3]
 
-![Jorvik][4]
+![Rezonality editor view][4]
 
-![Jorvik][5]
+![Rezonality live coding view][5]
 
 [1]: /img/portfolio/jorvik/jorvik_1.png
 [2]: /img/portfolio/jorvik/jorvik_2.png
