@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/mapmindz/help.png"
 date = "2013-11-05T18:25:22+05:30"
 title = "MapMindz"
+featured = true
 weight = 0
 +++
 

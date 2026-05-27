@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/first-contact-dcrx/first-contact-dcrx-open.jpeg"
 date = "2025-11-19T11:40:24+00:00"
 title = "First Contact DCRX"
+featured = true
 weight = 0
 +++
 

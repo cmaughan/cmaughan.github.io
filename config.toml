@@ -52,14 +52,6 @@ enableRobotsTXT = true
   url = "photos/"
 
   [[params.navlinks]]
-  name = "Wiki"
-  url = "secondbrain/"
-
-  [[params.navlinks]]
-  name = "Blog"
-  url = "secondbrain/Blog"
-
-  [[params.navlinks]]
   name = "About"
   url = "about/"
 
@@ -68,4 +60,3 @@ enableRobotsTXT = true
   linkedin      = "https://linkedin.com/in/chrismaughan"
   stackoverflow = "https://stackoverflow.com/users/18942/cmaughan"
   github        = "https://github.com/cmaughan"
-

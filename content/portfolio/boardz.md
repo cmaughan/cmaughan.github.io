@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/boardz/boardz_ipad.png"
 date = "2011-11-05T18:25:22+05:30"
 title = "Boardz"
+featured = true
 weight = 0
 +++
 

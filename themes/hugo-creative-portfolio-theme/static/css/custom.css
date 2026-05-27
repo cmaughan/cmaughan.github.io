@@ -13,6 +13,20 @@
   font-size: 14px;
 }
 
+.box-masonry-featured {
+  background: #fff9f2;
+  border: 1px solid #ead8c6;
+  box-shadow: 0 0 5px rgba(194, 159, 127, 0.4);
+}
+
+.box-masonry-featured .box-masonry-text {
+  background: #fff9f2;
+}
+
+.box-masonry-featured:hover {
+  box-shadow: 0 0 8px rgba(173, 129, 93, 0.6);
+}
+
 .sidebar-heading {
     font-size: 14px;
 }

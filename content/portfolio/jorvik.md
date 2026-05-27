@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/jorvik/rezonality.png"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
+featured = true
 weight = 0
 +++
 
