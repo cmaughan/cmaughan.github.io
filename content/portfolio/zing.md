@@ -7,14 +7,13 @@ title = "Zing"
 weight = 0
 +++
 
-Zing is a simple audio integration library.  It is designed to work inside an ImGui app and give you access to various audio features.
+Zing is a simple audio integration library. It is designed to work inside an ImGui app and give you access to various audio features.
 
 <!--more-->
 
-Zing supports ableton-link for tempo synchronisation, spectrum analysis on seperate threads, a midi loader and visualizer, soundfont playback using the tiny sound font library, and a profiler.
-See the github repo for more information, and watch the video demo.
+Zing supports Ableton Link for tempo synchronisation, spectrum analysis on separate threads, a MIDI loader and visualizer, soundfont playback using the TinySoundFont library, PortAudio device management, TOML settings, and a thread profiler. It is a grab-bag in the best sense: enough useful audio plumbing to get an ImGui application making, hearing, analysing, and drawing sound without building the whole shed first.
 
-See [Github](https://github.com/rezonality/zing) for more information about Zing, or watch the video:
+See [GitHub](https://github.com/rezonality/zing) for more information about Zing, or watch the video:
 
 ## Video Demo
 {{< youtube wCY025pFJAo >}}
@@ -23,4 +22,3 @@ See [Github](https://github.com/rezonality/zing) for more information about Zing
 ![Zing][1]
 
 [1]: /img/portfolio/zing/zing.png
-

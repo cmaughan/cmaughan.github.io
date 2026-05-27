@@ -11,9 +11,9 @@ Easy Render is a lightweight sample of how to do simple CPU drawing to a Windows
 
 <!--more-->
 
-The project contains the bare minimum of code to make it easy to get something on the screen.  A tip - it runs much faster on a release build - but this is not really about speed!
+The project contains the bare minimum of code to make it easy to get something on the screen: create a window, own a pixel buffer, draw on the CPU, and present it. It is intentionally tiny, because sometimes you want pixels before you want architecture. A tip - it runs much faster on a release build - but this is not really about speed!
 
-[On Github](https://github.com/cmaughan/easyrender)
+[On GitHub](https://github.com/cmaughan/easyrender)
 
 ![EasyRender][1]
 

@@ -6,13 +6,13 @@ date = "2002-01-01T18:25:22+05:30"
 title = "NVIDIA FX Composer"
 weight = 0
 +++
-FX Composer 2.5 is a powerful integrated development environment for shader authoring.
+FX Composer 2.5 was a powerful integrated development environment for shader authoring.
 
 <!--more-->
 
-At NVIDIA, I wrote a prototype shader IDE called FXComposer.  It became a bigger project with many folks working on it.  Eventually, when shader tools from other companies came on line, the project was finished.
+At NVIDIA, I wrote a prototype shader IDE called FX Composer. It became a bigger project with many folks working on it. Eventually, when shader tools from other companies came on line, the project was finished.
 
-We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders, including ways to measure instruction cycles & performance.
+We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders: code editing, model and material binding, parameter tweaking, texture inspection, scripting, sample projects, and ways to measure instruction cycles and performance. It was a proper "what if shader authors had a real workshop?" sort of tool.
 
 There were many interesting things I learned working on this project, such as:
 
@@ -20,9 +20,9 @@ There were many interesting things I learned working on this project, such as:
 - IronPython/Python (embedded in the Application)
 - Building a more complex IDE
 
-I wrote a couple chapters about FXComposer in GPU Gems, you can find them [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html)
+I wrote a couple chapters about FX Composer in GPU Gems, you can find them [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html)
 
-FXComposer is still available for download [Here](https://developer.nvidia.com/fx-composer)
+FX Composer is still available for download [Here](https://developer.nvidia.com/fx-composer), though NVIDIA no longer actively develops it.
 
 ![FXComposer][1]
 

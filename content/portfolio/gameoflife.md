@@ -11,9 +11,9 @@ Implementing Game of Life is a classic programming challenge.
 
 <!--more-->
 
-My version shown here implements the speed up detailed in this [paper](http://www.drdobbs.com/go-parallel/article/print?articleId=184406478&siteSectionName=) which enables simulation of millions of iterations by exploiting the repetive nature of the algorithm.  Also - best title for an academic paper ever ;)
+My version shown here implements the speed up detailed in this [paper](http://www.drdobbs.com/go-parallel/article/print?articleId=184406478&siteSectionName=) which enables simulation of millions of iterations by exploiting the repetitive nature of the algorithm. Also - best title for an academic paper ever ;)
 
-I need to dig out the source for this, I can't find it off hand, but there is an earlier version in the teaching framework [Mgfx](https://github.com/cmaughan/mgfx).
+The interesting bit is that Game of Life looks simple, but it rewards careful thinking about repeated patterns, cached results, and how much work you can avoid doing. I need to dig out the source for this version, but there is an earlier version in the teaching framework [Mgfx](https://github.com/cmaughan/mgfx), and a newer standalone experiment [here](https://github.com/cmaughan/game_of_life).
 
 ![Game of Life][1]
 

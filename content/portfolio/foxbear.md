@@ -7,11 +7,11 @@ title = "DX Driver"
 weight = 0
 +++
 
-At 3DLabs, I ran the DirectX Driver team.  I worked on DirectX 2,3,5,7 and 8 drivers - mostly for Permedia & Glint chips.
+At 3DLabs, I ran the DirectX Driver team. I worked on DirectX 2, 3, 5, 7 and 8 drivers - mostly for Permedia and Glint chips.
 
 <!--more-->
 
-If you can remember this app, you are old ;) This is one of the first DirectDraw applications Microsoft made.  I used to spend too much time making it work on various iterations of 3Dlabs hardware.  One interesting challenge was making this run out of AGP memory on a Permedia GPU.  I also used it to test a new linear video memory allocator.
+If you can remember this app, you are old ;) This is one of the first DirectDraw applications Microsoft made. I used to spend too much time making it work on various iterations of 3Dlabs hardware. One interesting challenge was making this run out of AGP memory on a Permedia GPU. I also used it to test a new linear video memory allocator, which is exactly the kind of glamorous work hidden behind "the demo runs now".
 
 ![FoxBear][1]
 

@@ -11,9 +11,9 @@ To support our developers in implementing DXSAS shader semantics, I developed an
 
 <!--more-->
 
-You could add semantics and annotations to shaders to describe how the game engine used them.  We had many effects that could be applied to objects.
+You could add semantics and annotations to shaders to describe how the game engine should feed them: matrices, textures, lights, camera values, and the other usual suspects. The sample app read those declarations, wired the data up, and let developers see how an authored effect would behave once an engine got involved.
 
-The sample application simply read in the shaders and used them in a simple scene.  It was written in C#
+The sample application simply read in the shaders and used them in a simple scene. It was written in C#.
 
 DXSAS is no longer used anywhere that I'm aware of.
 

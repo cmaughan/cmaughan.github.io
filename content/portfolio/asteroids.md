@@ -7,11 +7,11 @@ title = "Asteroids"
 weight = 0
 +++
 
-Asteroids is a fun an easy game to build. This one is part of the MGFX teaching framework.
+Asteroids is a fun and friendly game to build, mostly because every feature is visible the moment it works. This one is part of the MGFX teaching framework.
 
 <!--more-->
 
-The demo is designed to show how physics works in a simple game. Parameters can be used to tweak the behavior and the physics.
+The demo is designed to show simple game physics without hiding the interesting bits behind a full engine. It has ship thrust, momentum, collisions, wrapping space, and tweakable parameters so students can see how tiny changes turn a playable game into a skiddy little disaster machine.
 
 ![Asteroids][1]
 

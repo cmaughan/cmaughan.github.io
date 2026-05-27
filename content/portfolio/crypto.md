@@ -11,9 +11,9 @@ The nice part of crypto currency is how easy it is to talk to the exchanges and 
 
 <!--more-->
 
-To assist with trading on the Binance Futures market, I created a simple scanner which can gather real time trading information and draw candlestick charts.  The bot can also make decisions and trade.
+To assist with trading on the Binance Futures market, I created a simple scanner which can gather real time trading information, rank instruments, and draw candlestick charts. The bot can also make decisions and trade, though the interesting part for me was the plumbing: market data, charting, exchange APIs, and trying to keep the decision making visible enough that it did not feel like consulting a magic spreadsheet.
 
-I experimented with gathering twitter feeds too, in order to do some sentiment analysis.
+I experimented with gathering Twitter feeds too, in order to do some sentiment analysis. Crypto is noisy, twitchy, and occasionally ridiculous, which makes it a surprisingly good playground for testing data pipelines.
 
 ![Crypto Bot][1]
 

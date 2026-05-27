@@ -7,13 +7,12 @@ title = "Stocks"
 weight = 0
 +++
 
-Understanding how Option Trades evolve over time is key to being able to trade them effectively.
+Understanding how option trades evolve over time is key to being able to trade them effectively.
 
 <!--more-->
 
-I wrote a little graph rendering tool to show stock charts.  This one isn't open source.
+I wrote a little graph rendering tool to show stock charts. The useful part was being able to see how a position might move as price and time changed, rather than treating an option trade as a single number on a screen. This one isn't open source.
 
 ![Stocks][1]
 
 [1]: /img/portfolio/stocks/stocks.png
-
