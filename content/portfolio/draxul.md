@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/draxul/draxul_mac.png"
 date = "2026-05-20T18:25:22+05:30"
 title = "Draxul"
+featured = true
 weight = 0
 +++
 
