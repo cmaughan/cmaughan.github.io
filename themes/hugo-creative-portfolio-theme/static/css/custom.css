@@ -14,17 +14,26 @@
 }
 
 .box-masonry-featured {
-  background: #fff9f2;
-  border: 1px solid #ead8c6;
-  box-shadow: 0 0 5px rgba(194, 159, 127, 0.4);
+  background: #fff1df;
+  border: 1px solid #dfbf9a;
+  box-shadow: inset 4px 0 0 rgba(210, 137, 58, 0.34), 0 0 7px rgba(161, 120, 78, 0.36);
+}
+
+.box-masonry-featured .box-masonry-image.with-hover-overlay:before {
+  background: #d68b2f;
+  opacity: 0.14;
 }
 
 .box-masonry-featured .box-masonry-text {
-  background: #fff9f2;
+  background: #fff1df;
 }
 
 .box-masonry-featured:hover {
-  box-shadow: 0 0 8px rgba(173, 129, 93, 0.6);
+  box-shadow: inset 4px 0 0 rgba(210, 137, 58, 0.5), 0 0 10px rgba(145, 101, 59, 0.48);
+}
+
+.box-masonry-featured:hover .box-masonry-image.with-hover-overlay:before {
+  opacity: 0.22;
 }
 
 .sidebar-heading {
