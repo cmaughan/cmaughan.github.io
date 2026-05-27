@@ -1,1 +1,0 @@
-bundle exec octopress new post "%1" --dir %2

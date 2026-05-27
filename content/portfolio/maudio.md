@@ -1,0 +1,17 @@
++++
+showonlyimage = false
+draft = false
+image = "img/portfolio/maudio/maudio.png"
+date = "2020-06-04T09:00:22+05:32"
+title = "MAudio"
+weight = 0
++++
+
+I've been working on a graph-based synthesizer for some time, as part of my larger live coding project.
+
+<!--more-->
+
+When finished, it will be possible to reconfigure the synthesizer using script.  This should make it flexible enough to generate a wide range of sounds.  Here's a video of it in action:
+
+{{< youtube CmTfwoxM_gQ >}}
+
