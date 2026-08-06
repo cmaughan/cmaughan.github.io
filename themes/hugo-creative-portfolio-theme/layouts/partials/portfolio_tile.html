@@ -2,12 +2,8 @@
     <div class="box-masonry{{ if .Params.featured }} box-masonry-featured{{ end }}{{ if eq .Section "photos" }} box-masonry-photo{{ end }}">
         {{ if and (isset .Params "image") .Params.image }}
           {{ if eq .Section "photos" }}
-          <a href="{{ .Params.image | absURL }}" class="box-masonry-image with-hover-overlay photo-lightbox-link" data-toggle="lightbox" data-gallery="photos" data-title="{{ .Title }}" aria-label="View {{ .Title }} full size">
+          <a href="{{ .Params.image | absURL }}" class="box-masonry-image photo-lightbox-link" data-toggle="lightbox" data-gallery="photos" aria-label="View {{ .Title }} full size">
               <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" class="img-responsive">
-              <span class="photo-lightbox-title" aria-hidden="true">
-                  <span class="photo-lightbox-name">{{ .Title }}</span>
-                  <span class="photo-lightbox-action">View full size</span>
-              </span>
           </a>
           {{ else if eq .Params.showonlyimage true }}
           <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay">

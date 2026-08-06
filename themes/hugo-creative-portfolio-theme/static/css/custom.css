@@ -37,40 +37,6 @@
   cursor: zoom-in;
 }
 
-.photo-lightbox-title {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  left: 0;
-  display: block;
-  padding: 18px 20px;
-  color: #444444;
-  opacity: 0;
-  transition: opacity 0.2s ease-out;
-}
-
-.box-masonry-photo:hover .photo-lightbox-title,
-.photo-lightbox-link:focus .photo-lightbox-title {
-  opacity: 1;
-}
-
-.photo-lightbox-name,
-.photo-lightbox-action {
-  display: block;
-}
-
-.photo-lightbox-name {
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.photo-lightbox-action {
-  margin-top: 4px;
-  font-size: 13px;
-}
-
 .photo-lightbox-link:focus {
   outline: 3px solid #4d90fe;
   outline-offset: -3px;
