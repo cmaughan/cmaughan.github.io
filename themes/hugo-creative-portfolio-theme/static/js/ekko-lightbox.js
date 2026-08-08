@@ -327,7 +327,7 @@ License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
             _this.modal_arrows.css('display', 'block');
           }
           return image.load(function() {
-            _this.resize(img.width);
+            _this.resize(_this.fitImageWidth(img.width, img.height));
             return _this.options.onContentLoaded.call(_this);
           });
         };
@@ -337,6 +337,15 @@ License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
       }
       img.src = src;
       return img;
+    },
+    fitImageWidth: function(width, height) {
+      var available_height, available_width, footer_height, header_height, scale;
+      header_height = this.modal_content.find('.modal-header:visible').outerHeight(true) || 0;
+      footer_height = this.modal_content.find('.modal-footer:visible').outerHeight(true) || 0;
+      available_width = $(window).width() - this.border.left - this.border.right - this.padding.left - this.padding.right - 30;
+      available_height = $(window).height() - this.border.top - this.border.bottom - this.padding.top - this.padding.bottom - header_height - footer_height - 30;
+      scale = Math.min(1, available_width / width, available_height / height);
+      return Math.max(1, Math.floor(width * scale));
     },
     resize: function(width) {
       var width_total;

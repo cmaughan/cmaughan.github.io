@@ -42,6 +42,27 @@
   outline-offset: -3px;
 }
 
+.ekko-lightbox .modal-dialog {
+  margin: 15px auto;
+}
+
+.ekko-lightbox .modal-content {
+  max-height: calc(100vh - 30px);
+}
+
+.ekko-lightbox .modal-body {
+  overflow: hidden;
+}
+
+.ekko-lightbox .modal-body img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 125px);
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .sidebar-heading {
     font-size: 14px;
 }
