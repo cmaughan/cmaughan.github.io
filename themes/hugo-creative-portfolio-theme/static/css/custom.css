@@ -8,6 +8,26 @@
   font-size: 14px;
 }
 
+@media (min-width: 768px) {
+  #sidebar {
+    width: 16.66666667%;
+  }
+
+  .content-column {
+    width: 83.33333333%;
+  }
+}
+
+@media (min-width: 992px) {
+  #sidebar {
+    width: 12.5%;
+  }
+
+  .content-column {
+    width: 87.5%;
+  }
+}
+
 .box-masonry .box-masonry-text p {
   color: #666666;
   font-size: 14px;
