@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/scoreview/score.png"
 date = "2026-08-17T08:00:00+01:00"
 title = "ScoreView"
+featured = true
 weight = 0
 +++
 
