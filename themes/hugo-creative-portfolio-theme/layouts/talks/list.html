@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  {{ partial "mobile_nav_toggle.html" . }}
+  <div class="content-column-content talks-page">
+    <h1>{{ .Title }}</h1>
+    <div class="talks-intro">
+      {{ .Content }}
+    </div>
+    <div class="talks-grid">
+      {{ range .Params.talks }}
+      <article class="talk-card">
+        <a class="talk-card-image" href="{{ .url }}" aria-label="Open {{ .title }} presentation">
+          <img src="{{ .image | absURL }}" alt="{{ .alt }}">
+        </a>
+        <div class="talk-card-body">
+          <p class="talk-card-series">{{ .series }}</p>
+          <h2><a href="{{ .url }}">{{ .title }}</a></h2>
+          <p>{{ .description }}</p>
+          <a class="talk-card-link" href="{{ .url }}">View presentation <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
