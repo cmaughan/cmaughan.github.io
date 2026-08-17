@@ -1,6 +1,6 @@
 +++
 showonlyimage = false
-draft = false
+draft = true
 image = "img/portfolio/crochet-blankets/red-blanket.jpeg"
 date = "2024-08-28T09:58:29+00:00"
 title = "Crochet Blankets"
