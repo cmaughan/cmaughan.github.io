@@ -13,8 +13,7 @@
           <img src="{{ .image | absURL }}" alt="{{ .alt }}">
         </a>
         <div class="talk-card-body">
-          <p>{{ .description }}</p>
-          <a class="talk-card-link" href="{{ .url }}">View presentation <span aria-hidden="true">&rarr;</span></a>
+          <p>{{ .description }} <a class="talk-card-link" href="{{ .url }}">Go to presentation...</a></p>
         </div>
       </article>
       {{ end }}

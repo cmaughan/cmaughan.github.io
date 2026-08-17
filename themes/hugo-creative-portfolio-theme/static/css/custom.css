@@ -112,12 +112,7 @@
 }
 
 .talk-card-body p {
-  margin-bottom: 7px;
-}
-
-.talk-card-link {
-  display: inline-block;
-  font-weight: 700;
+  margin-bottom: 0;
 }
 
 @media (max-width: 991px) {
