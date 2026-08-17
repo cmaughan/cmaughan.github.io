@@ -26,6 +26,18 @@ The plugin is written in C++ and renders through Vulkan on Windows and Metal on 
 
 ![Mars viewed from Phobos][3]
 
+![Constellation figures in SatView's stereographic all-sky ground view][4]
+
+![Geostationary satellite tracks over the night side of an Earth map][5]
+
+![Ground-observer sky view with constellation boundaries and satellite markers][6]
+
+![Lunar landing sites and spacecraft orbit tracks around the Moon][7]
+
 [1]: /img/portfolio/satview/satview.png
 [2]: /img/portfolio/satview/tracks.png
 [3]: /img/portfolio/satview/mars.png
+[4]: /img/portfolio/satview/constellations.png
+[5]: /img/portfolio/satview/geostationary.png
+[6]: /img/portfolio/satview/groundview.png
+[7]: /img/portfolio/satview/moonlanders.png

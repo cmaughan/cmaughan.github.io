@@ -28,6 +28,9 @@ The project is also a live experiment in agentic development. None of the code h
 
 ![Draxul running terminal tools and Neovim on Windows][3]
 
+![Draxul Kanban and Markdown panes managing agent-generated work items][4]
+
 [1]: /img/portfolio/draxul/terminals_mac.png
 [2]: /img/portfolio/draxul/terminals_mac_2.png
 [3]: /img/portfolio/draxul/draxul_pc.png
+[4]: /img/portfolio/draxul/kanban.png
