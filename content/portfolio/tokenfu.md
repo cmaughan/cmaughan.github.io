@@ -15,6 +15,9 @@ The panel shows current activity by model, including tokens per second, total to
 
 TokenFu is written as a hardware-accelerated native UI, using Vulkan on Windows and Metal on macOS. The goal is a tiny, quick status surface that can stay nearby while agents work without becoming another full dashboard demanding attention.
 
-![TokenFu showing per-model API token usage and estimated cost][1]
+![TokenFu Today view showing per-model API token usage and estimated cost][1]
+
+![TokenFu History view showing usage and cost by period][2]
 
 [1]: /img/portfolio/tokenfu/tokenfu.png
+[2]: /img/portfolio/tokenfu/tokenfu_history.png
