@@ -4,6 +4,13 @@ title = "Presentations"
 aliases = ["/talks/"]
 
 [[presentations]]
+title = "A 30 Year Late QSO"
+description = "A journey from returning to amateur radio and building a Soldersmoke receiver and transmitter to making my first QSO more than three decades after qualifying."
+image = "img/presentations/a_30_year_late_qso.jpg"
+alt = "Title slide for A 30 Year Late QSO by Chris Maughan, G7LQX"
+url = "https://chrismaughan.com/presentations/radio_update_2/"
+
+[[presentations]]
 title = "Going Agentic"
 description = "Lessons from building dependable software with coding agents and orchestrating work effectively."
 image = "img/presentations/slurp_and_learn.png"
@@ -25,4 +32,4 @@ alt = "Title slide for The Soldersmoke DCRX, showing the home-built receiver"
 url = "https://docs.google.com/presentation/d/1igh53lOkmQISkxRDy_trL4AezOjECNsaEgshUDB7gRg/present?slide=id.p"
 +++
 
-Selected presentations on agentic software development, effective orchestration, and the changing shape of the developer workflow.
+Selected presentations on software development, electronics, creative technology, and the things I build.
