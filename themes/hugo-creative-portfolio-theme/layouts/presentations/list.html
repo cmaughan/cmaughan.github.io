@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  {{ partial "mobile_nav_toggle.html" . }}
+  <div class="content-column-content presentations-page">
+    <h1>{{ .Title }}</h1>
+    <div class="presentations-intro">
+      {{ .Content }}
+    </div>
+    <div class="presentations-grid">
+      {{ range .Params.presentations }}
+      <article class="presentation-card">
+        <a class="presentation-card-image" href="{{ .url }}" aria-label="Open {{ .title }} presentation">
+          <img src="{{ .image | absURL }}" alt="{{ .alt }}">
+        </a>
+        <div class="presentation-card-body">
+          <p>{{ .description }} <a class="presentation-card-link" href="{{ .url }}">Go to presentation...</a></p>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

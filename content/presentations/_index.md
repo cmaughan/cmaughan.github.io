@@ -1,18 +1,19 @@
 +++
 date = "2026-08-17T00:00:00+01:00"
-title = "Talks"
+title = "Presentations"
+aliases = ["/talks/"]
 
-[[talks]]
+[[presentations]]
 title = "Going Agentic"
 description = "Lessons from building dependable software with coding agents and orchestrating work effectively."
-image = "img/talks/slurp_and_learn.png"
+image = "img/presentations/slurp_and_learn.png"
 alt = "Title slide for Going Agentic: What I've Learned So Far"
 url = "https://chrismaughan.com/presentations/slurp_and_learn/"
 
-[[talks]]
+[[presentations]]
 title = "Strategies for 10x and 100x Developers"
 description = "Practical strategies for moving from AI-assisted coding to orchestrating complete development loops."
-image = "img/talks/strategies_10x_100x.png"
+image = "img/presentations/strategies_10x_100x.png"
 alt = "Title slide for Strategies for 10x and 100x Developers"
 url = "https://chrismaughan.com/presentations/strategies_10x_100x/"
 +++

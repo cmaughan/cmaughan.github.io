@@ -62,61 +62,61 @@
   outline-offset: -3px;
 }
 
-.talks-page {
+.presentations-page {
   max-width: 1400px;
 }
 
-.talks-intro {
+.presentations-intro {
   max-width: 760px;
 }
 
-.talks-grid {
+.presentations-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
   margin-top: 30px;
 }
 
-.talk-card {
+.presentation-card {
   min-width: 0;
   overflow: hidden;
 }
 
-.talk-card-image {
+.presentation-card-image {
   display: block;
   overflow: hidden;
   background: #0d1117;
 }
 
-.talk-card-image img {
+.presentation-card-image img {
   display: block;
   width: 100%;
   height: auto;
   transition: transform 180ms ease, opacity 180ms ease;
 }
 
-.talk-card-image:hover img,
-.talk-card-image:focus img {
+.presentation-card-image:hover img,
+.presentation-card-image:focus img {
   opacity: 0.92;
   transform: scale(1.01);
 }
 
-.talk-card-image:focus,
-.talk-card-link:focus {
+.presentation-card-image:focus,
+.presentation-card-link:focus {
   outline: 3px solid #4d90fe;
   outline-offset: 2px;
 }
 
-.talk-card-body {
+.presentation-card-body {
   padding: 14px 0 0;
 }
 
-.talk-card-body p {
+.presentation-card-body p {
   margin-bottom: 0;
 }
 
 @media (max-width: 991px) {
-  .talks-grid {
+  .presentations-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }

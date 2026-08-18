@@ -48,8 +48,8 @@ enableRobotsTXT = true
   home = true
 
   [[params.navlinks]]
-  name = "Talks"
-  url = "talks/"
+  name = "Presentations"
+  url = "presentations/"
 
   [[params.navlinks]]
   name = "Photos"
