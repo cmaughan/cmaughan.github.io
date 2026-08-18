@@ -1,13 +1,14 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/timing_window/iosgame.png"
+image = "img/portfolio/threadz/threadz.png"
 date = "2026-08-17T08:50:00+01:00"
-title = "Timing Window"
+title = "Threadz"
 weight = 0
+aliases = ["/portfolio/timing_window/"]
 +++
 
-Timing Window is a work-in-progress iOS puzzle game about arranging a solution on a grid and then watching it play out.
+Threadz is a work-in-progress iOS puzzle game about arranging a solution on a grid and then watching it play out.
 
 <!--more-->
 
@@ -15,6 +16,6 @@ Each puzzle gives you a small set of piecesâ€”directions, values, and operatorsâ
 
 The interface is deliberately compact and tactile: the puzzle state, available pieces, and transport controls all live on one screen. It is still being developed, but the core loop of plan, run, inspect, and improve is in place.
 
-![A Timing Window puzzle being solved on iOS][1]
+![A Threadz puzzle being solved on iOS][1]
 
-[1]: /img/portfolio/timing_window/iosgame.png
+[1]: /img/portfolio/threadz/threadz.png
