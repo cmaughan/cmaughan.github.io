@@ -31,5 +31,5 @@ The story behind the radio is also told in [A 30 Year Late QSO][4], from returni
 [1]: https://www.youtube.com/playlist?list=PLNDzNrVveLRc7gqZf2WExgn7L2B2BdJuJ
 [2]: /img/portfolio/first-contact-dcrx/first-contact-dcrx.jpeg
 [3]: /img/portfolio/first-contact-dcrx/first-contact-dcrx-open.jpeg
-[4]: https://chrismaughan.com/presentations/radio_update_2/
+[4]: https://chrismaughan.com/presentations/a_30_year_late_qso/
 [5]: /img/presentations/a_30_year_late_qso.jpg
