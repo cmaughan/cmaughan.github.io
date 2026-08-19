@@ -21,5 +21,13 @@ The rear panel carries the receiver's external connections, with ventilation slo
 
 ![Rear view of the WBR Regen receiver in its Hammond enclosure][2]
 
+I describe the receiver and the thinking behind the build in [WBR Regen 1: A fun side project][4].
+
+[![YouTube thumbnail for WBR Regen 1: A fun side project][3]][4]
+
+[Watch WBR Regen 1: A fun side project on YouTube...][4]
+
 [1]: /img/portfolio/wbr_regen/wbr_regen_front.jpeg
 [2]: /img/portfolio/wbr_regen/wbr_regen_rear.jpeg
+[3]: https://i.ytimg.com/vi/X2SCcV440uQ/maxresdefault.jpg
+[4]: https://youtu.be/X2SCcV440uQ?si=r5zJgQfvge2kJ3I8
