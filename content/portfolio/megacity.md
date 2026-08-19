@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/megacity/function_buildings_mac.png"
+image = "img/portfolio/megacity/live_coverage_pc.png"
 date = "2026-08-17T08:30:00+01:00"
 title = "MegaCity"
 featured = true
