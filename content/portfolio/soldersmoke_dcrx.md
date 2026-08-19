@@ -5,7 +5,6 @@ image = "img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg"
 date = "2025-11-19T11:40:23+00:00"
 title = "The Soldersmoke DCRX"
 description = "A home-built 80-metre direct-conversion receiver using Manhattan-style construction and 3D-printed hardware."
-featured = true
 weight = 0
 +++
 
