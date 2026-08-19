@@ -18,6 +18,8 @@ python -m unittest discover -s tests -v
 
 Use TOML front matter in content files and preserve the fields used by neighboring entries, including `image`, `title`, `date`, and `showonlyimage`. Name Markdown and image files descriptively with lowercase `snake_case`, and keep referenced image paths exact. Match the existing Hugo template indentation and use quoted HTML attributes. Python uses four-space indentation, type hints where helpful, and `snake_case` names.
 
+When a portfolio entry references a presentation, show the presentation's first slide as a clickable image and follow it with a `[Go to presentation...][ref]` text link. Both the image and text must target the same presentation route.
+
 ## Testing Guidelines
 
 Every change should produce a clean Hugo build. Check the affected page locally at desktop and mobile widths; for visual or interaction changes, exercise links, navigation, overlays, and image loading. Keep Python tests named `test_*.py` and test methods named `test_*`. No coverage threshold is configured.

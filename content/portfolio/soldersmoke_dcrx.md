@@ -18,6 +18,8 @@ This receiver led into the later [First Contact DCRX](/portfolio/first_contact_d
 
 [![Title slide for The Soldersmoke DCRX presentation][2]][3]
 
+[Go to presentation...][3]
+
 [1]: /img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg
 [2]: /img/presentations/the_soldersmoke_dcrx.png
 [3]: https://chrismaughan.com/presentations/the_soldersmoke_dcrx/
