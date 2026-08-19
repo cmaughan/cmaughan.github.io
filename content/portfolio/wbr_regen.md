@@ -11,6 +11,8 @@ weight = 0
 
 WBR Regen is my 7 MHz regenerative receiver build, boxed in a Hammond enclosure and finished with a custom two-colour fascia printed on my Bambu Lab printer.
 
+For more background on how this type of receiver works, see the [regenerative circuit overview on Wikipedia](https://en.wikipedia.org/wiki/Regenerative_circuit).
+
 <!--more-->
 
 The front panel brings the RF and regeneration controls together around a central tuning dial. The black-and-white fascia contrasts with the blue enclosure and turns the circuit into a compact, finished receiver.
