@@ -10,21 +10,11 @@
 
 @media (min-width: 768px) {
   #sidebar {
-    width: 16.66666667%;
+    width: 220px;
   }
 
   .content-column {
-    width: 83.33333333%;
-  }
-}
-
-@media (min-width: 992px) {
-  #sidebar {
-    width: 12.5%;
-  }
-
-  .content-column {
-    width: 87.5%;
+    width: calc(100% - 220px);
   }
 }
 
