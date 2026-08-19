@@ -16,7 +16,8 @@ The bright red 3D-printed parts support the controls, display and circuit boards
 
 This receiver led into the later [First Contact DCRX](/portfolio/first_contact_dcrx/) project. The accompanying presentation walks through the receiver's design, construction, testing and next steps.
 
-[View The Soldersmoke DCRX presentation][2]
+[![Title slide for The Soldersmoke DCRX presentation][2]][3]
 
 [1]: /img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg
-[2]: https://chrismaughan.com/presentations/the_soldersmoke_dcrx/
+[2]: /img/presentations/the_soldersmoke_dcrx.png
+[3]: https://chrismaughan.com/presentations/the_soldersmoke_dcrx/
