@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-c4e1171eb4281116019c604a711c5128.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-9e15f8fb9e1f2f288bfbe28f6ca11029.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Chris Maughan">
   <meta name="dcterms.date" content="2026-05-07">
@@ -18,16 +18,10 @@
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
+    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: 1.5em;}
-    div.column{flex: auto;}
-    @media screen {
-    div.columns{gap: min(4vw, 1.5em);}
-    div.column{overflow-x: auto;}
-    }
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -102,7 +96,7 @@
     code span.vs { color: #e6db74; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-26e44eec30400b273a300571d1b085ad.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-7e9751a3215b29fce7d79d71ed6e54de.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -206,7 +200,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Chris Maughan
+Chris Maughan 
 </div>
         <p class="quarto-title-affiliation">
             NVIDIA
@@ -520,10 +514,10 @@ Dark Factory Development
 <img data-src="screenshots/obsidian.png" class="slide-image r-stretch quarto-figure-center" style="width:90.0%"><p class="caption">Obsidian</p></section>
 <section class="slide level2 center">
 <h2>Parallel Agents via Worktrees</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-label="1"></a><span class="co"># Each agent gets an isolated git worktree</span></span>
-<span id="cb3-2"><a href="" aria-label="2"></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Fix the PTY EINTR bug..."</span><span class="kw">)</span></span>
-<span id="cb3-3"><a href="" aria-label="3"></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Refactor render passes..."</span><span class="kw">)</span></span>
-<span id="cb3-4"><a href="" aria-label="4"></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Add chord keybindings..."</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="co"># Each agent gets an isolated git worktree</span></span>
+<span id="cb3-2"><a href=""></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Fix the PTY EINTR bug..."</span><span class="kw">)</span></span>
+<span id="cb3-3"><a href=""></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Refactor render passes..."</span><span class="kw">)</span></span>
+<span id="cb3-4"><a href=""></a><span class="ex">Agent</span><span class="er">(</span><span class="ex">isolation:</span> <span class="st">"worktree"</span>, prompt: <span class="st">"Add chord keybindings..."</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Each agent works on an isolated copy of the repo</li>
 <li>No conflicts during execution</li>

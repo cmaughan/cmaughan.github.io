@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-c4e1171eb4281116019c604a711c5128.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark-9e15f8fb9e1f2f288bfbe28f6ca11029.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Chris Maughan">
   <meta name="dcterms.date" content="2026-08-12">
@@ -18,16 +18,10 @@
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
+    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: 1.5em;}
-    div.column{flex: auto;}
-    @media screen {
-    div.columns{gap: min(4vw, 1.5em);}
-    div.column{overflow-x: auto;}
-    }
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -102,7 +96,7 @@
     code span.vs { color: #e6db74; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-a7aec60032a46368e8246cbc399ceedd.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-66bf7da2995abbfea6323edfdb0a2cb8.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -205,7 +199,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Chris Maughan
+Chris Maughan 
 </div>
         <p class="quarto-title-affiliation">
             NVIDIA
@@ -483,12 +477,12 @@ Don’t prompt the rules, record them
 </section>
 <section class="slide level2 center">
 <h2>Skills: The Basic Structure</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="" aria-label="1"></a>my-skill/</span>
-<span id="cb1-2"><a href="" aria-label="2"></a>├── SKILL.md</span>
-<span id="cb1-3"><a href="" aria-label="3"></a>├── scripts/</span>
-<span id="cb1-4"><a href="" aria-label="4"></a>│   └── do_the_work.py</span>
-<span id="cb1-5"><a href="" aria-label="5"></a>├── references/</span>
-<span id="cb1-6"><a href="" aria-label="6"></a>└── assets/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>my-skill/</span>
+<span id="cb1-2"><a href=""></a>├── SKILL.md</span>
+<span id="cb1-3"><a href=""></a>├── scripts/</span>
+<span id="cb1-4"><a href=""></a>│   └── do_the_work.py</span>
+<span id="cb1-5"><a href=""></a>├── references/</span>
+<span id="cb1-6"><a href=""></a>└── assets/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p class="plain-note">
 <code>SKILL.md</code> explains when to use the skill. The supporting files make the work repeatable.
 </p>
@@ -544,16 +538,16 @@ Skills are <span>restrictive</span>
 </section>
 <section class="slide level2 center">
 <h2>Skill Hierarchy</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="" aria-label="1"></a>project/</span>
-<span id="cb2-2"><a href="" aria-label="2"></a>└── .agents/</span>
-<span id="cb2-3"><a href="" aria-label="3"></a>    └── skills/</span>
-<span id="cb2-4"><a href="" aria-label="4"></a>        └── orchestrator.md</span>
-<span id="cb2-5"><a href="" aria-label="5"></a>            ├── jira/</span>
-<span id="cb2-6"><a href="" aria-label="6"></a>            ├── coding/</span>
-<span id="cb2-7"><a href="" aria-label="7"></a>            ├── slack/</span>
-<span id="cb2-8"><a href="" aria-label="8"></a>            ├── perforce/       # source control</span>
-<span id="cb2-9"><a href="" aria-label="9"></a>            ├── swarm/          # reviews</span>
-<span id="cb2-10"><a href="" aria-label="10"></a>            └── preflight/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>project/</span>
+<span id="cb2-2"><a href=""></a>└── .agents/</span>
+<span id="cb2-3"><a href=""></a>    └── skills/</span>
+<span id="cb2-4"><a href=""></a>        └── orchestrator.md</span>
+<span id="cb2-5"><a href=""></a>            ├── jira/</span>
+<span id="cb2-6"><a href=""></a>            ├── coding/</span>
+<span id="cb2-7"><a href=""></a>            ├── slack/</span>
+<span id="cb2-8"><a href=""></a>            ├── perforce/       # source control</span>
+<span id="cb2-9"><a href=""></a>            ├── swarm/          # reviews</span>
+<span id="cb2-10"><a href=""></a>            └── preflight/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p class="plain-note">
 <code>orchestrator.md</code> chooses the workflow and delegates each step to a child skill.
 </p>
@@ -845,11 +839,11 @@ Attribution: European Space Agency
 <h2><code>plans/</code></h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="" aria-label="1"></a>plans/</span>
-<span id="cb3-2"><a href="" aria-label="2"></a>├── manifesto.md</span>
-<span id="cb3-3"><a href="" aria-label="3"></a>├── feature-plan.md</span>
-<span id="cb3-4"><a href="" aria-label="4"></a>├── architecture.md</span>
-<span id="cb3-5"><a href="" aria-label="5"></a>└── decisions.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href=""></a>plans/</span>
+<span id="cb3-2"><a href=""></a>├── manifesto.md</span>
+<span id="cb3-3"><a href=""></a>├── feature-plan.md</span>
+<span id="cb3-4"><a href=""></a>├── architecture.md</span>
+<span id="cb3-5"><a href=""></a>└── decisions.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:70%;">
 <ul>
 <li>Plans are Markdown</li>
@@ -1251,42 +1245,79 @@ Attribution: European Space Agency
       });
     </script>
     <script>
+
     (() => {
+
       if (window.location.hostname !== "127.0.0.1" && window.location.hostname !== "localhost") {
+
         return;
+
       }
 
+    
+
       let baseline = null;
+
       let reloading = false;
 
+    
+
       const checkForUpdate = async () => {
+
         try {
+
           const response = await fetch(window.location.pathname + window.location.search, {
+
             cache: "no-store"
+
           });
 
+    
+
           if (!response.ok) {
+
             return;
+
           }
+
+    
 
           const current = await response.text();
+
           if (baseline === null) {
+
             baseline = current;
+
           } else if (current !== baseline && !reloading) {
+
             reloading = true;
+
             window.location.reload();
+
           }
+
         } catch {
+
           // Quarto may be briefly unavailable while rebuilding. Try again next time.
+
         }
+
       };
 
+    
+
       window.setTimeout(() => {
+
         checkForUpdate();
+
         window.setInterval(checkForUpdate, 1500);
+
       }, 1000);
+
     })();
+
     </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
