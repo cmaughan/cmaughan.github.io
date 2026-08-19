@@ -4,11 +4,11 @@ title = "Presentations"
 aliases = ["/talks/"]
 
 [[presentations]]
-title = "A 30 Year Late QSO"
-description = "A journey from returning to amateur radio and building a Soldersmoke receiver and transmitter to making my first QSO more than three decades after qualifying."
-image = "img/presentations/a_30_year_late_qso.jpg"
-alt = "Title slide for A 30 Year Late QSO by Chris Maughan, G7LQX"
-url = "https://chrismaughan.com/presentations/radio_update_2/"
+title = "Strategies for 10x and 100x Developers"
+description = "Practical strategies for moving from AI-assisted coding to orchestrating complete development loops."
+image = "img/presentations/strategies_10x_100x.png"
+alt = "Title slide for Strategies for 10x and 100x Developers"
+url = "https://chrismaughan.com/presentations/strategies_10x_100x/"
 
 [[presentations]]
 title = "Going Agentic"
@@ -18,11 +18,11 @@ alt = "Title slide for Going Agentic: What I've Learned So Far"
 url = "https://chrismaughan.com/presentations/slurp_and_learn/"
 
 [[presentations]]
-title = "Strategies for 10x and 100x Developers"
-description = "Practical strategies for moving from AI-assisted coding to orchestrating complete development loops."
-image = "img/presentations/strategies_10x_100x.png"
-alt = "Title slide for Strategies for 10x and 100x Developers"
-url = "https://chrismaughan.com/presentations/strategies_10x_100x/"
+title = "A 30 Year Late QSO"
+description = "A journey from returning to amateur radio and building a Soldersmoke receiver and transmitter to making my first QSO more than three decades after qualifying."
+image = "img/presentations/a_30_year_late_qso.jpg"
+alt = "Title slide for A 30 Year Late QSO by Chris Maughan, G7LQX"
+url = "https://chrismaughan.com/presentations/radio_update_2/"
 
 [[presentations]]
 title = "The Soldersmoke DCRX"
