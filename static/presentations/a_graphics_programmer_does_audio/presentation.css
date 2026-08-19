@@ -22,10 +22,13 @@ a {
 }
 
 .presentation {
+  --controls-safe-area: 3.75rem;
   position: relative;
   display: grid;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  grid-template-rows: minmax(0, 1fr) var(--controls-safe-area);
   place-items: center;
   background: #050505;
   outline: none;
@@ -33,7 +36,10 @@ a {
 }
 
 .slide {
+  grid-row: 1;
   display: block;
+  min-width: 0;
+  min-height: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -43,7 +49,7 @@ a {
 
 .nav {
   position: absolute;
-  top: 50%;
+  top: calc((100% - var(--controls-safe-area)) / 2);
   z-index: 2;
   width: 3.25rem;
   height: 5rem;
@@ -87,7 +93,7 @@ a {
 .controls {
   position: absolute;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 0.55rem;
   left: 1rem;
   z-index: 3;
   display: flex;

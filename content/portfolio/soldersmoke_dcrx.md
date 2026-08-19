@@ -4,6 +4,7 @@ draft = false
 image = "img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg"
 date = "2025-11-19T11:40:23+00:00"
 title = "The Soldersmoke DCRX"
+description = "A home-built 80-metre direct-conversion receiver using Manhattan-style construction and 3D-printed hardware."
 featured = true
 weight = 0
 +++
@@ -14,15 +15,9 @@ The Soldersmoke DCRX is my home-built 80-metre direct-conversion receiver. It us
 
 The bright red 3D-printed parts support the controls, display and circuit boards while keeping the stages easy to see and work on.
 
-![A close view of the Soldersmoke DCRX construction][2]
-
 This receiver led into the later [First Contact DCRX](/portfolio/first_contact_dcrx/) project. The accompanying presentation walks through the receiver's design, construction, testing and next steps.
 
-[![Title slide for The Soldersmoke DCRX presentation][3]][4]
-
-[View The Soldersmoke DCRX presentation][4]
+[View The Soldersmoke DCRX presentation][2]
 
 [1]: /img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg
-[2]: /img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_interior.jpeg
-[3]: /img/presentations/the_soldersmoke_dcrx.png
-[4]: https://chrismaughan.com/presentations/the_soldersmoke_dcrx/
+[2]: https://chrismaughan.com/presentations/the_soldersmoke_dcrx/
