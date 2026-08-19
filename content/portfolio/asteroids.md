@@ -13,6 +13,8 @@ Asteroids is a compact MGFX teaching demo that makes simple game physics easy to
 
 I built the game to demonstrate ship thrust, momentum, collisions, wrapping space, and live-tweakable parameters without hiding the interesting parts behind a full engine. Every change is immediately visible in the way the ship and asteroids move.
 
+![The original MGFX Asteroids game and its live debug controls][3]
+
 I later reused it for the moving-points puzzle in Advent of Code 2018. Each point became an asteroid, and running the simulation brought the field together to reveal the answer inside the game.
 
 [![The Advent of Code solution converging inside the Asteroids game][1]][2]
@@ -21,3 +23,4 @@ I later reused it for the moving-points puzzle in Advent of Code 2018. Each poin
 
 [1]: /img/portfolio/asteroids/asteroids_reddit.png
 [2]: https://www.reddit.com/r/adventofcode/comments/a4xzuf/solved_inside_an_asteroids_game/
+[3]: /img/portfolio/asteroids/asteroids.png
