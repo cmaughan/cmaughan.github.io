@@ -1,0 +1,187 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050505;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.presentation {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  background: #050505;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 3.25rem;
+  height: 5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.4rem;
+  color: #fff;
+  background: rgb(0 0 0 / 38%);
+  font-size: 3.5rem;
+  line-height: 1;
+  opacity: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 160ms ease, background 160ms ease;
+}
+
+.nav-previous {
+  left: 1rem;
+}
+
+.nav-next {
+  right: 1rem;
+}
+
+.presentation:hover .nav,
+.nav:focus-visible {
+  opacity: 1;
+}
+
+.nav:hover,
+.nav:focus-visible {
+  background: rgb(0 0 0 / 72%);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.nav:disabled {
+  visibility: hidden;
+}
+
+.controls {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  background: rgb(0 0 0 / 72%);
+  box-shadow: 0 0.15rem 0.8rem rgb(0 0 0 / 30%);
+  font-size: 0.88rem;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.presentation:hover .controls,
+.controls:focus-within {
+  opacity: 1;
+}
+
+.control {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 0.3rem;
+  color: #fff;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.control:hover,
+.control:focus-visible {
+  border-color: #fff;
+  background: rgb(255 255 255 / 14%);
+  outline: none;
+}
+
+.counter {
+  min-width: 3.8rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  color: #d0d0d0;
+}
+
+.no-script {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  z-index: 4;
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  background: #111;
+  transform: translateX(-50%);
+}
+
+@media (hover: none), (max-width: 42rem) {
+  .nav,
+  .controls {
+    opacity: 1;
+  }
+
+  .hint {
+    display: none;
+  }
+
+  .controls {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    justify-content: space-between;
+    width: auto;
+    max-width: none;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+  }
+
+  .nav {
+    width: 2.75rem;
+    height: 4rem;
+  }
+
+  .nav-previous {
+    left: 0.5rem;
+  }
+
+  .nav-next {
+    right: 0.5rem;
+  }
+}
