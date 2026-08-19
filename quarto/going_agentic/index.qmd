@@ -1,6 +1,7 @@
 ---
 title: "Going Agentic"
 subtitle: "What I've Learned So Far"
+description: "Lessons from building dependable software with coding agents and orchestrating work effectively."
 author: "Chris Maughan"
 institute: "NVIDIA"
 date: 2026-05-07

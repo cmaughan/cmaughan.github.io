@@ -1,33 +1,40 @@
+{{ $page := .page }}
+{{ $loading := .loading }}
+{{ $priority := .priority }}
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-item">
-    <div class="box-masonry{{ if .Params.featured }} box-masonry-featured{{ end }}{{ if eq .Section "photos" }} box-masonry-photo{{ end }}">
-        {{ if and (isset .Params "image") .Params.image }}
-          {{ if eq .Section "photos" }}
-          <a href="{{ .Params.image | absURL }}" class="box-masonry-image photo-lightbox-link" data-toggle="lightbox" data-gallery="photos" aria-label="View {{ .Title }} full size">
-              <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" class="img-responsive">
+    <div class="box-masonry{{ if $page.Params.featured }} box-masonry-featured{{ end }}{{ if eq $page.Section "photos" }} box-masonry-photo{{ end }}">
+        {{ if and (isset $page.Params "image") $page.Params.image }}
+          {{ $cardBase := $page.Params.image | replaceRE "^img/" "img/card/" | replaceRE "\\.[^.]+$" "" }}
+          {{ $card360 := printf "%s_360.webp" $cardBase }}
+          {{ $card720 := printf "%s_720.webp" $cardBase }}
+          {{ $cardImage := imageConfig (printf "static/%s" $card720) }}
+          {{ if eq $page.Section "photos" }}
+          <a href="{{ $page.Params.image | absURL }}" class="box-masonry-image photo-lightbox-link" data-toggle="lightbox" data-gallery="photos" aria-label="View {{ $page.Title }} full size">
+              <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
           </a>
-          {{ else if eq .Params.showonlyimage true }}
-          <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay">
-              <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" class="img-responsive">
+          {{ else if eq $page.Params.showonlyimage true }}
+          <a href="{{ $page.Permalink }}" title="" class="box-masonry-image with-hover-overlay">
+              <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
           </a>
           {{ else }}
-          <a href="{{ .Permalink }}" title="" class="box-masonry-image with-hover-overlay with-hover-icon">
-              <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" class="img-responsive">
+          <a href="{{ $page.Permalink }}" title="" class="box-masonry-image with-hover-overlay with-hover-icon">
+              <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
           </a>
           {{ end }}
         {{ end }}
-        {{ if ne .Section "photos" }}
-            {{ if eq .Params.showonlyimage true }}
+        {{ if ne $page.Section "photos" }}
+            {{ if eq $page.Params.showonlyimage true }}
             <div class="box-masonry-hover-text-header">
             {{ else }}
             <div class="box-masonry-text">
             {{ end }}
-                <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                <h4><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h4>
                 <div class="box-masonry-description">
                   <p>
-                      {{ if .Description }}
-                        {{ .Description }}
+                      {{ if $page.Description }}
+                        {{ $page.Description }}
                       {{ else }}
-                        {{ .Summary }}
+                        {{ $page.Summary }}
                       {{ end }}
                   </p>
                 </div>

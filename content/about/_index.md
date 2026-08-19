@@ -7,7 +7,7 @@ I'm a programmer - and these days an 'orchestrator'! I like to follow my nose an
 
 I'm pretty good at grasping stuff and building things quickly. Lately I have been making Radios and doing a lot more electronics; refreshing the info I've forgotten from my degree! I am happiest when learning something new.
 
-I work for NVIDIA in my day job, building tools and technologies for developers. I have been doing that for about 25 years.
+I work for NVIDIA in my day job, building tools and technologies for developers. I have been doing that for more than 25 years.
 
 I sometimes teach coding or give lectures on various technologies. I'm most comfortable using C++, but have good experience with C# and many other languages.
 

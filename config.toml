@@ -5,15 +5,15 @@ languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
 disqusShortname = "www-chrismaughan-com"
 # Enable Google Analytics by entering your tracking code
-googleAnalytics = "UA-142140471-1"
 enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 [params]
   # Style options: default (pink), blue, green, pink, red, sea, violet
   # Use custom.css for your custom styling
   style = "default"
   title = "ChrisMaughan.com"
-  description = "ChrisMaughan.com"
-  copyright = "&copy;2019 Chris Maughan"
+  description = "Personal projects and presentations by Chris Maughan, spanning graphics, developer tools, agentic software, audio, and radio electronics."
+  copyright = "Chris Maughan"
   sidebarAbout = [
     "I'm a programmer, working for NVIDIA.",
     "This site contains screenshots of personal & professional projects.",
@@ -59,8 +59,12 @@ enableRobotsTXT = true
   name = "About"
   url = "about/"
 
+  [[params.navlinks]]
+  name = "Contact"
+  url = "contact/"
+
   [params.social]
-  twitter       = "https://twitter.com/cmaughan"
+  twitter       = "https://x.com/cmaughan"
   linkedin      = "https://linkedin.com/in/chrismaughan"
   stackoverflow = "https://stackoverflow.com/users/18942/cmaughan"
   github        = "https://github.com/cmaughan"

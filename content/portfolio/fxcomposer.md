@@ -22,7 +22,7 @@ There were many interesting things I learned working on this project, such as:
 
 I wrote a couple chapters about FX Composer in GPU Gems, you can find them [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html)
 
-FX Composer is still available for download [Here](https://developer.nvidia.com/fx-composer), though NVIDIA no longer actively develops it.
+NVIDIA has since retired FX Composer and its original download. NVIDIA's current Visual Studio graphics tooling is available through [Nsight Visual Studio Edition](https://developer.nvidia.com/nsight-visual-studio-edition).
 
 ![FXComposer][1]
 

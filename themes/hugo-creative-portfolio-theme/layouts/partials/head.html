@@ -1,10 +1,30 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{{ with .Site.Params.title }}<title>{{ . }}</title>{{ end }}
-{{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+{{ $pageTitle := .Site.Title }}
+{{ if not .IsHome }}{{ $pageTitle = printf "%s | %s" .Title .Site.Title }}{{ end }}
+{{ $description := .Description | plainify | htmlUnescape }}
+{{ if not $description }}{{ $description = .Summary | plainify | htmlUnescape }}{{ end }}
+{{ if not $description }}{{ $description = .Site.Params.description }}{{ end }}
+{{ $description = $description | replaceRE "\\s+" " " | replaceRE "^\\s+|\\s+$" "" | truncate 160 }}
+<title>{{ $pageTitle }}</title>
+<meta name="description" content="{{ $description }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ $pageTitle }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ $pageTitle }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{ with .Params.image }}
+<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:image:alt" content="{{ $.Title }}">
+<meta name="twitter:image" content="{{ . | absURL }}">
+{{ end }}
 <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
 <link rel="stylesheet" href="{{ "css/font-awesome.min.css" | absURL }}">
@@ -28,4 +48,3 @@
 <!-- Custom stylesheet - for your changes -->
 <link href="{{ "css/custom.css" | absURL }}" rel="stylesheet">
 <link rel="shortcut icon" href="{{ "img/favicon.png" | absURL }}">
-{{ template "_internal/google_analytics.html" . }}

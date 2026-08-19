@@ -7,13 +7,17 @@
       {{ .Content }}
     </div>
     <div class="presentations-grid">
-      {{ range .Params.presentations }}
+      {{ range $index, $presentation := .Params.presentations }}
+      {{ $cardBase := $presentation.image | replaceRE "^img/" "img/card/" | replaceRE "\\.[^.]+$" "" }}
+      {{ $card360 := printf "%s_360.webp" $cardBase }}
+      {{ $card720 := printf "%s_720.webp" $cardBase }}
+      {{ $cardImage := imageConfig (printf "static/%s" $card720) }}
       <article class="presentation-card">
-        <a class="presentation-card-image" href="{{ .url }}" aria-label="Open {{ .title }} presentation">
-          <img src="{{ .image | absURL }}" alt="{{ .alt }}">
+        <a class="presentation-card-image" href="{{ $presentation.url }}" aria-label="Open {{ $presentation.title }} presentation">
+          <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 992px) 42vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ cond (lt $index 2) "eager" "lazy" }}" decoding="async"{{ if eq $index 0 }} fetchpriority="high"{{ end }} alt="{{ $presentation.alt }}">
         </a>
         <div class="presentation-card-body">
-          <p>{{ .description }} <a class="presentation-card-link" href="{{ .url }}">Go to presentation...</a></p>
+          <p>{{ $presentation.description }} <a class="presentation-card-link" href="{{ $presentation.url }}">Go to presentation...</a></p>
         </div>
       </article>
       {{ end }}

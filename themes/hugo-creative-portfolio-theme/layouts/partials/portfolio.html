@@ -2,11 +2,14 @@
     {{ partial "mobile_nav_toggle.html" . }}
     <div class="grid">
         <div class="row">
+          {{ $cardIndex := 0 }}
           {{ range where .Data.Pages "Params.featured" true }}
-            {{ partial "portfolio_tile.html" . }}
+            {{ partial "portfolio_tile.html" (dict "page" . "loading" (cond (lt $cardIndex 4) "eager" "lazy") "priority" (eq $cardIndex 0)) }}
+            {{ $cardIndex = add $cardIndex 1 }}
           {{ end }}
           {{ range where .Data.Pages "Params.featured" "!=" true }}
-            {{ partial "portfolio_tile.html" . }}
+            {{ partial "portfolio_tile.html" (dict "page" . "loading" (cond (lt $cardIndex 4) "eager" "lazy") "priority" (eq $cardIndex 0)) }}
+            {{ $cardIndex = add $cardIndex 1 }}
           {{ end }}
         </div>
     </div>

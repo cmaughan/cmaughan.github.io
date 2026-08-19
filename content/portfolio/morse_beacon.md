@@ -15,6 +15,8 @@ Morse Beacon is a compact RP2350-powered device that generates a repeating Morse
 
 The custom circuit and 3D-printed enclosure turn the Tiny 2350 board into a tidy standalone unit, with an illuminated front control and the external connections brought out at the sides.
 
+[The source and hardware files are available on GitHub](https://github.com/cmaughan/MorseBeacon).
+
 ![The Morse Beacon in its red 3D-printed enclosure][1]
 
 I demonstrate the finished build in [A Little Morse Beacon][3].

@@ -18,8 +18,6 @@ The shaders here were typically written in shader assembly language; we had no C
 
 If I remember correctly, this tool was a C++ app using standard Win32 UI control widgets. It was not glamorous, but it gave developers a concrete place to load an effect, tweak it, and see the result immediately.
 
-[There's a site that talks about it here](http://archive.gamedev.net/archive/columns/hardcore/dxshader1/page3.html), but I don't have a nice screenshot of this any more.
-
 ![NVIDIA Effects Browser][1]
 
 [1]: /img/portfolio/nveffectsbrowser/nveffectsbrowser.jpg

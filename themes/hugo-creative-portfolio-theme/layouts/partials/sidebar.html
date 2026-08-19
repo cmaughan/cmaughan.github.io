@@ -11,11 +11,11 @@
     </ul>
     {{ partial "social_buttons_in_sidebar.html" . }}
 
-    <a class="fa" href='https://webring.xxiivv.com/#random' target='_blank'><img src='https://webring.xxiivv.com/icon.black.svg' width="40" height="40"/></a>
+    <a class="fa" href="https://webring.xxiivv.com/#random" target="_blank" rel="noopener" aria-label="Visit a random XXIIVV webring site"><img src="https://webring.xxiivv.com/icon.black.svg" width="40" height="40" alt="XXIIVV webring"></a>
     <div class="copyright">
       <p class="credit">
         {{ with .Site.Params.copyright }}
-          {{ . | safeHTML }}
+          &copy; {{ now.Format "2006" }} {{ . | safeHTML }}
         {{ end }}
         {{ partial "attribution.html" . }}
       </p>

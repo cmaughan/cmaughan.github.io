@@ -17,8 +17,6 @@ The fuel numbers are estimates, not lab measurements. Geek Fast combines fasting
 
 There is also a metabolic trace view for the geekier side of fasting: insulin suppression, glucagon signalling, lipolysis, gluconeogenesis, ketogenesis, AMPK activation, mTOR suppression, autophagy signalling, and related processes. Those are shown as approximate pathway intensity signals, with careful wording because HealthKit does not secretly contain a tiny biochemistry lab.
 
-[On GitHub](https://github.com/cmaughan/fastdash)
-
 ![Geek Fast][1]
 
 [1]: /img/portfolio/geekfast/screenshot.png

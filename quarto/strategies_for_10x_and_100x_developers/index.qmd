@@ -1,5 +1,6 @@
 ---
 title: "Strategies for 10x and 100x developers"
+description: "Practical strategies for moving from AI-assisted coding to orchestrating complete development loops."
 author: "Chris Maughan"
 institute: "NVIDIA"
 date: 2026-08-12
