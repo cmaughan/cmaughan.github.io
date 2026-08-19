@@ -25,6 +25,13 @@ alt = "Title slide for A 30 Year Late QSO by Chris Maughan, G7LQX"
 url = "https://chrismaughan.com/presentations/a_30_year_late_qso/"
 
 [[presentations]]
+title = "Software Defined Radio"
+description = "From home-built analogue receivers and basic electronics to an SDR testbed, covering data conversion, device communication, software architecture, FFT filtering and frequency shifting."
+image = "img/presentations/software_defined_radio.jpg"
+alt = "Title slide for Software Defined Radio by Chris Maughan, G7LQX"
+url = "https://chrismaughan.com/presentations/software_defined_radio/"
+
+[[presentations]]
 title = "The Soldersmoke DCRX"
 description = "A practical tour of building an 80m direct-conversion receiver from components and copper board, covering its main stages, testing and next steps."
 image = "img/presentations/the_soldersmoke_dcrx.png"
