@@ -32,6 +32,8 @@ MegaCity is a native C++ plugin for Draxul. It renders directly through Vulkan o
 
 [Go to presentation...][5]
 
+[![YouTube thumbnail for Dark Factory Dev Pt 1, showing MegaCity running beside the presenter][7]][6]
+
 [Watch the MegaCity demo on YouTube...][6]
 
 [1]: /img/portfolio/megacity/function_buildings_mac.png
@@ -40,3 +42,4 @@ MegaCity is a native C++ plugin for Draxul. It renders directly through Vulkan o
 [4]: /img/presentations/going_agentic.png
 [5]: https://chrismaughan.com/presentations/going_agentic/
 [6]: https://www.youtube.com/watch?v=TqdGnOzcdKc
+[7]: https://i.ytimg.com/vi/TqdGnOzcdKc/sddefault.jpg
