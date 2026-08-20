@@ -11,7 +11,7 @@ Asteroids is a compact MGFX teaching demo that makes simple game physics easy to
 
 <!--more-->
 
-I built this to demonstrate game physics, and because I'd never made an Asteroids clone before. A parameter panel lets you play with the physics parameters and see the results. It uses ImGui for the UI and if i recall correctly, it is basic OpenGL with sprites!
+I built this to demonstrate game physics, and because I'd never made an Asteroids clone before. A parameter panel lets you play with the physics parameters and see the results. It uses ImGui for the UI and if I recall correctly, it is basic OpenGL with sprites!
 
 ![The original MGFX Asteroids game and its live debug controls][3]
 
