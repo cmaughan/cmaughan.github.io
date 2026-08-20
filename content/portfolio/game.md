@@ -7,7 +7,7 @@ title = "Game"
 weight = 0
 +++
 
-I like to tinker at game development occasionally; my hex planet app shown here is one such example.
+I like to tinker with game development occasionally; my hex planet app shown here is one such example.
 
 <!--more-->
 

@@ -7,7 +7,7 @@ title = "Mgfx"
 weight = 0
 +++
 
-Mgfx is a teaching framework I've used at York Developers. It has simple support for building 2D and 3D applications in C++, with cross platform support.
+Mgfx is a teaching framework I've used at York Developers. It has simple support for building 2D and 3D applications in C++, with cross-platform support.
 
 <!--more-->
 

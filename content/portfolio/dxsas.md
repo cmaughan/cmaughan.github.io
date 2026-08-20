@@ -7,7 +7,7 @@ title = "DXSAS"
 weight = 0
 +++
 
-To support our developers in implementing DXSAS shader semantics, I developed an example tool that implemented the SAS processing and allowed you to combine full screen effects.
+To support our developers in implementing DXSAS shader semantics, I developed an example tool that implemented the SAS processing and allowed you to combine full-screen effects.
 
 <!--more-->
 

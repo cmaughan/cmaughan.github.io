@@ -20,7 +20,7 @@ There were many interesting things I learned working on this project, such as:
 - IronPython/Python (embedded in the Application)
 - Building a more complex IDE
 
-I wrote a couple chapters about FX Composer in GPU Gems, you can find them [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [Here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html)
+I wrote a couple of chapters about FX Composer in GPU Gems; you can find them [here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html).
 
 NVIDIA has since retired FX Composer and its original download. NVIDIA's current Visual Studio graphics tooling is available through [Nsight Visual Studio Edition](https://developer.nvidia.com/nsight-visual-studio-edition).
 

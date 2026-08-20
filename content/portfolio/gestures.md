@@ -7,7 +7,7 @@ title = "Gestures"
 weight = 0
 +++
 
-Recognizing gestures for a spell casting game idea.
+Recognizing gestures for a spell-casting game idea.
 
 <!--more-->
 

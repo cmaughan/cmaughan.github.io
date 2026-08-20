@@ -4,11 +4,11 @@ draft = false
 image = "img/portfolio/soldersmoke_dcrx/soldersmoke_dcrx_open.jpeg"
 date = "2025-11-19T11:40:23+00:00"
 title = "The Soldersmoke DCRX"
-description = "A home-built 80-metre direct-conversion receiver using Manhattan-style construction and 3D-printed hardware."
+description = "A home-built 80-meter direct-conversion receiver using Manhattan-style construction and 3D-printed hardware."
 weight = 0
 +++
 
-The Soldersmoke DCRX is my home-built 80-metre direct-conversion receiver. It uses Manhattan-style construction on copper-clad board, leaving the circuit open and accessible for testing and modification.
+The Soldersmoke DCRX is my home-built 80-meter direct-conversion receiver. It uses Manhattan-style construction on copper-clad board, leaving the circuit open and accessible for testing and modification.
 
 ![The open Soldersmoke DCRX receiver on the workbench][1]
 

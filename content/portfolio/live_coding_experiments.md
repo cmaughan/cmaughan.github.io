@@ -4,16 +4,16 @@ draft = false
 image = "img/portfolio/live_coding_experiments/live_coding_experiments.jpg"
 date = "2020-12-03T12:00:00+00:00"
 title = "Live Coding Experiments"
-description = "Experiments in live-coded music, audio visualisation, profiling and small languages for sequencing and connecting modules."
+description = "Experiments in live-coded music, audio visualization, profiling and small languages for sequencing and connecting modules."
 featured = false
 weight = 0
 +++
 
-Live Coding Experiments brings together several components I built while exploring programmable music, audio and visualisation.
+Live Coding Experiments brings together several components I built while exploring programmable music, audio and visualization.
 
 <!--more-->
 
-The system combines a Vim-like editor with real-time spectrum analysis and visualisation, a multithreaded profiler, a sequencer and a complete audio stack. Together, they make both the sound and the machinery producing it visible while the code is running.
+The system combines a Vim-like editor with real-time spectrum analysis and visualization, a multithreaded profiler, a sequencer and a complete audio stack. Together, they make both the sound and the machinery producing it visible while the code is running.
 
 I also implemented the IXI music language with live highlighting, plus a Lisp-based language for wiring processing modules together. The video shows these pieces working together in the same live-coding environment.
 

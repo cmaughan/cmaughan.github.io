@@ -15,7 +15,7 @@ The first screenshot shows a generated maze and an optimized path through it. Th
 
 The second screenshot shows a simple voxel renderer I made, with a circular maze generator.
 
-We taught maze generation on two occasions at York Code Dojo. It is a great teaching topic because you can cover random walks, graph traversal, path finding, and visualization without needing much scaffolding.
+We taught maze generation on two occasions at York Code Dojo. It is a great teaching topic because you can cover random walks, graph traversal, pathfinding, and visualization without needing much scaffolding.
 
 ![Mazes][1]
 
