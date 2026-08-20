@@ -18,7 +18,7 @@ The revelation of this project was how far I could actually go with Codex and Op
 
 In the city, buildings can be selected and traced back to their source, while dependency highlighting shows how code is connected across districts using an A\* pathfinding algorithm. Performance data colors busy areas as a heat map, and live or imported LCOV coverage can reveal which parts of the city have actually been exercised. It is intended as a shared visual language for a human and the coding agents working on a project: a quick way to ask where the complexity lives, what changed, and which neighborhood looks 'dodgy'!
 
-MegaCity is a native C++ plugin for Draxul. It renders directly through Vulkan on Windows and Metal on macOS, with an HDR pipeline, shadows, ambient occlusion, procedural buildings, roads, parks, and rather more attention to the central tree than was strictly necessary! A lot of this code was built by firing off different AIs and having them agree on features and refactoring. This project is really where I began to learn how to orchestrate AIs and build clean Dark Factory projects.
+MegaCity is a native C++ plugin for Draxul. It renders directly through Vulkan on Windows and Metal on macOS, with an HDR pipeline, shadows, ambient occlusion, procedural buildings, roads, parks, and rather more attention to the central tree than was strictly necessary! A lot of this code was built by firing off different AIs and having them agree on features and refactoring. This project is really where I began to learn how to orchestrate AIs and build clean Dark Factory projects. My presentation *Going Agentic*, linked below, has more details. The YouTube video shows a demo of it running.
 
 [On GitHub](https://github.com/cmaughan/draxul-megacity)
 
@@ -28,6 +28,15 @@ MegaCity is a native C++ plugin for Draxul. It renders directly through Vulkan o
 
 ![Live code-coverage data overlaid on MegaCity on Windows][3]
 
+[![Title slide for the Going Agentic presentation][4]][5]
+
+[Go to presentation...][5]
+
+[Watch the MegaCity demo on YouTube...][6]
+
 [1]: /img/portfolio/megacity/function_buildings_mac.png
 [2]: /img/portfolio/megacity/inspection_mac.png
 [3]: /img/portfolio/megacity/live_coverage_pc.png
+[4]: /img/presentations/going_agentic.png
+[5]: https://chrismaughan.com/presentations/going_agentic/
+[6]: https://www.youtube.com/watch?v=TqdGnOzcdKc
