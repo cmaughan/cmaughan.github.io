@@ -13,7 +13,7 @@ Morse Beacon is a compact RP2350-powered device that generates a repeating Morse
 
 <!--more-->
 
-The beacon is really handy for testing transmitters, and ensuring everything is working. In a custom enclosure, the beacon has a light for when the morse key is being pressed, and an opto isolated switch connects the unit to a morse key input. The MicroPython code sends a standard message and is easy to tweak.
+The beacon is really handy for testing my transmitter builds; especially given my poor Morse skills! The unit has a custom 3D printed enclosure and a light for when the morse key is being triggered, and can be connected to any radio's key socket. The MicroPython code sends a standard message and is easy to tweak. Using the reverse beacon network, I can check that my transmitter designs are functioning and how far they reach. With less than 5 Watts I've managed to send a signal to Ohio from York! That's the magic of radio & morse: 5 Watts is the energy it takes to light up one of those LED down-lighters on your kitchen ceiling...
 
 [The source and hardware files are available on GitHub](https://github.com/cmaughan/MorseBeacon).
 
