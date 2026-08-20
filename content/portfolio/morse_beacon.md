@@ -13,17 +13,13 @@ Morse Beacon is a compact RP2350-powered device that generates a repeating Morse
 
 <!--more-->
 
-The custom circuit and 3D-printed enclosure turn the Tiny 2350 board into a tidy standalone unit, with an illuminated front control and the external connections brought out at the sides.
+The beacon is really handy for testing transmitters, and ensuring everything is working. In a custom enclosure, the beacon has a light for when the morse key is being pressed, and an opto isolated switch connects the unit to a morse key input. The MicroPython code sends a standard message and is easy to tweak.
 
 [The source and hardware files are available on GitHub](https://github.com/cmaughan/MorseBeacon).
 
 ![The Morse Beacon in its red 3D-printed enclosure][1]
 
-The beacon keys the radio through an opto-isolator, while a separate LED mirrors the transmitted pattern. The compact circuit fits directly behind the key socket inside the enclosure.
-
 ![The Morse Beacon keying circuit and its compact hardware][4]
-
-Its configurable MicroPython sender controls the message, Morse speed and spacing, then continuously keys the radio from the RP2350.
 
 ![MicroPython code for configuring and sending the Morse Beacon message][5]
 
@@ -31,7 +27,7 @@ I demonstrate the finished build in [A Little Morse Beacon][3].
 
 [![YouTube thumbnail for A Little Morse Beacon][2]][3]
 
-[Watch A Little Morse Beacon on YouTube...][3]
+[Watch on YouTube...][3]
 
 [1]: /img/portfolio/morse_beacon/morse_beacon.jpg
 [2]: https://i.ytimg.com/vi/ZcFgws3iPPY/maxresdefault.jpg
