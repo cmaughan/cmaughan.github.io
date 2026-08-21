@@ -1,10 +1,11 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/jorvik/rezonality.png"
+image = "img/portfolio/jorvik/live_code_sf_dashboard.jpg"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
 featured = true
+cardvideo = "h7kWxdjfH8g"
 weight = 0
 +++
 
@@ -21,6 +22,10 @@ The editor you see running in the window is Zep ( {{< ref "zep" >}}).
 I'm currently busy porting Rezonality into a plugin for [Draxul]({{< ref "draxul" >}}), where it can use Draxul's cross-platform GPU UI and persistent workspace.  This short video shows Codex running inside Draxul and being used to live-code Rezonality.
 
 {{< video src="/img/portfolio/jorvik/rezonality_draxul_codex.mp4" poster="/img/portfolio/jorvik/rezonality_draxul_codex.jpg" title="Codex inside Draxul being used to live-code Rezonality" >}}
+
+I also used Codex to live-code an SF-style dashboard inside Draxul.  The video below shows the result:
+
+{{< youtube h7kWxdjfH8g >}}
 
 The existing standalone version remains available on GitHub: https://github.com/cmaughan/vklive
 
