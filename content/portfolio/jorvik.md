@@ -1,7 +1,7 @@
 +++
 showonlyimage = false
 draft = false
-image = "img/portfolio/jorvik/live_code_sf_dashboard.jpg"
+image = "img/portfolio/jorvik/live_code_sf_dashboard_desktop.jpg"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
 featured = true
