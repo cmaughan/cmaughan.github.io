@@ -11,6 +11,6 @@ I've been working on a graph-based synthesizer for some time, as part of my larg
 
 <!--more-->
 
-The idea is to describe audio as a graph of small processing nodes: oscillators, filters, envelopes, mixers, and control signals.  When finished, it will be possible to reconfigure the synthesizer using script, which should make it flexible enough to generate a wide range of sounds during a live coding session.  In other words, fewer fixed knobs, more "what if this patch turned into a tiny thunderstorm?" Here's a video of it in action:
+The idea is to describe audio as a graph of small processing nodes: oscillators, filters, envelopes, mixers, and control signals.  When finished, it will be possible to reconfigure the synthesizer using script, which should make it flexible enough to generate a wide range of sounds during a live coding session.  Here's a video of it in action:
 
 {{< youtube CmTfwoxM_gQ >}}

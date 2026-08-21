@@ -11,9 +11,9 @@ MUI is a cross-platform, GPU-accelerated user interface framework for use inside
 
 <!--more-->
 
-The aim is a simple, high-quality, anti-aliased UI that looks polished enough to be part of a demo rather than feeling like a programmer-facing layer placed on top of it.  It is intended as a visual and interaction step up from ImGui while keeping the immediacy that makes this style of UI useful during development.
+I wanted something better suited to demos than ImGui, while keeping an immediate-mode API and making it easy to add controls during development.  The UI is GPU-accelerated and uses high-quality antialiased rendering.
 
-The current prototype uses an immediate-mode API with a two-pass layout and caller-owned values.  The demo exercises draggable, resizable and overlapping panels, styled title bars, sliders, checkboxes, wrapped text, z-order changes, and text handling for kerning, ligatures, UTF-8 and missing glyphs.
+The current prototype uses a two-pass layout and caller-owned values.  It supports draggable, resizable and overlapping panels, styled title bars, sliders, checkboxes, wrapped text, z-order changes, and text handling for kerning, ligatures, UTF-8 and missing glyphs.
 
 ![MUI demo showing styled, draggable UI panels and controls][1]
 

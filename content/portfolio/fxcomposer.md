@@ -12,7 +12,7 @@ FX Composer 2.5 was a powerful integrated development environment for shader aut
 
 At NVIDIA, I wrote a prototype shader IDE called FX Composer.  It became a bigger project with many folks working on it.  Eventually, when shader tools from other companies came on line, the project was finished.
 
-We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders: code editing, model and material binding, parameter tweaking, texture inspection, scripting, sample projects, and ways to measure instruction cycles and performance.  It was a proper "what if shader authors had a real workshop?" sort of tool.
+We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders: code editing, model and material binding, parameter tweaking, texture inspection, scripting, sample projects, and ways to measure instruction cycles and performance.
 
 There were many interesting things I learned working on this project, such as:
 

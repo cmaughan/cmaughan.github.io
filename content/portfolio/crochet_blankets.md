@@ -7,15 +7,15 @@ title = "Crochet Blankets"
 weight = 0
 +++
 
-I have been making crochet blankets: soft, tactile pattern studies built from repeated stitches, borders, color changes and patient evenings.
+I've been making crochet blankets, mostly because I enjoy the patterns that emerge from simple repeated stitches.
 
 <!--more-->
 
-The thing that pulls me into crochet is pattern.  It is the same interest that shows up when I am programming synthesizers: small rules, repeated and layered until they become something with shape, rhythm and feeling.  Crochet makes that instinct physical.  Instead of code producing sound, the loop becomes yarn, tension, rows, corners and color.
+The thing that pulls me into crochet is the pattern.  It is the same interest that shows up when I am programming synthesizers: simple rules that build into something larger.  Here the result is physical, made from yarn, tension, rows, corners and color.
 
-That interest bleeds into my photography too.  I notice repeated forms, grids, edges, shadows and tiny variations inside ordinary things.  Blankets are a natural extension of that: a field of decisions where the whole object emerges from repetition, constraint and small changes.
+I notice the same kinds of repeated forms in photography too.  Making blankets gives me a different way to explore them.
 
-The red and gray blanket has a strong center motif and a lot of border detail, while the larger sofa blanket uses repeated square blocks in quieter colors.  I like both modes: one dense and graphic, the other slower and more of a meditation.
+The red and gray blanket has a strong center motif and a lot of border detail, while the larger sofa blanket uses repeated square blocks in quieter colors.  I like both approaches.
 
 The octopus was made for my daughter and presented a different challenge.
 

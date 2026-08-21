@@ -14,7 +14,7 @@ Rezonality is the current iteration of my live coding tool.  It is intended to b
 
 The editor supports writing shaders on Vulkan, and has a simple scene graph format for describing rendering setup.  Currently it supports multiple target rendering for deferred shading, sampling an audio stream for reactive shaders, and ray tracing.
 
-The nice trick is the live feedback loop: edit the scene or shader, evaluate it, rebuild the graphics pipeline, and keep the previous working state if the new version fails.  That makes shader editing feel more like playing an instrument and less like filing paperwork with the driver.
+The nice trick is the live feedback loop: edit the scene or shader, evaluate it, rebuild the graphics pipeline, and keep the previous working state if the new version fails.  That makes shader editing much more immediate.
 
 The editor you see running in the window is Zep ( {{< ref "zep" >}}).
 

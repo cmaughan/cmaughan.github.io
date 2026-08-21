@@ -18,7 +18,7 @@ The client is also a serious terminal host.  It runs PowerShell, WSL, Bash, Zsh,
 
 Draxul also provides Markdown and Kanban panes, a command-line interface for creating and arranging workspaces, and a versioned plugin ABI that lets native tools join the same client/server topology and render into raw Vulkan or Metal frames.
 
-The project is also a live experiment in agentic development.  None of the code has been human-written; agents built the application, tests, reviews, plans, and documentation, with a human acting as the arbiter.  That makes it a useful stress test for how far agent-driven C++ development can be pushed before the grown-ups need to take the keyboard back.
+The project is also a live experiment in agentic development.  None of the code has been human-written; agents built the application, tests, reviews, plans, and documentation, with a human acting as the arbiter.  That makes it a useful test of how far agent-driven C++ development can be pushed.
 
 [On GitHub](https://github.com/cmaughan/Draxul)
 
