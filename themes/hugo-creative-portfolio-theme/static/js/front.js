@@ -6,37 +6,12 @@ $(function () {
     utils();
     highlightCurrentPage();
     makeImagesResponsive();
-    portfolioVideos();
 });
 function highlightCurrentPage() {
   $("a[href='" + location.href + "']").parent().addClass("active");
 }
 function makeImagesResponsive() {
     $("img").addClass("img-responsive");
-}
-function portfolioVideos() {
-    $('.box-masonry-video-play-button').on('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        var playLink = this;
-        var container = playLink.parentNode;
-        var videoId = container.getAttribute('data-youtube-id');
-        if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
-            return;
-        }
-
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0';
-        iframe.title = playLink.getAttribute('data-video-title');
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        iframe.allowFullscreen = true;
-
-        container.innerHTML = '';
-        container.appendChild(iframe);
-        $('.grid').masonry('layout');
-    });
 }
 /* =========================================
  *  carousels

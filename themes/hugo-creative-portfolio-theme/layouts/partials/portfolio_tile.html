@@ -8,16 +8,7 @@
           {{ $card360 := printf "%s_360.webp" $cardBase }}
           {{ $card720 := printf "%s_720.webp" $cardBase }}
           {{ $cardImage := imageConfig (printf "static/%s" $card720) }}
-          {{ if and (eq $page.Section "portfolio") $page.Params.cardvideo }}
-          <div class="box-masonry-image box-masonry-video" data-youtube-id="{{ $page.Params.cardvideo }}">
-              <a href="{{ $page.Permalink }}" class="box-masonry-video-project" aria-label="View {{ $page.Title }} project">
-                  <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}">
-              </a>
-              <a href="https://youtu.be/{{ $page.Params.cardvideo }}" class="box-masonry-video-play-button" aria-label="Play {{ $page.Title }} video" data-video-title="{{ $page.Title }} video">
-                  <i class="fa fa-play" aria-hidden="true"></i>
-              </a>
-          </div>
-          {{ else if eq $page.Section "photos" }}
+          {{ if eq $page.Section "photos" }}
           <a href="{{ $page.Params.image | absURL }}" class="box-masonry-image photo-lightbox-link" data-toggle="lightbox" data-gallery="photos" aria-label="View {{ $page.Title }} full size">
               <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
           </a>

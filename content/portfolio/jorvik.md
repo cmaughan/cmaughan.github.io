@@ -5,7 +5,6 @@ image = "img/portfolio/jorvik/live_code_sf_dashboard.jpg"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
 featured = true
-cardvideo = "h7kWxdjfH8g"
 weight = 0
 +++
 
