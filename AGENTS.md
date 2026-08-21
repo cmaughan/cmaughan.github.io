@@ -20,6 +20,8 @@ Use TOML front matter in content files and preserve the fields used by neighbori
 
 Use two spaces after every sentence-ending period in prose.
 
+Write portfolio copy in Chris's first-person, conversational voice.  Explain plainly what the project does, why he built it, and what he found interesting, surprising, difficult, or unfinished.  Use concrete technical details, short direct sentences, modest claims, and occasional dry humor or informal asides.  Preserve honest uncertainty and rough edges where appropriate.  Avoid marketing language, inflated claims, extended metaphors, generic enthusiasm, and overly polished agentic prose.  Use American spelling and two spaces after sentence-ending periods.
+
 When a portfolio entry references a presentation, show the presentation's first slide as a clickable image and follow it with a `[Go to presentation...][ref]` text link. Both the image and text must target the same presentation route.
 
 ## Testing Guidelines
