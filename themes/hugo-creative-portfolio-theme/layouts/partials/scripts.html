@@ -6,7 +6,8 @@
 <script src="{{ "js/masonry.pkgd.min.js" | absURL }}"></script>
 <script src="{{ "js/imagesloaded.pkgd.min.js" | absURL }}"></script>
 <script src="{{ "js/owl.carousel.min.js" | absURL }}"></script>
-<script src="{{ "js/front.js" | absURL }}"></script>
+{{ $frontJSVersion := os.ReadFile "themes/hugo-creative-portfolio-theme/static/js/front.js" | crypto.MD5 }}
+<script src="{{ printf "js/front.js?v=%s" $frontJSVersion | absURL }}"></script>
 
 {{ if .Site.Params.analytics.matomo }}
   {{ partial "_analytics/matomo.html" . }}

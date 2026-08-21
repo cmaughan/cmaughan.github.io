@@ -46,5 +46,6 @@
   ` | safeHTML }}
 
 <!-- Custom stylesheet - for your changes -->
-<link href="{{ "css/custom.css" | absURL }}" rel="stylesheet">
+{{ $customCSSVersion := os.ReadFile "themes/hugo-creative-portfolio-theme/static/css/custom.css" | crypto.MD5 }}
+<link href="{{ printf "css/custom.css?v=%s" $customCSSVersion | absURL }}" rel="stylesheet">
 <link rel="shortcut icon" href="{{ "img/favicon.png" | absURL }}">

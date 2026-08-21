@@ -15,9 +15,12 @@ function makeImagesResponsive() {
     $("img").addClass("img-responsive");
 }
 function portfolioVideos() {
-    $('.box-masonry-video-button').on('click', function () {
-        var button = this;
-        var container = button.parentNode;
+    $('.box-masonry-video-play-button').on('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var playLink = this;
+        var container = playLink.parentNode;
         var videoId = container.getAttribute('data-youtube-id');
         if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
             return;
@@ -25,12 +28,13 @@ function portfolioVideos() {
 
         var iframe = document.createElement('iframe');
         iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0';
-        iframe.title = button.getAttribute('data-video-title');
+        iframe.title = playLink.getAttribute('data-video-title');
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         iframe.referrerPolicy = 'strict-origin-when-cross-origin';
         iframe.allowFullscreen = true;
 
-        container.replaceChild(iframe, button);
+        container.innerHTML = '';
+        container.appendChild(iframe);
         $('.grid').masonry('layout');
     });
 }
