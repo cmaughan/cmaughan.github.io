@@ -11,7 +11,7 @@ Sculpt is a prototype touch-first sculpting application for shaping a 3D mesh di
 
 <!--more-->
 
-The experiment is about making mesh editing feel immediate on a small screen: rotate and inspect the model, change the brush strength, work directly on the surface, and undo or redo without dropping into a conventional desktop modeling interface. A wireframe overlay keeps the underlying geometry visible while the form is being changed.
+The experiment is about making mesh editing feel immediate on a small screen: rotate and inspect the model, change the brush strength, work directly on the surface, and undo or redo without dropping into a conventional desktop modeling interface.  A wireframe overlay keeps the underlying geometry visible while the form is being changed.
 
 It is an early prototype rather than a finished modeling package, but it proved out the central interaction—using simple gestures and a deliberately sparse tool palette to make digital sculpting feel tactile.
 

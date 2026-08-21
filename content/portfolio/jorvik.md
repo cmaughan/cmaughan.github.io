@@ -8,17 +8,17 @@ featured = true
 weight = 0
 +++
 
-Rezonality is the current iteration of my live coding tool. It is intended to be used for Algorave and interactive applications.
+Rezonality is the current iteration of my live coding tool.  It is intended to be used for Algorave and interactive applications.
 
 <!--more-->
 
-The editor supports writing shaders on Vulkan, and has a simple scene graph format for describing rendering setup. Currently it supports multiple target rendering for deferred shading, sampling an audio stream for reactive shaders, and ray tracing.
+The editor supports writing shaders on Vulkan, and has a simple scene graph format for describing rendering setup.  Currently it supports multiple target rendering for deferred shading, sampling an audio stream for reactive shaders, and ray tracing.
 
-The nice trick is the live feedback loop: edit the scene or shader, evaluate it, rebuild the graphics pipeline, and keep the previous working state if the new version fails. That makes shader editing feel more like playing an instrument and less like filing paperwork with the driver.
+The nice trick is the live feedback loop: edit the scene or shader, evaluate it, rebuild the graphics pipeline, and keep the previous working state if the new version fails.  That makes shader editing feel more like playing an instrument and less like filing paperwork with the driver.
 
 The editor you see running in the window is Zep ( {{< ref "zep" >}}).
 
-I'm currently busy porting Rezonality into a plugin for [Draxul]({{< ref "draxul" >}}), where it can use Draxul's cross-platform GPU UI and persistent workspace. This short video shows Codex running inside Draxul and being used to live-code Rezonality.
+I'm currently busy porting Rezonality into a plugin for [Draxul]({{< ref "draxul" >}}), where it can use Draxul's cross-platform GPU UI and persistent workspace.  This short video shows Codex running inside Draxul and being used to live-code Rezonality.
 
 {{< video src="/img/portfolio/jorvik/rezonality_draxul_codex.mp4" poster="/img/portfolio/jorvik/rezonality_draxul_codex.jpg" title="Codex inside Draxul being used to live-code Rezonality" >}}
 

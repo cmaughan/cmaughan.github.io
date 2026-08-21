@@ -10,9 +10,9 @@ FX Composer 2.5 was a powerful integrated development environment for shader aut
 
 <!--more-->
 
-At NVIDIA, I wrote a prototype shader IDE called FX Composer. It became a bigger project with many folks working on it. Eventually, when shader tools from other companies came on line, the project was finished.
+At NVIDIA, I wrote a prototype shader IDE called FX Composer.  It became a bigger project with many folks working on it.  Eventually, when shader tools from other companies came on line, the project was finished.
 
-We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders: code editing, model and material binding, parameter tweaking, texture inspection, scripting, sample projects, and ways to measure instruction cycles and performance. It was a proper "what if shader authors had a real workshop?" sort of tool.
+We wrote many interesting shaders and effects, and with a big team behind it, there were lots of features for experimenting with shaders: code editing, model and material binding, parameter tweaking, texture inspection, scripting, sample projects, and ways to measure instruction cycles and performance.  It was a proper "what if shader authors had a real workshop?" sort of tool.
 
 There were many interesting things I learned working on this project, such as:
 
@@ -22,7 +22,7 @@ There were many interesting things I learned working on this project, such as:
 
 I wrote a couple of chapters about FX Composer in GPU Gems; you can find them [here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch30.html) and [here](https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch31.html).
 
-NVIDIA has since retired FX Composer and its original download. NVIDIA's current Visual Studio graphics tooling is available through [Nsight Visual Studio Edition](https://developer.nvidia.com/nsight-visual-studio-edition).
+NVIDIA has since retired FX Composer and its original download.  NVIDIA's current Visual Studio graphics tooling is available through [Nsight Visual Studio Edition](https://developer.nvidia.com/nsight-visual-studio-edition).
 
 ![FXComposer][1]
 

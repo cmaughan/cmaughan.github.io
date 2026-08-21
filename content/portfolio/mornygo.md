@@ -13,9 +13,9 @@ MornyGo is a C++ engine I wrote to play Go, combining an opening book with Monte
 
 <!--more-->
 
-The engine speaks version 2 of the Go Text Protocol, so it can play through compatible Go interfaces and against other engines. Beneath the search is a complete board implementation covering groups, liberties, scoring and Zobrist-based positional super-ko, along with SGF support for building its opening book.
+The engine speaks version 2 of the Go Text Protocol, so it can play through compatible Go interfaces and against other engines.  Beneath the search is a complete board implementation covering groups, liberties, scoring and Zobrist-based positional super-ko, along with SGF support for building its opening book.
 
-The screenshot below shows MornyGo playing Black against GNU Go. The game finished with MornyGo half a point ahead under area scoring.
+The screenshot below shows MornyGo playing Black against GNU Go.  The game finished with MornyGo half a point ahead under area scoring.
 
 ![MornyGo playing Black against GNU Go and winning by half a point][1]
 

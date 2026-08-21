@@ -15,7 +15,7 @@ For more background on how this type of receiver works, see the [regenerative ci
 
 <!--more-->
 
-The front panel brings the RF and regeneration controls together around a central tuning dial. The black-and-white fascia contrasts with the blue enclosure and turns the circuit into a compact, finished receiver.
+The front panel brings the RF and regeneration controls together around a central tuning dial.  The black-and-white fascia contrasts with the blue enclosure and turns the circuit into a compact, finished receiver.
 
 ![The WBR Regen receiver and its two-color printed fascia][1]
 

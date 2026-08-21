@@ -11,7 +11,7 @@ Zep is a lightweight editor, designed to be used inside a 3D engine.
 
 <!--more-->
 
-It is an embeddable C++ editor with optional Vim-style modal editing, standard modeless editing, syntax highlighting, tabs and splits, theming, text markers, and Qt/ImGui rendering backends. The core is designed to be dependency-light enough to drop into tools, games, and live coding environments. It started as one of those "I just need a little editor" projects, which is programmer code for "see you in several years".
+It is an embeddable C++ editor with optional Vim-style modal editing, standard modeless editing, syntax highlighting, tabs and splits, theming, text markers, and Qt/ImGui rendering backends.  The core is designed to be dependency-light enough to drop into tools, games, and live coding environments.  It started as one of those "I just need a little editor" projects, which is programmer code for "see you in several years".
 
 See [GitHub](https://github.com/cmaughan/zep) for more information about Zep.
 

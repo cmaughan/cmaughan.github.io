@@ -13,9 +13,9 @@ Live Coding Experiments brings together several components I built while explori
 
 <!--more-->
 
-The system combines a Vim-like editor with real-time spectrum analysis and visualization, a multithreaded profiler, a sequencer and a complete audio stack. Together, they make both the sound and the machinery producing it visible while the code is running.
+The system combines a Vim-like editor with real-time spectrum analysis and visualization, a multithreaded profiler, a sequencer and a complete audio stack.  Together, they make both the sound and the machinery producing it visible while the code is running.
 
-I also implemented the IXI music language with live highlighting, plus a Lisp-based language for wiring processing modules together. The video shows these pieces working together in the same live-coding environment.
+I also implemented the IXI music language with live highlighting, plus a Lisp-based language for wiring processing modules together.  The video shows these pieces working together in the same live-coding environment.
 
 [![The Live Coding Experiments interface, showing the editor, spectrum displays, profiler, sequencer and audio modules][1]][2]
 

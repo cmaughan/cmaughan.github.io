@@ -11,7 +11,7 @@ Understanding how option trades evolve over time is key to being able to trade t
 
 <!--more-->
 
-I wrote a little graph rendering tool to show stock charts. The useful part was being able to see how a position might move as price and time changed, rather than treating an option trade as a single number on a screen. This one isn't open source.
+I wrote a little graph rendering tool to show stock charts.  The useful part was being able to see how a position might move as price and time changed, rather than treating an option trade as a single number on a screen.  This one isn't open source.
 
 ![Stocks][1]
 

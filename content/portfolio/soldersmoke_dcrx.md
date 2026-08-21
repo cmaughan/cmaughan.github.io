@@ -8,13 +8,13 @@ description = "A home-built 80-meter direct-conversion receiver using Manhattan-
 weight = 0
 +++
 
-The Soldersmoke DCRX is my home-built 80-meter direct-conversion receiver. It uses Manhattan-style construction on copper-clad board, leaving the circuit open and accessible for testing and modification.
+The Soldersmoke DCRX is my home-built 80-meter direct-conversion receiver.  It uses Manhattan-style construction on copper-clad board, leaving the circuit open and accessible for testing and modification.
 
 ![The open Soldersmoke DCRX receiver on the workbench][1]
 
 The bright red 3D-printed parts support the controls, display and circuit boards while keeping the stages easy to see and work on.
 
-This receiver led into the later [First Contact DCRX](/portfolio/first_contact_dcrx/) project. The accompanying presentation walks through the receiver's design, construction, testing and next steps.
+This receiver led into the later [First Contact DCRX](/portfolio/first_contact_dcrx/) project.  The accompanying presentation walks through the receiver's design, construction, testing and next steps.
 
 [![Title slide for The Soldersmoke DCRX presentation][2]][3]
 
