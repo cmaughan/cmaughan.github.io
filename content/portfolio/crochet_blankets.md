@@ -11,7 +11,7 @@ I started making blankets because I've always been fascinated by pattern problem
 
 <!--more-->
 
-There's a definite through-line of some of my work; from synthesizers to live coding loops, to blankets and building Mazes.  Patterns are my jam; they tweak my brain in a way that pleases me!
+There's a definite through-line of some of my work; from synthesizers to live coding loops, to blankets, routing PCBs, photography and building Mazes. Patterns are my jam, it seems.
 
 ![Red crochet blanket][1]
 
