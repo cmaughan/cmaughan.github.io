@@ -19,4 +19,10 @@ There is also a metabolic trace view for the geekier side of fasting: insulin su
 
 ![Geek Fast][1]
 
+[![Geek Fast shown in the Agentic Personal Projects video][2]][3]
+
+[Watch Geek Fast in Agentic Personal Projects on YouTube (20:48)...][3]
+
 [1]: /img/portfolio/geekfast/screenshot.png
+[2]: /img/portfolio/geekfast/agentic_personal_projects.jpg
+[3]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1248s

@@ -17,4 +17,10 @@ I want to be able to explore a sound, change it and sequence it without moving b
 
 ![MSynth showing its sequencer, SynthDef browser, parameter controls and keyboard][1]
 
+[![MSynth shown in the Agentic Personal Projects video][2]][3]
+
+[Watch MSynth in Agentic Personal Projects on YouTube (25:29)...][3]
+
 [1]: /img/portfolio/msynth/msynth.png
+[2]: /img/portfolio/msynth/agentic_personal_projects.jpg
+[3]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1529s

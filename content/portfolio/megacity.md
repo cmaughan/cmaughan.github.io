@@ -36,6 +36,10 @@ MegaCity is a native C++ plugin for Draxul.  It renders directly through Vulkan 
 
 [Watch the MegaCity demo on YouTube...][6]
 
+[![MegaCity shown in the Agentic Personal Projects video][8]][9]
+
+[Watch MegaCity in Agentic Personal Projects on YouTube (5:56)...][9]
+
 [1]: /img/portfolio/megacity/function_buildings_mac.png
 [2]: /img/portfolio/megacity/inspection_mac.png
 [3]: /img/portfolio/megacity/live_coverage_pc.png
@@ -43,3 +47,5 @@ MegaCity is a native C++ plugin for Draxul.  It renders directly through Vulkan 
 [5]: https://chrismaughan.com/presentations/going_agentic/
 [6]: https://www.youtube.com/watch?v=TqdGnOzcdKc
 [7]: https://i.ytimg.com/vi/TqdGnOzcdKc/sddefault.jpg
+[8]: /img/portfolio/megacity/agentic_personal_projects.jpg
+[9]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=356s

@@ -19,5 +19,11 @@ TokenFu is written as a hardware-accelerated native UI, using Vulkan on Windows 
 
 ![TokenFu History view showing usage and cost by period][2]
 
+[![TokenFu shown in the Agentic Personal Projects video][3]][4]
+
+[Watch TokenFu in Agentic Personal Projects on YouTube (20:07)...][4]
+
 [1]: /img/portfolio/tokenfu/tokenfu.png
 [2]: /img/portfolio/tokenfu/tokenfu_history.png
+[3]: /img/portfolio/tokenfu/agentic_personal_projects.jpg
+[4]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1207s

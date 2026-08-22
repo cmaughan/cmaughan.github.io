@@ -38,8 +38,14 @@ The existing standalone version remains available on GitHub: https://github.com/
 
 ![Rezonality live coding view][5]
 
+[![Rezonality shown in the Agentic Personal Projects video][6]][7]
+
+[Watch Rezonality in Agentic Personal Projects on YouTube (1:53)...][7]
+
 [1]: /img/portfolio/jorvik/jorvik_1.png
 [2]: /img/portfolio/jorvik/jorvik_2.png
 [3]: /img/portfolio/jorvik/jorvik_3.png
 [4]: /img/portfolio/jorvik/jorvik_4.png
 [5]: /img/portfolio/jorvik/jorvik_5.png
+[6]: /img/portfolio/jorvik/agentic_personal_projects.jpg
+[7]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=113s

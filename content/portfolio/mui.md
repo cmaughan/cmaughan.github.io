@@ -17,4 +17,10 @@ The current prototype uses a two-pass layout and caller-owned values.  It suppor
 
 ![MUI demo showing styled, draggable UI panels and controls][1]
 
+[![MUI shown in the Agentic Personal Projects video][2]][3]
+
+[Watch MUI in Agentic Personal Projects on YouTube (18:12)...][3]
+
 [1]: /img/portfolio/mui/mui.png
+[2]: /img/portfolio/mui/agentic_personal_projects.jpg
+[3]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1092s

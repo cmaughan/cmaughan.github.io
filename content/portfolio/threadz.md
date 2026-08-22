@@ -18,4 +18,10 @@ I wanted the puzzle state, available pieces, and transport controls to fit on on
 
 ![A Threadz puzzle being solved on iOS][1]
 
+[![Threadz shown in the Agentic Personal Projects video][2]][3]
+
+[Watch Threadz in Agentic Personal Projects on YouTube (21:55)...][3]
+
 [1]: /img/portfolio/threadz/threadz.png
+[2]: /img/portfolio/threadz/agentic_personal_projects.jpg
+[3]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1315s

@@ -19,5 +19,11 @@ The idea is similar to Townscaper.  I wanted a small set of tiles that could res
 
 ![A selection of the modular landscape pieces][2]
 
+[![RTS Landscape Generator shown in the Agentic Personal Projects video][3]][4]
+
+[Watch RTS Landscape Generator in Agentic Personal Projects on YouTube (23:00)...][4]
+
 [1]: /img/portfolio/rts_landscape/rts.png
 [2]: /img/portfolio/rts_landscape/rts2.png
+[3]: /img/portfolio/rts_landscape/agentic_personal_projects.jpg
+[4]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=1380s

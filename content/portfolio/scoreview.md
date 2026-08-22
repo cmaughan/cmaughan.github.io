@@ -28,5 +28,11 @@ ScoreView is a C++ plugin for Draxul, running through the same Vulkan and Metal 
 
 ![ScoreView's adaptive player and learning inspector][2]
 
+[![ScoreView shown in the Agentic Personal Projects video][3]][4]
+
+[Watch ScoreView in Agentic Personal Projects on YouTube (15:29)...][4]
+
 [1]: /img/portfolio/scoreview/score.png
 [2]: /img/portfolio/scoreview/player.png
+[3]: /img/portfolio/scoreview/agentic_personal_projects.jpg
+[4]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=929s

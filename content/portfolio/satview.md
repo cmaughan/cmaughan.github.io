@@ -38,6 +38,10 @@ One surprise here was how useful I found it to understand things like geostation
 
 ![Lunar landing sites and spacecraft orbit tracks around the Moon][7]
 
+[![SatView shown in the Agentic Personal Projects video][8]][9]
+
+[Watch SatView in Agentic Personal Projects on YouTube (8:02)...][9]
+
 [1]: /img/portfolio/satview/satview.png
 [2]: /img/portfolio/satview/tracks.png
 [3]: /img/portfolio/satview/mars.png
@@ -45,3 +49,5 @@ One surprise here was how useful I found it to understand things like geostation
 [5]: /img/portfolio/satview/geostationary.png
 [6]: /img/portfolio/satview/groundview.png
 [7]: /img/portfolio/satview/moonlanders.png
+[8]: /img/portfolio/satview/agentic_personal_projects.jpg
+[9]: https://www.youtube.com/watch?v=T4rKTgVxV_4&t=482s
