@@ -9,6 +9,9 @@ description = "Practical strategies for moving from AI-assisted coding to orches
 image = "img/presentations/strategies_for_10x_and_100x_developers.png"
 alt = "Title slide for Strategies for 10x and 100x Developers"
 url = "https://chrismaughan.com/presentations/strategies_for_10x_and_100x_developers/"
+video_url = "https://www.youtube.com/watch?v=nxzzHINgKTU"
+video_image = "img/presentations/strategies_for_10x_and_100x_developers_youtube.jpg"
+video_alt = "Video of Strategies for 10x and 100x Developers, showing the title slide and Chris presenting"
 
 [[presentations]]
 title = "Going Agentic"

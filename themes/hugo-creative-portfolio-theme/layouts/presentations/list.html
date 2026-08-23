@@ -13,11 +13,34 @@
       {{ $card720 := printf "%s_720.webp" $cardBase }}
       {{ $cardImage := imageConfig (printf "static/%s" $card720) }}
       <article class="presentation-card">
+        {{ with $presentation.video_url }}
+        {{ $videoCardBase := $presentation.video_image | replaceRE "^img/" "img/card/" | replaceRE "\\.[^.]+$" "" }}
+        {{ $videoCard360 := printf "%s_360.webp" $videoCardBase }}
+        {{ $videoCard720 := printf "%s_720.webp" $videoCardBase }}
+        {{ $videoCardImage := imageConfig (printf "static/%s" $videoCard720) }}
+        <div class="presentation-card-media presentation-card-media-split">
+          <a class="presentation-card-image" href="{{ . }}" aria-label="Watch {{ $presentation.title }} on YouTube">
+            <img src="{{ $videoCard720 | absURL }}" srcset="{{ $videoCard360 | absURL }} 360w, {{ $videoCard720 | absURL }} 720w" sizes="(min-width: 992px) 21vw, 50vw" width="{{ $videoCardImage.Width }}" height="{{ $videoCardImage.Height }}" loading="{{ cond (lt $index 2) "eager" "lazy" }}" decoding="async"{{ if eq $index 0 }} fetchpriority="high"{{ end }} alt="{{ $presentation.video_alt }}">
+          </a>
+          <a class="presentation-card-image" href="{{ $presentation.url }}" aria-label="Open {{ $presentation.title }} presentation slides">
+            <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 992px) 21vw, 50vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ cond (lt $index 2) "eager" "lazy" }}" decoding="async" alt="{{ $presentation.alt }}">
+          </a>
+        </div>
+        {{ else }}
         <a class="presentation-card-image" href="{{ $presentation.url }}" aria-label="Open {{ $presentation.title }} presentation">
           <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 992px) 42vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ cond (lt $index 2) "eager" "lazy" }}" decoding="async"{{ if eq $index 0 }} fetchpriority="high"{{ end }} alt="{{ $presentation.alt }}">
         </a>
+        {{ end }}
         <div class="presentation-card-body">
+          {{ with $presentation.video_url }}
+          <div class="presentation-card-links">
+            <a class="presentation-card-link" href="{{ . }}">Watch video...</a>
+            <a class="presentation-card-link" href="{{ $presentation.url }}">View slides...</a>
+          </div>
+          <p>{{ $presentation.description }}</p>
+          {{ else }}
           <p>{{ $presentation.description }} <a class="presentation-card-link" href="{{ $presentation.url }}">Go to presentation...</a></p>
+          {{ end }}
         </div>
       </article>
       {{ end }}

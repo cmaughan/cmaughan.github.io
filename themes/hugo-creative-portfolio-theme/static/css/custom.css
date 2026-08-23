@@ -78,6 +78,22 @@
   background: #0d1117;
 }
 
+.presentation-card-media-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  background: #ffffff;
+}
+
+.presentation-card-media-split .presentation-card-image {
+  aspect-ratio: 16 / 9;
+}
+
+.presentation-card-media-split .presentation-card-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .presentation-card-image img {
   display: block;
   width: 100%;
@@ -103,6 +119,13 @@
 
 .presentation-card-body p {
   margin-bottom: 0;
+}
+
+.presentation-card-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 991px) {
