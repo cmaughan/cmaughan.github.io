@@ -27,7 +27,7 @@
           </a>
         </div>
         {{ else }}
-        <a class="presentation-card-image" href="{{ $presentation.url }}" aria-label="Open {{ $presentation.title }} presentation">
+        <a class="presentation-card-image" href="{{ $presentation.url }}" aria-label="{{ default (printf "Open %s presentation" $presentation.title) $presentation.aria_label }}">
           <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 992px) 42vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ cond (lt $index 2) "eager" "lazy" }}" decoding="async"{{ if eq $index 0 }} fetchpriority="high"{{ end }} alt="{{ $presentation.alt }}">
         </a>
         {{ end }}
@@ -39,7 +39,7 @@
           </div>
           <p>{{ $presentation.description }}</p>
           {{ else }}
-          <p>{{ $presentation.description }} <a class="presentation-card-link" href="{{ $presentation.url }}">Go to presentation...</a></p>
+          <p>{{ $presentation.description }} <a class="presentation-card-link" href="{{ $presentation.url }}">{{ default "Go to presentation..." $presentation.link_text }}</a></p>
           {{ end }}
         </div>
       </article>

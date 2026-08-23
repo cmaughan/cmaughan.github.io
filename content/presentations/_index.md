@@ -47,6 +47,15 @@ description = "Building Rezonality, a live-coding IDE, through the lens of a gra
 image = "img/presentations/a_graphics_programmer_does_audio.jpg"
 alt = "Title slide for A Graphics Programmer Does Audio: Building a Live Coding IDE"
 url = "https://chrismaughan.com/presentations/a_graphics_programmer_does_audio/"
+
+[[presentations]]
+title = "Projects Showcase"
+description = "A tour of my recent projects, including Rezonality, MegaCity, SatView, ScoreView, MUI, TokenFu, several iOS experiments, MSynth, and Draxul."
+image = "img/presentations/projects_showcase.jpg"
+alt = "Projects Showcase video thumbnail featuring several recent software projects"
+url = "https://www.youtube.com/watch?v=T4rKTgVxV_4"
+aria_label = "Watch Projects Showcase on YouTube"
+link_text = "Watch video..."
 +++
 
 Selected presentations on software development, electronics, creative technology, and the things I build.
