@@ -35,6 +35,9 @@ description = "A journey from returning to amateur radio and building a Soldersm
 image = "img/presentations/a_30_year_late_qso.jpg"
 alt = "Title slide for A 30 Year Late QSO by Chris Maughan, G7LQX"
 url = "https://chrismaughan.com/presentations/a_30_year_late_qso/"
+video_url = "https://www.youtube.com/watch?v=0MAOV36cYGo"
+video_image = "img/presentations/a_30_year_late_qso_youtube.jpg"
+video_alt = "Video of A 30 Year Late QSO, showing the presentation alongside Chris speaking"
 
 [[presentations]]
 title = "Software Defined Radio"
