@@ -29,30 +29,41 @@ $code-block-border-color: #30363d;
 .reveal .cover-meta { font-size: .67em; color: #aebbc9; margin: 0 0 20px; }
 .reveal .cover-image { width: 100%; height: 343px; object-fit: cover; object-position: top; border-radius: 8px; margin: 0; opacity: .9; }
 .reveal .cover-bottom { display: flex; justify-content: space-between; font-size: .67em; color: #aebbc9; margin-top: 12px; }
-.reveal .opcode { display: flex; align-items: flex-start; gap: 13px; margin: 28px 0 20px; }
-.reveal .opcode > div { text-align: center; }
-.reveal .opcode code { display: block; font-size: 1.55em; line-height: 1.4; border-bottom: 3px solid currentColor; padding: 4px 17px; background: #161b22; color: inherit; }
-.reveal .opcode span { display: block; font-size: .58em; color: #aebbc9; margin-top: 8px; }
-.reveal .opcode .opcode-explanation { text-align: left; margin: 10px 0 0 25px; font-size: .95em; }
-.reveal .protocol-map { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 30px; }
-.reveal .dialect { display: grid; grid-template-columns: 120px 1fr; border-top: 1px solid #30363d; padding: 10px 0; font-size: .75em; }
-.reveal .dialect code { color: #c4a5ff; }
-.reveal .protocol-counts { display: flex; gap: 38px; align-items: flex-start; border-left: 2px solid #30363d; padding-left: 30px; }
-.reveal .protocol-counts strong { display: block; font-size: 2.7em; color: #f2b66d; line-height: 1; }
-.reveal .protocol-counts span { display: block; font-size: .65em; line-height: 1.3; margin-top: 12px; }
-.reveal .protocol-summary { font-size: .82em; margin-top: 26px; }
-.reveal .agent-demo { display: grid; grid-template-columns: 330px 1fr; border: 1px solid #30363d; border-radius: 8px; background: #10151c; margin-top: 22px; height: 385px; overflow: hidden; }
+.reveal .simple-command { display: flex; justify-content: space-around; align-items: center; height: 400px; }
+.reveal .simple-command code { display: block; font-size: 1.9em; color: #f2b66d; background: none; }
+.reveal .simple-command span { display: block; margin-top: 26px; font-size: 1em; color: #a4b3c4; }
+.reveal .command-arrow { color: #58a6ff; font-size: 2.2em; }
+.reveal .red-result { color: #ff8989; font-size: 5em; font-weight: 600; }
+.reveal .agent-demo { display: grid; grid-template-columns: 350px 1fr; border: 1px solid #30363d; border-radius: 8px; background: #10151c; margin-top: 22px; height: 385px; overflow: hidden; }
 .reveal .agent-list { border-right: 1px solid #30363d; padding: 18px; }
 .reveal .demo-heading { font-size: .55em; color: #aebbc9; letter-spacing: .08em; margin-bottom: 13px; }
-.reveal .agent-row { display: block; width: 100%; text-align: left; border: 1px solid transparent; background: none; padding: 11px 12px; margin: 0 0 5px; border-radius: 5px; color: #e6edf3; font-family: inherit; font-size: 22px; cursor: pointer; }
-.reveal .agent-row small { display: block; color: #aebbc9; font-size: 15px; padding-left: 20px; margin-top: 5px; }
+.reveal .agent-row { display: block; width: 100%; text-align: left; border: 1px solid transparent; background: none; padding: 8px 12px; margin: 0 0 3px; border-radius: 5px; color: #e6edf3; font-family: inherit; font-size: 25px; cursor: pointer; }
+.reveal .agent-row small { display: block; color: #aebbc9; font-size: 18px; padding-left: 20px; margin-top: 5px; }
 .reveal .agent-row.active { border-color: #58a6ff; background: #192c42; }
 .reveal .agent-row:focus-visible { outline: 2px solid #f2b66d; outline-offset: 2px; }
 .reveal .agent-pane { padding: 22px 26px; }
 .reveal .agent-pane h3 { font-size: 1.1em; color: #e6edf3; margin: 15px 0; }
 .reveal .agent-pane .demo-route { font-size: 18px; color: #58a6ff; }
-.reveal .agent-pane pre { box-shadow: none; font-size: 21px; line-height: 1.65; margin: 18px 0; white-space: pre-wrap; font-family: Menlo, Consolas, monospace; color: #b6c2cf; }
-.reveal .agent-pane .demo-status { display: inline-block; font-size: 20px; color: #f2b66d; }
+.reveal .agent-pane pre { box-shadow: none; font-size: 26px; line-height: 1.65; margin: 18px 0; white-space: pre-wrap; font-family: Menlo, Consolas, monospace; color: #b6c2cf; }
+.reveal .agent-pane .demo-status { display: inline-block; font-size: 25px; color: #f2b66d; }
 .reveal .agent-pipeline { margin: 18px 0 0; font-size: .7em; color: #aebbc9; text-align: center; }
 .reveal .slide-number { font-family: inherit; }
+.reveal .communication-examples { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 32px 0 28px; }
+.reveal .command-column { min-width: 0; }
+.reveal .command-column h3 { font-size: 1.05em; color: #58a6ff; margin: 0 0 28px; }
+.reveal .command-column + .command-column h3 { color: #7ee787; }
+.reveal .command-column p { font-size: .7em; color: #a4b3c4; margin: 22px 0 8px; }
+.reveal .command-column pre { width: 100%; min-height: 63px; margin: 0; box-shadow: none; font-size: 19px; line-height: 1.65; }
+.reveal .command-column code { padding: 0; background: none; color: #e6edf3; white-space: pre; font-family: Menlo, Consolas, monospace; }
+.reveal .personal-assistant-overview { display: grid; grid-template-columns: 1.05fr 1fr; gap: 42px; margin: 30px 0 24px; }
+.reveal .personal-assistant-overview h3 { font-size: 1em; color: #58a6ff; margin: 0 0 20px; }
+.reveal .personal-assistant-overview > div + div h3 { color: #7ee787; }
+.reveal .personal-assistant-overview p { font-size: .72em; color: #a4b3c4; margin: 18px 0 10px; line-height: 1.5; }
+.reveal .personal-assistant-overview strong { color: #e6edf3; font-weight: 500; }
+.reveal .personal-assistant-overview pre { width: 100%; margin: 0; box-shadow: none; font-size: 18px; line-height: 1.55; }
+.reveal .personal-assistant-overview code { padding: 8px; color: #e6edf3; font-family: Menlo, Consolas, monospace; }
+.reveal .personal-assistant-overview blockquote { width: auto; margin: 24px 0; padding: 0 0 0 18px; border-left: 3px solid #7ee787; background: none; box-shadow: none; font-size: .9em; line-height: 1.45; font-style: normal; color: #e6edf3; }
+.reveal .assistant-status { border-top: 1px solid #30363d; padding-top: 16px; font-size: .7em; line-height: 1.6; color: #e6edf3; }
+.reveal .assistant-status strong { color: #7ee787; }
+.reveal .assistant-status span { color: #a4b3c4; }
 @media print { .reveal .agent-demo { print-color-adjust: exact; } }

@@ -1,10 +1,10 @@
 <script>
 (() => {
   const examples = {
-    build: { route: 'Draxul / Renderer / pane 1', title: 'Build renderer', status: 'Working · running', color: '#7ee787', output: 'Compiling the Metal backend…\n\n[18/24] grid pipeline\n[19/24] glyph atlas\n\n› Checking the next build result…' },
-    review: { route: 'Draxul / Protocol / pane 2', title: 'Review protocol', status: 'Blocked · needs a decision', color: '#f2b66d', output: 'Found a resize / controller race.\n\nKeep the lease until acknowledgement?\n\n› Waiting for your input…' },
-    tests: { route: 'Draxul / Runtime / pane 3', title: 'Test reconnect', status: 'Done · process still running', color: '#58a6ff', output: 'Reconnect checks complete.\n\nSnapshot received.\nDeltas resumed in order.\n\n› Ready for the next task.' },
-    new: { route: 'Draxul / Investigation / pane 4', title: 'New investigation', status: 'Starting · newly created', color: '#c4a5ff', output: 'Agent identity created.\nPane allocated.\n\nStarting the configured agent…\n\n› No working-state evidence yet.' }
+    build: { route: 'Renderer', title: 'Build the app', status: 'Working', color: '#7ee787', output: 'Building the latest changes…\n\nI’ll let you know when it’s ready.' },
+    review: { route: 'Protocol', title: 'Review changes', status: 'Needs your decision', color: '#f2b66d', output: 'I found a possible problem.\n\nShall I investigate it?' },
+    tests: { route: 'Runtime', title: 'Check reconnect', status: 'Finished', color: '#58a6ff', output: 'The checks passed.\n\nReady for your next task.' },
+    new: { route: 'Investigation', title: 'Start a task', status: 'Just created', color: '#c4a5ff', output: 'Starting a new agent…\n\nThe other agents keep working.' }
   };
   document.querySelectorAll('[data-agent]').forEach(button => {
     button.addEventListener('click', () => {
