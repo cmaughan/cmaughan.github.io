@@ -1,0 +1,25 @@
+<script>
+(() => {
+  const examples = {
+    build: { route: 'Draxul / Renderer / pane 1', title: 'Build renderer', status: 'Working · running', color: '#7ee787', output: 'Compiling the Metal backend…\n\n[18/24] grid pipeline\n[19/24] glyph atlas\n\n› Checking the next build result…' },
+    review: { route: 'Draxul / Protocol / pane 2', title: 'Review protocol', status: 'Blocked · needs a decision', color: '#f2b66d', output: 'Found a resize / controller race.\n\nKeep the lease until acknowledgement?\n\n› Waiting for your input…' },
+    tests: { route: 'Draxul / Runtime / pane 3', title: 'Test reconnect', status: 'Done · process still running', color: '#58a6ff', output: 'Reconnect checks complete.\n\nSnapshot received.\nDeltas resumed in order.\n\n› Ready for the next task.' },
+    new: { route: 'Draxul / Investigation / pane 4', title: 'New investigation', status: 'Starting · newly created', color: '#c4a5ff', output: 'Agent identity created.\nPane allocated.\n\nStarting the configured agent…\n\n› No working-state evidence yet.' }
+  };
+  document.querySelectorAll('[data-agent]').forEach(button => {
+    button.addEventListener('click', () => {
+      const example = examples[button.dataset.agent];
+      document.querySelectorAll('[data-agent]').forEach(row => {
+        const selected = row === button;
+        row.classList.toggle('active', selected);
+        row.setAttribute('aria-pressed', String(selected));
+      });
+      document.getElementById('agent-route').textContent = example.route;
+      document.getElementById('agent-title').textContent = example.title;
+      document.getElementById('agent-status').textContent = example.status;
+      document.getElementById('agent-status').style.color = example.color;
+      document.getElementById('agent-output').textContent = example.output;
+    });
+  });
+})();
+</script>

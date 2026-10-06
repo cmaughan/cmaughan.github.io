@@ -1,0 +1,25 @@
+project:
+  type: default
+  output-dir: _output
+  render:
+    - index.qmd
+  resources:
+    - images/**
+
+format:
+  revealjs:
+    theme: [dark, custom.scss]
+    transition: fade
+    slide-number: true
+    code-line-numbers: true
+    highlight-style: monokai
+    width: 1050
+    height: 700
+    margin: 0.1
+    center: true
+    hash-type: number
+    navigation-mode: linear
+    controls: true
+    progress: true
+    pdf-separate-fragments: false
+    include-in-header: metadata.html

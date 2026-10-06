@@ -1,0 +1,58 @@
+/*-- scss:defaults --*/
+$presentation-heading-color: #58a6ff;
+$presentation-heading-font: 'Inter', 'Helvetica Neue', sans-serif;
+$body-color: #e6edf3;
+$body-bg: #0d1117;
+$link-color: #58a6ff;
+$code-color: #7ee787;
+$code-block-bg: #161b22;
+$code-block-border-color: #30363d;
+
+/*-- scss:rules --*/
+.reveal { font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 30px; }
+.reveal .slides { text-align: left; }
+.reveal .slides > section { padding: 0; }
+.reveal h1 { font-size: 2.05em; font-weight: 700; line-height: 1.07; letter-spacing: -.04em; text-shadow: 0 0 20px rgba(88,166,255,.15); }
+.reveal h2 { font-size: 1.48em; line-height: 1.15; font-weight: 600; letter-spacing: -.025em; border-bottom: 2px solid #30363d; padding-bottom: .3em; margin-bottom: .35em; }
+.reveal p { line-height: 1.35; }
+.reveal .deck-visual { display: block; width: 100%; height: 450px; margin: 5px auto 0; object-fit: contain; }
+.reveal .slides section > p:has(.deck-visual) { margin: 0; }
+.reveal .takeaway { font-size: .87em; margin: 10px 0 0; color: #c9d1d9; }
+.reveal .takeaway strong { color: #7ee787; font-weight: 600; }
+.reveal .small-note { font-size: .58em; color: #8b949e; margin: 10px 0 0; }
+.reveal .blue { color: #58a6ff; }
+.reveal .green { color: #7ee787; }
+.reveal .orange { color: #f2b66d; }
+.reveal .purple { color: #c4a5ff; }
+.reveal .title-cover > h2 { display: none; }
+.reveal .title-cover h1 { margin: 0 0 16px; max-width: 1020px; }
+.reveal .cover-meta { font-size: .67em; color: #aebbc9; margin: 0 0 20px; }
+.reveal .cover-image { width: 100%; height: 343px; object-fit: cover; object-position: top; border-radius: 8px; margin: 0; opacity: .9; }
+.reveal .cover-bottom { display: flex; justify-content: space-between; font-size: .67em; color: #aebbc9; margin-top: 12px; }
+.reveal .opcode { display: flex; align-items: flex-start; gap: 13px; margin: 28px 0 20px; }
+.reveal .opcode > div { text-align: center; }
+.reveal .opcode code { display: block; font-size: 1.55em; line-height: 1.4; border-bottom: 3px solid currentColor; padding: 4px 17px; background: #161b22; color: inherit; }
+.reveal .opcode span { display: block; font-size: .58em; color: #aebbc9; margin-top: 8px; }
+.reveal .opcode .opcode-explanation { text-align: left; margin: 10px 0 0 25px; font-size: .95em; }
+.reveal .protocol-map { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 30px; }
+.reveal .dialect { display: grid; grid-template-columns: 120px 1fr; border-top: 1px solid #30363d; padding: 10px 0; font-size: .75em; }
+.reveal .dialect code { color: #c4a5ff; }
+.reveal .protocol-counts { display: flex; gap: 38px; align-items: flex-start; border-left: 2px solid #30363d; padding-left: 30px; }
+.reveal .protocol-counts strong { display: block; font-size: 2.7em; color: #f2b66d; line-height: 1; }
+.reveal .protocol-counts span { display: block; font-size: .65em; line-height: 1.3; margin-top: 12px; }
+.reveal .protocol-summary { font-size: .82em; margin-top: 26px; }
+.reveal .agent-demo { display: grid; grid-template-columns: 330px 1fr; border: 1px solid #30363d; border-radius: 8px; background: #10151c; margin-top: 22px; height: 385px; overflow: hidden; }
+.reveal .agent-list { border-right: 1px solid #30363d; padding: 18px; }
+.reveal .demo-heading { font-size: .55em; color: #aebbc9; letter-spacing: .08em; margin-bottom: 13px; }
+.reveal .agent-row { display: block; width: 100%; text-align: left; border: 1px solid transparent; background: none; padding: 11px 12px; margin: 0 0 5px; border-radius: 5px; color: #e6edf3; font-family: inherit; font-size: 22px; cursor: pointer; }
+.reveal .agent-row small { display: block; color: #aebbc9; font-size: 15px; padding-left: 20px; margin-top: 5px; }
+.reveal .agent-row.active { border-color: #58a6ff; background: #192c42; }
+.reveal .agent-row:focus-visible { outline: 2px solid #f2b66d; outline-offset: 2px; }
+.reveal .agent-pane { padding: 22px 26px; }
+.reveal .agent-pane h3 { font-size: 1.1em; color: #e6edf3; margin: 15px 0; }
+.reveal .agent-pane .demo-route { font-size: 18px; color: #58a6ff; }
+.reveal .agent-pane pre { box-shadow: none; font-size: 21px; line-height: 1.65; margin: 18px 0; white-space: pre-wrap; font-family: Menlo, Consolas, monospace; color: #b6c2cf; }
+.reveal .agent-pane .demo-status { display: inline-block; font-size: 20px; color: #f2b66d; }
+.reveal .agent-pipeline { margin: 18px 0 0; font-size: .7em; color: #aebbc9; text-align: center; }
+.reveal .slide-number { font-family: inherit; }
+@media print { .reveal .agent-demo { print-color-adjust: exact; } }
