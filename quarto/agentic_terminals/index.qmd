@@ -181,6 +181,33 @@ Sources: [runtime ownership design](https://github.com/cmaughan/Draxul/blob/a295
 
 <p class="section-sub">See them.  Go to them.  Let them drive.</p>
 
+## Where the spinning coins came from
+
+```{=html}
+<div class="tokenfu-slide">
+  <img src="images/tokenfu.png" alt="TokenFu Today view: a spinning coin per model, with tokens per second, input, cached and output tokens, and estimated cost">
+  <ul class="plain-list">
+    <li>A tiny toolbar app I leave running <strong>while agents work</strong></li>
+    <li>Tokens per second, totals, cache use and rough cost, <strong>per model</strong></li>
+    <li>Each model gets a coin that <strong>spins faster as tokens flow</strong></li>
+  </ul>
+</div>
+<p class="takeaway">A glance tells me who's busy.  <strong>So I put the coins in Draxul.</strong></p>
+<p class="small-note">TokenFu · native Metal/Vulkan UI · <a href="https://chrismaughan.com/portfolio/tokenfu/">chrismaughan.com/portfolio/tokenfu</a></p>
+```
+
+::: {.notes}
+Before the agent rail, a small detour.  TokenFu is a separate little app I wrote to keep an eye on token usage and cost.  It reads the agents' own session logs and shows, per model, tokens per second, input, cached and output tokens, and an estimated cost, with a history view for longer periods.
+
+Each provider gets a small 3D coin, and the coin spins faster as tokens flow.  It turned out to be the most useful part: I could tell at a glance whether anything was actually happening, without reading a number.
+
+So when Draxul needed a way to show agent activity, I ported the coin.  Same colors, same speed scale.  The difference is that in Draxul there's one coin per agent rather than per model, and it sits next to that agent's name.
+
+The figures in the screenshot are from one day of my own use; costs are estimates from public pricing.
+
+Sources: [TokenFu portfolio entry](https://chrismaughan.com/portfolio/tokenfu/).
+:::
+
 ## Every agent in one list
 
 ```{=html}
@@ -213,7 +240,7 @@ Click the rows while talking.  This is a mock-up of the real Agents rail, not a 
 
 The rail lists Spaces at the top and agents underneath.  Agents get short generated names like happy-otter, so I can tell them apart in conversation.  Clicking a name activates the owning Space and tab and focuses the pane.  The other agents keep working.
 
-The coin next to each agent is borrowed from TokenFu.  It's blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet.  The server gets the rate by tailing the agent's own session log.  Only the rate and total cross the wire, never file paths or text.  An agent waiting for me gets a bright accent; an exited one is dimmed and marked.
+The coin next to each agent is the TokenFu coin.  It's blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet.  The server gets the rate by tailing the agent's own session log.  Only the rate and total cross the wire, never file paths or text.  An agent waiting for me gets a bright accent; an exited one is dimmed and marked.
 
 The rail picks up agents I launch through Draxul, and also ones I start by hand in an ordinary shell.  Launching is in the command palette: pick a Codex or Claude profile, or one from config.toml.
 

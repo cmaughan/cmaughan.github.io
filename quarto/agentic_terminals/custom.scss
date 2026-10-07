@@ -87,6 +87,11 @@ $code-block-border-color: #30363d;
 .reveal .pane-status { font-size: 25px; color: #f2b66d; margin: 18px 0 0; }
 .reveal .rail-pane pre { box-shadow: none; font-size: 24px; line-height: 1.6; margin: 18px 0; white-space: pre-wrap; font-family: Menlo, Consolas, monospace; color: #b6c2cf; background: none; }
 
+/* TokenFu */
+.reveal .tokenfu-slide { display: grid; grid-template-columns: 610px 1fr; gap: 26px; align-items: center; margin: 10px 0 4px; }
+.reveal .tokenfu-slide img { width: 100%; margin: 0 0 0 -24px; }
+.reveal .tokenfu-slide li { font-size: .7em; }
+
 /* Personal agents */
 .reveal .personal-agents { display: grid; grid-template-columns: 300px 1fr; gap: 50px; align-items: center; margin: 34px 0 20px; }
 .reveal .pa-rail { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px 14px; }

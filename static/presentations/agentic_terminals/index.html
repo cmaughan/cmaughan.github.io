@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-acd8cc08ccef17e3c862c94434a00b72.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-6982e151896037a93baf01165287c27d.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -373,6 +373,36 @@ See them. Go to them. Let them drive.
 </p>
 </section>
 <section class="slide level2 center">
+<h2>Where the spinning coins came from</h2>
+<div class="tokenfu-slide">
+  <img src="images/tokenfu.png" alt="TokenFu Today view: a spinning coin per model, with tokens per second, input, cached and output tokens, and estimated cost">
+  <ul class="plain-list">
+    <li>A tiny toolbar app I leave running <strong>while agents work</strong></li>
+    <li>Tokens per second, totals, cache use and rough cost, <strong>per model</strong></li>
+    <li>Each model gets a coin that <strong>spins faster as tokens flow</strong></li>
+  </ul>
+</div>
+<p class="takeaway">A glance tells me who's busy.  <strong>So I put the coins in Draxul.</strong></p>
+<p class="small-note">TokenFu · native Metal/Vulkan UI · <a href="https://chrismaughan.com/portfolio/tokenfu/">chrismaughan.com/portfolio/tokenfu</a></p>
+<aside class="notes">
+<p>Before the agent rail, a small detour. TokenFu is a separate little app I wrote to keep an eye on token usage and cost. It reads the agents’ own session logs and shows, per model, tokens per second, input, cached and output tokens, and an estimated cost, with a history view for longer periods.</p>
+<p>Each provider gets a small 3D coin, and the coin spins faster as tokens flow. It turned out to be the most useful part: I could tell at a glance whether anything was actually happening, without reading a number.</p>
+<p>So when Draxul needed a way to show agent activity, I ported the coin. Same colors, same speed scale. The difference is that in Draxul there’s one coin per agent rather than per model, and it sits next to that agent’s name.</p>
+<p>The figures in the screenshot are from one day of my own use; costs are estimates from public pricing.</p>
+<p>Sources: <a href="https://chrismaughan.com/portfolio/tokenfu/">TokenFu portfolio entry</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
 <h2>Every agent in one list</h2>
 <div class="rail-demo" aria-label="Interactive concept of the Draxul agents rail: click an agent to go to its pane">
   <div class="rail">
@@ -399,7 +429,7 @@ Allow this command? (y/n)</pre>
 <aside class="notes">
 <p>Click the rows while talking. This is a mock-up of the real Agents rail, not a live connection.</p>
 <p>The rail lists Spaces at the top and agents underneath. Agents get short generated names like happy-otter, so I can tell them apart in conversation. Clicking a name activates the owning Space and tab and focuses the pane. The other agents keep working.</p>
-<p>The coin next to each agent is borrowed from TokenFu. It’s blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet. The server gets the rate by tailing the agent’s own session log. Only the rate and total cross the wire, never file paths or text. An agent waiting for me gets a bright accent; an exited one is dimmed and marked.</p>
+<p>The coin next to each agent is the TokenFu coin. It’s blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet. The server gets the rate by tailing the agent’s own session log. Only the rate and total cross the wire, never file paths or text. An agent waiting for me gets a bright accent; an exited one is dimmed and marked.</p>
 <p>The rail picks up agents I launch through Draxul, and also ones I start by hand in an ordinary shell. Launching is in the command palette: pick a Codex or Claude profile, or one from config.toml.</p>
 <p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">Agents rail in features.md</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/include/draxul/agent_model.h">agent model</a>.</p>
 <style type="text/css">
