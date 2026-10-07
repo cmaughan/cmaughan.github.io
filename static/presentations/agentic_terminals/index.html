@@ -10,6 +10,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Chris Maughan">
+  <meta name="dcterms.date" content="2026-10-07">
   <title>Building an Agent Friendly Terminal Harness</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-c98fc78d8eee0d841fb28fff778ec5cc.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-52b40e3bbd87f7a376fe5d9252506922.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -138,18 +139,29 @@
   <div class="reveal">
     <div class="slides">
 
-<!-- The editable cover is the first slide in index.qmd. -->
-<section class="slide level2 title-cover center">
-<h2>Building an Agent Friendly Terminal Harness</h2>
-<h1>Building an Agent Friendly<br>Terminal Harness</h1>
-<p class="cover-meta">Chris Maughan · NVIDIA · Draxul</p>
-<img class="cover-image" src="images/draxul_mac.png" alt="Draxul on macOS showing a Neovim editor, shell prompt, and terminal system monitor in split panes">
-<div class="cover-bottom"><span>A home for long-running agents</span><span>github.com/cmaughan/Draxul</span></div>
+<section data-background-image="images/cover_starship.jpg" data-background-opacity="0.35" class="quarto-title-block center">
+  <h1 class="title">Building an Agent Friendly Terminal Harness</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Chris Maughan
+</div>
+        <p class="quarto-title-affiliation">
+            NVIDIA
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-10-07</p>
+</section>
+<section class="slide level2 center">
+<h2>Inspiration</h2>
+<img class="rail-shot" src="images/inspiration_ghostty.jpg" alt="A Today on Mac review graphic for Ghostty, showing its icon and a Ghostty window with file listings, system information and a CPU history chart">
+<p class="small-note">Image: <a href="https://www.todayonmac.com/">Today on Mac</a> review of Ghostty</p>
 <aside class="notes">
-<p>Draxul started as a GPU frontend for Neovim. Then it grew a terminal, so I could run shells next to the editor. Then I started running coding agents in those shells, several at a time, and the interesting problems changed.</p>
-<p>The plan: a quick tour of what a terminal actually does, then how Draxul keeps work alive when the window closes, then the agent features, which are the point of the talk.</p>
-<p>Implementation reference: Draxul commit <code>a295e80509c44da3c7b1d6a79468eb60768c587b</code>. The cover screenshot predates the agent rail.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b">Draxul source</a>.</p>
+<p>This was the initial inspiration. Ghostty is a terminal that draws with the GPU, using Metal on the Mac, and it’s fast and good-looking. It runs on macOS and Linux, but not on Windows.</p>
+<p>I wanted that kind of hardware-accelerated terminal on both of my platforms, and I already had a GPU front end for Neovim to build it into.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -171,7 +183,8 @@
   <figure><img src="images/dx_ai_news.jpg" alt="A personal agent pane showing a short AI news briefing"><figcaption>A personal agent with its daily brief</figcaption></figure>
 </div>
 <aside class="notes">
-<p>A quick tour before the details. Draxul is a GPU-drawn terminal and Neovim front end that I’ve been building for myself, on macOS and Windows.</p>
+<p>Draxul started as a GPU frontend for Neovim. Then it grew a terminal, so I could run shells next to the editor. Then I started running coding agents in those shells, several at a time, and the interesting problems changed. It runs on macOS and Windows.</p>
+<p>The background on the title slide is Rezonality’s Starship Bridge example, rendered in a Draxul pane.</p>
 <p>Top left: ordinary terminals and Neovim in split panes. Top right: the agent rail with Claude and Codex running, and some personal agents underneath. Bottom left: the Kanban board I use to queue work for agents. Bottom right: one of the personal agents, which keeps a running AI news brief.</p>
 <p>Everything here lives in one window, and the server keeps it running when the window closes.</p>
 <style type="text/css">
@@ -239,20 +252,38 @@
     <li><b>Live edits</b>Save a file and it rebuilds.  A bad edit keeps the last good build on screen</li>
   </ol>
 </div>
-<div class="rz-shots">
-  <figure><img src="images/rezonality_pbr_robot.jpg" alt="Rezonality rendering a glTF robot with PBR materials and an HDR sky"><figcaption>glTF + PBR + HDR</figcaption></figure>
-  <figure><img src="images/rezonality_protoplanetary_disc.jpg" alt="Rezonality rendering a raymarched protoplanetary disc and a sphere"><figcaption>Raymarched volume</figcaption></figure>
-  <figure><img src="images/rezonality_ray_tracer.jpg" alt="Rezonality rendering a Cornell box using hardware ray tracing"><figcaption>Hardware ray tracing</figcaption></figure>
-</div>
-<p class="takeaway">The agent writes text files.  <strong>Rezonality turns them into pictures.</strong></p>
 <aside class="notes">
 <p>Rezonality is a Draxul plugin, and the Draxul version of VkLive, an older live shader tool of mine. It renders straight into a pane, with Metal on macOS and Vulkan on Windows, while you edit the project from a terminal or editor pane next to it.</p>
 <p>A project is a scene graph file plus shaders. The scene graph declares surfaces (render targets with a format and a scale relative to the pane), cameras, models loaded through Assimp, and an ordered list of passes. Each pass names the surfaces it writes and the ones it samples. The example on screen is deferred shading: one pass fills position, albedo and normal targets, and a second pass reads them to light the scene. Multiple render targets, float formats, depth, bloom chains and HDR environments all fall out of the same few keywords.</p>
 <p>Shaders are plain GLSL. Rezonality compiles them to SPIR-V with glslang. Vulkan uses that directly; on macOS SPIRV-Cross generates Metal Shading Language from the SPIR-V, with the bindings mapped to match. On ray-capable GPUs it also builds acceleration structures and runs ray-generation, miss and hit shaders, or the equivalent Metal kernel.</p>
 <p>Every save produces a new numbered build. If it fails, the error goes to the pane’s status pill and to a small JSON file, and the previous good build keeps rendering. That JSON is the important bit for agents: it lists the file, line and message, plus which build is being attempted and which is active. An agent can break a shader, read the error, fix it, and see the next build go live, without trying to read pixels.</p>
 <p>There’s a layout generator that sets up an editor pane next to a Rezonality view with one <code>draxul layout apply</code>. Put that together with the skill, and “make me a spinning ringed planet in this pane” turns into a scene graph, a few shaders and a working picture. How good the picture is depends on the agent, of course.</p>
-<p>The three images are the macOS reference renders from Draxul’s render tests: a glTF robot with PBR materials, a raymarched protoplanetary disc, and a ray-traced Cornell box.</p>
 <p>Sources: <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/README.md">Rezonality README</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/AGENTS.md">agent guide</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/src/native_backend_metal.mm">Metal backend</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/examples/deferred_shading/default.scenegraph">deferred shading example</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>What Rezonality can draw</h2>
+<div class="collage collage-feature rz-collage">
+  <figure class="feature"><img src="images/rz_dashboard.jpg" alt="NYX flight deck: ten Rezonality panes of neon shader art and telemetry text in a Draxul tab"><figcaption>An SF dashboard, live-coded by Codex in Draxul</figcaption></figure>
+  <figure><img src="images/rz_codex_robot.jpg" alt="Draxul with a Rezonality PBR robot on the left and Codex editing the scene graph on the right"><figcaption>Codex editing the PBR robot scene</figcaption></figure>
+  <figure><img src="images/rz_jorvik_1.jpg" alt="A Cornell box rendered with hardware ray tracing next to its ray generation shader"><figcaption>Ray-traced Cornell box</figcaption></figure>
+  <figure><img src="images/rz_jorvik_2.jpg" alt="Glowing audio waveform and spectrum bars over shader code"><figcaption>Audio-reactive spectrum</figcaption></figure>
+  <figure><img src="images/rz_jorvik_3.jpg" alt="A kaleidoscopic shader pattern next to its GLSL source"><figcaption>Shader art, edited live</figcaption></figure>
+</div>
+<aside class="notes">
+<p>A few things Rezonality has drawn. The big one is an SF flight-deck dashboard that I had Codex live-code inside Draxul: ten panes of shader art and telemetry text in one tab. Next to it, Codex is editing the PBR robot scene graph in one pane while the render updates in the other.</p>
+<p>The bottom row is from the earlier standalone Rezonality, with the Zep editor on the left: a ray-traced Cornell box, an audio-reactive spectrum, and some shader art. The same kinds of project now run as examples in the Draxul plugin.</p>
+<p>Sources: <a href="https://chrismaughan.com/portfolio/jorvik/">Rezonality portfolio page</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -268,9 +299,6 @@
 <section class="slide level2 center">
 <h2>One GPU surface, many kinds of pane</h2>
 <p><img data-src="images/gpu_surface.svg" class="deck-visual" alt="Draxul owns one GPU frame on Metal or Vulkan; terminals, Neovim and plugins each record into the shared command buffer inside their pane."></p>
-<p class="takeaway">
-A terminal is <strong>just one thing that can draw in a pane.</strong>
-</p>
 <aside class="notes">
 <p>All of this works because Draxul owns one GPU frame, on Metal on macOS and Vulkan on Windows. It owns the window, the swapchain or drawable, the frame’s command buffer, the glyph atlas and the present.</p>
 <p>Each pane records its own work into that command buffer, in pane order, clipped to its rectangle. Terminal and Neovim panes upload their cell grid and draw it with the glyph atlas. Plugin panes record whatever they like: SatView and MegaCity run their own HDR scene passes and ImGui, and Rezonality runs its pass list and, on capable GPUs, ray tracing.</p>
@@ -292,9 +320,6 @@ A terminal is <strong>just one thing that can draw in a pane.</strong>
 <section class="slide level2 center">
 <h2>From bytes to pixels</h2>
 <p><img data-src="images/architecture.svg" class="deck-visual" alt="A shell writes a stream of bytes through the PTY; Draxul parses it into a persistent grid, which the GPU draws using glyphs from a font atlas."></p>
-<p class="takeaway">
-The stream edits the grid. <strong>The GPU draws the grid.</strong>
-</p>
 <aside class="notes">
 <p>This is the whole pipeline on one slide. The shell, or an agent running in it, writes bytes through a PTY on macOS or ConPTY on Windows. Those bytes are text mixed with instructions: ESC [ 31 m turns red on, H and i are letters, ESC [ 0 m turns it off again, and the carriage return and newline move the cursor.</p>
 <p>Draxul’s parser reads the stream and turns it into edits on a grid of cells. Each cell holds a character, its colors and its style. The cursor, modes and scrollback live alongside it. This grid is the real state of the terminal, and it’s kept by the server, which matters later.</p>
@@ -316,9 +341,6 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
 <section class="slide level2 center">
 <h2>Text comes with instructions</h2>
 <p><img data-src="images/parser.svg" class="deck-visual" alt="An incomplete color instruction is completed by the next piece of output, turning Hi red."></p>
-<p class="takeaway">
-<code>ESC [ 31 m</code> means “make it red”, and it can arrive split across two reads.
-</p>
 <aside class="notes">
 <p>Terminal output is text mixed with instructions. ESC [ 31 m sets the color to red. There are decades of these, and different terminals support different sets. Draxul handles 30 CSI endings and 14 private modes, plus a handful of OSC commands. That’s the set real programs needed, not the whole of xterm.</p>
 <p>Reads don’t line up with instructions. Here the first read ends after ESC [ 3 1, and the m arrives in the next one. The parser keeps its state between reads and waits. UTF-8 characters can split the same way.</p>
@@ -339,29 +361,11 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
 <section class="slide level2 center">
 <h2>The big port: client and server</h2>
 <img class="port-strip" src="images/ownership.svg" alt="Before: one window owns every shell. Now: a server owns shells, state and agents, and windows attach to it.">
-<div class="port-grid">
-  <div>
-    <h3>What it gave me</h3>
-    <ul class="plain-list">
-      <li>Terminals that <strong>outlive the window</strong></li>
-      <li>Several windows on <strong>one live session</strong></li>
-      <li>The groundwork for <strong>remote access</strong></li>
-    </ul>
-  </div>
-  <div>
-    <h3>What it cost</h3>
-    <ul class="plain-list">
-      <li>Pull the terminal core <strong>away from the renderer</strong></li>
-      <li>A protocol: <strong>snapshots, deltas, reconnects</strong></li>
-      <li>Decide who owns <strong>every process, ID and thread</strong></li>
-    </ul>
-  </div>
-</div>
+<p class="port-note">This took a lot of planning, and many vertical slices, to get right.</p>
 <div class="agent-quote">
   <div class="quote-line"><span class="quote-dot">●</span> Wow, they really did it...</div>
   <div class="quote-source">An agent, on finding that another agent had already worked through the port</div>
 </div>
-<p class="takeaway">A big port, and the right move.</p>
 <aside class="notes">
 <p>Draxul started as one process: the window owned the shells, the parser and the renderer. Close the window and everything went with it. That’s fine for an editor, and no good for agents that run for hours.</p>
 <p>So I moved the terminals into a headless server, the same idea as tmux. The server owns the PTYs, the terminal state, scrollback, the layout of spaces, tabs and panes, and the agent state. A window owns fonts, rendering, selection and local focus. Close every window and the shells and agents keep running; open one again and you’re back where you were. A returning window gets a snapshot of the current screen, then the changes, rather than a replay of old output. Several windows can attach to the same session.</p>
@@ -392,7 +396,6 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
     <li>Each model gets a coin that <strong>spins faster as tokens flow</strong></li>
   </ul>
 </div>
-<p class="takeaway">A glance tells me who's busy, so the coins went into Draxul.</p>
 <p class="small-note">TokenFu · native Metal/Vulkan UI · <a href="https://chrismaughan.com/portfolio/tokenfu/">chrismaughan.com/portfolio/tokenfu</a></p>
 <aside class="notes">
 <p>Before the agent rail, a small detour. TokenFu is a separate little app I wrote to keep an eye on token usage and cost. It reads the agents’ own session logs and shows, per model, tokens per second, input, cached and output tokens, and an estimated cost, with a history view for longer periods.</p>
@@ -415,7 +418,6 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
 <section class="slide level2 center">
 <h2>Every agent in one list</h2>
 <img class="rail-shot" src="images/agent_rail.jpg" alt="Draxul's agent rail on macOS: Spaces at the top, Claude and Codex under Agents with activity coins, and three personal agents below, next to a Claude session and a Codex session">
-<p class="takeaway">Click a name to jump to its pane.  The coin spins with the agent's token rate.</p>
 <aside class="notes">
 <p>With four or five agents in different tabs, one would stop to ask a question and I wouldn’t notice for twenty minutes. The rail fixes that. This is the real rail, on my Mac. Claude and Codex are running under Agents, with three personal agents below them.</p>
 <p>The rail lists Spaces at the top and agents underneath. Clicking a name activates the owning Space and tab and focuses the pane. The other agents keep working.</p>
@@ -457,7 +459,6 @@ draxul agent prompt A --text "Review it"
 draxul agent wait A --until done,blocked</code></pre>
   </div>
 </div>
-<p class="takeaway">The same commands work for me, a script, <strong>or an agent in another pane.</strong></p>
 <p class="small-note">P and A are IDs from the list commands · <code>--current</code> means “this pane”</p>
 <aside class="notes">
 <p>Everything in the UI is also available from the <code>draxul</code> command line, talking to the server’s local control API. An agent with shell access can run these just like I can.</p>
@@ -503,7 +504,6 @@ draxul agent wait A --until done,blocked</code></pre>
 <section class="slide level2 center">
 <h2>Agents automatically update and maintain Kanban</h2>
 <img class="rail-shot" src="images/kanban_board.jpg" alt="Draxul's Kanban board: ice-box, pending and done columns of work-item cards from the Draxul repository and its plugin submodules, with priority and type icons">
-<p class="takeaway">Each card is a Markdown file.  <strong>Agents create them, tick them off and move them.</strong></p>
 <aside class="notes">
 <p>This is the Kanban board in a Draxul pane. There’s no database behind it: the columns are folders under <code>kanban/</code> in the repository, and each card is a Markdown file. It combines the main repository with its plugin submodules, so SatView, MegaCity, Rezonality and ScoreView cards show up with their own prefix.</p>
 <p>The repository’s agent instructions do the rest. Agents are told to create a card in <code>pending</code> for any non-trivial new work, tick the checkboxes in the card as they finish each step, and move it to <code>done</code> only when everything is ticked. So the board stays current without me maintaining it.</p>
@@ -539,7 +539,6 @@ draxul agent wait A --until done,blocked</code></pre>
     <li>Closing the window doesn't stop it</li>
   </ul>
 </div>
-<p class="takeaway">Conversations that belong to me, not to a project.</p>
 <aside class="notes">
 <p>This is the newest part, and it’s changed shape a few times already. A personal agent is just an ordinary Codex or Claude conversation with a persistent backing folder. Press plus, chat in the terminal, and it’s there next time.</p>
 <p>The folders sit under a shared Dropbox path, set with <code>[agents].personal_root</code> in config.toml, so the same agents show up on my Mac and my PC. Click a pill to return to the conversation; if its terminal has gone, it starts a new one with the same folder. Deleting moves the folder somewhere recoverable rather than destroying it.</p>
@@ -560,7 +559,6 @@ draxul agent wait A --until done,blocked</code></pre>
 <section class="slide level2 center">
 <h2>A personal agent at work</h2>
 <img class="rail-shot" src="images/personal_agent_ai_news.jpg" alt="The AI News personal agent in Draxul, showing a short briefing of three recent AI stories with links, and a message box for follow-up questions">
-<p class="takeaway">One click from the rail, and the briefing is waiting.</p>
 <aside class="notes">
 <p>This is one of my personal agents, AI News, open in its own tab. It keeps a short briefing of recent stories, with links, in the format I asked for. The rail on the left shows it alongside the Stocks and Calendar agents.</p>
 <p>Because it’s an ordinary Claude or Codex conversation with its own folder, I can ask follow-up questions in the box at the bottom, or tell it to change the format, and it remembers next time. Its folder syncs through Dropbox, so the same agent is there on my PC.</p>
@@ -580,7 +578,6 @@ draxul agent wait A --until done,blocked</code></pre>
 <section class="slide level2 center">
 <h2>Tables and charts, not just text</h2>
 <img class="rail-shot" src="images/personal_agent_stocks.jpg" alt="The Stocks personal agent in Draxul, showing a price table for SOL, BTC and NVDA and a 60-day SOL/USD Heikin Ashi candle chart, with links to its sources">
-<p class="takeaway">The Stocks agent answers with a table, a chart and its sources.</p>
 <aside class="notes">
 <p>Another personal agent, Stocks. I ask it about a few prices and it comes back with a table, a 60-day candle chart, and links to where the numbers came from.</p>
 <p>The conversation view renders tables, images and links, not only terminal text, so an agent can answer with whatever fits. Underneath it’s the same kind of personal agent as AI News: a Claude or Codex conversation with its own folder, listed in the rail.</p>
@@ -598,31 +595,19 @@ draxul agent wait A --until done,blocked</code></pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>What I learned, and what’s next</h2>
-<div class="wrap-grid">
-  <div>
-    <h3>Learned</h3>
-    <ul class="plain-list">
-      <li>A terminal is a <strong>conversation</strong>, not a log</li>
-      <li>Keep the work in a <strong>server</strong>; windows come and go</li>
-      <li>Make agents <strong>visible at a glance</strong></li>
-      <li>Give agents the <strong>same commands</strong> as people</li>
-    </ul>
-  </div>
-  <div>
-    <h3>Next</h3>
-    <ul class="plain-list">
-      <li>Read the last command's output using shell prompt marks</li>
-      <li>Messages between agents that survive restarts</li>
-      <li>Skills that work outside the Draxul repo</li>
-    </ul>
-  </div>
-</div>
+<h2>Next</h2>
+<ul class="plain-list next-list">
+  <li>Inter-agent experiments</li>
+  <li>Personal agent improvements</li>
+  <li>Network/portable use</li>
+  <li>All of the things...</li>
+</ul>
 <p class="takeaway"><strong>github.com/cmaughan/Draxul</strong></p>
 <aside class="notes">
-<p>The main lessons. Treat the terminal as a live, two-way conversation, which pushes you towards parsing it in a server rather than recording bytes. Once the server owns the work, windows become cheap. Agents need to be visible at a glance, and their status will always be partly a guess, so make it explainable. And the simplest way to let agents coordinate is to give them the same command line I use.</p>
-<p>Next: Draxul already parses OSC 133 shell prompt marks, but nothing uses them yet. They would let <code>pane read</code> return just the last command’s output instead of the bottom 40 lines. A persistent mailbox between agents is planned. And the skills need packaging so they work outside the repository.</p>
-<p>Thanks.</p>
+<p>Inter-agent experiments: agents can already prompt and wait on each other through the command line. A persistent mailbox between agents is the next step.</p>
+<p>Personal agent improvements: they’ve changed shape a few times already, and there’s more to do.</p>
+<p>Network/portable use: the client/server split is local today, over sockets and named pipes. Machine-to-machine transport is listed as future work, and the protocol is what makes it possible.</p>
+<p>And all of the things.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -634,6 +619,9 @@ draxul agent wait A --until done,blocked</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2 thanks-slide center">
+<h2>Thanks…</h2>
 
 </section>
     </div>
