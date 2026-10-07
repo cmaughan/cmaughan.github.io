@@ -201,16 +201,17 @@ The quick version.
 </p>
 </section>
 <section class="slide level2 center">
-<h2>Two ways in. One way to draw</h2>
-<p><img data-src="images/architecture.svg" class="deck-visual" alt="Shell and Neovim updates reach Draxul and a GPU-drawn screen."></p>
+<h2>From bytes to pixels</h2>
+<p><img data-src="images/architecture.svg" class="deck-visual" alt="A shell writes a stream of bytes through the PTY; Draxul parses it into a persistent grid, which the GPU draws using glyphs from a font atlas."></p>
 <p class="takeaway">
-Shells and Neovim speak differently. <strong>The GPU just draws cells.</strong>
+The stream edits the grid. <strong>The GPU draws the grid.</strong>
 </p>
 <aside class="notes">
-<p>A shell talks through a PTY on macOS, or ConPTY on Windows. Draxul’s terminal core decodes that stream into cells, colors, modes and a cursor.</p>
-<p>Embedded Neovim takes a different route: msgpack-RPC and ext_linegrid redraw events. Neovim already knows what its screen looks like.</p>
-<p>Both end up in the same grid and renderer. The renderer sees geometry, colors and atlas coordinates. It doesn’t need to know anything about Bash, VT sequences or Neovim.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/module-map.md">module map</a>.</p>
+<p>This is the whole pipeline on one slide. The shell, or an agent running in it, writes bytes through a PTY on macOS or ConPTY on Windows. Those bytes are text mixed with instructions: ESC [ 31 m turns red on, H and i are letters, ESC [ 0 m turns it off again, and the carriage return and newline move the cursor.</p>
+<p>Draxul’s parser reads the stream and turns it into edits on a grid of cells. Each cell holds a character, its colors and its style. The cursor, modes and scrollback live alongside it. This grid is the real state of the terminal, and it’s kept by the server, which matters later.</p>
+<p>To draw, Draxul looks up each character’s shape in a glyph atlas. HarfBuzz shapes the text, FreeType draws each glyph once, and the result is packed into a texture. The GPU then paints the frame in two passes: cell backgrounds first, then glyphs from the atlas on top. It’s batched, so there isn’t a draw call per character.</p>
+<p>Neovim takes a different route in, over msgpack-RPC, because it already knows what its screen looks like. It ends up in the same grid and renderer.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/module-map.md">module map</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-renderer/include/draxul/renderer_state.h">GpuCell layout</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

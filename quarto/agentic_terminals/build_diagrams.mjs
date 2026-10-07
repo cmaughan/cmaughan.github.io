@@ -21,11 +21,35 @@ const node=(x,y,w,title,sub,color=C.blue)=>rect(x,y,w,142,C.panel,color)+label(x
 
 // Each diagram carries one idea, with implementation detail in speaker notes.
 {
-let s=node(20,40,250,'Shell','Text + commands',C.green)+node(20,250,250,'Neovim','Screen updates',C.purple);
-s+=route('M275,111 H360 V204 H428',C.green)+route('M275,320 H360 V236 H428',C.purple);
-s+=node(440,150,235,'Draxul','Builds the screen',C.blue)+arrow(685,220,750,220,C.blue)+grid(770,130,5,5,40,36,'hello>_');
-s+=t(870,358,'Drawn by the GPU',27,C.blue,'middle');
-save('architecture','A shell or Neovim sends updates; Draxul builds and draws the screen',s);
+const mono=(x,y,str,size,color,anchor='middle',weight=500)=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" text-anchor="${anchor}" font-weight="${weight}" font-family="Menlo, Consolas, monospace">${esc(str)}</text>`;
+// Row 1: the program writes a stream; Draxul's parser reads it.
+let s=rect(20,40,170,130,C.panel,C.green)+t(105,92,'Shell',30,C.green,'middle',600)+t(105,130,'bash · claude',21,C.muted,'middle');
+s+=arrow(196,105,242,105,C.green)+t(219,90,'PTY',18,C.muted,'middle');
+s+=t(470,62,'A stream of bytes',24,C.text,'middle',600);
+let x=252;
+for(const [str,w,color] of [['…',34,C.muted],['ESC[31m',112,C.gold],['H',40,C.text],['i',40,C.text],['ESC[0m',100,C.gold],['\\r\\n',62,C.gold],['$',40,C.text]]){
+  s+=rect(x,84,w,42,C.bg,color,6)+mono(x+w/2,112,str,19,color);x+=w+6;
+}
+s+=t(470,158,'Text mixed with instructions',20,C.muted,'middle');
+s+=arrow(x+2,105,762,105,C.blue);
+s+=rect(772,40,208,130,C.panel,C.blue)+t(876,92,'Parser',30,C.blue,'middle',600)+t(876,130,'Bytes → cell edits',21,C.muted,'middle');
+// Row 2: the grid plus the glyph atlas become a GPU frame.
+s+=route('M876,172 V205 H166 V228',C.blue);
+s+=t(166,256,'Grid',26,C.gold,'middle',600)+t(166,282,'Kept by the server',19,C.muted,'middle');
+const cw=34,ch=32,gx=30,gy=296,rows=['$ ls    ','Hi      ','$ ▌     '];
+rows.forEach((row,r)=>[...row].forEach((g,c)=>{
+  const red=r===1&&c<2;
+  s+=rect(gx+c*cw,gy+r*ch,cw,ch,red?'#3a1f22':C.panel,red?C.red:C.line,0);
+  if(g!==' ')s+=mono(gx+c*cw+cw/2,gy+r*ch+23,g,20,red?C.red:C.text);
+}));
+s+=t(333,350,'+',44,C.muted,'middle');
+s+=t(470,256,'Glyph atlas',26,C.purple,'middle',600)+t(470,282,'Font shapes, drawn once',19,C.muted,'middle');
+[...'Hi$lsé─▌'].forEach((g,i)=>{const ax=378+(i%4)*46,ay=296+Math.floor(i/4)*46;s+=rect(ax,ay,42,42,C.bg,C.purple,4)+mono(ax+21,ay+30,g,24,C.purple);});
+s+=arrow(574,345,640,345,C.blue);
+s+=t(815,256,'GPU',26,C.blue,'middle',600)+t(815,282,'Backgrounds, then glyphs',19,C.muted,'middle');
+s+=rect(652,296,326,96,'#05080c',C.blue,8);
+s+=mono(672,328,'$ ls',22,C.text,'start')+mono(672,356,'Hi',22,C.red,'start',700)+mono(672,384,'$ ▌',22,C.text,'start');
+save('architecture','A shell writes a stream of bytes through the PTY; Draxul parses it into a persistent grid, which the GPU draws using glyphs from a font atlas',s);
 }
 {
 let s=node(30,145,250,'Your program','Bash / PowerShell',C.green)+node(720,145,250,'Draxul','Your terminal',C.blue);
