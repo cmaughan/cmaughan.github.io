@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-eaee737d95d4e3215dd0a3156512ca94.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-30414929a44f72223ef69e577acd5854.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -186,16 +186,53 @@ Two ways in. <strong>One way to draw the result.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>A two-way conversation</h2>
-<p><img data-src="images/pty.svg" class="deck-visual" alt="Programs send output; the terminal sends keys and replies back."></p>
-<p class="takeaway">
-<strong>The program talks. The terminal answers.</strong>
-</p>
+<h2>Terminal protocols: transport + byte stream</h2>
+<div class="terminal-transports">
+  <div><h3>macOS · PTY</h3><p><code>openpty()</code> + <code>fork()</code> · master/slave<br><code>termios</code>: echo, input, and signals</p></div>
+  <div><h3>Windows · ConPTY</h3><p><code>CreatePseudoConsole()</code> · I/O pipes<br>UTF-8 + VT at the host boundary</p></div>
+</div>
+<p class="terminal-stream">On the wire: <strong>UTF-8 text + C0 controls + VT/ANSI escape sequences</strong></p>
+
+<table class="terminal-protocol-table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Direction</th>
+<th data-quarto-table-cell-role="th">Bytes exchanged</th>
+<th data-quarto-table-cell-role="th">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>App → terminal</td>
+<td><code>\x1b[12;40H</code></td>
+<td>CSI: cursor to row 12, column 40</td>
+</tr>
+<tr class="even">
+<td>App → terminal</td>
+<td><code>\x1b]2;Build\x07</code></td>
+<td>OSC: window title “Build”</td>
+</tr>
+<tr class="odd">
+<td>Terminal → app</td>
+<td><code>\x1b[A</code></td>
+<td>Up arrow in normal cursor-key mode</td>
+</tr>
+<tr class="even">
+<td>Query ↔︎ reply</td>
+<td><code>\x1b[6n</code> → <code>\x1b[12;40R</code></td>
+<td>Ask for / report cursor position</td>
+</tr>
+</tbody>
+</table>
+
+<p class="takeaway"><strong>Both sides keep state.</strong>  Modes change how bytes are interpreted.</p>
+<p class="small-note">\x1b = ESC (0x1B) · \x07 = BEL · C0 includes CR and LF · resize uses OS APIs</p>
 <aside class="notes">
-<p>A pseudoterminal gives the shell terminal semantics, rather than just an ordinary pipe. On macOS the PTY has master/slave endpoints, termios settings, terminal size, and signal behavior. The terminal application reads output and writes encoded input through its side of the connection.</p>
-<p>Windows ConPTY offers a similar hosting boundary using UTF-8 and VT sequences. It can translate legacy console API activity into terminal output. Resizing uses platform APIs, rather than being an ordinary printable character in the stream.</p>
-<p>This is bidirectional even when no one types. An application can request the cursor position with CSI 6 n; Draxul must write the reply back. Input encoding also depends on application cursor mode, mouse tracking, focus reporting, and bracketed paste.</p>
-<p>Sources: <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/openpty.3.html">Apple openpty/forkpty</a>; <a href="https://learn.microsoft.com/en-us/windows/console/pseudoconsoles">Microsoft pseudoconsoles</a>; <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-terminal-process">Draxul process adapters</a>.</p>
+<p>A pseudoterminal provides the operating-system connection and terminal behavior. VT/ANSI-style control sequences are the language carried over that connection. Bash and PowerShell are programs using it, not separate terminal protocols. Unix PTYs carry bytes without imposing a character encoding; UTF-8 here describes the modern terminal text stream Draxul expects. ConPTY explicitly uses UTF-8/VT at its host boundary and can translate legacy Windows console operations.</p>
+<p>On macOS, Draxul uses openpty, fork, setsid, TIOCSCTTY, and dup2 to attach the child to its controlling terminal. The master side belongs to Draxul; the child uses the slave. termios settings govern canonical versus raw input, echo, and control-character handling. On Windows, CreatePseudoConsole connects the pseudoconsole to input/output pipes. Draxul resizes with TIOCSWINSZ on Unix and ResizePseudoConsole on Windows, outside the VT byte stream.</p>
+<p>The table uses escaped notation: each <code>\x1b</code> represents one ESC byte, not four printable characters. CSI is Control Sequence Introducer (ESC followed by <code>[</code>). OSC is Operating System Command (ESC followed by <code>]</code>); the example ends with BEL. Cursor coordinates are one-based; the example assumes normal origin mode. The position reply is sent by the terminal in response to the application’s query.</p>
+<p>Up is ESC [ A in normal cursor-key mode, but ESC O A in application cursor-key mode. Other modes affect mouse input, focus events, and bracketed paste. Text and control sequences share an ordered byte stream without message boundaries; a read can end inside either a sequence or a UTF-8 code point. The following slides expand the command families and parser behavior.</p>
+<p>Sources: <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/openpty.3.html">Apple openpty/forkpty</a>; <a href="https://learn.microsoft.com/en-us/windows/console/pseudoconsoles">Microsoft pseudoconsoles</a>; <a href="https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences">Microsoft VT sequences</a>; <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">xterm control sequences</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process">Draxul process adapters</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -467,6 +504,36 @@ personal_root = "/path/to/Dropbox/Vault/PA"</code></pre>
 <p>P previews pinning execution to this machine and Enter confirms. Keep other machines display-only. R previews a manual run against the saved revision and Enter starts it. H opens history; C cancels the selected active run. The server owns execution, so closing the view or all GUI windows does not cancel a run. Editing instructions affects the next run.</p>
 <p>Current implementation: one run at a time, at most five minutes, with read-only provider tools and bounded output. This is suitable for inspecting available files and producing summaries; it is not yet an unrestricted personal automation service. A provider final-result event is required for success. Scheduling, durable messaging, and coordinated cross-machine handoff remain planned. Dropbox shares definitions and results; it does not coordinate who may execute. The machine pin is local and lasts for the server lifetime.</p>
 <p>Sources: current local <a href="./Users/cmaughan/dev/draxul/docs/personal-assistant.md">Personal Assistant documentation</a>, <a href="./Users/cmaughan/dev/draxul/plans/personal-assistant.md">implementation plan</a>, and <a href="./Users/cmaughan/dev/draxul/libs/draxul-server/src/personal_agent_service.cpp">server execution service</a>, including in-progress changes inspected October 6, 2026.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>How running agents are discovered</h2>
+<p class="takeaway">Start <code>codex</code> or <code>claude</code> in a Draxul shell pane.  <strong>Draxul finds it.</strong></p>
+<div class="agent-discovery-steps">
+  <div><h3>1. Inspect the pane</h3><p><strong>macOS:</strong> PTY foreground process group · <code>tcgetpgrp()</code><br><strong>Windows:</strong> Job Object processes + shell descendants</p></div>
+  <div><h3>2. Recognize the agent</h3><p>Match executable names, launch arguments, and known wrappers.<br>Handle <code>node …/codex.js</code>, versioned installs, and agent hints.</p></div>
+  <div><h3>3. Add it to Agents</h3><p>The server assigns an instance ID and keeps its pane route.<br>Ambiguous matches are rejected; confidence is recorded.</p></div>
+</div>
+<p class="discovery-status"><strong>Identity comes from processes.</strong>  Activity comes from terminal titles + screen rules.<br><code>draxul agent list --json</code> · <code>draxul agent explain A</code></p>
+<p class="small-note">Agents launched by Draxul already have an identity.  Discovery covers agents started by hand in its panes.</p>
+<aside class="notes">
+<p>This slide describes the current server-owned terminal path, inspected at Draxul commit a295e80509c44da3c7b1d6a79468eb60768c587b on October 7, 2026. Discovery is scoped to Draxul’s terminals, not an inventory of every agent on the computer. Managed launches supply declared_identity; the server reserves those IDs and skips inference for them.</p>
+<p>On macOS, capture_unix_agent_processes calls tcgetpgrp on the PTY master. proc_listpids(PROC_PGRP_ONLY) enumerates that foreground process group; libproc and sysctl collect executable paths, argv, parent PID, working directory, and the optional DRAXUL_AGENT environment hint. This foreground-group evidence is marked reliable. Background jobs outside that group are not enumerated by this path.</p>
+<p>On Windows, capture_agent_processes first inspects the ConPTY Job Object’s process IDs. If that does not yield an agent, it reconciles descendants of the shell using a Toolhelp process snapshot, covering children outside the job. Windows observations do not claim reliable foreground selection. Multiple unrelated candidate processes are rejected, even if they name the same agent kind; a wrapper and its child in one ancestry chain can match together.</p>
+<p>The shared discover_agent_process matcher checks environment hints, executable names, argv[0], known versioned installation paths, and structured wrapper arguments. Recognized kinds are Codex and Claude. Matching normalizes platform path separators and executable suffixes. It recognizes known Node/package/shell launch forms rather than treating any mention of an agent in arbitrary command text as proof. Conflicting kinds produce no match. high_confidence is also gated on reliable foreground evidence.</p>
+<p>AgentProcessObserver performs and caches probes on a worker thread, with activity/change signals and bounded periodic refresh. The UI does not inspect processes every frame. ServerAgentService allocates an instance ID, records origin Discovered and identity evidence, and attaches the Space/Tab/Pane/terminal route. Runtime-generation changes reset discovery state; repeated missing matches remove the discovered identity.</p>
+<p>Finding a process identifies the agent, not its current task status. In this server path, evaluate_agent_observation inspects terminal titles and recent visible rows using bundled Codex/Claude rules, retaining unknown when evidence is insufficient. Integration hooks can attach native provider session IDs, but those IDs alone do not establish working/blocked/done. <code>agent list --json</code> exposes origin, identity evidence/confidence, and route; <code>agent explain A</code> explains status evidence. Replace A with an actual instance ID.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/unix_agent_process_probe.cpp">Unix process probe</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/conpty_process.cpp">Windows process probe</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_discovery.cpp">agent matcher</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-server/src/server_agent_service.cpp">server registration</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/agent_process_observer.cpp">background observer</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_status.cpp">status rules</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

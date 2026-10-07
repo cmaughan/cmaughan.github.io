@@ -66,4 +66,22 @@ $code-block-border-color: #30363d;
 .reveal .assistant-status { border-top: 1px solid #30363d; padding-top: 16px; font-size: .7em; line-height: 1.6; color: #e6edf3; }
 .reveal .assistant-status strong { color: #7ee787; }
 .reveal .assistant-status span { color: #a4b3c4; }
+.reveal .terminal-transports { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; margin: 25px 0 20px; }
+.reveal .terminal-transports h3 { font-size: .95em; color: #58a6ff; margin: 0 0 10px; }
+.reveal .terminal-transports > div + div h3 { color: #7ee787; }
+.reveal .terminal-transports p { font-size: .7em; line-height: 1.55; margin: 0; color: #a4b3c4; }
+.reveal .terminal-stream { font-size: .72em; margin: 20px 0 15px; }
+.reveal .terminal-protocol-table { width: 100%; font-size: 19px; margin: 0 0 22px; }
+.reveal .terminal-protocol-table th { color: #a4b3c4; font-weight: 500; }
+.reveal .terminal-protocol-table th, .reveal .terminal-protocol-table td { padding: 13px 8px; border-bottom: 1px solid #30363d; vertical-align: middle; }
+.reveal .terminal-protocol-table td:first-child { white-space: nowrap; color: #58a6ff; }
+.reveal .terminal-protocol-table td:nth-child(2) { white-space: nowrap; }
+.reveal .terminal-protocol-table code { color: #7ee787; background: none; font-size: 1em; }
+.reveal .agent-discovery-steps { margin: 28px 0 22px; }
+.reveal .agent-discovery-steps > div { display: grid; grid-template-columns: 305px 1fr; align-items: center; gap: 20px; min-height: 110px; border-bottom: 1px solid #30363d; }
+.reveal .agent-discovery-steps h3 { color: #58a6ff; font-size: .84em; margin: 0; }
+.reveal .agent-discovery-steps p { font-size: .72em; line-height: 1.6; margin: 15px 0; color: #a4b3c4; }
+.reveal .agent-discovery-steps strong { color: #e6edf3; font-weight: 500; }
+.reveal .discovery-status { font-size: .72em; line-height: 1.8; }
+.reveal .discovery-status strong { color: #7ee787; }
 @media print { .reveal .agent-demo { print-color-adjust: exact; } }
