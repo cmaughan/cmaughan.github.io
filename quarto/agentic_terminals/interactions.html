@@ -1,10 +1,10 @@
 <script>
 (() => {
   const examples = {
-    build: { route: 'Renderer', title: 'Build the app', status: 'Working', color: '#7ee787', output: 'Building the latest changes…\n\nI’ll let you know when it’s ready.' },
-    review: { route: 'Protocol', title: 'Review changes', status: 'Needs your decision', color: '#f2b66d', output: 'I found a possible problem.\n\nShall I investigate it?' },
-    tests: { route: 'Runtime', title: 'Check reconnect', status: 'Finished', color: '#58a6ff', output: 'The checks passed.\n\nReady for your next task.' },
-    new: { route: 'Investigation', title: 'Start a task', status: 'Just created', color: '#c4a5ff', output: 'Starting a new agent…\n\nThe other agents keep working.' }
+    otter: { route: 'Draxul › parser › pane 1', status: '● Working', color: '#7ee787', output: 'Splitting the CSI tests into smaller cases…\n\nEdited 3 files.' },
+    heron: { route: 'Draxul › renderer › pane 2', status: '◆ Needs you', color: '#f2b66d', output: "I'd like to run the Metal tests.\n\nAllow this command? (y/n)" },
+    badger: { route: 'Website › deck › pane 1', status: '✓ Done', color: '#58a6ff', output: 'Rendered the slides and checked the links.\n\nAnything else?' },
+    moth: { route: 'Draxul › windows › pane 3', status: 'Exited', color: '#8b949e', output: 'The process has exited.\n\nRestart it from the palette, or with draxul agent restart.' }
   };
   document.querySelectorAll('[data-agent]').forEach(button => {
     button.addEventListener('click', () => {
@@ -15,7 +15,6 @@
         row.setAttribute('aria-pressed', String(selected));
       });
       document.getElementById('agent-route').textContent = example.route;
-      document.getElementById('agent-title').textContent = example.title;
       document.getElementById('agent-status').textContent = example.status;
       document.getElementById('agent-status').style.color = example.color;
       document.getElementById('agent-output').textContent = example.output;

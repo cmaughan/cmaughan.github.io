@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-30414929a44f72223ef69e577acd5854.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-acd8cc08ccef17e3c862c94434a00b72.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -129,7 +129,7 @@
   </style>
   <link rel="canonical" href="https://chrismaughan.com/presentations/agentic_terminals/">
   <meta property="og:title" content="Building an Agent Friendly Terminal Harness">
-  <meta property="og:description" content="Inside Draxul: terminal protocols, Unicode, GPU grids, persistent sessions, and agent navigation.">
+  <meta property="og:description" content="Inside Draxul: how a GPU terminal grew persistent sessions, an agent sidebar, and commands that agents can use themselves.">
   <meta property="og:url" content="https://chrismaughan.com/presentations/agentic_terminals/">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary">
@@ -144,12 +144,12 @@
 <h1>Building an Agent Friendly<br>Terminal Harness</h1>
 <p class="cover-meta">Chris Maughan · NVIDIA · Draxul</p>
 <img class="cover-image" src="images/draxul_mac.png" alt="Draxul on macOS showing a Neovim editor, shell prompt, and terminal system monitor in split panes">
-<div class="cover-bottom"><span>A home for long-running agents</span></div>
+<div class="cover-bottom"><span>A home for long-running agents</span><span>10 minutes · 3 parts</span></div>
 <aside class="notes">
-<p>I started with a GPU frontend for Neovim. Hosting shells adds another route into the same rendering machinery, and hosting agents adds another set of lifetime and attention problems.</p>
-<p>This is a tour of the terminal substrate first, then the move to persistent sessions and an agent-aware interface.</p>
-<p>Implementation reference: Draxul commit <code>1c369209b5d65cd41226047a18355fffeeee8a8c</code>. Historical screenshots may predate the current agent sidebar.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c">Draxul source</a>; screenshot from <code>screenshots/terminals_mac_2.png</code> in the same repository.</p>
+<p>Draxul started as a GPU frontend for Neovim. Then it grew a terminal, so I could run shells next to the editor. Then I started running coding agents in those shells, several at a time, and the interesting problems changed.</p>
+<p>The plan: a quick tour of what a terminal actually does, then how Draxul keeps work alive when the window closes, then the agent features, which are the point of the talk.</p>
+<p>Implementation reference: Draxul commit <code>a295e80509c44da3c7b1d6a79468eb60768c587b</code>. The cover screenshot predates the agent rail.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b">Draxul source</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -163,16 +163,54 @@
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Draxul turns updates into a screen</h2>
+<h2>Which tab was that agent in?</h2>
+<div class="problem-tabs" aria-label="Six terminal tabs; the visible one shows a build, while a hidden tab has an agent waiting for an answer">
+  <div class="tab-strip">
+    <span>zsh</span><span>claude</span><span class="current">build</span><span>claude</span><span>codex</span><span>nvim</span>
+  </div>
+  <pre>[412/418] Linking CXX executable draxul
+[418/418] Build complete</pre>
+  <div class="meanwhile">Meanwhile, in tab 4, for the last 20 minutes: <code>Apply this change? (y/n)</code></div>
+</div>
+<p class="takeaway">Agents are slow, patient and quiet.  <strong>They wait for you without saying so.</strong></p>
+<div class="part-list">
+  <div><span class="blue">1</span> What a terminal does</div>
+  <div><span class="green">2</span> Keeping work alive</div>
+  <div><span class="orange">3</span> Making agents easy to find and use</div>
+</div>
+<aside class="notes">
+<p>This is the problem that got me going. I would have four or five agents running in different tabs. One of them would stop to ask a question, and I wouldn’t notice for twenty minutes.</p>
+<p>Agents differ from the usual terminal workload. They run for a long time, they work in parallel, and they stop to ask for permission. They also read terminal output themselves, so a terminal can be useful to them as well as to me.</p>
+<p>So the goal: keep agents running, show me which one needs me, take me there, and let agents drive the terminal too.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 section-slide center">
+<h2>Part 1: what a terminal does</h2>
+<p class="section-sub">
+The quick version.
+</p>
+</section>
+<section class="slide level2 center">
+<h2>Two ways in. One way to draw</h2>
 <p><img data-src="images/architecture.svg" class="deck-visual" alt="Shell and Neovim updates reach Draxul and a GPU-drawn screen."></p>
 <p class="takeaway">
-Two ways in. <strong>One way to draw the result.</strong>
+Shells and Neovim speak differently. <strong>The GPU just draws cells.</strong>
 </p>
 <aside class="notes">
-<p>The shell path is PTY on macOS and ConPTY on Windows. Draxul’s terminal core decodes the stream into cell contents, attributes, modes, and cursor state. In the current architecture the server owns that terminal state; the UI receives semantic snapshots and deltas.</p>
-<p>Embedded Neovim follows a different path: msgpack-RPC and ext_linegrid redraw events. It already knows its screen layout. That integration remains client-local, even when its pane is represented in shared topology.</p>
-<p>Both paths reach the grid/text/rendering infrastructure. The renderer sees geometry, colors, atlas coordinates, and flags. It does not need to understand Bash, PowerShell, VT syntax, or Neovim RPC.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/docs/module-map.md">module map</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/plans/server-client-terminal-runtime.md">runtime ownership design</a>.</p>
+<p>A shell talks through a PTY on macOS, or ConPTY on Windows. Draxul’s terminal core decodes that stream into cells, colors, modes and a cursor.</p>
+<p>Embedded Neovim takes a different route: msgpack-RPC and ext_linegrid redraw events. Neovim already knows what its screen looks like.</p>
+<p>Both end up in the same grid and renderer. The renderer sees geometry, colors and atlas coordinates. It doesn’t need to know anything about Bash, VT sequences or Neovim.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/module-map.md">module map</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -186,53 +224,15 @@ Two ways in. <strong>One way to draw the result.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Terminal protocols: transport + byte stream</h2>
-<div class="terminal-transports">
-  <div><h3>macOS · PTY</h3><p><code>openpty()</code> + <code>fork()</code> · master/slave<br><code>termios</code>: echo, input, and signals</p></div>
-  <div><h3>Windows · ConPTY</h3><p><code>CreatePseudoConsole()</code> · I/O pipes<br>UTF-8 + VT at the host boundary</p></div>
-</div>
-<p class="terminal-stream">On the wire: <strong>UTF-8 text + C0 controls + VT/ANSI escape sequences</strong></p>
-
-<table class="terminal-protocol-table caption-top">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Direction</th>
-<th data-quarto-table-cell-role="th">Bytes exchanged</th>
-<th data-quarto-table-cell-role="th">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>App → terminal</td>
-<td><code>\x1b[12;40H</code></td>
-<td>CSI: cursor to row 12, column 40</td>
-</tr>
-<tr class="even">
-<td>App → terminal</td>
-<td><code>\x1b]2;Build\x07</code></td>
-<td>OSC: window title “Build”</td>
-</tr>
-<tr class="odd">
-<td>Terminal → app</td>
-<td><code>\x1b[A</code></td>
-<td>Up arrow in normal cursor-key mode</td>
-</tr>
-<tr class="even">
-<td>Query ↔︎ reply</td>
-<td><code>\x1b[6n</code> → <code>\x1b[12;40R</code></td>
-<td>Ask for / report cursor position</td>
-</tr>
-</tbody>
-</table>
-
-<p class="takeaway"><strong>Both sides keep state.</strong>  Modes change how bytes are interpreted.</p>
-<p class="small-note">\x1b = ESC (0x1B) · \x07 = BEL · C0 includes CR and LF · resize uses OS APIs</p>
+<h2>A two-way conversation</h2>
+<p><img data-src="images/pty.svg" class="deck-visual" alt="Programs send output; the terminal sends keys and replies back."></p>
+<p class="takeaway">
+<strong>The program talks. The terminal answers.</strong>
+</p>
 <aside class="notes">
-<p>A pseudoterminal provides the operating-system connection and terminal behavior. VT/ANSI-style control sequences are the language carried over that connection. Bash and PowerShell are programs using it, not separate terminal protocols. Unix PTYs carry bytes without imposing a character encoding; UTF-8 here describes the modern terminal text stream Draxul expects. ConPTY explicitly uses UTF-8/VT at its host boundary and can translate legacy Windows console operations.</p>
-<p>On macOS, Draxul uses openpty, fork, setsid, TIOCSCTTY, and dup2 to attach the child to its controlling terminal. The master side belongs to Draxul; the child uses the slave. termios settings govern canonical versus raw input, echo, and control-character handling. On Windows, CreatePseudoConsole connects the pseudoconsole to input/output pipes. Draxul resizes with TIOCSWINSZ on Unix and ResizePseudoConsole on Windows, outside the VT byte stream.</p>
-<p>The table uses escaped notation: each <code>\x1b</code> represents one ESC byte, not four printable characters. CSI is Control Sequence Introducer (ESC followed by <code>[</code>). OSC is Operating System Command (ESC followed by <code>]</code>); the example ends with BEL. Cursor coordinates are one-based; the example assumes normal origin mode. The position reply is sent by the terminal in response to the application’s query.</p>
-<p>Up is ESC [ A in normal cursor-key mode, but ESC O A in application cursor-key mode. Other modes affect mouse input, focus events, and bracketed paste. Text and control sequences share an ordered byte stream without message boundaries; a read can end inside either a sequence or a UTF-8 code point. The following slides expand the command families and parser behavior.</p>
-<p>Sources: <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/openpty.3.html">Apple openpty/forkpty</a>; <a href="https://learn.microsoft.com/en-us/windows/console/pseudoconsoles">Microsoft pseudoconsoles</a>; <a href="https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences">Microsoft VT sequences</a>; <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">xterm control sequences</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process">Draxul process adapters</a>.</p>
+<p>A pseudoterminal makes the shell believe it’s talking to a real terminal, rather than a pipe. It carries terminal size, signals and line settings as well as text.</p>
+<p>It’s two-way even when nobody types. A program can ask “where is the cursor?” with CSI 6 n, and the terminal has to write the answer back. This becomes important later: if the window is closed, something still has to answer.</p>
+<p>Sources: <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/openpty.3.html">Apple openpty/forkpty</a>; <a href="https://learn.microsoft.com/en-us/windows/console/pseudoconsoles">Microsoft pseudoconsoles</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process">Draxul process adapters</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -247,41 +247,15 @@ Two ways in. <strong>One way to draw the result.</strong>
 </section>
 <section class="slide level2 center">
 <h2>Text comes with instructions</h2>
-<div class="simple-command" aria-label="ESC bracket 31 m sets the text color to red">
-  <div><code>ESC [ 31 m</code><span>“Make the next letters red”</span></div>
-  <div class="command-arrow" aria-hidden="true">→</div>
-  <div class="red-result">Hi</div>
-</div>
-<p class="takeaway">Decades of additions.  <strong>Different terminals support different instructions.</strong></p>
-<p class="small-note">Draxul: 30 CSI endings + 14 private modes.  More behavior hides in their parameters.</p>
-<aside class="notes">
-<p>The example on screen, ESC [ 31 m, sets the foreground color to red. There is no useful universal answer to “how many terminal opcodes do I need?” A final byte does not identify an operation on its own. Private markers, intermediate bytes, parameter values, and existing modes all matter. SGR alone uses the same final m for resets, styles, indexed colors, and RGB colors.</p>
-<p>In the inspected code, handle_csi dispatches 30 distinct final characters. csi_mode handles 14 distinct DEC private-mode numbers, including three alternate-screen aliases. Those are not 44 independent commands. There are also six recognized OSC selectors—0, 2, 7, 8, 52, and 133—plus C0/ESC handling. The DCS path recognizes XTGETTCAP queries and returns an unsupported response rather than leaving a caller waiting.</p>
-<p>The practical target is the applications you need: a shell prompt, a full-screen editor, terminal agents, and multiplexers exercise different subsets. TERM/terminfo and device replies advertise capabilities; they do not magically implement them. In xterm, 1049 includes save/restore and alternate-screen behavior; Draxul currently routes 47, 1047, and 1049 through shared alternate-screen handling.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-terminal-core/src/terminal_core_csi.cpp">Draxul CSI/OSC/DCS dispatch</a>; <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">xterm control sequences</a>; <a href="https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences">Microsoft VT sequences</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
-<h2>Wait for the whole instruction</h2>
-<p><img data-src="images/parser.svg" class="deck-visual" alt="An incomplete color instruction is completed by the next piece of output."></p>
+<p><img data-src="images/parser.svg" class="deck-visual" alt="An incomplete color instruction is completed by the next piece of output, turning Hi red."></p>
 <p class="takeaway">
-A message can arrive <strong>half now, half later.</strong>
+<code>ESC [ 31 m</code> means “make it red”. <strong>It can arrive half now, half later.</strong>
 </p>
 <aside class="notes">
-<p>Here the first read ends after ESC [ 3 1. There is no complete command yet. The next read begins with m, completing the foreground-red command. H and i become cell content under the current attributes. A later ESC [ 0 m can reset the attributes for subsequent text.</p>
-<p>The diagram shows the two arriving pieces and the result. Internally, Draxul retains its parser state between reads. Draxul’s parser has nine enum states covering ground, escape, CSI, OSC, DCS, string termination, and ignored overlong DCS data. Printable text has a separate UTF-8/cluster path. UTF-8 code points can also straddle read boundaries.</p>
-<p>The parser dispatches callbacks; TerminalCore owns the terminal behavior. Buffers are capped: CSI at 4 KiB, OSC and DCS at 8 KiB, and plain-text accumulation at 64 KiB. Bounds and recovery matter because the child process controls this input. Cross-read grapheme-cluster handling still has tracked hardening work; do not interpret the simplified picture as full Unicode conformance.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-terminal-core/include/draxul/vt_parser.h">parser contract</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-terminal-core/src/vt_parser.cpp">parser implementation</a>.</p>
+<p>Terminal output is text mixed with instructions. ESC [ 31 m sets the color to red. There are decades of these, and different terminals support different sets. Draxul handles 30 CSI endings and 14 private modes, plus a handful of OSC commands. That’s the set real programs needed, not the whole of xterm.</p>
+<p>Reads don’t line up with instructions. Here the first read ends after ESC [ 3 1, and the m arrives in the next one. The parser keeps its state between reads and waits. UTF-8 characters can split the same way.</p>
+<p>The child process controls this input, so every buffer has a limit.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-core/src/vt_parser.cpp">parser</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-core/src/terminal_core_csi.cpp">CSI/OSC dispatch</a>; <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">xterm control sequences</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -295,16 +269,15 @@ A message can arrive <strong>half now, half later.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>How text becomes a letter on screen</h2>
+<h2>From letters to pixels</h2>
 <p><img data-src="images/glyphs.svg" class="deck-visual" alt="Text is turned into a font shape and drawn in a screen cell."></p>
 <p class="takeaway">
-A letter can be made from <strong>more than one character.</strong>
+One letter on screen can be <strong>more than one character.</strong>
 </p>
 <aside class="notes">
-<p>An ASCII letter makes this look trivial. An e followed by a combining acute accent is two code points but can occupy one display cluster and one terminal cell. Wide characters, emoji sequences, font fallback, and programming ligatures break the one-byte/one-character/one-glyph intuition in different ways.</p>
-<p>Draxul decodes and stores display text with grid attributes. Font selection and fallback choose the face. HarfBuzz returns glyph IDs and offsets; FreeType produces glyph bitmaps; the cache packs reusable pixels into the atlas. The grid still constrains placement. The pipeline diagram compresses several collaborating classes and cache checks into their conceptual stages.</p>
-<p>The renderer ultimately gets texture coordinates and dimensions, not a Unicode character that the GPU magically understands. Some box-drawing glyphs also have a dedicated path so adjoining cells meet cleanly.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-font/src/text_shaper.cpp">text shaping</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-font/src/glyph_cache.cpp">glyph cache</a>; <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-font">font service</a>.</p>
+<p>An e followed by a combining accent is two code points and one cell on screen. Wide characters, emoji and font fallback all break the one-byte, one-letter idea in different ways.</p>
+<p>HarfBuzz shapes the text, FreeType draws the glyph, and Draxul packs it into a texture atlas so it’s only drawn once. The GPU then paints two layers: cell backgrounds, then glyphs from the atlas. It’s batched, so there isn’t a draw call per character.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-font/src/text_shaper.cpp">text shaping</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-font/src/glyph_cache.cpp">glyph cache</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-renderer/include/draxul/renderer_state.h">GpuCell layout</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -318,39 +291,15 @@ A letter can be made from <strong>more than one character.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>The GPU paints two layers</h2>
-<p><img data-src="images/gpu_grid.svg" class="deck-visual" alt="Background cells and letter shapes combine to form the screen."></p>
-<p class="takeaway">
-<strong>Two layers make the picture.</strong>
-</p>
-<aside class="notes">
-<p>Each GpuCell record is 112 bytes in the inspected implementation, with a compile-time size assertion. It carries pixel position, cell size, background/foreground/special colors, atlas UVs, glyph offset/size, and style flags.</p>
-<p>The vertex shader generates quad geometry using instance and vertex indices. The first grid draw paints cell backgrounds. The second paints glyphs from the atlas with alpha blending. Draxul batches grid work; it does not issue a draw call for every character.</p>
-<p>Metal uses shared buffers on macOS; Vulkan uses host-visible memory on Windows. Atlas uploads, buffer synchronization, pane clipping, cursor overlays, and UI rendering still need management. The picture shows the two drawing layers; the implementation uses an atlas of cached letter shapes.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-renderer/include/draxul/renderer_state.h">GpuCell layout</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-renderer/src/metal/metal_renderer.mm">Metal draw path</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-renderer/src/vulkan/vk_renderer.cpp">Vulkan renderer</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
-<h2>Small actions, awkward combinations</h2>
+<h2>Small things, awkward combinations</h2>
 <p><img data-src="images/complexity.svg" class="deck-visual" alt="Resize, paste, and emoji can affect the screen together."></p>
 <p class="takeaway">
 Printing “hello” is easy. <strong>Then someone resizes the window.</strong>
 </p>
 <aside class="notes">
-<p>The hard bugs often combine features that work separately. Resize during a full-screen redraw. Paste while bracketed-paste mode is enabled. Move between normal and alternate screens. Put a wide cluster at the right margin. Let a reply-generating query arrive in the middle of a burst.</p>
-<p>Terminal modes persist until changed. Scroll margins, pending wrap, cursor visibility, mouse coordinates, and selection all need coherent behavior. An application can also hide the cursor during an update or request synchronized output.</p>
-<p>Draxul’s tests cover partial VT sequences, SGR, OSC/ESC, mouse input, PSReadLine behavior, terminal snapshots, atlas resets, and transport behavior. The repository still tracks hardening and performance work. The point is to communicate the interaction surface, not claim the terminal is finished.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-terminal-core">terminal core</a>; <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c/tests">tests</a>; <a href="https://github.com/cmaughan/Draxul/tree/1c369209b5d65cd41226047a18355fffeeee8a8c/kanban/pending">active work</a>.</p>
+<p>The hard bugs come from features that work fine on their own. Resize during a full-screen redraw. Paste while an editor is in bracketed-paste mode. A wide emoji at the right margin. A query arriving in the middle of a burst of output.</p>
+<p>Draxul has tests for a lot of this, and there’s still hardening work in the queue. It’s not finished, and I’m not sure a terminal ever is.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/tests">tests</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -363,21 +312,24 @@ Printing “hello” is easy. <strong>Then someone resizes the window.</strong>
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2 center">
-<h2>Herdr helps you find the waiting agent</h2>
-<p><img data-src="images/herdr.svg" class="deck-visual" alt="Herdr shows agents working, waiting for help, or finished."></p>
-<p class="takeaway">
-<strong>Less hunting through panes.</strong>
+<section class="slide level2 section-slide center">
+<h2>Part 2: keeping work alive</h2>
+<p class="section-sub">
+Agents run for hours. Windows don’t.
 </p>
-<p class="small-note">
-Concept diagram · <a href="https://herdr.dev">herdr.dev</a>
+</section>
+<section class="slide level2 center">
+<h2>Close the window. The work continues</h2>
+<p><img data-src="images/ownership.svg" class="deck-visual" alt="Draxul moved work out of a single window into a server; windows show the work independently."></p>
+<p class="takeaway">
+A server owns the shells. <strong>Windows just show them.</strong>
 </p>
 <aside class="notes">
-<p>Herdr is an agent-aware terminal multiplexer/runtime. It groups work into spaces, tabs, and panes, recognizes agent processes, and exposes working, blocked, done, idle, or unknown states. Its CLI and local control API let scripts and agents operate the environment as well as humans.</p>
-<p>The useful design idea for Draxul is combining process persistence with attention: tell me which agent needs a response, then take me to its pane. That explains the appeal without needing a popularity claim or a feature-count contest.</p>
-<p>State recognition combines process identity with integrations and terminal-screen rules. Complete lifecycle hooks can be authoritative; a native conversation/session ID alone does not prove whether an agent is working. Screen heuristics can drift, so unknown and explainable evidence matter.</p>
-<p>This is a conceptual interface diagram, not a Herdr screenshot or a claim that Draxul runs Herdr internally. The project is motionharvest/herdr, also identified by Draxul’s existing research notes.</p>
-<p>Sources: <a href="https://herdr.dev/docs/">Herdr documentation</a>; <a href="https://herdr.dev/docs/agents/">agent detection and state</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/plans/herdr-agent-harness-research.md">Draxul’s Herdr research</a>.</p>
+<p>This is the same idea as tmux: a server keeps your shells running, and you attach and detach views. Draxul moved its terminals into a headless server process.</p>
+<p>The server owns the PTYs, the terminal state, scrollback, the layout of spaces, tabs and panes, and the agent state. The window owns fonts, rendering, selection and local focus. One server can feed several windows.</p>
+<p>Remember the two-way conversation? With no window open, the server still has to answer the program’s questions. That’s why the server parses the terminal itself, rather than just recording bytes.</p>
+<p>It’s not magic. If the server or the machine restarts, Draxul restores the layout, but it can’t bring a dead process back.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md">runtime ownership design</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -391,32 +343,64 @@ Concept diagram · <a href="https://herdr.dev">herdr.dev</a>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Click the agent. Go to its work</h2>
-<div class="agent-demo" aria-label="Interactive concept: click an agent to go to its work">
-  <div class="agent-list">
-    <div class="demo-heading">YOUR AGENTS</div>
-    <button class="agent-row" data-agent="build" aria-pressed="false"><span class="green">●</span> Build the app<small>Working</small></button>
-    <button class="agent-row active" data-agent="review" aria-pressed="true"><span class="orange">◆</span> Review changes<small>Needs you</small></button>
-    <button class="agent-row" data-agent="tests" aria-pressed="false"><span class="blue">✓</span> Check reconnect<small>Finished</small></button>
-    <button class="agent-row" data-agent="new" aria-pressed="false"><span class="purple">○</span> Start a task<small>Just created</small></button>
+<h2>Come back to the screen, not a replay</h2>
+<p><img data-src="images/reconnect.svg" class="deck-visual" alt="A returning window asks to reconnect; the server sends the current screen and then subsequent changes."></p>
+<p class="takeaway">
+Reconnect gets <strong>the current screen, then the changes.</strong>
+</p>
+<aside class="notes">
+<p>Replaying an hour of output to rebuild the screen would be slow, and wrong in places. Instead the server sends a snapshot of the current screen, then deltas.</p>
+<p>Cells, colors, cursor and modes go over the wire. Fonts and GPU resources stay in the window, so each window can render at its own size and DPI.</p>
+<p>If two windows are attached, one has control of input and resize, and the other watches until it takes over. This all runs over authenticated local IPC: Unix sockets on macOS and named pipes on Windows.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md">runtime ownership design</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 section-slide center">
+<h2>Part 3: agents in the UI</h2>
+<p class="section-sub">
+See them. Go to them. Let them drive.
+</p>
+</section>
+<section class="slide level2 center">
+<h2>Every agent in one list</h2>
+<div class="rail-demo" aria-label="Interactive concept of the Draxul agents rail: click an agent to go to its pane">
+  <div class="rail">
+    <div class="rail-heading">SPACES</div>
+    <div class="rail-space active"><span class="pill"><b>1</b><span>Draxul</span></span></div>
+    <div class="rail-space"><span class="pill"><b>2</b><span>Website</span></span></div>
+    <div class="rail-divider"></div>
+    <div class="rail-heading">AGENTS</div>
+    <button class="rail-agent" data-agent="otter" aria-pressed="false"><i class="coin claude fast"></i><span class="pill"><b>1</b><span>happy-otter</span></span></button>
+    <button class="rail-agent attention active" data-agent="heron" aria-pressed="true"><i class="coin codex"></i><span class="pill"><b>2</b><span>quiet-heron</span></span></button>
+    <button class="rail-agent" data-agent="badger" aria-pressed="false"><i class="coin claude slow"></i><span class="pill"><b>3</b><span>brave-badger</span></span></button>
+    <button class="rail-agent exited" data-agent="moth" aria-pressed="false"><i class="coin codex"></i><span class="pill"><b>4</b><span>tidy-moth</span></span> <small>[exited]</small></button>
   </div>
-  <div class="agent-pane" aria-live="polite" aria-atomic="true">
-    <div class="demo-route" id="agent-route">Protocol</div>
-    <h3 id="agent-title">Review changes</h3>
-    <div class="demo-status" id="agent-status">Needs your decision</div>
-    <pre id="agent-output">I found a possible problem.
+  <div class="rail-pane" aria-live="polite" aria-atomic="true">
+    <div class="pane-route" id="agent-route">Draxul › renderer › pane 2</div>
+    <div class="pane-status" id="agent-status">◆ Needs you</div>
+    <pre id="agent-output">I'd like to run the Metal tests.
 
-Shall I investigate it?</pre>
+Allow this command? (y/n)</pre>
   </div>
 </div>
-<p class="takeaway"><strong>Go straight to whoever needs you.</strong>  The others keep working.</p>
-<p class="small-note">Clickable concept · illustrative tasks</p>
+<p class="takeaway">Click a name to <strong>jump to its space, tab and pane.</strong>  The coin spins with its token rate.</p>
+<p class="small-note">Clickable mock-up of the real rail · names and output are illustrative</p>
 <aside class="notes">
-<p>Click the four rows during the presentation. The panel demonstrates navigating to the owning Space, Tab, and Pane without restarting work. The task names and terminal output are illustrative; this is not a live Draxul connection.</p>
-<p>Draxul separates durable identity from runtime lifecycle and semantic status. Lifecycle is Starting, Running, Exited, or Failed. Semantic status is Unknown, Idle, Working, Blocked, or Done. “Just created” in this illustration is the user’s creation event, represented by Starting; it is not an extra enum state. A Running agent can be blocked on a decision or done with its latest task while the process stays alive.</p>
-<p>Managed agents are launched intentionally; discovered agents may have been started by hand in an ordinary shell pane. Both need stable identity and a route to their owner. The sidebar is a projection of authoritative state, not a second independent registry. Process discovery, screen evidence, and integrations contribute different kinds of evidence.</p>
-<p>AgentController already provides identity-based and index-based focus operations. The route activates the Space and Tab and focuses the owning pane. Local navigation must not drag another UI client to the same pane. The design goal is to spend less time looking for the waiting agent.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-agent/include/draxul/agent_model.h">agent identity, lifecycle and status model</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/app/agent_controller.cpp">agent controller and focus routing</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/plans/agent-cards-token-activity.md">agent UI design</a>.</p>
+<p>Click the rows while talking. This is a mock-up of the real Agents rail, not a live connection.</p>
+<p>The rail lists Spaces at the top and agents underneath. Agents get short generated names like happy-otter, so I can tell them apart in conversation. Clicking a name activates the owning Space and tab and focuses the pane. The other agents keep working.</p>
+<p>The coin next to each agent is borrowed from TokenFu. It’s blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet. The server gets the rate by tailing the agent’s own session log. Only the rate and total cross the wire, never file paths or text. An agent waiting for me gets a bright accent; an exited one is dimmed and marked.</p>
+<p>The rail picks up agents I launch through Draxul, and also ones I start by hand in an ordinary shell. Launching is in the command palette: pick a Codex or Claude profile, or one from config.toml.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">Agents rail in features.md</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/include/draxul/agent_model.h">agent model</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -430,39 +414,62 @@ Shall I investigate it?</pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Commands between panes and agents</h2>
+<h2>Is it working, or waiting for me?</h2>
+<p><img data-src="images/status.svg" class="deck-visual" alt="Process tracking, hooks and screen rules combine into an agent status, with Unknown when unsure."></p>
+<p class="takeaway">
+Mostly it reads the screen. <strong><code>draxul agent explain</code> says why.</strong>
+</p>
+<aside class="notes">
+<p>Three kinds of evidence. Process tracking spots Claude or Codex starting in a pane, even if I typed the command myself. On Unix that’s the PTY’s foreground process group; Windows uses ConPTY job notifications.</p>
+<p>Optional hooks, installed with <code>draxul integration install claude</code> or <code>codex</code>, tell the server which native conversation belongs to which pane. That gives exact token tracking and lets Draxul resume the right conversation later.</p>
+<p>The status itself mostly comes from the bottom of the screen. Small rule sets for Claude and Codex recognize the idle prompt, progress indicators and approval questions. The four useful answers are working, blocked, done and idle. When the rules aren’t sure, it says unknown rather than guessing.</p>
+<p>These rules will drift when the agents change their UI. That’s why <code>agent explain</code> exists: it tells you which rule matched, without exposing the captured text.</p>
+<p>The idea of an agent-aware multiplexer came from looking at Herdr, which does this well. See <a href="https://herdr.dev/docs/agents/">herdr.dev</a>.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_status.cpp">status rules</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_discovery.cpp">process discovery</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Agents can use the terminal too</h2>
 <div class="communication-examples">
   <div class="command-column">
-    <h3>Pane → pane</h3>
-    <p>Find the destination</p>
-    <pre><code>draxul pane list --json</code></pre>
-    <p>Type into another pane, then press Enter</p>
-    <pre><code>draxul pane send P --text "ctest"
-draxul pane keys P Enter</code></pre>
-    <p>Read back what appeared</p>
-    <pre><code>draxul pane read P --lines 40</code></pre>
+    <h3>Drive a pane</h3>
+    <pre><code><span class="cmt"># find it</span>
+draxul pane list --json
+<span class="cmt"># run something</span>
+draxul pane run P --command "ctest"
+<span class="cmt"># wait, then read the result</span>
+draxul pane wait-output P --text "passed"
+draxul pane read P --lines 40</code></pre>
   </div>
   <div class="command-column">
-    <h3>Agent → agent</h3>
-    <p>Find the other agent</p>
-    <pre><code>draxul agent list --json</code></pre>
-    <p>Give it a task — Enter included</p>
-    <pre><code>draxul agent prompt A --text "Review this"</code></pre>
-    <p>Wait until it finishes or needs help</p>
-    <pre><code>draxul agent wait A --until done,blocked</code></pre>
+    <h3>Ask another agent</h3>
+    <pre><code><span class="cmt"># start a reviewer</span>
+draxul agent start claude --cwd .
+<span class="cmt"># give it a job</span>
+draxul agent prompt A --text "Review it"
+<span class="cmt"># wait until it's done or stuck</span>
+draxul agent wait A --until done,blocked</code></pre>
   </div>
 </div>
-<p class="takeaway">An agent can <strong>drive another pane or ask another agent to work.</strong></p>
-<p class="small-note">P = pane ID · A = agent ID · use IDs returned by the list commands</p>
+<p class="takeaway">The same commands work for me, a script, <strong>or an agent in another pane.</strong></p>
+<p class="small-note">P and A are IDs from the list commands · <code>--current</code> means “this pane”</p>
 <aside class="notes">
-<p>These are Draxul’s existing command-line controls, backed by its local control API. An agent with shell access can invoke them just as a person or script can. Replace P with a pane ID from <code>draxul pane list --json</code>, and A with an agent instance ID from <code>draxul agent list --json</code>.</p>
-<p>The left example sends literal text to another pane, then sends Enter as a separate operation. The example assumes the target pane is at a shell prompt where <code>ctest</code> is an appropriate command. <code>pane send</code> and <code>pane keys</code> send input to whatever program currently owns that terminal; they do not automatically find a shell. <code>pane run P --command "ctest"</code> offers the combined command-submission form. The read returns the last 40 terminal lines.</p>
-<p>The right example addresses an agent by its stable instance ID instead of manually finding its pane. <code>agent prompt</code> includes Enter in the same request. The wait returns when the agent is done or blocked; a blocked agent needs attention, while done is an observed status rather than a guarantee that the requested task succeeded. Read its owning pane to inspect output. These are terminal-based coordination commands; the persistent agent mailbox is a separate planned feature.</p>
-<p>Find: <code>draxul agent list --json</code> discovers agents; <code>draxul agent get &lt;id&gt; --json</code> gives one agent’s identity, route, lifecycle, and semantic status. The underlying methods are <code>agent.list</code> and <code>agent.get</code>. <code>agent explain</code> provides the evidence behind a reported state.</p>
-<p>Give work: <code>draxul agent start &lt;profile-id&gt; --cwd &lt;path&gt;</code> launches a configured agent profile through <code>agent.start</code>. <code>draxul agent prompt &lt;id&gt; --text "Run the tests"</code> sends text and Enter together through <code>agent.send_text</code>. <code>agent send</code> uses the same API without Enter, while <code>agent keys</code> sends named keys through <code>agent.send_keys</code>.</p>
-<p>Follow: <code>draxul agent wait &lt;id&gt; --until &lt;state,state&gt; --timeout &lt;duration&gt; --json</code> waits for a requested state through <code>agent.wait</code>. State describes activity; it does not prove the task succeeded. Terminal text is read separately with <code>draxul pane read &lt;pane-id&gt; --lines 40 --json</code>, using the agent’s owning pane ID. This maps to <code>pane.read</code> and returns a bounded terminal-text view, not a structured answer or complete conversation history. <code>pane wait-output</code> can wait for matching text.</p>
-<p><code>agent focus</code> jumps to the owning pane; <code>agent restart</code> restarts the instance. Session selection is available with <code>--session</code>. The control endpoint is authenticated and local to the user; these commands control the terminal around an agent rather than calling the model provider’s API directly.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-app-cli/src/cli_help.cpp">CLI commands</a>; <a href="https://github.com/cmaughan/Draxul/blob/1c369209b5d65cd41226047a18355fffeeee8a8c/libs/draxul-app-cli/src/control_cli.cpp">CLI-to-API mapping and prompt handling</a>.</p>
+<p>Everything in the UI is also available from the <code>draxul</code> command line, talking to the server’s local control API. An agent with shell access can run these just like I can.</p>
+<p>On the left: list panes, run a command in one, wait for some text to appear, then read the last 40 lines back. On the right: start a Claude reviewer, give it a prompt (Enter included), and wait until it’s done or blocked.</p>
+<p>Each pane gets environment variables telling it which session, space, tab and pane it’s in, so an agent can say <code>--current</code> instead of working out its own ID.</p>
+<p>Two honest caveats. Done means the agent stopped working, not that it succeeded; you still read its pane. And <code>pane read</code> gives you the bottom of the screen, not a structured answer.</p>
+<p>There’s more: spaces, tabs, splits, swapping and moving panes, and declarative layouts with <code>draxul layout apply</code>.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-app-cli/src/cli_help.cpp">CLI help</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -476,34 +483,17 @@ draxul pane keys P Enter</code></pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Personal assistant agents</h2>
+<h2>Skills teach agents the commands</h2>
+<p><img data-src="images/skills.svg" class="deck-visual" alt="You ask an agent in plain words; a skill tells it which draxul commands to run; the panes appear."></p>
 <p class="takeaway">
-Saved instructions for <strong>jobs I want to repeat.</strong>
+I describe the layout. <strong>The agent works out the commands.</strong>
 </p>
-<div class="personal-assistant-overview">
-  <div>
-    <h3>Set it up</h3>
-    <p><strong>1. Choose a shared folder</strong></p>
-    <pre><code>[agents]
-personal_root = "/path/to/Dropbox/Vault/PA"</code></pre>
-    <p><strong>2. Create an agent</strong><br>In Personal Assistant: name, Codex or Claude,<br>model, and instructions.  Preview and save.</p>
-    <p><strong>3. Pin one machine, then Run</strong><br>The server runs the job and saves its result.</p>
-  </div>
-  <div>
-    <h3>Give it a standing job</h3>
-    <blockquote>“Review my project notes and summarize what needs attention.”</blockquote>
-    <p>Save the job once.  Run it again without<br>rewriting the prompt.</p>
-    <p>Definitions and summaries sync through Dropbox.<br>Runs keep going after the window closes.</p>
-  </div>
-</div>
-<p class="assistant-status"><strong>Today:</strong> manual, read-only runs · up to 5 minutes<br><span>Planned: schedules, messaging, and handoff between machines</span></p>
 <aside class="notes">
-<p>A personal agent is a saved definition with a name, provider profile, explicit model, and standing instructions. It stays visible in Personal Agents between runs; active executions also appear in Agents. The project-notes example is an illustrative job, not an already configured agent. The longer-term intent is repeatable personal work such as reviews, summaries, and periodic checks, with inspectable activity and editable instructions.</p>
-<p>Configure <code>[agents].personal_root</code> in Draxul’s normal config.toml. The path shown is a placeholder; this machine uses <code>/Users/cmaughan/Dropbox/Vault/PA</code>, and Windows should point to the same collection under its own Dropbox folder. The server reads the setting at startup. Reopening a GUI alone does not reload it. The shared folder contains collection.toml, agent manifests and instruction files, plus immutable run inputs and final summaries. Raw output stays in local application data.</p>
-<p>Open the Personal Assistant tab from the command palette or launch <code>draxul --host personal-assistant</code>. N creates a draft; choose a supported Codex or Claude profile, type an explicit model, and write the instructions. Ctrl+Enter previews the definition and Enter saves it. Instructions are used verbatim. The provider executable and authentication must already work locally; there is no silent model fallback.</p>
-<p>P previews pinning execution to this machine and Enter confirms. Keep other machines display-only. R previews a manual run against the saved revision and Enter starts it. H opens history; C cancels the selected active run. The server owns execution, so closing the view or all GUI windows does not cancel a run. Editing instructions affects the next run.</p>
-<p>Current implementation: one run at a time, at most five minutes, with read-only provider tools and bounded output. This is suitable for inspecting available files and producing summaries; it is not yet an unrestricted personal automation service. A provider final-result event is required for success. Scheduling, durable messaging, and coordinated cross-machine handoff remain planned. Dropbox shares definitions and results; it does not coordinate who may execute. The machine pin is local and lasts for the server lifetime.</p>
-<p>Sources: current local <a href="./Users/cmaughan/dev/draxul/docs/personal-assistant.md">Personal Assistant documentation</a>, <a href="./Users/cmaughan/dev/draxul/plans/personal-assistant.md">implementation plan</a>, and <a href="./Users/cmaughan/dev/draxul/libs/draxul-server/src/personal_agent_service.cpp">server execution service</a>, including in-progress changes inspected October 6, 2026.</p>
+<p>A skill is a markdown file of instructions that an agent loads when it needs it. The <code>draxul</code> skill in the repository explains how to find the current session, inspect the layout, apply a layout, run panes, start agents, and wait on them properly. It also covers the traps, such as not blindly retrying a create command that might already have worked.</p>
+<p>So I can say “make me a tab with the build on the left, tests top right, and a reviewer agent bottom right”, and the agent does it with <code>layout apply</code>, <code>pane run</code> and <code>agent start</code>.</p>
+<p>There are a couple of other skills too. <code>draxul-review</code> asks several different AI models to review the repository and combines the results; <code>draxul-preflight</code> checks that their command-line tools are installed and logged in.</p>
+<p>Right now these skills live in the Draxul repository, so they’re picked up when an agent works there. Packaging them for use anywhere is still to do.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills/draxul/SKILL.md">draxul skill</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills">skills folder</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -517,23 +507,93 @@ personal_root = "/path/to/Dropbox/Vault/PA"</code></pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>How running agents are discovered</h2>
-<p class="takeaway">Start <code>codex</code> or <code>claude</code> in a Draxul shell pane.  <strong>Draxul finds it.</strong></p>
-<div class="agent-discovery-steps">
-  <div><h3>1. Inspect the pane</h3><p><strong>macOS:</strong> PTY foreground process group · <code>tcgetpgrp()</code><br><strong>Windows:</strong> Job Object processes + shell descendants</p></div>
-  <div><h3>2. Recognize the agent</h3><p>Match executable names, launch arguments, and known wrappers.<br>Handle <code>node …/codex.js</code>, versioned installs, and agent hints.</p></div>
-  <div><h3>3. Add it to Agents</h3><p>The server assigns an instance ID and keeps its pane route.<br>Ambiguous matches are rejected; confidence is recorded.</p></div>
+<h2>Personal agents</h2>
+<div class="personal-agents">
+  <div class="pa-rail">
+    <div class="rail-heading">PERSONAL AGENTS</div>
+    <div class="rail-agent static"><i class="coin codex slow"></i><span class="pill"><b>1</b><span>notes</span></span></div>
+    <div class="rail-agent static"><i class="coin claude"></i><span class="pill"><b>2</b><span>reading-list</span></span></div>
+    <div class="rail-agent static"><i class="coin codex"></i><span class="pill"><b>3</b><span>house</span></span></div>
+    <div class="pa-add">+</div>
+  </div>
+  <ul class="plain-list">
+    <li>A normal Claude or Codex chat <strong>with its own folder</strong></li>
+    <li>The folder lives in Dropbox, so <strong>every machine sees it</strong></li>
+    <li>Click to pick up where I left off</li>
+    <li>Closing the window doesn't stop it</li>
+  </ul>
 </div>
-<p class="discovery-status"><strong>Identity comes from processes.</strong>  Activity comes from terminal titles + screen rules.<br><code>draxul agent list --json</code> · <code>draxul agent explain A</code></p>
-<p class="small-note">Agents launched by Draxul already have an identity.  Discovery covers agents started by hand in its panes.</p>
+<p class="takeaway">Conversations that belong to me, <strong>not to a project.</strong></p>
 <aside class="notes">
-<p>This slide describes the current server-owned terminal path, inspected at Draxul commit a295e80509c44da3c7b1d6a79468eb60768c587b on October 7, 2026. Discovery is scoped to Draxul’s terminals, not an inventory of every agent on the computer. Managed launches supply declared_identity; the server reserves those IDs and skips inference for them.</p>
-<p>On macOS, capture_unix_agent_processes calls tcgetpgrp on the PTY master. proc_listpids(PROC_PGRP_ONLY) enumerates that foreground process group; libproc and sysctl collect executable paths, argv, parent PID, working directory, and the optional DRAXUL_AGENT environment hint. This foreground-group evidence is marked reliable. Background jobs outside that group are not enumerated by this path.</p>
-<p>On Windows, capture_agent_processes first inspects the ConPTY Job Object’s process IDs. If that does not yield an agent, it reconciles descendants of the shell using a Toolhelp process snapshot, covering children outside the job. Windows observations do not claim reliable foreground selection. Multiple unrelated candidate processes are rejected, even if they name the same agent kind; a wrapper and its child in one ancestry chain can match together.</p>
-<p>The shared discover_agent_process matcher checks environment hints, executable names, argv[0], known versioned installation paths, and structured wrapper arguments. Recognized kinds are Codex and Claude. Matching normalizes platform path separators and executable suffixes. It recognizes known Node/package/shell launch forms rather than treating any mention of an agent in arbitrary command text as proof. Conflicting kinds produce no match. high_confidence is also gated on reliable foreground evidence.</p>
-<p>AgentProcessObserver performs and caches probes on a worker thread, with activity/change signals and bounded periodic refresh. The UI does not inspect processes every frame. ServerAgentService allocates an instance ID, records origin Discovered and identity evidence, and attaches the Space/Tab/Pane/terminal route. Runtime-generation changes reset discovery state; repeated missing matches remove the discovered identity.</p>
-<p>Finding a process identifies the agent, not its current task status. In this server path, evaluate_agent_observation inspects terminal titles and recent visible rows using bundled Codex/Claude rules, retaining unknown when evidence is insufficient. Integration hooks can attach native provider session IDs, but those IDs alone do not establish working/blocked/done. <code>agent list --json</code> exposes origin, identity evidence/confidence, and route; <code>agent explain A</code> explains status evidence. Replace A with an actual instance ID.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/unix_agent_process_probe.cpp">Unix process probe</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/conpty_process.cpp">Windows process probe</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_discovery.cpp">agent matcher</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-server/src/server_agent_service.cpp">server registration</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process/src/agent_process_observer.cpp">background observer</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_status.cpp">status rules</a>.</p>
+<p>This is the newest part, and it’s changed shape a few times already. A personal agent is just an ordinary Codex or Claude conversation with a persistent backing folder. Press plus, chat in the terminal, and it’s there next time.</p>
+<p>The folders sit under a shared Dropbox path, set with <code>[agents].personal_root</code> in config.toml, so the same agents show up on my Mac and my PC. Click a pill to return to the conversation; if its terminal has gone, it starts a new one with the same folder. Deleting moves the folder somewhere recoverable rather than destroying it.</p>
+<p>Earlier versions had a definition form and a separate run step. I took that out; a conversation turned out to be simpler.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/personal-assistant.md">personal agents documentation</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Keeping it sensible</h2>
+<div class="safety-grid">
+  <div><h3>Local only</h3><p>Unix socket or named pipe.  A per-user token on every request.</p></div>
+  <div><h3>No text by default</h3><p>Status updates never include screen text.  Reading a pane is an explicit, size-limited request.</p></div>
+  <div><h3>Ask before destroying</h3><p>Shutting down the server or deleting a session needs <code>--yes</code>.</p></div>
+  <div><h3>Still powerful</h3><p>An agent that can type into panes can do what you can.  Keep an eye on it.</p></div>
+</div>
+<aside class="notes">
+<p>Letting agents type into other agents’ terminals raises obvious questions.</p>
+<p>The control API only listens locally, on a Unix-domain socket or a Windows named pipe, and every request has to carry a token that only the current user can read. Windows pipes refuse remote clients.</p>
+<p>Agent status events never carry terminal text. Text only comes back from an explicit <code>pane read</code> or <code>wait-output</code>, and those are bounded.</p>
+<p>Destructive commands like shutting down the server need <code>--yes</code>, and the skill tells agents to check with the user first.</p>
+<p>None of this protects you from an agent you’ve told to do something silly. If an agent can type into a shell, it can do what you can. Same as any other agent setup.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-control/src/control_codec.cpp">control codec</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>What I learned, and what’s next</h2>
+<div class="wrap-grid">
+  <div>
+    <h3>Learned</h3>
+    <ul class="plain-list">
+      <li>A terminal is a <strong>conversation</strong>, not a log</li>
+      <li>Keep the work in a <strong>server</strong>; windows come and go</li>
+      <li>Status is a guess, so <strong>show your working</strong></li>
+      <li>Give agents the <strong>same commands</strong> as people</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Next</h3>
+    <ul class="plain-list">
+      <li>Read the last command's output using shell prompt marks</li>
+      <li>Messages between agents that survive restarts</li>
+      <li>Skills that work outside the Draxul repo</li>
+    </ul>
+  </div>
+</div>
+<p class="takeaway"><strong>github.com/cmaughan/Draxul</strong></p>
+<aside class="notes">
+<p>The main lessons. Treat the terminal as a live, two-way conversation, which pushes you towards parsing it in a server rather than recording bytes. Once the server owns the work, windows become cheap. Agent status will always be partly heuristic, so make it explainable and allow unknown. And the simplest way to let agents coordinate is to give them the same command line I use.</p>
+<p>Next: Draxul already parses OSC 133 shell prompt marks, but nothing uses them yet. They would let <code>pane read</code> return just the last command’s output instead of the bottom 40 lines. A persistent mailbox between agents is planned. And the skills need packaging so they work outside the repository.</p>
+<p>Thanks.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -802,10 +862,10 @@ personal_root = "/path/to/Dropbox/Vault/PA"</code></pre>
     <script>
     (() => {
       const examples = {
-        build: { route: 'Renderer', title: 'Build the app', status: 'Working', color: '#7ee787', output: 'Building the latest changes…\n\nI’ll let you know when it’s ready.' },
-        review: { route: 'Protocol', title: 'Review changes', status: 'Needs your decision', color: '#f2b66d', output: 'I found a possible problem.\n\nShall I investigate it?' },
-        tests: { route: 'Runtime', title: 'Check reconnect', status: 'Finished', color: '#58a6ff', output: 'The checks passed.\n\nReady for your next task.' },
-        new: { route: 'Investigation', title: 'Start a task', status: 'Just created', color: '#c4a5ff', output: 'Starting a new agent…\n\nThe other agents keep working.' }
+        otter: { route: 'Draxul › parser › pane 1', status: '● Working', color: '#7ee787', output: 'Splitting the CSI tests into smaller cases…\n\nEdited 3 files.' },
+        heron: { route: 'Draxul › renderer › pane 2', status: '◆ Needs you', color: '#f2b66d', output: "I'd like to run the Metal tests.\n\nAllow this command? (y/n)" },
+        badger: { route: 'Website › deck › pane 1', status: '✓ Done', color: '#58a6ff', output: 'Rendered the slides and checked the links.\n\nAnything else?' },
+        moth: { route: 'Draxul › windows › pane 3', status: 'Exited', color: '#8b949e', output: 'The process has exited.\n\nRestart it from the palette, or with draxul agent restart.' }
       };
       document.querySelectorAll('[data-agent]').forEach(button => {
         button.addEventListener('click', () => {
@@ -816,7 +876,6 @@ personal_root = "/path/to/Dropbox/Vault/PA"</code></pre>
             row.setAttribute('aria-pressed', String(selected));
           });
           document.getElementById('agent-route').textContent = example.route;
-          document.getElementById('agent-title').textContent = example.title;
           document.getElementById('agent-status').textContent = example.status;
           document.getElementById('agent-status').style.color = example.color;
           document.getElementById('agent-output').textContent = example.output;

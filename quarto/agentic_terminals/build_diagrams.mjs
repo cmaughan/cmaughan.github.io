@@ -21,12 +21,6 @@ const node=(x,y,w,title,sub,color=C.blue)=>rect(x,y,w,142,C.panel,color)+label(x
 
 // Each diagram carries one idea, with implementation detail in speaker notes.
 {
-let s=label(155,60,'Paper','Print each line',C.muted)+rect(40,155,230,190,C.panel,C.muted,0)+lines(70,200,['$ build','working…','done.'],29,C.muted);
-s+=arrow(300,240,355,240,C.line)+label(500,60,'Screen','Move the cursor',C.green)+grid(385,155,6,5,38,38,'READY >_');
-s+=arrow(650,240,705,240,C.line)+label(850,60,'Today','Draw it with a GPU',C.blue)+grid(736,155,6,5,38,38,'READY >_',[6,7]);
-save('history','Paper output became a screen; today software and a GPU draw that screen',s);
-}
-{
 let s=node(20,40,250,'Shell','Text + commands',C.green)+node(20,250,250,'Neovim','Screen updates',C.purple);
 s+=route('M275,111 H360 V204 H428',C.green)+route('M275,320 H360 V236 H428',C.purple);
 s+=node(440,150,235,'Draxul','Builds the screen',C.blue)+arrow(685,220,750,220,C.blue)+grid(770,130,5,5,40,36,'hello>_');
@@ -59,27 +53,12 @@ s+=t(676,255,'=',60,C.muted,'middle')+label(845,75,'The screen','',C.green)+grid
 save('gpu_grid','The GPU paints cell backgrounds, then adds letter shapes to form the terminal screen',s);
 }
 {
-let s=grid(30,95,12,7,34,32,'',Array.from({length:12},(_,i)=>36+i))+t(234,367,'Thousands of cells',33,C.text,'middle');
-s+=arrow(470,212,570,212,C.blue)+t(757,265,'2',178,C.blue,'middle',700)+lines(757,331,['draws for the main grid','in each pane'],30,C.text,'middle');
-save('gpu_batching','Thousands of cells can be drawn together using two main grid draws per pane',s);
-}
-{
 let s=grid(360,149,8,5,35,35,'$ vim   hello   ',[24,25,26,27,28,29,30,31]);
 s+=label(156,155,'Resize','The text moves',C.gold)+arrow(265,205,341,205,C.gold);
 s+=label(839,155,'Paste','More text arrives',C.blue)+arrow(728,205,659,205,C.blue);
 s+=label(500,47,'Emoji','Symbols take more space',C.purple)+arrow(500,107,500,135,C.purple);
 s+=t(500,402,'Sometimes all at once.',34,C.text,'middle');
 save('complexity','Resizing, pasting, and wide characters can all affect the same screen at once',s);
-}
-{
-let s=label(137,100,'Leave','Close your view',C.muted)+rect(40,175,195,124,C.panel,C.muted)+line(67,198,210,273,C.muted,3)+line(67,273,210,198,C.muted,3);
-s+=arrow(253,237,336,237,C.muted,'7 7')+node(350,164,300,'tmux','Keeps work running',C.green);
-s+=arrow(665,237,744,237,C.blue)+label(865,100,'Come back','Same work',C.blue)+grid(768,175,5,3,39,41,'$ rundone $ _  ');
-save('tmux_server','tmux keeps the work running while you close a view and open another later',s);
-}
-{
-let s=node(20,145,250,'Your app','Sends output',C.green)+arrow(287,216,354,216,C.gold)+node(375,145,250,'tmux','Arranges the panes',C.gold)+arrow(641,216,710,216,C.blue)+node(730,145,250,'Draxul','Draws the window',C.blue);
-save('tmux_stack','Application output goes through tmux, which arranges panes, then Draxul draws the window',s);
 }
 {
 let s=t(166,65,'Before',34,C.muted,'middle')+node(25,147,280,'One window','Owns all the work',C.muted);
@@ -94,26 +73,23 @@ const color=back?C.blue:C.green;s+=arrow(back?845:145,y,back?145:845,y,color)+re
 save('reconnect','A returning window asks to reconnect; the server sends the current screen and then subsequent changes',s);
 }
 {
-let s=t(45,50,'Herdr',42,C.green,'start',600)+t(45,97,'Runs and tracks your agents',32,C.text);
-for(const [y,status,col] of [[153,'● Working',C.green],[243,'◆ Needs you',C.gold],[333,'✓ Finished',C.blue]]){s+=rect(45,y,485,70,y===243?'#34291d':C.panel,y===243?C.gold:C.line)+t(76,y+46,status,32,col);}
-s+=arrow(548,278,631,278,C.gold)+lines(815,261,['Know where','to look next.'],36,C.text,'middle');
-save('herdr','Herdr shows which agents are working, need your help, or have finished',s);
+let s='';
+for(const [y,title,sub,color] of [[30,'Process','Is it Claude or Codex?',C.blue],[160,'Hooks','Which conversation?',C.green],[290,'Screen','Prompt, progress, approval',C.purple]]){
+  s+=rect(30,y,330,110,C.panel,color)+t(55,y+48,title,32,color,'start',600)+t(55,y+85,sub,24,C.muted);
+  s+=route(`M362,${y+55} C455,${y+55} 455,220 540,220`,color);
+}
+s+=rect(555,120,410,200,C.panel,C.gold)+t(760,170,'Status',34,C.gold,'middle',600);
+s+=t(595,228,'● Working',27,C.green)+t(775,228,'◆ Needs you',27,C.gold)+t(595,285,'✓ Done',27,C.blue)+t(775,285,'? Unknown',27,C.muted);
+s+=t(760,370,'Not sure?  Say Unknown.',26,C.muted,'middle');
+save('status','Process tracking, hooks and screen rules combine into an agent status, with Unknown when unsure',s);
 }
 {
-let s='';
-for(const [x,title,color,entries] of [
-  [20,'Find an agent',C.blue,[['agent list','Who is here?'],['agent get','What are they doing?']]],
-  [360,'Give it work',C.green,[['agent start','Launch an agent'],['agent prompt','Send a task + Enter']]],
-  [700,'Follow along',C.gold,[['agent wait','Wait for a chosen state'],['pane read','Read its terminal text']]]
-]){
-  s+=rect(x,35,280,278,C.panel,color)+t(x+140,83,title,30,color,'middle',600);
-  for(const [i,[command,meaning]] of entries.entries()){
-    s+=t(x+22,141+i*92,command,28,C.text,'start',600)+t(x+22,175+i*92,meaning,22,C.muted);
-  }
+let s=rect(25,60,290,200,C.panel,C.green)+t(170,108,'You ask',30,C.green,'middle',600)+lines(170,160,['“Make a tab with the','build, the tests and','a reviewer agent.”'],23,C.text,'middle');
+s+=arrow(330,160,385,160,C.line)+rect(400,60,250,200,C.panel,C.purple)+t(525,108,'Skill',30,C.purple,'middle',600)+lines(525,160,['Tells the agent','which draxul','commands to use'],23,C.muted,'middle');
+s+=arrow(665,160,720,160,C.line)+t(855,45,'Draxul',30,C.blue,'middle',600);
+s+=rect(735,70,120,190,'#1c4432',C.green,0)+rect(855,70,120,95,C.panel,C.blue,0)+rect(855,165,120,95,'#34291d',C.gold,0);
+s+=t(795,172,'build',23,C.green,'middle')+t(915,125,'tests',23,C.blue,'middle')+t(915,220,'review',23,C.gold,'middle');
+s+=t(500,330,'draxul layout apply  ·  pane run  ·  agent start',27,C.muted,'middle');
+save('skills','You ask an agent in plain words; a skill tells it which draxul commands to run; the panes appear',s);
 }
-s+=arrow(310,171,346,171,C.line)+arrow(650,171,686,171,C.line);
-s+=t(500,358,'CLI example',22,C.muted,'middle');
-s+=t(500,405,'draxul agent prompt <id> --text "Run the tests"',29,C.green,'middle',500);
-save('agent_apis','Draxul commands find agents, give them work, wait for their state, and read their terminal output',s);
-}
-console.log('Wrote 14 simplified diagrams.');
+console.log('Wrote simplified diagrams.');
