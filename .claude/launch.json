@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["do.py", "serve"],
+      "port": 1313
+    },
+    {
+      "name": "agentic-deck",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "quarto/agentic_terminals/_output"],
+      "port": 8765
+    }
+  ]
+}
