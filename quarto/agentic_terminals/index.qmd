@@ -1,6 +1,6 @@
 ---
-title: "Building an Agent Friendly Terminal Harness"
-description: "Inside Draxul: how a GPU terminal grew persistent sessions, an agent sidebar, and commands that agents can use themselves."
+title: "Building an Agent-Friendly Terminal Harness"
+description: "Inside Draxul: how a GPU terminal grew persistent sessions, an agent rail, and commands that agents can use themselves."
 author: "Chris Maughan"
 institute: "NVIDIA"
 date: 2026-10-07
@@ -25,28 +25,27 @@ format:
 This was the initial inspiration.  Ghostty is a terminal that draws with the GPU, using Metal on the Mac, and it's fast and good-looking.  It runs on macOS and Linux, but not on Windows.
 
 I wanted that kind of hardware-accelerated terminal on both of my platforms, and I already had a GPU front end for Neovim to build it into.
-
 :::
 
 ## Draxul, briefly
 
 ```{=html}
 <div class="collage collage-2x2">
-  <figure><img src="images/dx_terminals.jpg" alt="Draxul with a Neovim editor and terminal panes side by side"><figcaption>Terminals and Neovim, GPU drawn</figcaption></figure>
+  <figure><img src="images/dx_terminals.jpg" alt="Draxul with a Neovim editor and terminal panes side by side"><figcaption>GPU-drawn terminals and Neovim</figcaption></figure>
   <figure><img src="images/dx_agents.jpg" alt="Draxul with Claude and Codex agents and personal agents listed in the left-hand rail"><figcaption>Claude and Codex in the agent rail</figcaption></figure>
   <figure><img src="images/dx_kanban.jpg" alt="Draxul showing a three-column Kanban board of work items"><figcaption>A Kanban board for the work queue</figcaption></figure>
-  <figure><img src="images/dx_ai_news.jpg" alt="A personal agent pane showing a short AI news briefing"><figcaption>A personal agent with its daily brief</figcaption></figure>
+  <figure><img src="images/dx_ai_news.jpg" alt="A personal agent pane showing a short AI news briefing"><figcaption>A personal agent with its daily briefing</figcaption></figure>
 </div>
 ```
 
 ::: {.notes}
-Draxul started as a GPU frontend for Neovim.  Then it grew a terminal, so I could run shells next to the editor.  Then I started running coding agents in those shells, several at a time, and the interesting problems changed.  It runs on macOS and Windows.
-
-The background on the title slide is Rezonality's Starship Bridge example, rendered in a Draxul pane.
+Draxul started as a GPU front end for Neovim.  Then it grew a terminal, so I could run shells next to the editor.  Then I started running coding agents in those shells, several at a time, and the interesting problems changed.  It runs on macOS and Windows.
 
 Top left: ordinary terminals and Neovim in split panes.  Top right: the agent rail with Claude and Codex running, and some personal agents underneath.  Bottom left: the Kanban board I use to queue work for agents.  Bottom right: one of the personal agents, which keeps a running AI news brief.
 
 Everything here lives in one window, and the server keeps it running when the window closes.
+
+The background on the title slide is Rezonality's Starship Bridge example, rendered in a Draxul pane.
 :::
 
 ## Anything that fits in a pane
@@ -94,7 +93,7 @@ The big one is Rezonality's Starship Bridge example: four live shader scenes sha
     <li><b>Scene graph</b>Surfaces, cameras, glTF/OBJ models and ordered passes</li>
     <li><b>Shaders</b>GLSL → SPIR-V with glslang → Metal source via SPIRV-Cross</li>
     <li><b>Passes</b>Each pass renders into its surfaces; the last one fills the pane</li>
-    <li><b>Live edits</b>Save a file and it rebuilds.  A bad edit keeps the last good build on screen</li>
+    <li><b>Live edits</b>Saving rebuilds; a bad edit leaves the last good build on screen</li>
   </ol>
 </div>
 ```
@@ -108,7 +107,7 @@ Shaders are plain GLSL.  Rezonality compiles them to SPIR-V with glslang.  Vulka
 
 Every save produces a new numbered build.  If it fails, the error goes to the pane's status pill and to a small JSON file, and the previous good build keeps rendering.  That JSON is the important bit for agents: it lists the file, line and message, plus which build is being attempted and which is active.  An agent can break a shader, read the error, fix it, and see the next build go live, without trying to read pixels.
 
-There's a layout generator that sets up an editor pane next to a Rezonality view with one `draxul layout apply`.  Put that together with the skill, and "make me a spinning ringed planet in this pane" turns into a scene graph, a few shaders and a working picture.  How good the picture is depends on the agent, of course.
+There's a layout generator that sets up an editor pane next to a Rezonality view with one `draxul layout apply`.  Put that together with the Draxul skill (more on that later), and "make me a spinning ringed planet in this pane" turns into a scene graph, a few shaders and a working picture.  How good the picture is depends on the agent, of course.
 
 Sources: [Rezonality README](https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/README.md); [agent guide](https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/AGENTS.md); [Metal backend](https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/src/native_backend_metal.mm); [deferred shading example](https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/examples/deferred_shading/default.scenegraph).
 :::
@@ -117,7 +116,7 @@ Sources: [Rezonality README](https://github.com/cmaughan/draxul-rezonality/blob/
 
 ```{=html}
 <div class="collage collage-feature rz-collage">
-  <figure class="feature"><img src="images/rz_dashboard.jpg" alt="NYX flight deck: ten Rezonality panes of neon shader art and telemetry text in a Draxul tab"><figcaption>An SF dashboard, live-coded by Codex in Draxul</figcaption></figure>
+  <figure class="feature"><img src="images/rz_dashboard.jpg" alt="NYX flight deck: ten Rezonality panes of neon shader art and telemetry text in a Draxul tab"><figcaption>A sci-fi dashboard, live-coded by Codex in Draxul</figcaption></figure>
   <figure><img src="images/rz_codex_robot.jpg" alt="Draxul with a Rezonality PBR robot on the left and Codex editing the scene graph on the right"><figcaption>Codex editing the PBR robot scene</figcaption></figure>
   <figure><img src="images/rz_jorvik_1.jpg" alt="A Cornell box rendered with hardware ray tracing next to its ray generation shader"><figcaption>Ray-traced Cornell box</figcaption></figure>
   <figure><img src="images/rz_jorvik_2.jpg" alt="Glowing audio waveform and spectrum bars over shader code"><figcaption>Audio-reactive spectrum</figcaption></figure>
@@ -126,20 +125,19 @@ Sources: [Rezonality README](https://github.com/cmaughan/draxul-rezonality/blob/
 ```
 
 ::: {.notes}
-A few things Rezonality has drawn.  The big one is an SF flight-deck dashboard that I had Codex live-code inside Draxul: ten panes of shader art and telemetry text in one tab.  Next to it, Codex is editing the PBR robot scene graph in one pane while the render updates in the other.
+A few things Rezonality has drawn.  The big one is a sci-fi flight-deck dashboard that I had Codex live-code inside Draxul: ten panes of shader art and telemetry text in one tab.  Next to it, Codex is editing the PBR robot scene graph in one pane while the render updates in the other.
 
 The bottom row is from the earlier standalone Rezonality, with the Zep editor on the left: a ray-traced Cornell box, an audio-reactive spectrum, and some shader art.  The same kinds of project now run as examples in the Draxul plugin.
 
 Sources: [Rezonality portfolio page](https://chrismaughan.com/portfolio/jorvik/).
 :::
 
-## One GPU surface, many kinds of pane
+## One GPU surface, many kinds of panes
 
 ![](images/gpu_surface.svg){.deck-visual fig-alt="Draxul owns one GPU frame on Metal or Vulkan; terminals, Neovim and plugins each record into the shared command buffer inside their pane."}
 
-
 ::: {.notes}
-All of this works because Draxul owns one GPU frame, on Metal on macOS and Vulkan on Windows.  It owns the window, the swapchain or drawable, the frame's command buffer, the glyph atlas and the present.
+All of this works because Draxul owns one GPU frame, using Metal on macOS and Vulkan on Windows.  It owns the window, the swapchain or drawable, the frame's command buffer, the glyph atlas and the present.
 
 Each pane records its own work into that command buffer, in pane order, clipped to its rectangle.  Terminal and Neovim panes upload their cell grid and draw it with the glyph atlas.  Plugin panes record whatever they like: SatView and MegaCity run their own HDR scene passes and ImGui, and Rezonality runs its pass list and, on capable GPUs, ray tracing.
 
@@ -153,7 +151,6 @@ Sources: [plugin ABI header](https://github.com/cmaughan/Draxul/blob/a295e80509c
 ## From bytes to pixels
 
 ![](images/architecture.svg){.deck-visual fig-alt="A shell writes a stream of bytes through the PTY; Draxul parses it into a persistent grid, which the GPU draws using glyphs from a font atlas."}
-
 
 ::: {.notes}
 This is the whole pipeline on one slide.  The shell, or an agent running in it, writes bytes through a PTY on macOS or ConPTY on Windows.  Those bytes are text mixed with instructions: ESC [ 31 m turns red on, H and i are letters, ESC [ 0 m turns it off again, and the carriage return and newline move the cursor.
@@ -171,9 +168,8 @@ Sources: [module map](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7
 
 ![](images/parser.svg){.deck-visual fig-alt="An incomplete color instruction is completed by the next piece of output, turning Hi red."}
 
-
 ::: {.notes}
-Terminal output is text mixed with instructions.  ESC [ 31 m sets the color to red.  There are decades of these, and different terminals support different sets.  Draxul handles 30 CSI endings and 14 private modes, plus a handful of OSC commands.  That's the set real programs needed, not the whole of xterm.
+Terminal output is text mixed with instructions.  ESC [ 31 m sets the color to red.  There are decades of these, and different terminals support different sets.  Draxul handles 30 CSI endings and 14 private modes, plus a handful of OSC commands.  That's the set real programs need, not the whole of xterm.
 
 Reads don't line up with instructions.  Here the first read ends after ESC [ 3 1, and the m arrives in the next one.  The parser keeps its state between reads and waits.  UTF-8 characters can split the same way.
 
@@ -186,9 +182,9 @@ Sources: [parser](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6
 
 ```{=html}
 <img class="port-strip" src="images/ownership.svg" alt="Before: one window owns every shell. Now: a server owns shells, state and agents, and windows attach to it.">
-<p class="port-note">This took a lot of planning, and many vertical slices, to get right.</p>
+<p class="port-note">This took a lot of planning and many vertical slices to get right.</p>
 <div class="agent-quote">
-  <div class="quote-line"><span class="quote-dot">●</span> Wow, they really did it...</div>
+  <div class="quote-line"><span class="quote-dot">●</span> Wow, they really did it…</div>
   <div class="quote-source">An agent, on finding that another agent had already worked through the port</div>
 </div>
 ```
@@ -200,16 +196,16 @@ So I moved the terminals into a headless server, the same idea as tmux.  The ser
 
 It also has to keep answering the programs.  Terminals reply to queries even when nobody is looking, so the server parses everything itself rather than just recording bytes.
 
-It was a big port.  The terminal core had to come out from under the renderer.  There's now a versioned protocol with snapshots, deltas and reconnect rules.  And every process, ID, thread and failure needed a clear owner.  It went in as a series of vertical slices, behind experimental flags at first.
+The terminal core had to come out from under the renderer.  There's now a versioned protocol with snapshots, deltas and reconnect rules.  And every process, ID, thread and failure needed a clear owner.  It went in as a series of vertical slices, behind experimental flags at first.
 
-The quote is real.  Partway through the port, one agent spotted that another agent had already worked through the problem, and left the comment "Wow, they really did it..."
+The quote is real.  Partway through the port, one agent spotted that another agent had already worked through the problem, and left the comment "Wow, they really did it…"
 
-The connection is local today: Unix sockets on macOS and named pipes on Windows.  Machine-to-machine transport is listed as future work, but the protocol is what makes it possible.
+The connection is local today: Unix-domain sockets on macOS and named pipes on Windows.  Machine-to-machine transport is listed as future work, but the protocol is what makes it possible.
 
 Sources: [runtime ownership design](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md); [server features](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md).
 :::
 
-## Where the spinning coins came from
+## TokenFu: activity at a glance
 
 ```{=html}
 <div class="tokenfu-slide">
@@ -300,9 +296,8 @@ Sources: [control codec](https://github.com/cmaughan/Draxul/blob/a295e80509c44da
 
 ![](images/skills.svg){.deck-visual fig-alt="You ask an agent in plain words; a skill tells it which draxul commands to run; the panes appear."}
 
-
 ::: {.notes}
-A skill is a markdown file of instructions that an agent loads when it needs it.  The `draxul` skill in the repository explains how to find the current session, inspect the layout, apply a layout, run panes, start agents, and wait on them properly.  It also covers the traps, such as not blindly retrying a create command that might already have worked.
+A skill is a Markdown file of instructions that an agent loads when it needs it.  The `draxul` skill in the repository explains how to find the current session, inspect the layout, apply a layout, run panes, start agents, and wait on them properly.  It also covers the traps, such as not blindly retrying a create command that might already have worked.
 
 So I can say "make me a tab with the build on the left, tests top right, and a reviewer agent bottom right", and the agent does it with `layout apply`, `pane run` and `agent start`.
 
@@ -313,7 +308,7 @@ Right now these skills live in the Draxul repository, so they're picked up when 
 Sources: [draxul skill](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills/draxul/SKILL.md); [skills folder](https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills).
 :::
 
-## Agents automatically update and maintain Kanban
+## Agents keep the Kanban board up to date
 
 ```{=html}
 <img class="rail-shot" src="images/kanban_board.jpg" alt="Draxul's Kanban board: ice-box, pending and done columns of work-item cards from the Draxul repository and its plugin submodules, with priority and type icons">
@@ -326,7 +321,7 @@ The repository's agent instructions do the rest.  Agents are told to create a ca
 
 The board watches the folders, so when an agent edits or moves a card, the pane updates within a fraction of a second.  Enter opens the card in Neovim, and `p` shows a live preview of it.
 
-The icons are priority and type: the fire is P1, the lightning P2, the spanner a refactor, the bug a bug.  In this screenshot there are 143 cards pending and 51 done across seven boards.
+The icons are priority and type: the fire is P1, the lightning P2, the wrench a refactor, the bug a bug.  In this screenshot there are 143 cards pending and 51 done across seven boards.
 
 Sources: [Kanban in features.md](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md); [agent instructions](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/AGENTS.md); [CLAUDE.md work items](https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/CLAUDE.md).
 :::
@@ -337,13 +332,13 @@ Sources: [Kanban in features.md](https://github.com/cmaughan/Draxul/blob/a295e80
 <div class="personal-agents">
   <div class="pa-rail">
     <div class="rail-heading">PERSONAL AGENTS</div>
-    <div class="rail-agent static"><i class="coin codex slow"></i><span class="pill"><b>1</b><span>notes</span></span></div>
-    <div class="rail-agent static"><i class="coin claude"></i><span class="pill"><b>2</b><span>reading-list</span></span></div>
-    <div class="rail-agent static"><i class="coin codex"></i><span class="pill"><b>3</b><span>house</span></span></div>
+    <div class="rail-agent static"><i class="coin codex slow"></i><span class="pill"><b>1</b><span>AI News</span></span></div>
+    <div class="rail-agent static"><i class="coin claude"></i><span class="pill"><b>2</b><span>Stocks</span></span></div>
+    <div class="rail-agent static"><i class="coin codex"></i><span class="pill"><b>3</b><span>Calendar</span></span></div>
     <div class="pa-add">+</div>
   </div>
   <ul class="plain-list">
-    <li>A normal Claude or Codex chat <strong>with its own folder</strong></li>
+    <li>An ordinary Claude or Codex chat <strong>with its own folder</strong></li>
     <li>The folder lives in Dropbox, so <strong>every machine sees it</strong></li>
     <li>Click to pick up where I left off</li>
     <li>Closing the window doesn't stop it</li>
@@ -352,7 +347,7 @@ Sources: [Kanban in features.md](https://github.com/cmaughan/Draxul/blob/a295e80
 ```
 
 ::: {.notes}
-This is the newest part, and it's changed shape a few times already.  A personal agent is just an ordinary Codex or Claude conversation with a persistent backing folder.  Press plus, chat in the terminal, and it's there next time.
+This is the newest part, and it's changed shape a few times already.  A personal agent is just an ordinary Codex or Claude conversation with a persistent backing folder.  Press plus, start chatting, and it's there next time.
 
 The folders sit under a shared Dropbox path, set with `[agents].personal_root` in config.toml, so the same agents show up on my Mac and my PC.  Click a pill to return to the conversation; if its terminal has gone, it starts a new one with the same folder.  Deleting moves the folder somewhere recoverable rather than destroying it.
 
@@ -406,7 +401,7 @@ Inter-agent experiments: agents can already prompt and wait on each other throug
 
 Personal agent improvements: they've changed shape a few times already, and there's more to do.
 
-Network/portable use: the client/server split is local today, over sockets and named pipes.  Machine-to-machine transport is listed as future work, and the protocol is what makes it possible.
+Network/portable use: the client/server split is local today, over Unix-domain sockets and named pipes.  Machine-to-machine transport is listed as future work, and the protocol is what makes it possible.
 
 And all of the things.
 :::
