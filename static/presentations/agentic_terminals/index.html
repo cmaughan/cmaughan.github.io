@@ -35,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-6982e151896037a93baf01165287c27d.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-c98fc78d8eee0d841fb28fff778ec5cc.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -144,7 +144,7 @@
 <h1>Building an Agent Friendly<br>Terminal Harness</h1>
 <p class="cover-meta">Chris Maughan · NVIDIA · Draxul</p>
 <img class="cover-image" src="images/draxul_mac.png" alt="Draxul on macOS showing a Neovim editor, shell prompt, and terminal system monitor in split panes">
-<div class="cover-bottom"><span>A home for long-running agents</span><span>10 minutes · 3 parts</span></div>
+<div class="cover-bottom"><span>A home for long-running agents</span><span>github.com/cmaughan/Draxul</span></div>
 <aside class="notes">
 <p>Draxul started as a GPU frontend for Neovim. Then it grew a terminal, so I could run shells next to the editor. Then I started running coding agents in those shells, several at a time, and the interesting problems changed.</p>
 <p>The plan: a quick tour of what a terminal actually does, then how Draxul keeps work alive when the window closes, then the agent features, which are the point of the talk.</p>
@@ -163,25 +163,17 @@
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Which tab was that agent in?</h2>
-<div class="problem-tabs" aria-label="Six terminal tabs; the visible one shows a build, while a hidden tab has an agent waiting for an answer">
-  <div class="tab-strip">
-    <span>zsh</span><span>claude</span><span class="current">build</span><span>claude</span><span>codex</span><span>nvim</span>
-  </div>
-  <pre>[412/418] Linking CXX executable draxul
-[418/418] Build complete</pre>
-  <div class="meanwhile">Meanwhile, in tab 4, for the last 20 minutes: <code>Apply this change? (y/n)</code></div>
-</div>
-<p class="takeaway">Agents are slow, patient and quiet.  <strong>They wait for you without saying so.</strong></p>
-<div class="part-list">
-  <div><span class="blue">1</span> What a terminal does</div>
-  <div><span class="green">2</span> Keeping work alive</div>
-  <div><span class="orange">3</span> Making agents easy to find and use</div>
+<h2>Draxul, briefly</h2>
+<div class="collage collage-2x2">
+  <figure><img src="images/dx_terminals.jpg" alt="Draxul with a Neovim editor and terminal panes side by side"><figcaption>Terminals and Neovim, GPU drawn</figcaption></figure>
+  <figure><img src="images/dx_agents.jpg" alt="Draxul with Claude and Codex agents and personal agents listed in the left-hand rail"><figcaption>Claude and Codex in the agent rail</figcaption></figure>
+  <figure><img src="images/dx_kanban.jpg" alt="Draxul showing a three-column Kanban board of work items"><figcaption>A Kanban board for the work queue</figcaption></figure>
+  <figure><img src="images/dx_ai_news.jpg" alt="A personal agent pane showing a short AI news briefing"><figcaption>A personal agent with its daily brief</figcaption></figure>
 </div>
 <aside class="notes">
-<p>This is the problem that got me going. I would have four or five agents running in different tabs. One of them would stop to ask a question, and I wouldn’t notice for twenty minutes.</p>
-<p>Agents differ from the usual terminal workload. They run for a long time, they work in parallel, and they stop to ask for permission. They also read terminal output themselves, so a terminal can be useful to them as well as to me.</p>
-<p>So the goal: keep agents running, show me which one needs me, take me there, and let agents drive the terminal too.</p>
+<p>A quick tour before the details. Draxul is a GPU-drawn terminal and Neovim front end that I’ve been building for myself, on macOS and Windows.</p>
+<p>Top left: ordinary terminals and Neovim in split panes. Top right: the agent rail with Claude and Codex running, and some personal agents underneath. Bottom left: the Kanban board I use to queue work for agents. Bottom right: one of the personal agents, which keeps a running AI news brief.</p>
+<p>Everything here lives in one window, and the server keeps it running when the window closes.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -194,11 +186,108 @@
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2 section-slide center">
-<h2>Part 1: what a terminal does</h2>
-<p class="section-sub">
-The quick version.
+<section class="slide level2 center">
+<h2>Anything that fits in a pane</h2>
+<div class="collage collage-feature">
+  <figure class="feature"><img src="images/dx_rezonality_ship.jpg" alt="Rezonality Starship Bridge example: four 3D panels with a cruiser, a ringed planet, a warp core and a terrain scan"><figcaption>Rezonality: four live shader scenes</figcaption></figure>
+  <figure><img src="images/dx_megacity.jpg" alt="MegaCity showing source files as buildings on a grid"><figcaption>MegaCity: a codebase as a city</figcaption></figure>
+  <figure><img src="images/dx_satview.jpg" alt="SatView showing thousands of satellites around a day-night Earth"><figcaption>SatView: satellites around Earth</figcaption></figure>
+  <figure><img src="images/dx_scoreview.jpg" alt="ScoreView showing a Grieg waltz with colored note heads"><figcaption>ScoreView: a piano practice partner</figcaption></figure>
+  <figure><img src="images/dx_flashcards.jpg" alt="A Japanese flashcard plugin showing the word asa, meaning morning"><figcaption>Flashcards: Japanese practice</figcaption></figure>
+</div>
+<aside class="notes">
+<p>Panes don’t have to hold text. These are all native plugins that draw straight into a pane on the same GPU frame as the terminals.</p>
+<p>The big one is Rezonality’s Starship Bridge example: four live shader scenes sharing an HDR bloom and a HUD. MegaCity turns a source tree into an explorable 3D city. SatView draws thousands of satellites around a day-night Earth. ScoreView is an experimental piano teacher that turns a score into a practice session. Flashcards is a small Japanese practice plugin.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Rezonality: a 3D engine in a pane</h2>
+<div class="rezonality">
+  <div class="rz-code">
+    <div class="rz-file">deferred_shading/default.scenegraph</div>
+<pre><code><span class="kw">surface:</span> Positions { format: rgba16f }
+<span class="kw">surface:</span> Albedo    { format: default_color }
+<span class="kw">surface:</span> Normals   { format: rgba16f }
+<span class="kw">surface:</span> Depth     { format: default_depth }
+
+<span class="kw">pass:</span> GBuffer {
+  targets: (Positions, Albedo, Normals, Depth)
+  geometry: background {
+    path: screen_rect
+    vs: screen.vert  fs: gbuffer.frag }
+}
+<span class="kw">pass:</span> Lights {
+  samplers: (Positions, Albedo, Normals)
+  targets: (default_color)
+  geometry: background { ... fs: lighting.frag }
+}</code></pre>
+  </div>
+  <ol class="rz-steps">
+    <li><b>Scene graph</b>Surfaces, cameras, glTF/OBJ models and ordered passes</li>
+    <li><b>Shaders</b>GLSL → SPIR-V with glslang → Metal source via SPIRV-Cross</li>
+    <li><b>Passes</b>Each pass renders into its surfaces; the last one fills the pane</li>
+    <li><b>Live edits</b>Save a file and it rebuilds.  A bad edit keeps the last good build on screen</li>
+  </ol>
+</div>
+<div class="rz-shots">
+  <figure><img src="images/rezonality_pbr_robot.jpg" alt="Rezonality rendering a glTF robot with PBR materials and an HDR sky"><figcaption>glTF + PBR + HDR</figcaption></figure>
+  <figure><img src="images/rezonality_protoplanetary_disc.jpg" alt="Rezonality rendering a raymarched protoplanetary disc and a sphere"><figcaption>Raymarched volume</figcaption></figure>
+  <figure><img src="images/rezonality_ray_tracer.jpg" alt="Rezonality rendering a Cornell box using hardware ray tracing"><figcaption>Hardware ray tracing</figcaption></figure>
+</div>
+<p class="takeaway">The agent writes text files.  <strong>Rezonality turns them into pictures.</strong></p>
+<aside class="notes">
+<p>Rezonality is a Draxul plugin, and the Draxul version of VkLive, an older live shader tool of mine. It renders straight into a pane, with Metal on macOS and Vulkan on Windows, while you edit the project from a terminal or editor pane next to it.</p>
+<p>A project is a scene graph file plus shaders. The scene graph declares surfaces (render targets with a format and a scale relative to the pane), cameras, models loaded through Assimp, and an ordered list of passes. Each pass names the surfaces it writes and the ones it samples. The example on screen is deferred shading: one pass fills position, albedo and normal targets, and a second pass reads them to light the scene. Multiple render targets, float formats, depth, bloom chains and HDR environments all fall out of the same few keywords.</p>
+<p>Shaders are plain GLSL. Rezonality compiles them to SPIR-V with glslang. Vulkan uses that directly; on macOS SPIRV-Cross generates Metal Shading Language from the SPIR-V, with the bindings mapped to match. On ray-capable GPUs it also builds acceleration structures and runs ray-generation, miss and hit shaders, or the equivalent Metal kernel.</p>
+<p>Every save produces a new numbered build. If it fails, the error goes to the pane’s status pill and to a small JSON file, and the previous good build keeps rendering. That JSON is the important bit for agents: it lists the file, line and message, plus which build is being attempted and which is active. An agent can break a shader, read the error, fix it, and see the next build go live, without trying to read pixels.</p>
+<p>There’s a layout generator that sets up an editor pane next to a Rezonality view with one <code>draxul layout apply</code>. Put that together with the skill, and “make me a spinning ringed planet in this pane” turns into a scene graph, a few shaders and a working picture. How good the picture is depends on the agent, of course.</p>
+<p>The three images are the macOS reference renders from Draxul’s render tests: a glTF robot with PBR materials, a raymarched protoplanetary disc, and a ray-traced Cornell box.</p>
+<p>Sources: <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/README.md">Rezonality README</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/AGENTS.md">agent guide</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/src/native_backend_metal.mm">Metal backend</a>; <a href="https://github.com/cmaughan/draxul-rezonality/blob/00c3ae1d325e4737a0adfe9762eba1516678481c/examples/deferred_shading/default.scenegraph">deferred shading example</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>One GPU surface, many kinds of pane</h2>
+<p><img data-src="images/gpu_surface.svg" class="deck-visual" alt="Draxul owns one GPU frame on Metal or Vulkan; terminals, Neovim and plugins each record into the shared command buffer inside their pane."></p>
+<p class="takeaway">
+A terminal is <strong>just one thing that can draw in a pane.</strong>
 </p>
+<aside class="notes">
+<p>All of this works because Draxul owns one GPU frame, on Metal on macOS and Vulkan on Windows. It owns the window, the swapchain or drawable, the frame’s command buffer, the glyph atlas and the present.</p>
+<p>Each pane records its own work into that command buffer, in pane order, clipped to its rectangle. Terminal and Neovim panes upload their cell grid and draw it with the glyph atlas. Plugin panes record whatever they like: SatView and MegaCity run their own HDR scene passes and ImGui, and Rezonality runs its pass list and, on capable GPUs, ray tracing.</p>
+<p>Plugins are native DLLs or dylibs behind a small C ABI. They get a borrowed Vulkan command buffer, or a Metal continuation descriptor, and must leave it as they found it. They never submit, present or keep host objects. That keeps one bad plugin from owning the frame. Plugins can be rebuilt and hot reloaded while Draxul runs; if the new version fails to start, the old one stays.</p>
+<p>Ray tracing is optional. Draxul only turns on the Vulkan ray extensions when the whole set is there, so a plugin that needs it can report “not supported” instead of stopping Draxul from starting.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/sdk/include/draxul/plugin_api.h">plugin ABI header</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">native GPU pane plugins</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/architecture/rendering.md">rendering flow</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2 center">
 <h2>From bytes to pixels</h2>
@@ -225,32 +314,10 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>A two-way conversation</h2>
-<p><img data-src="images/pty.svg" class="deck-visual" alt="Programs send output; the terminal sends keys and replies back."></p>
-<p class="takeaway">
-<strong>The program talks. The terminal answers.</strong>
-</p>
-<aside class="notes">
-<p>A pseudoterminal makes the shell believe it’s talking to a real terminal, rather than a pipe. It carries terminal size, signals and line settings as well as text.</p>
-<p>It’s two-way even when nobody types. A program can ask “where is the cursor?” with CSI 6 n, and the terminal has to write the answer back. This becomes important later: if the window is closed, something still has to answer.</p>
-<p>Sources: <a href="https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/openpty.3.html">Apple openpty/forkpty</a>; <a href="https://learn.microsoft.com/en-us/windows/console/pseudoconsoles">Microsoft pseudoconsoles</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-terminal-process">Draxul process adapters</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
 <h2>Text comes with instructions</h2>
 <p><img data-src="images/parser.svg" class="deck-visual" alt="An incomplete color instruction is completed by the next piece of output, turning Hi red."></p>
 <p class="takeaway">
-<code>ESC [ 31 m</code> means “make it red”. <strong>It can arrive half now, half later.</strong>
+<code>ESC [ 31 m</code> means “make it red”, and it can arrive split across two reads.
 </p>
 <aside class="notes">
 <p>Terminal output is text mixed with instructions. ESC [ 31 m sets the color to red. There are decades of these, and different terminals support different sets. Draxul handles 30 CSI endings and 14 private modes, plus a handful of OSC commands. That’s the set real programs needed, not the whole of xterm.</p>
@@ -270,15 +337,39 @@ The stream edits the grid. <strong>The GPU draws the grid.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>From letters to pixels</h2>
-<p><img data-src="images/glyphs.svg" class="deck-visual" alt="Text is turned into a font shape and drawn in a screen cell."></p>
-<p class="takeaway">
-One letter on screen can be <strong>more than one character.</strong>
-</p>
+<h2>The big port: client and server</h2>
+<img class="port-strip" src="images/ownership.svg" alt="Before: one window owns every shell. Now: a server owns shells, state and agents, and windows attach to it.">
+<div class="port-grid">
+  <div>
+    <h3>What it gave me</h3>
+    <ul class="plain-list">
+      <li>Terminals that <strong>outlive the window</strong></li>
+      <li>Several windows on <strong>one live session</strong></li>
+      <li>The groundwork for <strong>remote access</strong></li>
+    </ul>
+  </div>
+  <div>
+    <h3>What it cost</h3>
+    <ul class="plain-list">
+      <li>Pull the terminal core <strong>away from the renderer</strong></li>
+      <li>A protocol: <strong>snapshots, deltas, reconnects</strong></li>
+      <li>Decide who owns <strong>every process, ID and thread</strong></li>
+    </ul>
+  </div>
+</div>
+<div class="agent-quote">
+  <div class="quote-line"><span class="quote-dot">●</span> Wow, they really did it...</div>
+  <div class="quote-source">An agent, on finding that another agent had already worked through the port</div>
+</div>
+<p class="takeaway">A big port, and the right move.</p>
 <aside class="notes">
-<p>An e followed by a combining accent is two code points and one cell on screen. Wide characters, emoji and font fallback all break the one-byte, one-letter idea in different ways.</p>
-<p>HarfBuzz shapes the text, FreeType draws the glyph, and Draxul packs it into a texture atlas so it’s only drawn once. The GPU then paints two layers: cell backgrounds, then glyphs from the atlas. It’s batched, so there isn’t a draw call per character.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-font/src/text_shaper.cpp">text shaping</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-font/src/glyph_cache.cpp">glyph cache</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-renderer/include/draxul/renderer_state.h">GpuCell layout</a>.</p>
+<p>Draxul started as one process: the window owned the shells, the parser and the renderer. Close the window and everything went with it. That’s fine for an editor, and no good for agents that run for hours.</p>
+<p>So I moved the terminals into a headless server, the same idea as tmux. The server owns the PTYs, the terminal state, scrollback, the layout of spaces, tabs and panes, and the agent state. A window owns fonts, rendering, selection and local focus. Close every window and the shells and agents keep running; open one again and you’re back where you were. A returning window gets a snapshot of the current screen, then the changes, rather than a replay of old output. Several windows can attach to the same session.</p>
+<p>It also has to keep answering the programs. Terminals reply to queries even when nobody is looking, so the server parses everything itself rather than just recording bytes.</p>
+<p>It was a big port. The terminal core had to come out from under the renderer. There’s now a versioned protocol with snapshots, deltas and reconnect rules. And every process, ID, thread and failure needed a clear owner. It went in as a series of vertical slices, behind experimental flags at first.</p>
+<p>The quote is real. Partway through the port, one agent spotted that another agent had already worked through the problem, and left the comment “Wow, they really did it…”</p>
+<p>The connection is local today: Unix sockets on macOS and named pipes on Windows. Machine-to-machine transport is listed as future work, but the protocol is what makes it possible.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md">runtime ownership design</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">server features</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -290,87 +381,6 @@ One letter on screen can be <strong>more than one character.</strong>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section class="slide level2 center">
-<h2>Small things, awkward combinations</h2>
-<p><img data-src="images/complexity.svg" class="deck-visual" alt="Resize, paste, and emoji can affect the screen together."></p>
-<p class="takeaway">
-Printing “hello” is easy. <strong>Then someone resizes the window.</strong>
-</p>
-<aside class="notes">
-<p>The hard bugs come from features that work fine on their own. Resize during a full-screen redraw. Paste while an editor is in bracketed-paste mode. A wide emoji at the right margin. A query arriving in the middle of a burst of output.</p>
-<p>Draxul has tests for a lot of this, and there’s still hardening work in the queue. It’s not finished, and I’m not sure a terminal ever is.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/tests">tests</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 section-slide center">
-<h2>Part 2: keeping work alive</h2>
-<p class="section-sub">
-Agents run for hours. Windows don’t.
-</p>
-</section>
-<section class="slide level2 center">
-<h2>Close the window. The work continues</h2>
-<p><img data-src="images/ownership.svg" class="deck-visual" alt="Draxul moved work out of a single window into a server; windows show the work independently."></p>
-<p class="takeaway">
-A server owns the shells. <strong>Windows just show them.</strong>
-</p>
-<aside class="notes">
-<p>This is the same idea as tmux: a server keeps your shells running, and you attach and detach views. Draxul moved its terminals into a headless server process.</p>
-<p>The server owns the PTYs, the terminal state, scrollback, the layout of spaces, tabs and panes, and the agent state. The window owns fonts, rendering, selection and local focus. One server can feed several windows.</p>
-<p>Remember the two-way conversation? With no window open, the server still has to answer the program’s questions. That’s why the server parses the terminal itself, rather than just recording bytes.</p>
-<p>It’s not magic. If the server or the machine restarts, Draxul restores the layout, but it can’t bring a dead process back.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md">runtime ownership design</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
-<h2>Come back to the screen, not a replay</h2>
-<p><img data-src="images/reconnect.svg" class="deck-visual" alt="A returning window asks to reconnect; the server sends the current screen and then subsequent changes."></p>
-<p class="takeaway">
-Reconnect gets <strong>the current screen, then the changes.</strong>
-</p>
-<aside class="notes">
-<p>Replaying an hour of output to rebuild the screen would be slow, and wrong in places. Instead the server sends a snapshot of the current screen, then deltas.</p>
-<p>Cells, colors, cursor and modes go over the wire. Fonts and GPU resources stay in the window, so each window can render at its own size and DPI.</p>
-<p>If two windows are attached, one has control of input and resize, and the other watches until it takes over. This all runs over authenticated local IPC: Unix sockets on macOS and named pipes on Windows.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/plans/server-client-terminal-runtime.md">runtime ownership design</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 section-slide center">
-<h2>Part 3: agents in the UI</h2>
-<p class="section-sub">
-See them. Go to them. Let them drive.
-</p>
 </section>
 <section class="slide level2 center">
 <h2>Where the spinning coins came from</h2>
@@ -382,7 +392,7 @@ See them. Go to them. Let them drive.
     <li>Each model gets a coin that <strong>spins faster as tokens flow</strong></li>
   </ul>
 </div>
-<p class="takeaway">A glance tells me who's busy.  <strong>So I put the coins in Draxul.</strong></p>
+<p class="takeaway">A glance tells me who's busy, so the coins went into Draxul.</p>
 <p class="small-note">TokenFu · native Metal/Vulkan UI · <a href="https://chrismaughan.com/portfolio/tokenfu/">chrismaughan.com/portfolio/tokenfu</a></p>
 <aside class="notes">
 <p>Before the agent rail, a small detour. TokenFu is a separate little app I wrote to keep an eye on token usage and cost. It reads the agents’ own session logs and shows, per model, tokens per second, input, cached and output tokens, and an estimated cost, with a history view for longer periods.</p>
@@ -404,59 +414,14 @@ See them. Go to them. Let them drive.
 </section>
 <section class="slide level2 center">
 <h2>Every agent in one list</h2>
-<div class="rail-demo" aria-label="Interactive concept of the Draxul agents rail: click an agent to go to its pane">
-  <div class="rail">
-    <div class="rail-heading">SPACES</div>
-    <div class="rail-space active"><span class="pill"><b>1</b><span>Draxul</span></span></div>
-    <div class="rail-space"><span class="pill"><b>2</b><span>Website</span></span></div>
-    <div class="rail-divider"></div>
-    <div class="rail-heading">AGENTS</div>
-    <button class="rail-agent" data-agent="otter" aria-pressed="false"><i class="coin claude fast"></i><span class="pill"><b>1</b><span>happy-otter</span></span></button>
-    <button class="rail-agent attention active" data-agent="heron" aria-pressed="true"><i class="coin codex"></i><span class="pill"><b>2</b><span>quiet-heron</span></span></button>
-    <button class="rail-agent" data-agent="badger" aria-pressed="false"><i class="coin claude slow"></i><span class="pill"><b>3</b><span>brave-badger</span></span></button>
-    <button class="rail-agent exited" data-agent="moth" aria-pressed="false"><i class="coin codex"></i><span class="pill"><b>4</b><span>tidy-moth</span></span> <small>[exited]</small></button>
-  </div>
-  <div class="rail-pane" aria-live="polite" aria-atomic="true">
-    <div class="pane-route" id="agent-route">Draxul › renderer › pane 2</div>
-    <div class="pane-status" id="agent-status">◆ Needs you</div>
-    <pre id="agent-output">I'd like to run the Metal tests.
-
-Allow this command? (y/n)</pre>
-  </div>
-</div>
-<p class="takeaway">Click a name to <strong>jump to its space, tab and pane.</strong>  The coin spins with its token rate.</p>
-<p class="small-note">Clickable mock-up of the real rail · names and output are illustrative</p>
+<img class="rail-shot" src="images/agent_rail.jpg" alt="Draxul's agent rail on macOS: Spaces at the top, Claude and Codex under Agents with activity coins, and three personal agents below, next to a Claude session and a Codex session">
+<p class="takeaway">Click a name to jump to its pane.  The coin spins with the agent's token rate.</p>
 <aside class="notes">
-<p>Click the rows while talking. This is a mock-up of the real Agents rail, not a live connection.</p>
-<p>The rail lists Spaces at the top and agents underneath. Agents get short generated names like happy-otter, so I can tell them apart in conversation. Clicking a name activates the owning Space and tab and focuses the pane. The other agents keep working.</p>
+<p>With four or five agents in different tabs, one would stop to ask a question and I wouldn’t notice for twenty minutes. The rail fixes that. This is the real rail, on my Mac. Claude and Codex are running under Agents, with three personal agents below them.</p>
+<p>The rail lists Spaces at the top and agents underneath. Clicking a name activates the owning Space and tab and focuses the pane. The other agents keep working.</p>
 <p>The coin next to each agent is the TokenFu coin. It’s blue for Codex and coral for Claude, and it spins faster as the agent burns tokens, then slows to a stop within a minute of going quiet. The server gets the rate by tailing the agent’s own session log. Only the rate and total cross the wire, never file paths or text. An agent waiting for me gets a bright accent; an exited one is dimmed and marked.</p>
-<p>The rail picks up agents I launch through Draxul, and also ones I start by hand in an ordinary shell. Launching is in the command palette: pick a Codex or Claude profile, or one from config.toml.</p>
+<p>The rail picks up agents I launch through Draxul, and also ones I start by hand in an ordinary shell. Status comes mostly from reading the bottom of the agent’s screen, helped by process tracking and optional hooks. When the rules aren’t sure, it says unknown, and <code>draxul agent explain</code> shows which rule matched. Launching is in the command palette: pick a Codex or Claude profile, or one from config.toml.</p>
 <p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">Agents rail in features.md</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/include/draxul/agent_model.h">agent model</a>.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
-<h2>Is it working, or waiting for me?</h2>
-<p><img data-src="images/status.svg" class="deck-visual" alt="Process tracking, hooks and screen rules combine into an agent status, with Unknown when unsure."></p>
-<p class="takeaway">
-Mostly it reads the screen. <strong><code>draxul agent explain</code> says why.</strong>
-</p>
-<aside class="notes">
-<p>Three kinds of evidence. Process tracking spots Claude or Codex starting in a pane, even if I typed the command myself. On Unix that’s the PTY’s foreground process group; Windows uses ConPTY job notifications.</p>
-<p>Optional hooks, installed with <code>draxul integration install claude</code> or <code>codex</code>, tell the server which native conversation belongs to which pane. That gives exact token tracking and lets Draxul resume the right conversation later.</p>
-<p>The status itself mostly comes from the bottom of the screen. Small rule sets for Claude and Codex recognize the idle prompt, progress indicators and approval questions. The four useful answers are working, blocked, done and idle. When the rules aren’t sure, it says unknown rather than guessing.</p>
-<p>These rules will drift when the agents change their UI. That’s why <code>agent explain</code> exists: it tells you which rule matched, without exposing the captured text.</p>
-<p>The idea of an agent-aware multiplexer came from looking at Herdr, which does this well. See <a href="https://herdr.dev/docs/agents/">herdr.dev</a>.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_status.cpp">status rules</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-agent/src/agent_discovery.cpp">process discovery</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -500,7 +465,8 @@ draxul agent wait A --until done,blocked</code></pre>
 <p>Each pane gets environment variables telling it which session, space, tab and pane it’s in, so an agent can say <code>--current</code> instead of working out its own ID.</p>
 <p>Two honest caveats. Done means the agent stopped working, not that it succeeded; you still read its pane. And <code>pane read</code> gives you the bottom of the screen, not a structured answer.</p>
 <p>There’s more: spaces, tabs, splits, swapping and moving panes, and declarative layouts with <code>draxul layout apply</code>.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-app-cli/src/cli_help.cpp">CLI help</a>.</p>
+<p>The control API only listens locally, on a Unix-domain socket or a Windows named pipe, with a per-user token on every request. Status updates never carry screen text, and destructive commands need <code>--yes</code>. Still, an agent that can type into a shell can do what you can.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-control/src/control_codec.cpp">control codec</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-app-cli/src/cli_help.cpp">CLI help</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -516,15 +482,34 @@ draxul agent wait A --until done,blocked</code></pre>
 <section class="slide level2 center">
 <h2>Skills teach agents the commands</h2>
 <p><img data-src="images/skills.svg" class="deck-visual" alt="You ask an agent in plain words; a skill tells it which draxul commands to run; the panes appear."></p>
-<p class="takeaway">
-I describe the layout. <strong>The agent works out the commands.</strong>
-</p>
 <aside class="notes">
 <p>A skill is a markdown file of instructions that an agent loads when it needs it. The <code>draxul</code> skill in the repository explains how to find the current session, inspect the layout, apply a layout, run panes, start agents, and wait on them properly. It also covers the traps, such as not blindly retrying a create command that might already have worked.</p>
 <p>So I can say “make me a tab with the build on the left, tests top right, and a reviewer agent bottom right”, and the agent does it with <code>layout apply</code>, <code>pane run</code> and <code>agent start</code>.</p>
 <p>There are a couple of other skills too. <code>draxul-review</code> asks several different AI models to review the repository and combines the results; <code>draxul-preflight</code> checks that their command-line tools are installed and logged in.</p>
 <p>Right now these skills live in the Draxul repository, so they’re picked up when an agent works there. Packaging them for use anywhere is still to do.</p>
 <p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills/draxul/SKILL.md">draxul skill</a>; <a href="https://github.com/cmaughan/Draxul/tree/a295e80509c44da3c7b1d6a79468eb60768c587b/.agents/skills">skills folder</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Agents automatically update and maintain Kanban</h2>
+<img class="rail-shot" src="images/kanban_board.jpg" alt="Draxul's Kanban board: ice-box, pending and done columns of work-item cards from the Draxul repository and its plugin submodules, with priority and type icons">
+<p class="takeaway">Each card is a Markdown file.  <strong>Agents create them, tick them off and move them.</strong></p>
+<aside class="notes">
+<p>This is the Kanban board in a Draxul pane. There’s no database behind it: the columns are folders under <code>kanban/</code> in the repository, and each card is a Markdown file. It combines the main repository with its plugin submodules, so SatView, MegaCity, Rezonality and ScoreView cards show up with their own prefix.</p>
+<p>The repository’s agent instructions do the rest. Agents are told to create a card in <code>pending</code> for any non-trivial new work, tick the checkboxes in the card as they finish each step, and move it to <code>done</code> only when everything is ticked. So the board stays current without me maintaining it.</p>
+<p>The board watches the folders, so when an agent edits or moves a card, the pane updates within a fraction of a second. Enter opens the card in Neovim, and <code>p</code> shows a live preview of it.</p>
+<p>The icons are priority and type: the fire is P1, the lightning P2, the spanner a refactor, the bug a bug. In this screenshot there are 143 cards pending and 51 done across seven boards.</p>
+<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/docs/features.md">Kanban in features.md</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/AGENTS.md">agent instructions</a>; <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/CLAUDE.md">CLAUDE.md work items</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -554,7 +539,7 @@ I describe the layout. <strong>The agent works out the commands.</strong>
     <li>Closing the window doesn't stop it</li>
   </ul>
 </div>
-<p class="takeaway">Conversations that belong to me, <strong>not to a project.</strong></p>
+<p class="takeaway">Conversations that belong to me, not to a project.</p>
 <aside class="notes">
 <p>This is the newest part, and it’s changed shape a few times already. A personal agent is just an ordinary Codex or Claude conversation with a persistent backing folder. Press plus, chat in the terminal, and it’s there next time.</p>
 <p>The folders sit under a shared Dropbox path, set with <code>[agents].personal_root</code> in config.toml, so the same agents show up on my Mac and my PC. Click a pill to return to the conversation; if its terminal has gone, it starts a new one with the same folder. Deleting moves the folder somewhere recoverable rather than destroying it.</p>
@@ -573,20 +558,33 @@ I describe the layout. <strong>The agent works out the commands.</strong>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Keeping it sensible</h2>
-<div class="safety-grid">
-  <div><h3>Local only</h3><p>Unix socket or named pipe.  A per-user token on every request.</p></div>
-  <div><h3>No text by default</h3><p>Status updates never include screen text.  Reading a pane is an explicit, size-limited request.</p></div>
-  <div><h3>Ask before destroying</h3><p>Shutting down the server or deleting a session needs <code>--yes</code>.</p></div>
-  <div><h3>Still powerful</h3><p>An agent that can type into panes can do what you can.  Keep an eye on it.</p></div>
-</div>
+<h2>A personal agent at work</h2>
+<img class="rail-shot" src="images/personal_agent_ai_news.jpg" alt="The AI News personal agent in Draxul, showing a short briefing of three recent AI stories with links, and a message box for follow-up questions">
+<p class="takeaway">One click from the rail, and the briefing is waiting.</p>
 <aside class="notes">
-<p>Letting agents type into other agents’ terminals raises obvious questions.</p>
-<p>The control API only listens locally, on a Unix-domain socket or a Windows named pipe, and every request has to carry a token that only the current user can read. Windows pipes refuse remote clients.</p>
-<p>Agent status events never carry terminal text. Text only comes back from an explicit <code>pane read</code> or <code>wait-output</code>, and those are bounded.</p>
-<p>Destructive commands like shutting down the server need <code>--yes</code>, and the skill tells agents to check with the user first.</p>
-<p>None of this protects you from an agent you’ve told to do something silly. If an agent can type into a shell, it can do what you can. Same as any other agent setup.</p>
-<p>Sources: <a href="https://github.com/cmaughan/Draxul/blob/a295e80509c44da3c7b1d6a79468eb60768c587b/libs/draxul-control/src/control_codec.cpp">control codec</a>.</p>
+<p>This is one of my personal agents, AI News, open in its own tab. It keeps a short briefing of recent stories, with links, in the format I asked for. The rail on the left shows it alongside the Stocks and Calendar agents.</p>
+<p>Because it’s an ordinary Claude or Codex conversation with its own folder, I can ask follow-up questions in the box at the bottom, or tell it to change the format, and it remembers next time. Its folder syncs through Dropbox, so the same agent is there on my PC.</p>
+<p>The stories in the screenshot are whatever it found that day; the point is the shape of it, not the news.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Tables and charts, not just text</h2>
+<img class="rail-shot" src="images/personal_agent_stocks.jpg" alt="The Stocks personal agent in Draxul, showing a price table for SOL, BTC and NVDA and a 60-day SOL/USD Heikin Ashi candle chart, with links to its sources">
+<p class="takeaway">The Stocks agent answers with a table, a chart and its sources.</p>
+<aside class="notes">
+<p>Another personal agent, Stocks. I ask it about a few prices and it comes back with a table, a 60-day candle chart, and links to where the numbers came from.</p>
+<p>The conversation view renders tables, images and links, not only terminal text, so an agent can answer with whatever fits. Underneath it’s the same kind of personal agent as AI News: a Claude or Codex conversation with its own folder, listed in the rail.</p>
+<p>These are just numbers it fetched on the day of the screenshot.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -607,7 +605,7 @@ I describe the layout. <strong>The agent works out the commands.</strong>
     <ul class="plain-list">
       <li>A terminal is a <strong>conversation</strong>, not a log</li>
       <li>Keep the work in a <strong>server</strong>; windows come and go</li>
-      <li>Status is a guess, so <strong>show your working</strong></li>
+      <li>Make agents <strong>visible at a glance</strong></li>
       <li>Give agents the <strong>same commands</strong> as people</li>
     </ul>
   </div>
@@ -622,7 +620,7 @@ I describe the layout. <strong>The agent works out the commands.</strong>
 </div>
 <p class="takeaway"><strong>github.com/cmaughan/Draxul</strong></p>
 <aside class="notes">
-<p>The main lessons. Treat the terminal as a live, two-way conversation, which pushes you towards parsing it in a server rather than recording bytes. Once the server owns the work, windows become cheap. Agent status will always be partly heuristic, so make it explainable and allow unknown. And the simplest way to let agents coordinate is to give them the same command line I use.</p>
+<p>The main lessons. Treat the terminal as a live, two-way conversation, which pushes you towards parsing it in a server rather than recording bytes. Once the server owns the work, windows become cheap. Agents need to be visible at a glance, and their status will always be partly a guess, so make it explainable. And the simplest way to let agents coordinate is to give them the same command line I use.</p>
 <p>Next: Draxul already parses OSC 133 shell prompt marks, but nothing uses them yet. They would let <code>pane read</code> return just the last command’s output instead of the bottom 40 lines. A persistent mailbox between agents is planned. And the skills need packaging so they work outside the repository.</p>
 <p>Thanks.</p>
 <style type="text/css">
@@ -888,30 +886,6 @@ I describe the layout. <strong>The agent works out the commands.</strong>
         checkForUpdate();
         window.setInterval(checkForUpdate, 1500);
       }, 1000);
-    })();
-    </script>
-    <script>
-    (() => {
-      const examples = {
-        otter: { route: 'Draxul › parser › pane 1', status: '● Working', color: '#7ee787', output: 'Splitting the CSI tests into smaller cases…\n\nEdited 3 files.' },
-        heron: { route: 'Draxul › renderer › pane 2', status: '◆ Needs you', color: '#f2b66d', output: "I'd like to run the Metal tests.\n\nAllow this command? (y/n)" },
-        badger: { route: 'Website › deck › pane 1', status: '✓ Done', color: '#58a6ff', output: 'Rendered the slides and checked the links.\n\nAnything else?' },
-        moth: { route: 'Draxul › windows › pane 3', status: 'Exited', color: '#8b949e', output: 'The process has exited.\n\nRestart it from the palette, or with draxul agent restart.' }
-      };
-      document.querySelectorAll('[data-agent]').forEach(button => {
-        button.addEventListener('click', () => {
-          const example = examples[button.dataset.agent];
-          document.querySelectorAll('[data-agent]').forEach(row => {
-            const selected = row === button;
-            row.classList.toggle('active', selected);
-            row.setAttribute('aria-pressed', String(selected));
-          });
-          document.getElementById('agent-route').textContent = example.route;
-          document.getElementById('agent-status').textContent = example.status;
-          document.getElementById('agent-status').style.color = example.color;
-          document.getElementById('agent-output').textContent = example.output;
-        });
-      });
     })();
     </script>
     <script id="quarto-html-after-body" type="application/javascript">

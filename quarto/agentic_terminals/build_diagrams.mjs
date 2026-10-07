@@ -52,60 +52,10 @@ s+=mono(672,328,'$ ls',22,C.text,'start')+mono(672,356,'Hi',22,C.red,'start',700
 save('architecture','A shell writes a stream of bytes through the PTY; Draxul parses it into a persistent grid, which the GPU draws using glyphs from a font atlas',s);
 }
 {
-let s=node(30,145,250,'Your program','Bash / PowerShell',C.green)+node(720,145,250,'Draxul','Your terminal',C.blue);
-s+=arrow(300,175,700,175,C.green)+t(500,140,'What to show',32,C.green,'middle');
-s+=arrow(700,265,300,265,C.blue)+t(500,310,'Keys + replies',32,C.blue,'middle');
-s+=t(500,402,'The connection: PTY on Mac · ConPTY on Windows',27,C.muted,'middle');
-save('pty','The program sends output to Draxul; Draxul sends keys and replies back through PTY or ConPTY',s);
-}
-{
 let s=label(175,82,'First piece','Wait for the rest',C.gold)+rect(40,145,270,145,C.panel,C.gold)+t(175,234,'ESC [ 31',43,C.gold,'middle');
 s+=arrow(330,217,378,217,C.line)+label(540,82,'Next piece','Now it makes sense',C.green)+rect(400,145,280,145,C.panel,C.green)+t(540,234,'m Hi',48,C.green,'middle');
 s+=arrow(700,217,760,217,C.blue)+t(879,242,'Hi',108,C.red,'middle',600)+t(879,337,'Draw in red',29,C.muted,'middle');
 save('parser','An incomplete color instruction waits for the next piece; the completed instruction turns Hi red',s);
-}
-{
-let s=label(160,70,'Read the text','e + an accent',C.green)+t(160,250,'e + ◌́',66,C.green,'middle');
-s+=arrow(320,220,370,220,C.line)+label(505,70,'Find the shape','From a font',C.blue)+t(505,278,'é',155,C.blue,'middle');
-s+=arrow(640,220,695,220,C.line)+label(850,70,'Draw the letter','In its screen cell',C.purple)+grid(773,155,1,1,154,154,'é');
-save('glyphs','Read text, choose its letter shape from a font, and draw it in a terminal cell',s);
-}
-{
-let s=label(155,75,'1. Background','Paint the cells',C.blue)+grid(32,145,6,4,41,44,'',[6,7,8,9,10,11]);
-s+=t(328,255,'+',60,C.muted,'middle')+label(502,75,'2. Letters','Add the shapes',C.purple)+grid(379,145,6,4,41,44,'READY >_');
-s+=t(676,255,'=',60,C.muted,'middle')+label(845,75,'The screen','',C.green)+grid(722,145,6,4,41,44,'READY >_',[6,7,8,9,10,11]);
-save('gpu_grid','The GPU paints cell backgrounds, then adds letter shapes to form the terminal screen',s);
-}
-{
-let s=grid(360,149,8,5,35,35,'$ vim   hello   ',[24,25,26,27,28,29,30,31]);
-s+=label(156,155,'Resize','The text moves',C.gold)+arrow(265,205,341,205,C.gold);
-s+=label(839,155,'Paste','More text arrives',C.blue)+arrow(728,205,659,205,C.blue);
-s+=label(500,47,'Emoji','Symbols take more space',C.purple)+arrow(500,107,500,135,C.purple);
-s+=t(500,402,'Sometimes all at once.',34,C.text,'middle');
-save('complexity','Resizing, pasting, and wide characters can all affect the same screen at once',s);
-}
-{
-let s=t(166,65,'Before',34,C.muted,'middle')+node(25,147,280,'One window','Owns all the work',C.muted);
-s+=arrow(324,218,404,218,C.blue)+t(711,65,'Now',34,C.green,'middle');
-s+=node(435,109,265,'Server','Keeps work running',C.green)+node(722,250,265,'Windows','Show the work',C.blue)+route('M710,179 H855 V235',C.green);
-save('ownership','Draxul moved work out of a single window into a server; windows show the work independently',s);
-}
-{
-let s=t(130,50,'Server',36,C.green,'middle',600)+t(860,50,'Your window',36,C.blue,'middle',600)+line(130,83,130,384,C.green,3)+line(860,83,860,384,C.blue,3);
-for(const [y,msg,back] of [[137,'I’m back.',true],[245,'Here’s the screen.',false],[353,'Here’s what changed.',false]]){
-const color=back?C.blue:C.green;s+=arrow(back?845:145,y,back?145:845,y,color)+rect(285,y-45,430,42,C.bg,C.bg,0)+t(500,y-12,msg,32,color,'middle');}
-save('reconnect','A returning window asks to reconnect; the server sends the current screen and then subsequent changes',s);
-}
-{
-let s='';
-for(const [y,title,sub,color] of [[30,'Process','Is it Claude or Codex?',C.blue],[160,'Hooks','Which conversation?',C.green],[290,'Screen','Prompt, progress, approval',C.purple]]){
-  s+=rect(30,y,330,110,C.panel,color)+t(55,y+48,title,32,color,'start',600)+t(55,y+85,sub,24,C.muted);
-  s+=route(`M362,${y+55} C455,${y+55} 455,220 540,220`,color);
-}
-s+=rect(555,120,410,200,C.panel,C.gold)+t(760,170,'Status',34,C.gold,'middle',600);
-s+=t(595,228,'● Working',27,C.green)+t(775,228,'◆ Needs you',27,C.gold)+t(595,285,'✓ Done',27,C.blue)+t(775,285,'? Unknown',27,C.muted);
-s+=t(760,370,'Not sure?  Say Unknown.',26,C.muted,'middle');
-save('status','Process tracking, hooks and screen rules combine into an agent status, with Unknown when unsure',s);
 }
 {
 let s=rect(25,60,290,200,C.panel,C.green)+t(170,108,'You ask',30,C.green,'middle',600)+lines(170,160,['“Make a tab with the','build, the tests and','a reviewer agent.”'],23,C.text,'middle');
@@ -115,5 +65,34 @@ s+=rect(735,70,120,190,'#1c4432',C.green,0)+rect(855,70,120,95,C.panel,C.blue,0)
 s+=t(795,172,'build',23,C.green,'middle')+t(915,125,'tests',23,C.blue,'middle')+t(915,220,'review',23,C.gold,'middle');
 s+=t(500,330,'draxul layout apply  ·  pane run  ·  agent start',27,C.muted,'middle');
 save('skills','You ask an agent in plain words; a skill tells it which draxul commands to run; the panes appear',s);
+}
+{
+// Compact before/after strip for the client/server slide.
+let s=t(20,40,'Before',24,C.muted,'start',600)+rect(20,58,250,74,C.panel,C.muted)+t(145,92,'One window',24,C.text,'middle',600)+t(145,120,'owns every shell',19,C.muted,'middle');
+s+=arrow(285,95,338,95,C.blue);
+s+=t(352,40,'Now',24,C.green,'start',600)+rect(352,58,262,74,C.panel,C.green)+t(483,92,'Server',24,C.green,'middle',600)+t(483,120,'owns shells, state, agents',19,C.muted,'middle');
+const both=(d)=>`<path d="${d}" fill="none" stroke="${C.blue}" stroke-width="2.5" marker-start="url(#blue)" marker-end="url(#blue)"/>`;
+s+=both('M622,80 H686')+both('M622,112 H686');
+s+=rect(694,50,300,44,C.panel,C.blue)+t(844,79,'Window: draws, sends keys',18,C.text,'middle');
+s+=rect(694,100,300,44,C.panel,C.blue)+t(844,129,'Another window, same session',18,C.text,'middle');
+const defs=Object.entries(C).map(([k,v])=>`<marker id="${k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="${v}"/></marker>`).join('');
+writeFileSync(out+'ownership.svg',`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 155" role="img" aria-label="Before: one window owns every shell. Now: a server owns shells, state and agents, and windows attach to it"><title>Before and after the client/server port</title><defs>${defs}</defs><g font-family="Inter, Helvetica Neue, Arial, sans-serif">${s}</g></svg>`);
+}
+{
+// One GPU frame shared by every kind of pane.
+let s=rect(20,20,960,92,C.panel,C.blue)+t(44,58,'One frame',30,C.blue,'start',600)+t(44,92,'Draxul owns the window, swapchain, command buffer and present',21,C.muted);
+s+=rect(760,40,200,30,C.bg,C.line,6)+t(860,61,'Metal · macOS',18,C.text,'middle');
+s+=rect(760,76,200,30,C.bg,C.line,6)+t(860,97,'Vulkan · Windows',18,C.text,'middle');
+const panes=[['Terminal','grid + glyph atlas',C.blue],['Neovim','grid + glyph atlas',C.purple],['SatView','plugin: 3D, ImGui',C.green],['Rezonality','plugin: passes, ray tracing',C.gold]];
+panes.forEach(([title,sub,color],i)=>{
+  const x=20+i*245;
+  s+=rect(x,170,225,110,C.panel,color)+t(x+112,214,title,26,color,'middle',600)+t(x+112,248,sub,18,C.muted,'middle');
+  s+=arrow(x+112,166,x+112,118,color);
+});
+s+=t(500,308,'Each pane records into the same command buffer, inside its own rectangle',18,C.muted,'middle');
+const rules=[['Borrowed command buffer',C.green],['Never submits or presents',C.gold],['Hot reload, with rollback',C.purple]];
+s+=t(500,350,'Plugin C ABI v2',22,C.text,'middle',600);
+rules.forEach(([r,color],i)=>{const x=40+i*315;s+=rect(x,366,290,50,C.bg,color,8)+t(x+145,398,r,20,color,'middle');});
+save('gpu_surface','Draxul owns one GPU frame on Metal or Vulkan; terminals, Neovim and plugins each record into the shared command buffer inside their pane',s);
 }
 console.log('Wrote simplified diagrams.');
