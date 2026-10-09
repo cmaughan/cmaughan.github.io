@@ -74,6 +74,7 @@
 
 .presentation-card-image {
   display: block;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #0d1117;
 }
@@ -81,7 +82,9 @@
 .presentation-card-image img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 180ms ease, opacity 180ms ease;
 }
 
