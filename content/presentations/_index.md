@@ -4,6 +4,13 @@ title = "Presentations"
 aliases = ["/talks/"]
 
 [[presentations]]
+title = "Building an Agent-Friendly Terminal Harness"
+description = "How I turned Draxul from a GPU terminal into a persistent client/server harness, with native panes, an agent rail, and commands the agents can use themselves."
+image = "img/presentations/agentic_terminals.png"
+alt = "Title slide for Building an Agent-Friendly Terminal Harness"
+url = "https://chrismaughan.com/presentations/agentic_terminals/#/"
+
+[[presentations]]
 title = "Projects Showcase"
 description = "A tour of my recent projects, including Rezonality, MegaCity, SatView, ScoreView, MUI, TokenFu, several iOS experiments, MSynth, and Draxul."
 image = "img/presentations/projects_showcase.jpg"
