@@ -85,6 +85,11 @@ $code-block-border-color: #30363d;
 .reveal .quote-dot { color: #d97757; margin-right: 8px; }
 .reveal .quote-source { font-size: 16px; color: #8b949e; margin-top: 8px; }
 
+.reveal .prompt-quote { margin-top: 60px; padding: 30px 34px; border-left-color: #7ee787; }
+.reveal .prompt-quote .quote-line { font-size: 30px; line-height: 1.5; }
+.reveal .prompt-mark { color: #7ee787; margin-right: 10px; }
+.reveal video.rail-shot { background: #000; }
+
 /* TokenFu */
 .reveal .tokenfu-slide { display: grid; grid-template-columns: 610px 1fr; gap: 26px; align-items: center; margin: 10px 0 4px; }
 .reveal .tokenfu-slide img { width: 100%; margin: 0 0 0 -24px; }

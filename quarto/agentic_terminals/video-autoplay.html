@@ -1,0 +1,15 @@
+<script>
+// Start (or restart) any video on the slide being shown; pause it on the way out.
+(() => {
+  const play = slide => slide && slide.querySelectorAll('video').forEach(v => {
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  });
+  const pause = slide => slide && slide.querySelectorAll('video').forEach(v => v.pause());
+  const hook = () => {
+    Reveal.on('ready', e => play(e.currentSlide));
+    Reveal.on('slidechanged', e => { pause(e.previousSlide); play(e.currentSlide); });
+  };
+  if (window.Reveal && Reveal.on) hook(); else window.addEventListener('load', hook);
+})();
+</script>

@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-52b40e3bbd87f7a376fe5d9252506922.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-e84ed4831121b46ac97ba268fd52b8e6.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -620,6 +620,43 @@ draxul agent wait A --until done,blocked</code></pre>
           display:block!important;
       }</style></aside>
 </section>
+<section class="slide level2 center">
+<h2>The prompt</h2>
+<div class="agent-quote prompt-quote">
+  <div class="quote-line"><span class="prompt-mark">❯</span> Make me a new tab with a 4-pane seaside scene.  Use rezonality and make the panels 3D, be creative, use full screen effects and geometry/shaders.</div>
+  <div class="quote-source">What I typed to an agent in a Draxul pane</div>
+</div>
+<aside class="notes">
+<p>To finish, one prompt. This is what I typed to an agent running in Draxul. From that, the agent made the tab and the four panes and wrote the Rezonality scenes for them: scene graphs, geometry and shaders.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>The result</h2>
+<video class="rail-shot" src="images/seaside.mp4" poster="images/seaside_poster.jpg" data-autoplay="" autoplay="" loop="" muted="" playsinline="" aria-label="A Draxul tab with four Rezonality panes: dawn sea stacks, a midday kelp forest, a sailing boat at sunset, and a lighthouse at night"></video>
+<aside class="notes">
+<p>And this is what came back: a new Seaside tab with four 3D Rezonality scenes. Dawn over sea stacks, a kelp forest at midday, a boat on a broad reach at sunset, and a lighthouse at night.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section class="slide level2 thanks-slide center">
 <h2>Thanks…</h2>
 
@@ -874,6 +911,21 @@ draxul agent wait A --until done,blocked</code></pre>
         checkForUpdate();
         window.setInterval(checkForUpdate, 1500);
       }, 1000);
+    })();
+    </script>
+    <script>
+    // Start (or restart) any video on the slide being shown; pause it on the way out.
+    (() => {
+      const play = slide => slide && slide.querySelectorAll('video').forEach(v => {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      });
+      const pause = slide => slide && slide.querySelectorAll('video').forEach(v => v.pause());
+      const hook = () => {
+        Reveal.on('ready', e => play(e.currentSlide));
+        Reveal.on('slidechanged', e => { pause(e.previousSlide); play(e.currentSlide); });
+      };
+      if (window.Reveal && Reveal.on) hook(); else window.addEventListener('load', hook);
     })();
     </script>
     <script id="quarto-html-after-body" type="application/javascript">

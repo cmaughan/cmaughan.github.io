@@ -12,6 +12,7 @@ format:
     auto-stretch: false
     include-after-body:
       - preview-refresh.html
+      - video-autoplay.html
 ---
 
 ## Inspiration
@@ -404,6 +405,29 @@ Personal agent improvements: they've changed shape a few times already, and ther
 Network/portable use: the client/server split is local today, over Unix-domain sockets and named pipes.  Machine-to-machine transport is listed as future work, and the protocol is what makes it possible.
 
 And all of the things.
+:::
+
+## The prompt
+
+```{=html}
+<div class="agent-quote prompt-quote">
+  <div class="quote-line"><span class="prompt-mark">❯</span> Make me a new tab with a 4-pane seaside scene.  Use rezonality and make the panels 3D, be creative, use full screen effects and geometry/shaders.</div>
+  <div class="quote-source">What I typed to an agent in a Draxul pane</div>
+</div>
+```
+
+::: {.notes}
+To finish, one prompt.  This is what I typed to an agent running in Draxul.  From that, the agent made the tab and the four panes and wrote the Rezonality scenes for them: scene graphs, geometry and shaders.
+:::
+
+## The result
+
+```{=html}
+<video class="rail-shot" src="images/seaside.mp4" poster="images/seaside_poster.jpg" data-autoplay autoplay loop muted playsinline aria-label="A Draxul tab with four Rezonality panes: dawn sea stacks, a midday kelp forest, a sailing boat at sunset, and a lighthouse at night"></video>
+```
+
+::: {.notes}
+And this is what came back: a new Seaside tab with four 3D Rezonality scenes.  Dawn over sea stacks, a kelp forest at midday, a boat on a broad reach at sunset, and a lighthouse at night.
 :::
 
 ## Thanks... {.thanks-slide}
