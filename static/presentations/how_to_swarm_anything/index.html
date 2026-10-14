@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-17d84546d065c3215a14a03de26a1941.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-8a1133b0ecbed9f659b5e8071cc4dbdc.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -130,17 +130,16 @@
   </style>
   <link rel="canonical" href="https://chrismaughan.com/presentations/how_to_swarm_anything/">
   <meta property="og:title" content="How to Swarm Anything">
-  <meta property="og:description" content="How PhotoCraft turns a large software problem into clean, parallel, verifiable work for coding agents.">
+  <meta property="og:description" content="A practical architecture for turning a large software problem into clean, parallel, verifiable work for coding agents.">
   <meta property="og:url" content="https://chrismaughan.com/presentations/how_to_swarm_anything/">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
-<section data-background-image="images/photocraft-demo.jpg" data-background-opacity="0.28" class="quarto-title-block center">
+<section data-background-color="#090d12" class="quarto-title-block center">
   <h1 class="title">How to Swarm Anything</h1>
   <p class="subtitle">A repository that teaches agents to build clean software</p>
 
@@ -158,18 +157,26 @@ Chris Maughan
 <h2>The brief is deliberately too large</h2>
 <div class="stage opening-stage">
   <div>
-    <div class="eyebrow">THE WORKED EXAMPLE</div>
-    <p class="big-claim">Build a native, cross-platform image editor with Photoshop-scale breadth.</p>
-    <div class="metric-line"><b>~540k</b><span>lines of Rust</span></div>
-    <div class="metric-line"><b>25</b><span>library crates</span></div>
-    <div class="metric-line"><b>8,000+</b><span>tests</span></div>
+    <div class="eyebrow">THE STARTING POINT</div>
+    <p class="big-claim">Choose work that one agent cannot hold in its head.</p>
+    <div class="metric-line"><b>Many</b><span>subsystems and platforms</span></div>
+    <div class="metric-line"><b>Many</b><span>workers in parallel</span></div>
+    <div class="metric-line"><b>One</b><span>coherent product</span></div>
   </div>
-  <figure class="hero-frame"><img src="images/photocraft-demo.jpg" alt="PhotoCraft editing Hokusai's Great Wave with adjustment and layer panels visible"><figcaption>PhotoCraft, in the middle of real work</figcaption></figure>
+  <div class="system-map" aria-label="A large product divided into architectural regions">
+    <div class="map-node domain"><b>Domain</b><span>model · rules</span></div>
+    <div class="map-node engine"><b>Engine</b><span>commands · state</span></div>
+    <div class="map-node io"><b>Data</b><span>I/O · protocols</span></div>
+    <div class="map-node ui"><b>Interface</b><span>desktop · web</span></div>
+    <div class="map-node tools"><b>Automation</b><span>CLI · agents</span></div>
+    <div class="map-node proof"><b>Evidence</b><span>tests · scorecards</span></div>
+    <div class="map-center"><b>REPOSITORY</b><span>the shared model of reality</span></div>
+  </div>
 </div>
 <aside class="notes">
-<p>PhotoCraft is a useful test because the brief is unreasonable for one person or one agent. A serious image editor needs a document model, PSD fidelity, color management, painting, text, vectors, GPU rendering, automation, platform packaging, and a large, familiar UI.</p>
-<p>The interesting result is not that agents can type half a million lines. It is that the repository can absorb parallel work without turning those lines into an unmaintainable pile.</p>
-<p>The figures on the slide are counted from the current source and architecture document. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/architecture.md">architecture</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/Cargo.toml">workspace manifest</a>.</p>
+<p>The interesting swarm problems are too large for one worker to understand at once. They cross subsystems, platforms, tools, and definitions of done.</p>
+<p>The trick is not to give every agent more context. The trick is to arrange the repository so that each agent needs less context, while the finished pieces still compose into one product.</p>
+<p>This is an architectural problem before it is a prompting problem.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -200,9 +207,9 @@ Chris Maughan
   </div>
 </div>
 <aside class="notes">
-<p>The first artifact is the most important one. <code>AGENTS.md</code> is not a welcome note. It is the operating system for contributors and agents.</p>
-<p>It tells a worker what to read, how to pick work, what must never happen, which files are shared, how to validate a change, and how to leave the repository for the next worker. That turns tacit maintainer knowledge into versioned project state.</p>
-<p>It is deliberately specific. “Everything is a command,” “never panic on input,” and “new behavior goes in a new module” are stronger than general advice about writing good code. Source: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/AGENTS.md">AGENTS.md</a>.</p>
+<p>The first artifact is the operating manual. <code>AGENTS.md</code> is not a welcome note. It records how work is chosen, where code belongs, which files are shared, how changes are validated, and what a clean handoff looks like.</p>
+<p>That moves maintainer judgment out of private conversations and into versioned project state. Every worker begins with the same rules, and the rules evolve with the software.</p>
+<p>Specific instructions beat vague encouragement. “Dependencies point down” and “new behavior gets a new module” are useful. “Write good code” is not.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -216,28 +223,28 @@ Chris Maughan
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>The architecture is a map of safe ownership</h2>
+<h2>Architecture is a map of safe ownership</h2>
 <div class="architecture-stage">
   <div class="layer-stack">
-    <div class="layer l6"><b>L6</b><span>UI · automation</span></div>
-    <div class="layer l5"><b>L5</b><span>engine · command registry</span></div>
-    <div class="layer l4"><b>L4</b><span>I/O · sandboxed plug-ins</span></div>
-    <div class="layer l3"><b>L3</b><span>CPU/GPU composition · native format</span></div>
-    <div class="layer l2"><b>L2</b><span>paint · text · vector · algorithms</span></div>
-    <div class="layer l1"><b>L1</b><span>document model</span></div>
-    <div class="layer l0"><b>L0</b><span>geometry · color · raster · codecs</span></div>
+    <div class="layer l6"><b>L6</b><span>interfaces · automation</span></div>
+    <div class="layer l5"><b>L5</b><span>application services · command registry</span></div>
+    <div class="layer l4"><b>L4</b><span>adapters · storage · protocols</span></div>
+    <div class="layer l3"><b>L3</b><span>compute · scheduling · composition</span></div>
+    <div class="layer l2"><b>L2</b><span>domain algorithms</span></div>
+    <div class="layer l1"><b>L1</b><span>domain model</span></div>
+    <div class="layer l0"><b>L0</b><span>types · geometry · codecs</span></div>
   </div>
   <div class="side-copy architecture-copy">
-    <div class="eyebrow">ARTIFACT · docs/architecture.md</div>
-    <p class="big-claim compact">A crate may only depend downward.</p>
-    <p><code>cargo xtask layers</code> checks the rule.  The diagram is not a suggestion.</p>
-    <p class="accent-note">An agent can own a layer without learning the whole application.</p>
+    <div class="eyebrow">ARTIFACT · architecture.md</div>
+    <p class="big-claim compact">Dependencies may only point downward.</p>
+    <p><code>check-layers</code> enforces the rule.  The diagram is not a suggestion.</p>
+    <p class="accent-note">A worker can own one region without learning the entire system.</p>
   </div>
 </div>
 <aside class="notes">
-<p>Parallel work needs boundaries that a machine can enforce. PhotoCraft has explicit crate layers. Foundation code sits at the bottom, then the document model, algorithms, composition, I/O, engine, and finally UI and automation.</p>
-<p>The <code>xtask layers</code> command checks that dependencies only point downward. An agent working on a codec cannot quietly pull UI types into the format layer. The architectural map therefore doubles as a map of safe ownership.</p>
-<p>Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/architecture.md">architecture</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/xtask/src/layers.rs">layer checker</a>.</p>
+<p>Parallel work needs boundaries that a machine can enforce. The architecture document describes layers, allowed dependencies, public seams, and ownership zones.</p>
+<p>A layer checker turns the diagram into a rule. A worker changing storage cannot quietly reach into the interface. A worker adding a command cannot bypass the domain model.</p>
+<p>The architecture therefore does two jobs. It keeps the software clean, and it reduces the amount of context needed to make a safe change.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -251,25 +258,25 @@ Chris Maughan
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>The menu is a contract</h2>
+<h2>The product surface is a contract</h2>
 <div class="stage menu-stage">
   <div class="artifact code-paper">
-    <div class="artifact-bar"><span>menu_catalog.rs</span><span>631 items</span></div>
-    <div class="menu-row"><span>File › Export</span><b>Export As…</b><code>file.export.exportAs</code></div>
-    <div class="menu-row"><span>Edit › Transform</span><b>Warp</b><code>edit.transform.warp</code></div>
-    <div class="menu-row"><span>Layer › New</span><b>Layer…</b><code>layer.new.layer</code></div>
-    <div class="menu-row"><span>Filter › Blur</span><b>Gaussian Blur…</b><code>filter.blur.gaussianBlur</code></div>
+    <div class="artifact-bar"><span>surface_catalog.toml</span><span>versioned</span></div>
+    <div class="menu-row"><span>Workspace</span><b>Open</b><code>workspace.open</code></div>
+    <div class="menu-row"><span>Document</span><b>Transform</b><code>document.transform</code></div>
+    <div class="menu-row"><span>Data</span><b>Import</b><code>data.import</code></div>
+    <div class="menu-row"><span>Output</span><b>Export</b><code>output.export</code></div>
   </div>
   <div class="menu-result">
-    <div class="ring"><span>631</span><small>of 631 live</small></div>
-    <p>Matching command ID found: enabled.<br>Missing implementation: visible, but disabled.</p>
-    <p class="accent-note">The surface area becomes a measurable backlog.</p>
+    <div class="ring"><span>KNOWN</span><small>product surface</small></div>
+    <p>Matching command found: enabled.<br>Missing implementation: visible, but incomplete.</p>
+    <p class="accent-note">Ambition becomes a measurable backlog.</p>
   </div>
 </div>
 <aside class="notes">
-<p>The menu catalog is a surprisingly powerful planning artifact. It records the whole target menu structure with a stable command ID for every item.</p>
-<p>When the engine registers that ID, the menu item becomes live automatically. The agent implementing Gaussian Blur does not also need to understand menu construction, shortcuts, automation, and parity reporting. One identifier joins those systems.</p>
-<p>The generated parity document currently reports 631 of 631 menu items live, and a test prevents the floor from falling. That is breadth, not proof of full behavioral depth, which matters later. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/crates/ui-egui/src/menu_catalog.rs">menu catalog</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/crates/ui-egui/src/parity.rs">parity floor</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/parity-checklist.md">generated parity report</a>.</p>
+<p>A swarm needs a finite description of the product it is trying to build. The surface catalog records every user-visible capability with a stable identifier.</p>
+<p>Those identifiers join interface, engine, automation, documentation, and tracking. When an implementation registers the identifier, every client can discover it. When it is missing, the gap remains visible.</p>
+<p>The catalog prevents a common failure mode: lots of locally impressive work with no reliable picture of whether the product is becoming complete.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -286,26 +293,26 @@ Chris Maughan
 <h2>Everything becomes one command</h2>
 <div class="command-stage">
   <div class="artifact command-spec">
-    <div class="artifact-bar"><span>CommandSpec</span><span>the engine seam</span></div>
-    <pre><code>id        "filter.blur.gaussianBlur"
-label     "Gaussian Blur…"
-menu      ["Filter", "Blur"]
-params    { radius: 0..1000 }
-enabled   has_pixel_layer
-run       gaussian_blur</code></pre>
+    <div class="artifact-bar"><span>CommandSpec</span><span>the application seam</span></div>
+    <pre><code>id        "document.transform"
+label     "Transform…"
+params    { mode, amount }
+enabled   has_active_document
+run       transform_document
+undo      restore_snapshot</code></pre>
   </div>
   <div class="clients">
-    <div><b>Desktop</b><span>menu click</span></div>
+    <div><b>Desktop</b><span>menu or gesture</span></div>
     <div><b>CLI</b><span>headless run</span></div>
-    <div><b>MCP</b><span>agent tool</span></div>
-    <div><b>Actions</b><span>record + replay</span></div>
+    <div><b>Agent</b><span>structured tool</span></div>
+    <div><b>Replay</b><span>recorded action</span></div>
   </div>
-  <p class="command-caption">Four clients.  One behavior.  One undo step.</p>
+  <p class="command-caption">Four clients.  One behavior.  One undo boundary.</p>
 </div>
 <aside class="notes">
-<p>“Everything is a command” is the central design choice. A command carries its stable ID, label, menu path, shortcut, parameter description, precondition, implementation, and whether it belongs in the journal.</p>
-<p>The desktop UI, CLI, MCP server, control channel, recorded actions, and plug-ins all converge on the same registry. That removes duplicate behavior and gives agents a structured way to discover what exists.</p>
-<p>A UI gesture ends in a command too. The command owns the edit and therefore the undo boundary. Source: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/crates/engine/src/commands.rs">command registry</a>.</p>
+<p>The command registry is the central seam. A command carries its stable ID, parameters, precondition, implementation, result, and undo behavior.</p>
+<p>Every client converges on that registry. The interface does not contain a second implementation. The automation layer does not invent another API. Recorded actions do not bypass validation.</p>
+<p>This makes functionality composable. It also gives agents a small, typed place to discover and extend behavior.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -322,15 +329,15 @@ run       gaussian_blur</code></pre>
 <h2>The backlog is executable</h2>
 <div class="tracking-stage">
   <div class="tracking-doc road"><span>ROADMAP.md</span><b>What matters now?</b><small>stage · milestones · honest readiness</small></div>
-  <div class="tracking-doc gaps"><span>docs/gaps.md</span><b>What should an agent pick?</b><small>G1–G17 · ranked by user impact</small></div>
+  <div class="tracking-doc gaps"><span>docs/gaps.md</span><b>What should a worker pick?</b><small>ranked by user impact and dependency</small></div>
   <div class="tracking-doc score"><span>scorecard/*.toml</span><b>What counts as done?</b><small>status · issue · evidence · budget</small></div>
   <div class="tracking-doc report"><span>docs/scorecard.md</span><b>Does the report match reality?</b><small>generated · checked in CI</small></div>
 </div>
 <p class="tracking-caption">Strategy becomes a queue.  The queue becomes evidence.</p>
 <aside class="notes">
-<p>The work queue is also kept in the repository. <code>ROADMAP.md</code> says where the product is. <code>docs/gaps.md</code> ranks the known shortfalls. The scorecard sources attach a status, issue, and code evidence to individual capabilities and performance budgets.</p>
-<p>An agent can choose useful work without a meeting. More importantly, it can update the same artifact when the change lands. CI regenerates the scorecard and fails if the report is stale.</p>
-<p>This is how the swarm avoids optimizing for whatever task happens to be easiest to prompt. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/ROADMAP.md">roadmap</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/gaps.md">ranked gaps</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/scorecard.md">scorecard</a>.</p>
+<p>The work queue belongs in the repository too. The roadmap says where the product is going. The gaps document ranks missing behavior. Machine-readable scorecards attach status, evidence, and budgets to individual capabilities.</p>
+<p>A worker can choose useful work without a meeting. More importantly, the same worker updates the evidence when the change lands. CI regenerates reports and rejects stale claims.</p>
+<p>This keeps the swarm aimed at user value rather than whatever task happens to be easiest to prompt.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -349,19 +356,19 @@ run       gaussian_blur</code></pre>
   <div class="agent-field" aria-label="Several independent agents working around a shared repository">
     <span class="agent a1">A</span><span class="agent a2">A</span><span class="agent a3">A</span><span class="agent a4">A</span>
     <span class="agent a5">A</span><span class="agent a6">A</span><span class="agent a7">A</span><span class="agent a8">A</span>
-    <div class="repo-core"><img src="images/photocraft-mark.png" alt="PhotoCraft application mark"><b>REPO</b><small>rules · queue · evidence</small></div>
+    <div class="repo-core"><span class="repo-glyph">{ }</span><b>REPO</b><small>rules · queue · evidence</small></div>
   </div>
   <div class="swarm-rules">
-    <div><b>Separate build directories</b><span>No Cargo lock queue</span></div>
+    <div><b>Isolated workspaces</b><span>No shared build-state queue</span></div>
     <div><b>Explicit file ownership</b><span>Small edits to shared registries</span></div>
-    <div><b>New command modules</b><span>Parallel additions rarely collide</span></div>
+    <div><b>Additive modules</b><span>Parallel changes rarely collide</span></div>
     <div><b>Green handoffs</b><span>The next worker starts from a stable tree</span></div>
   </div>
 </div>
 <aside class="notes">
 <p>There is no magical conductor in the middle. The repository coordinates the swarm.</p>
-<p>Agents use separate build directories, own narrow file sets, add behavior in new command modules, and keep edits to shared registries small. The shared artifacts tell each worker what matters and what “finished” means.</p>
-<p>This is closer to a well-designed distributed system than a group chat. Workers do not need to know everything the others know. They need stable contracts and low-conflict places to write. Source: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/AGENTS.md#6-parallel-agents">parallel-agent rules</a>.</p>
+<p>Workers use isolated workspaces, claim narrow file sets, add behavior in new modules, and keep edits to shared registries small. The shared artifacts tell each worker what matters and what finished means.</p>
+<p>This looks more like a distributed system than a group chat. Workers do not need identical knowledge. They need stable contracts, low-conflict write paths, and a reliable shared state.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -378,18 +385,25 @@ run       gaussian_blur</code></pre>
 <h2>Vertical slices keep merges boring</h2>
 <div class="slice-stage">
   <div class="slice-list">
-    <div><i>01</i><b>Choose one visible gap</b><span>“Add Gaussian Blur”</span></div>
-    <div><i>02</i><b>Add one command module</b><span><code>gaussian_blur_cmds.rs</code></span></div>
-    <div><i>03</i><b>Reuse the lower layer</b><span><code>algo::blur::gaussian</code></span></div>
-    <div><i>04</i><b>Prove failure and success</b><span>bad params · pixels · undo</span></div>
-    <div><i>05</i><b>Raise the evidence</b><span>parity · scorecard · dev log</span></div>
+    <div><i>01</i><b>Choose one visible gap</b><span>One outcome, not a subsystem rewrite</span></div>
+    <div><i>02</i><b>Add one command module</b><span><code>transform_command.rs</code></span></div>
+    <div><i>03</i><b>Reuse the lower layer</b><span><code>domain::transform</code></span></div>
+    <div><i>04</i><b>Prove failure and success</b><span>bad input · output · undo</span></div>
+    <div><i>05</i><b>Raise the evidence</b><span>catalog · scorecard · dev log</span></div>
   </div>
-  <figure class="slice-image"><img src="images/photocraft-filters.jpg" alt="PhotoCraft applying a Twirl filter to The Starry Night"><figcaption>A complete user-visible slice</figcaption></figure>
+  <div class="slice-proof artifact">
+    <div class="artifact-bar"><span>change set</span><span>small enough to review</span></div>
+    <div class="proof-line add"><b>+</b><span>src/commands/transform.rs</span></div>
+    <div class="proof-line add"><b>+</b><span>tests/transform_fixture.rs</span></div>
+    <div class="proof-line edit"><b>±</b><span>src/commands/registry.rs</span></div>
+    <div class="proof-line edit"><b>±</b><span>scorecard/capabilities.toml</span></div>
+    <div class="proof-result"><span>tests</span><b>PASS</b><span>layers</span><b>PASS</b><span>evidence</span><b>UPDATED</b></div>
+  </div>
 </div>
 <aside class="notes">
-<p>The unit of parallel work is a vertical slice, not an abstract layer. A useful slice starts with a visible gap, adds one command, reuses or extends a lower-level algorithm, proves both success and graceful failure, and updates the evidence.</p>
-<p>That shape is easy to review and easy to merge. It avoids the classic swarm failure where one agent builds a framework, another builds a UI, and neither quite matches the other.</p>
-<p>The shared command registry still needs a small edit, but the implementation stays in a new module. Source: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/contributing.md">contributor checklist</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/AGENTS.md">agent rules</a>.</p>
+<p>The unit of parallel work is a vertical slice, not a broad layer. A useful slice starts with one visible gap, adds one command, reuses or extends a lower-level capability, proves success and failure, and updates the evidence.</p>
+<p>That shape is easy to review and easy to merge. It avoids the swarm failure where one worker builds a framework, another builds an interface, and neither quite matches the other.</p>
+<p>Most files in the change are new. Shared registries receive only the smallest possible edit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -403,27 +417,29 @@ run       gaussian_blur</code></pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Photoshop becomes a test oracle</h2>
+<h2>The target becomes a test oracle</h2>
 <div class="oracle-stage">
-  <div class="oracle-image">
-    <img src="images/photocraft-adjustments.jpg" alt="PhotoCraft displaying Monet's Impression, Sunrise with Levels and Histogram panels">
-    <div class="pixel-chip">difference ≤ 2 / 255</div>
+  <div class="oracle-panel">
+    <div class="oracle-sample reference"><span>REFERENCE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="oracle-arrow">→</div>
+    <div class="oracle-sample candidate"><span>CANDIDATE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="oracle-diff"><span>DIFF</span><b>within budget</b><small>regression floor raised</small></div>
   </div>
   <div class="oracle-copy">
     <div class="eyebrow">ARTIFACT · TEST CORPUS</div>
-    <p class="big-claim compact">The target application supplies the expected pixels.</p>
+    <p class="big-claim compact">Turn the thing you are matching into durable evidence.</p>
     <ol>
-      <li>Build a document in Photoshop</li>
-      <li>Keep its flattened compatibility image</li>
-      <li>Render it with PhotoCraft's CPU compositor</li>
-      <li>Compare, then raise a floor that cannot fall</li>
+      <li>Capture a known-good result</li>
+      <li>Run the same fixture locally</li>
+      <li>Compare pixels, data, timings, or events</li>
+      <li>Raise a floor that cannot fall</li>
     </ol>
   </div>
 </div>
 <aside class="notes">
-<p>Natural-language acceptance criteria are not enough for compositing. PhotoCraft uses Photoshop-authored PSD files as test oracles.</p>
-<p>The files contain Photoshop’s flattened compatibility image. PhotoCraft renders the document through its CPU compositor and compares the pixels, normally allowing at most two levels of difference out of 255. The GPU compositor is then checked against the CPU reference.</p>
-<p>Pass counts have floors. When a fix raises one, later changes are not allowed to lower it. The target product has been turned into durable evidence instead of a vague visual reference. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/AGENTS.md">corpus rules</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/crates/io/tests/corpus.rs">I/O corpus tests</a>.</p>
+<p>Natural-language acceptance criteria are rarely precise enough. A target system, file corpus, protocol trace, benchmark, or curated example can become a test oracle.</p>
+<p>The new implementation runs the same fixture and compares its observable result. The comparison might use pixels, serialized data, events, timing budgets, or semantic output.</p>
+<p>Pass counts and tolerances have floors. When a change improves the result, later work is not allowed to lower it. A vague reference becomes durable evidence.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -439,23 +455,23 @@ run       gaussian_blur</code></pre>
 <section class="slide level2 center">
 <h2>Agents can operate the product</h2>
 <div class="operate-stage">
-  <div class="operate-code"><div class="artifact-bar"><span>MCP / control protocol</span><span>same command IDs</span></div><pre><code>command_list  { filter: "blur" }
+  <div class="operate-code"><div class="artifact-bar"><span>agent control protocol</span><span>same command IDs</span></div><pre><code>command_list  { filter }
 command_run   { id, params }
-doc_inspect   { layers, history }
-render_preview{ max_side: 1024 }
-ui_screenshot { live window }</code></pre></div>
+state_inspect { selection, history }
+render_preview{ max_size }
+ui_screenshot { live_window }</code></pre></div>
   <div class="observe-loop">
     <div><b>Inspect</b><span>state, commands, preconditions</span></div>
-    <div><b>Act</b><span>the same engine path as the UI</span></div>
-    <div><b>See</b><span>bounded render or full screenshot</span></div>
+    <div><b>Act</b><span>the same application path as the UI</span></div>
+    <div><b>See</b><span>bounded output or full screenshot</span></div>
     <div><b>Correct</b><span>use the returned error, not a guess</span></div>
   </div>
 </div>
-<p class="operate-caption">A bug report can be a runnable script.</p>
+<p class="operate-caption">A bug report can become a runnable script.</p>
 <aside class="notes">
-<p>Agents are not restricted to editing source and hoping. They can operate the product headlessly through the CLI and MCP, or drive the live desktop app through the control channel.</p>
-<p>The tools expose the command catalog, current preconditions, document state, rendered previews, UI state, pointer input, and screenshots. The file authority is capability-scoped rather than ambient.</p>
-<p>That creates a closed loop: inspect, act, see, correct. It also makes a bug report executable. The reproduction can be a short sequence of commands rather than a paragraph describing where somebody clicked. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/mcp.md">MCP conventions</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/control-protocol.md">control protocol</a>.</p>
+<p>Agents should be able to operate the software, not merely edit source and hope. A small control protocol exposes the command catalog, preconditions, state, bounded previews, and interface screenshots.</p>
+<p>The tools use the same command path as the human interface. They do not create a privileged second application hidden behind the first.</p>
+<p>This closes the loop: inspect, act, see, correct. It also makes bug reports executable. A reproduction can be a short command sequence rather than a paragraph about where somebody clicked.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -469,21 +485,21 @@ ui_screenshot { live window }</code></pre></div>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Why Rust fits this system</h2>
+<h2>Why Rust fits the framework</h2>
 <div class="rust-stage">
   <div class="rust-word">Rust</div>
   <div class="rust-reasons">
-    <div><b>One language</b><span>engine, native UI, CLI, plug-in host, web build</span></div>
-    <div><b>Explicit boundaries</b><span>types make command and crate seams harder to blur</span></div>
-    <div><b>Native performance</b><span>rayon on the CPU, wgpu on the GPU</span></div>
-    <div><b>Portable core</b><span>macOS · Windows · Linux · FreeBSD · WebAssembly</span></div>
-    <div><b>Constrained danger</b><span><code>unsafe_code = "forbid"</code> across the workspace</span></div>
+    <div><b>One language</b><span>domain, native UI, CLI, automation, web build</span></div>
+    <div><b>Explicit seams</b><span>types make architectural boundaries harder to blur</span></div>
+    <div><b>Local reasoning</b><span>ownership exposes sharing and mutation</span></div>
+    <div><b>Native speed</b><span>parallel CPU work and portable GPU compute</span></div>
+    <div><b>Portable core</b><span>desktop platforms and WebAssembly</span></div>
   </div>
 </div>
 <aside class="notes">
-<p>Rust is not just a speed choice here. It lets the project keep the engine, native interface, command-line tools, automation server, and browser build in one language and one type system.</p>
-<p>The ownership model and explicit error types support the project’s “never crash on input” rule. They do not make correctness automatic, but they make hidden sharing and unchecked failure harder to introduce across agent boundaries.</p>
-<p>Performance work remains direct: Rayon handles CPU-parallel tiles and wgpu handles the GPU. The same core compiles to WebAssembly. The workspace forbids unsafe code, with one isolated tablet-input exception documented in the agent guide. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/Cargo.toml">workspace manifest</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/architecture.md">architecture</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/development.md">development guide</a>.</p>
+<p>The framework does not require Rust, but Rust reinforces its ideas unusually well.</p>
+<p>Types make command and layer seams explicit. Ownership makes sharing and mutation visible. Errors are values rather than hidden control flow. The domain, native interface, command-line tools, automation server, and browser build can live in one language and one workspace.</p>
+<p>Rust does not make correctness automatic. It does make many accidental forms of architectural drift harder to introduce across agent boundaries.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -499,18 +515,18 @@ ui_screenshot { live window }</code></pre></div>
 <section class="slide level2 center">
 <h2>Quality is enforced at the borders</h2>
 <div class="gates-stage">
-  <div class="gate"><span>FORMAT</span><b>rustfmt</b><small>one mechanical style</small></div>
-  <div class="gate"><span>SAFETY</span><b>clippy</b><small>panics and shortcuts denied</small></div>
-  <div class="gate"><span>BEHAVIOR</span><b>8,000+ tests</b><small>unit · corpus · regression</small></div>
+  <div class="gate"><span>FORMAT</span><b>one style</b><small>mechanical output, no debate</small></div>
+  <div class="gate"><span>SAFETY</span><b>lint</b><small>panics and shortcuts denied</small></div>
+  <div class="gate"><span>BEHAVIOR</span><b>tests</b><small>unit · corpus · regression</small></div>
   <div class="gate"><span>STRUCTURE</span><b>layers</b><small>dependencies point down</small></div>
-  <div class="gate"><span>PORTABILITY</span><b>wasm</b><small>web-safe core stays web-safe</small></div>
+  <div class="gate"><span>PORTABILITY</span><b>targets</b><small>platform coupling stays visible</small></div>
   <div class="gate"><span>TRUTH</span><b>scorecard</b><small>generated evidence stays current</small></div>
 </div>
-<p class="gate-caption">Agents are allowed to be fast because the borders are strict.</p>
+<p class="gate-caption">Workers are allowed to be fast because the borders are strict.</p>
 <aside class="notes">
-<p>The system expects agents to make mistakes. Quality comes from gates at the borders, not from assuming every worker has perfect judgment.</p>
-<p>Formatting removes stylistic debate. Clippy denies dangerous shortcuts. Tests cover local behavior and real files. The layer checker preserves architecture. The Wasm build catches accidental platform coupling. The generated scorecard catches stale claims.</p>
-<p>The full gate is expensive, so agents run narrow checks while iterating and the complete relevant set before finishing. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/.github/workflows/ci.yml">CI workflow</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/development.md">development guide</a>.</p>
+<p>The system expects workers to make mistakes. Quality comes from gates at the borders, not from assuming every agent has perfect judgment.</p>
+<p>Formatting removes stylistic debate. Linting denies dangerous shortcuts. Tests cover local behavior and real fixtures. The layer checker preserves architecture. Cross-target builds expose platform coupling. Generated scorecards catch stale claims.</p>
+<p>The complete gate can be expensive. Workers run narrow checks while iterating, then the full relevant set before handing off.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -526,18 +542,26 @@ ui_screenshot { live window }</code></pre></div>
 <section class="slide level2 center">
 <h2>Fast does not mean finished</h2>
 <div class="honesty-stage">
-  <figure><img src="images/photocraft-vector.jpg" alt="PhotoCraft editing vector shapes over Monet's Water Lilies"><figcaption>Wide, convincing feature coverage</figcaption></figure>
+  <div class="maturity-board artifact">
+    <div class="artifact-bar"><span>capability scorecard</span><span>evidence, not optimism</span></div>
+    <div class="maturity-row"><span>Surface</span><div><i style="width: 94%"></i></div><b>known</b></div>
+    <div class="maturity-row"><span>Behavior</span><div><i style="width: 68%"></i></div><b>tested</b></div>
+    <div class="maturity-row"><span>Edge cases</span><div><i style="width: 43%"></i></div><b>partial</b></div>
+    <div class="maturity-row"><span>Performance</span><div><i style="width: 31%"></i></div><b>measured</b></div>
+    <div class="maturity-row"><span>Readiness</span><div><i style="width: 22%"></i></div><b>honest</b></div>
+  </div>
   <div class="honesty-copy">
-    <div class="paired-stat"><b>100%</b><span>menu breadth<br><small>631 / 631 live</small></span></div>
-    <div class="paired-stat warning"><b>~45%</b><span>ready for real work<br><small>project estimate</small></span></div>
-    <div class="paired-stat warning"><b>3 / 56</b><span>performance scenarios within budget<br><small>measured scorecard</small></span></div>
-    <p>The system records the gap between a feature existing and a feature being dependable.</p>
+    <div class="eyebrow">BREADTH ≠ DEPTH</div>
+    <p class="big-claim compact">A capability can exist without being mature.</p>
+    <div class="paired-stat"><b>Surface</b><span>Can it be reached?<br><small>catalog + command</small></span></div>
+    <div class="paired-stat warning"><b>Depth</b><span>Can it survive reality?<br><small>fixtures + budgets + edge cases</small></span></div>
+    <p>Do not let a busy swarm manufacture confidence faster than software.</p>
   </div>
 </div>
 <aside class="notes">
-<p>This slide is important because swarm speed can create a convincing surface before the depth is ready.</p>
-<p>The menu is completely live, yet the project’s own roadmap estimates readiness for real work at roughly 45 percent. The scorecard records only 3 of 56 performance scenarios within budget in its current baseline, with many missing, unmeasured, or over budget.</p>
-<p>The honest numbers are a feature of the system. They stop broad coverage from being mistaken for a finished product and give the next wave of agents something concrete to improve. Sources: <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/ROADMAP.md">roadmap</a>, <a href="https://github.com/storytold/photocraft/blob/c699e3cda69f4852b43c0b191ab0091aaeff9d6a/docs/scorecard.md">scorecard</a>.</p>
+<p>Swarming can produce astonishing breadth quickly. That makes honest maturity tracking essential.</p>
+<p>The scorecard separates existence from depth. A command may be wired and reachable while its edge cases, performance budgets, platform coverage, or recovery paths remain incomplete.</p>
+<p>That is useful information, not an embarrassment. It prevents feature counts from being mistaken for readiness and gives the next wave of workers something concrete to improve.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -554,16 +578,16 @@ ui_screenshot { live window }</code></pre></div>
 <h2>A reusable swarm recipe</h2>
 <div class="recipe">
   <div><i>01</i><b>Write the operating manual</b><span>Put judgment, constraints, and finish criteria in the repository.</span></div>
-  <div><i>02</i><b>Turn the product into stable contracts</b><span>Commands, schemas, crate seams, and file ownership.</span></div>
+  <div><i>02</i><b>Turn the product into stable contracts</b><span>Commands, schemas, layer seams, and file ownership.</span></div>
   <div><i>03</i><b>Turn ambition into a ranked queue</b><span>Roadmap, gaps, budgets, and evidence.</span></div>
   <div><i>04</i><b>Give workers a closed loop</b><span>Inspect, act, observe, test, and recover without a human relay.</span></div>
   <div><i>05</i><b>Make truth harder to fake</b><span>Generated reports, regression floors, oracles, and honest gaps.</span></div>
 </div>
 <p class="final-thought">The swarm scales when the work is legible.</p>
 <aside class="notes">
-<p>PhotoCraft’s recipe transfers well beyond image editing.</p>
-<p>Start with an operating manual that contains real project judgment. Define stable contracts that create low-conflict ownership. Convert the product vision into a ranked queue with measurable evidence. Give workers the tools to operate and observe the system themselves. Finally, make the truth difficult to fake with generated reports, floors, and external oracles.</p>
-<p>The reusable idea is simple: the swarm scales when the work is legible. Agents do not need a larger prompt. They need a repository that can explain itself, constrain change, and verify the result.</p>
+<p>This approach transfers to any sufficiently large software project.</p>
+<p>Start with the operating manual. Make architecture and product surface explicit. Give each behavior a stable command seam. Keep the ranked queue and evidence beside the code. Let workers operate the product and observe the result. Enforce quality at the borders.</p>
+<p>The aim is not to make agents imitate a large team. It is to build a repository that makes parallel work safe, useful, and easy to verify.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -3,8 +3,6 @@ project:
   output-dir: _output
   render:
     - index.qmd
-  resources:
-    - images/**
 
 format:
   revealjs:
