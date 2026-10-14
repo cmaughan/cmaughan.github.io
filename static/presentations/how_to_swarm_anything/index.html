@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-6d04970600cde2303903b29b0473d141.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-c92ec1c5f0f046049761f8305033df0e.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -477,20 +477,31 @@ ui_screenshot { live_window }</code></pre></div>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>Quality is enforced at the borders</h2>
-<div class="gates-stage">
-  <div class="gate"><span>FORMAT</span><b>one style</b><small>mechanical output, no debate</small></div>
-  <div class="gate"><span>SAFETY</span><b>lint</b><small>panics and shortcuts denied</small></div>
-  <div class="gate"><span>BEHAVIOR</span><b>tests</b><small>unit · corpus · regression</small></div>
-  <div class="gate"><span>STRUCTURE</span><b>layers</b><small>dependencies point down</small></div>
-  <div class="gate"><span>PORTABILITY</span><b>targets</b><small>platform coupling stays visible</small></div>
-  <div class="gate"><span>TRUTH</span><b>scorecard</b><small>generated evidence stays current</small></div>
+<h2>Tests and measures, not trust</h2>
+<div class="qm-stage">
+  <div class="qm-panel">
+    <div class="eyebrow">TESTS · DOES IT BEHAVE?</div>
+    <div class="qm-row"><b>Unit + property</b><span>every crate; generated inputs for the tricky data structures</span></div>
+    <div class="qm-row"><b>Round trips</b><span>read, write, compare byte for byte</span></div>
+    <div class="qm-row"><b>Hostile input</b><span>truncate at every offset; fuzz the parsers in CI</span></div>
+    <div class="qm-row"><b>Real files</b><span>pinned, checksum-verified corpora with pass floors</span></div>
+    <div class="qm-row"><b>Render oracle</b><span>compare output with the file's own embedded preview</span></div>
+    <div class="qm-row"><b>Agent tasks</b><span>realistic edits through the control API, checked by screenshot</span></div>
+  </div>
+  <div class="qm-panel measures">
+    <div class="eyebrow">MEASURES · HOW GOOD IS IT?</div>
+    <div class="qm-row"><b>Perf budgets</b><span>named scenarios with targets; regressions fail</span></div>
+    <div class="qm-row"><b>Size gate</b><span>the web build must stay under its limit</span></div>
+    <div class="qm-row"><b>Coverage floor</b><span>the count of live commands can't go down</span></div>
+    <div class="qm-row"><b>Scorecard</b><span>generated from evidence; CI fails if it's stale</span></div>
+  </div>
 </div>
-<p class="gate-caption">Workers are allowed to be fast because the borders are strict.</p>
+<p class="qm-gates">Every change also passes <b>format</b> · <b>lint</b> · <b>layers</b> · <b>cross-target builds</b></p>
 <aside class="notes">
-<p>The system expects workers to make mistakes. Quality comes from gates at the borders, not from assuming every agent has perfect judgment.</p>
-<p>Formatting removes stylistic debate. Linting denies dangerous shortcuts. Tests cover local behavior and real fixtures. The layer checker preserves architecture. Cross-target builds expose platform coupling. Generated scorecards catch stale claims.</p>
-<p>The complete gate can be expensive. Workers run narrow checks while iterating, then the full relevant set before handing off.</p>
+<p>The swarm expects workers to make mistakes, so quality has to be checked by machines, not assumed. There are two kinds of check.</p>
+<p>Tests answer “does it behave?”. Every crate has unit tests, with property tests generating inputs for the trickiest data structures. File formats get byte-exact round trips, and hostile input: files truncated at every offset, plus fuzz targets for the parsers that run in CI. Real-world files live in pinned, checksum-verified corpora, and the pass counts have floors that can’t drop. A render oracle compares the compositor’s output with the image the file itself embeds. And a set of realistic agent tasks drives the app through the control API and checks the result by screenshot.</p>
+<p>Measures answer “how good is it?”. Performance scenarios each have a budget; anything not yet met is tracked, and regressions fail. The web build has a size gate. The count of live menu commands has a floor. The scorecard is generated from all of this, and CI fails if the committed copy is stale.</p>
+<p>Underneath, every change passes formatting, lint with warnings as errors, the layer checker, and the cross-target builds. Workers run the narrow checks while they iterate, and the full relevant set before they hand off.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -526,32 +537,6 @@ ui_screenshot { live_window }</code></pre></div>
 <p>Swarming can produce astonishing breadth quickly. That makes honest maturity tracking essential.</p>
 <p>The scorecard separates existence from depth. A command may be wired and reachable while its edge cases, performance budgets, platform coverage, or recovery paths remain incomplete.</p>
 <p>That is useful information, not an embarrassment. It prevents feature counts from being mistaken for readiness and gives the next wave of workers something concrete to improve.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 final-slide center">
-<h2>A reusable swarm recipe</h2>
-<div class="recipe">
-  <div><i>01</i><b>Write the operating manual</b><span>Put judgment, constraints, and finish criteria in the repository.</span></div>
-  <div><i>02</i><b>Turn the product into stable contracts</b><span>Commands, schemas, layer seams, and file ownership.</span></div>
-  <div><i>03</i><b>Turn ambition into a ranked queue</b><span>Roadmap, gaps, budgets, and evidence.</span></div>
-  <div><i>04</i><b>Give workers a closed loop</b><span>Inspect, act, observe, test, and recover without a human relay.</span></div>
-  <div><i>05</i><b>Make truth harder to fake</b><span>Generated reports, regression floors, oracles, and honest gaps.</span></div>
-</div>
-<p class="final-thought">The swarm scales when the work is legible.</p>
-<aside class="notes">
-<p>This approach transfers to any sufficiently large software project.</p>
-<p>Start with the operating manual. Make architecture and product surface explicit. Give each behavior a stable command seam. Keep the ranked queue and evidence beside the code. Let workers operate the product and observe the result. Enforce quality at the borders.</p>
-<p>The aim is not to make agents imitate a large team. It is to build a repository that makes parallel work safe, useful, and easy to verify.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

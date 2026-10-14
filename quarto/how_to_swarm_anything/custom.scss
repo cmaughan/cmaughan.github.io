@@ -1268,3 +1268,55 @@ $code-block-border-color: #263444;
 @media (max-width: 900px) {
   .reveal { font-size: 27px; }
 }
+
+.qm-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 56fr) minmax(0, 44fr);
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.qm-panel {
+  padding: 18px 20px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #121c27, #0e141c);
+}
+
+.qm-panel.measures .eyebrow {
+  color: var(--green);
+}
+
+.qm-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(148, 167, 185, .16);
+  font-size: 16px;
+  line-height: 1.32;
+}
+
+.qm-row b {
+  color: #f2f7fb;
+  font-weight: 650;
+}
+
+.qm-row span {
+  color: var(--muted);
+}
+
+.qm-panel.measures .qm-row {
+  grid-template-columns: 130px 1fr;
+}
+
+.qm-gates {
+  margin: 18px 0 0 !important;
+  color: var(--muted);
+  font-size: .62em;
+}
+
+.qm-gates b {
+  color: #f2f7fb;
+  font-weight: 600;
+}
