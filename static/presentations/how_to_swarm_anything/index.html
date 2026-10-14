@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-8a1133b0ecbed9f659b5e8071cc4dbdc.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-6d04970600cde2303903b29b0473d141.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -417,42 +417,6 @@ undo      restore_snapshot</code></pre>
       }</style></aside>
 </section>
 <section class="slide level2 center">
-<h2>The target becomes a test oracle</h2>
-<div class="oracle-stage">
-  <div class="oracle-panel">
-    <div class="oracle-sample reference"><span>REFERENCE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="oracle-arrow">→</div>
-    <div class="oracle-sample candidate"><span>CANDIDATE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="oracle-diff"><span>DIFF</span><b>within budget</b><small>regression floor raised</small></div>
-  </div>
-  <div class="oracle-copy">
-    <div class="eyebrow">ARTIFACT · TEST CORPUS</div>
-    <p class="big-claim compact">Turn the thing you are matching into durable evidence.</p>
-    <ol>
-      <li>Capture a known-good result</li>
-      <li>Run the same fixture locally</li>
-      <li>Compare pixels, data, timings, or events</li>
-      <li>Raise a floor that cannot fall</li>
-    </ol>
-  </div>
-</div>
-<aside class="notes">
-<p>Natural-language acceptance criteria are rarely precise enough. A target system, file corpus, protocol trace, benchmark, or curated example can become a test oracle.</p>
-<p>The new implementation runs the same fixture and compares its observable result. The comparison might use pixels, serialized data, events, timing budgets, or semantic output.</p>
-<p>Pass counts and tolerances have floors. When a change improves the result, later work is not allowed to lower it. A vague reference becomes durable evidence.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2 center">
 <h2>Agents can operate the product</h2>
 <div class="operate-stage">
   <div class="operate-code"><div class="artifact-bar"><span>agent control protocol</span><span>same command IDs</span></div><pre><code>command_list  { filter }
@@ -599,6 +563,13 @@ ui_screenshot { live_window }</code></pre></div>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level2 thanks-slide center">
+<h2>Thanks…</h2>
+<div class="thanks-wrap">
+  <p>Questions?</p>
+  <span>chrismaughan.com</span>
+</div>
 
 </section>
     </div>

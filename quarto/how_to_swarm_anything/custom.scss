@@ -1240,6 +1240,31 @@ $code-block-border-color: #263444;
   text-align: center;
 }
 
+.thanks-slide {
+  text-align: center !important;
+}
+
+.thanks-slide h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: #fff;
+  font-size: 2.5em;
+  letter-spacing: -.045em;
+}
+
+.thanks-wrap p {
+  margin: 28px 0 8px !important;
+  color: var(--green);
+  font-size: .92em;
+  font-weight: 650;
+}
+
+.thanks-wrap span {
+  color: var(--muted);
+  font-size: .52em;
+}
+
 @media (max-width: 900px) {
   .reveal { font-size: 27px; }
 }

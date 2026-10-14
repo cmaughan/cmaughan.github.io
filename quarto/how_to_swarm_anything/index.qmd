@@ -236,37 +236,6 @@ That shape is easy to review and easy to merge.  It avoids the swarm failure whe
 Most files in the change are new.  Shared registries receive only the smallest possible edit.
 :::
 
-## The target becomes a test oracle
-
-```{=html}
-<div class="oracle-stage">
-  <div class="oracle-panel">
-    <div class="oracle-sample reference"><span>REFERENCE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="oracle-arrow">→</div>
-    <div class="oracle-sample candidate"><span>CANDIDATE</span><div class="signal"><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="oracle-diff"><span>DIFF</span><b>within budget</b><small>regression floor raised</small></div>
-  </div>
-  <div class="oracle-copy">
-    <div class="eyebrow">ARTIFACT · TEST CORPUS</div>
-    <p class="big-claim compact">Turn the thing you are matching into durable evidence.</p>
-    <ol>
-      <li>Capture a known-good result</li>
-      <li>Run the same fixture locally</li>
-      <li>Compare pixels, data, timings, or events</li>
-      <li>Raise a floor that cannot fall</li>
-    </ol>
-  </div>
-</div>
-```
-
-::: {.notes}
-Natural-language acceptance criteria are rarely precise enough.  A target system, file corpus, protocol trace, benchmark, or curated example can become a test oracle.
-
-The new implementation runs the same fixture and compares its observable result.  The comparison might use pixels, serialized data, events, timing budgets, or semantic output.
-
-Pass counts and tolerances have floors.  When a change improves the result, later work is not allowed to lower it.  A vague reference becomes durable evidence.
-:::
-
 ## Agents can operate the product
 
 ```{=html}
@@ -389,3 +358,12 @@ Start with the operating manual.  Make architecture and product surface explicit
 
 The aim is not to make agents imitate a large team.  It is to build a repository that makes parallel work safe, useful, and easy to verify.
 :::
+
+## Thanks… {.thanks-slide}
+
+```{=html}
+<div class="thanks-wrap">
+  <p>Questions?</p>
+  <span>chrismaughan.com</span>
+</div>
+```
