@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-c92ec1c5f0f046049761f8305033df0e.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-39a97eedfdcd6a39a422282055559917.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -537,6 +537,502 @@ ui_screenshot { live_window }</code></pre></div>
 <p>Swarming can produce astonishing breadth quickly. That makes honest maturity tracking essential.</p>
 <p>The scorecard separates existence from depth. A command may be wired and reachable while its edge cases, performance budgets, platform coverage, or recovery paths remain incomplete.</p>
 <p>That is useful information, not an embarrassment. It prevents feature counts from being mistaken for readiness and gives the next wave of workers something concrete to improve.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Field notes from two swarms</h2>
+<div class="fn-divider">
+  <div class="eyebrow">APPENDIX · FOR REVIEW</div>
+  <p class="big-claim">What running real swarms actually taught me.</p>
+  <p class="fn-divider-sub">Two swarms, about a week: one built a product, the other built a tool to watch it.</p>
+</div>
+</section>
+<section class="slide level2 center">
+<h2>Two swarms, one week</h2>
+<div class="fn-two">
+  <div class="fn-swarm a">
+    <div class="eyebrow">SWARM A · STARTED 13 OCT</div>
+    <p class="fn-what">Rewrite a large desktop application, with the original as the golden reference.</p>
+    <div class="fn-stats">
+      <div><b>~940</b><span>commits</span></div>
+      <div><b>217</b><span>merges</span></div>
+      <div><b>43</b><span>owner directions</span></div>
+    </div>
+  </div>
+  <div class="fn-link">
+    <div class="fn-arrow right"><span>tracking data</span></div>
+    <div class="fn-arrow left"><span>process fixes</span></div>
+  </div>
+  <div class="fn-swarm b">
+    <div class="eyebrow">SWARM B · STARTED 17 OCT</div>
+    <p class="fn-what">Build a timeline inspector that shows what Swarm A is doing.</p>
+    <div class="fn-stats">
+      <div><b>~420</b><span>commits</span></div>
+      <div><b>3</b><span>days</span></div>
+      <div><b>38</b><span>owner directions</span></div>
+    </div>
+  </div>
+</div>
+<p class="fn-caption">One swarm built the product.  The other built the instrument to watch it.</p>
+<aside class="notes">
+<p>Two swarms, running side by side for about a week.</p>
+<p>Swarm A is a rewrite of a large desktop application, using the original product as the golden reference. Swarm B is a timeline inspector: it reads Swarm A’s tracking data and shows which agent worked on what, and when.</p>
+<p>They ended up improving each other. Swarm A’s tracking data feeds Swarm B, and fixes to the process found while building Swarm B flowed back into Swarm A.</p>
+<p>Counts are from the repositories on 19 October and are approximate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>The owner keeps a ledger</h2>
+<div class="stage document-stage">
+  <div class="artifact paper fn-ledger">
+    <div class="artifact-bar"><span>docs/owner-directions.md</span><span>read with AGENTS.md</span></div>
+    <div class="fn-line"><i>10-14</i><span>Real applications drive the work, not toy demos.</span></div>
+    <div class="fn-line"><i>10-15</i><span>The original is the golden reference.  Do what it does.</span></div>
+    <div class="fn-line"><i>10-15</i><span>When something fails, the UI must say so.</span></div>
+    <div class="fn-line"><i>10-17</i><span>The coordinator claims its own work, too.</span></div>
+    <div class="fn-line"><i>10-18</i><span>Capacity is measured, not guessed.</span></div>
+    <div class="fn-line fade"><i>…</i><span>a revision table at the bottom</span></div>
+  </div>
+  <div class="side-copy">
+    <p class="big-claim compact">One line per direction.  Dated.  Newest wins.</p>
+    <p>When it disagrees with <code>AGENTS.md</code>, the ledger wins and <code>AGENTS.md</code> is updated to match.</p>
+    <p class="accent-note">Agents add a line whenever I decide something.</p>
+  </div>
+</div>
+<aside class="notes">
+<p>The most useful single file turned out to be a ledger of my decisions. One line per direction, each dated, newest decisions winning.</p>
+<p>Agents read it alongside AGENTS.md. If the two disagree, the more recent direction wins and AGENTS.md gets fixed. There’s a small revision table at the bottom, so you can see how the direction changed over time.</p>
+<p>The important habit is that the agents maintain it. When I make a call in a conversation, it becomes a line in the file, so the next worker, who never saw that conversation, still knows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Steer with decisions, not prompts</h2>
+<div class="fn-flow">
+  <div class="fn-step"><i>01</i><b>The swarm writes a plan</b><span>with numbered recommendations and open questions</span></div>
+  <div class="fn-step"><i>02</i><b>I answer the questions</b><span>“all eight recommendations approved”</span></div>
+  <div class="fn-step"><i>03</i><b>Answers become directions</b><span>one dated line each, in the ledger</span></div>
+  <div class="fn-step"><i>04</i><b>The plan becomes tickets</b><span>phases filed, in whatever order makes sense</span></div>
+</div>
+<p class="fn-caption">My job became answering good questions, not writing prompts.</p>
+<aside class="notes">
+<p>Big pieces of work started as a plan written by the swarm, not by me. Each plan ended with numbered recommendations and a short list of questions only the owner could answer.</p>
+<p>I answered them, sometimes in a sentence: all eight recommendations approved. The answers went straight into the ledger, and the plan was split into tickets.</p>
+<p>That changed what my day looked like. Less prompting, more product management: deciding, approving, and setting the quality bar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>A golden reference beats a spec</h2>
+<div class="fn-ref">
+  <div class="fn-ref-claim">
+    <div class="eyebrow">THE RULE</div>
+    <p class="big-claim">Do what the original does, unless there is a reason not to.</p>
+    <p class="fn-small">Accessibility is a reason.  Taste is not.</p>
+  </div>
+  <div class="fn-ref-rules">
+    <div><b>Match, don't exceed</b><span>a menu item the original never enables stays disabled</span></div>
+    <div><b>Use it as an oracle</b><span>compare results event by event through its own API</span></div>
+    <div><b>Read it for gotchas</b><span>its source knows how real apps misbehave</span></div>
+    <div><b>Never modify it</b><span>study it, run it, never change it</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>A spec is never complete, and agents fill the gaps with their own ideas. A working product to copy is much better.</p>
+<p>The rule was simple: do what the original does, unless there’s a real reason not to. Accessibility was a good reason; we kept a few contrast fixes. Personal taste was not.</p>
+<p>Match it, rather than going beyond it: if the original never enables a menu item, ours doesn’t either. Use the original’s own scripting API as an oracle to compare results event by event. Read its source for the ways real applications misuse the API. And never, ever modify the reference install.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Toy targets mislead</h2>
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">THE TOY</div>
+    <b>One tiny demo app</b>
+    <ul>
+      <li>Every feature worked on it</li>
+      <li>Tests run 20 times over</li>
+      <li>The code bent around its quirks</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">THE REAL WORLD</div>
+    <b>Public sample suites</b>
+    <ul>
+      <li>Dozens of real applications</li>
+      <li>Run once, twice to confirm a fix</li>
+      <li>Failures point at real gaps</li>
+    </ul>
+  </div>
+</div>
+<p class="fn-caption">The early focus on the toy was too invasive.  Real workloads drive the work.</p>
+<aside class="notes">
+<p>Early on the swarm leaned hard on one tiny demo application. Everything worked on it, tests were run over and over, and the code started bending around that one app’s quirks.</p>
+<p>I redirected the work to public sample suites: dozens of real applications. Repeated runs stopped too; once, then twice to confirm a fix, and leave the rest to CI.</p>
+<p>The toy is still useful for testing a mechanism. It just isn’t representative, and a swarm will happily optimize for whatever target you hand it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>How work moves through the swarm</h2>
+<div class="fn-pipe">
+  <div class="fn-pipe-row">
+    <div class="fn-node"><b>Issue</b><span>ranked in the tracker</span></div>
+    <div class="fn-node claim"><b>Claim</b><span>label + comment</span></div>
+    <div class="fn-node"><b>Worktree</b><span>one per worker</span></div>
+    <div class="fn-node"><b>MR</b><span>with a Progress section</span></div>
+    <div class="fn-node gate"><b>Local gate</b><span>the full check, on real hardware</span></div>
+    <div class="fn-node merge"><b>Merge</b><span>by the coordinator</span></div>
+  </div>
+  <div class="fn-roles">
+    <div><b>Workers</b><span>claim an issue, build it in their own worktree, open an MR, clean up when it closes</span></div>
+    <div><b>Coordinator</b><span>starts workers, merges on a green local gate, watches main, stops merging while it's red</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>The process settled into a simple pipeline. Issues are ranked in the tracker. A worker claims one by adding a label and a comment, builds it in its own worktree, and opens a merge request.</p>
+<p>The coordinator merges on a green local gate, run on real hardware, rather than waiting for a CI pipeline. It then watches main’s pipeline and stops merging while it’s red.</p>
+<p>One lesson here: the coordinator has to claim its own work too, however small. Otherwise a worker picks up the same issue and you get duplicates.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Shared files are merge magnets</h2>
+<div class="fn-magnet">
+  <div class="fn-files">
+    <div class="eyebrow">WORKERS DON'T EDIT</div>
+    <div class="fn-file struck">ROADMAP.md</div>
+    <div class="fn-file struck">docs/roadmap.md</div>
+    <div class="fn-file struck">docs/gaps.md</div>
+  </div>
+  <div class="fn-instead">
+    <div class="fn-hop"><b>Each MR</b><span>carries a Progress note: measured numbers, what moved, what's open</span></div>
+    <div class="fn-hop"><b>The coordinator</b><span>updates the summaries once per batch</span></div>
+    <div class="fn-hop"><b>The tracker</b><span>stays the board: claims need live state across two machines</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Every worker wanted to update the roadmap and the gaps list when it finished something. With several workers, those files became merge conflicts waiting to happen.</p>
+<p>So workers stopped editing them. Each merge request carries a short Progress section instead, with the measured numbers and what’s still open. The coordinator rolls those up into the summaries once per batch.</p>
+<p>For the same reason the issue tracker stayed the board, rather than a Kanban folder in the repository. With a Mac and a desktop PC both taking work, claims need shared live state.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Make the swarm observable</h2>
+<div class="fn-observe">
+  <div class="artifact fn-jsonl">
+    <div class="artifact-bar"><span>tracking/&lt;instance&gt;/work.jsonl</span><span>tracking branch</span></div>
+<pre><code>{"event":"session.start","role":"worker","name":"spruce"}
+{"event":"claim","issue":80,"mr":87}
+{"event":"work","issue":80}
+{"event":"submit","issue":80,"mr":87}
+{"event":"stop","issue":80,"reason":"done"}
+{"event":"session.stop"}</code></pre>
+  </div>
+  <div class="fn-verbs">
+    <div class="eyebrow">EVERY AGENT LOGS</div>
+    <div class="fn-chips"><span>session</span><span>claim</span><span>work</span><span>submit</span><span>stop</span><span>release</span><span class="c">merge</span><span class="c">send-back</span></div>
+    <p>One small JSON line per event, on a branch of its own.</p>
+    <p class="accent-note">It must stay small and never hold the swarm back.</p>
+  </div>
+</div>
+<aside class="notes">
+<p>Once there were several agents, I couldn’t tell what was going on by reading chat. So every agent, workers and coordinator, logs its sessions and its work on issues to a tracking branch: one small JSON line per event.</p>
+<p>Workers log claim, work, submit, stop and release. The coordinator also logs merges and send-backs. Sessions record their role, their parent and the model.</p>
+<p>The rule was that tracking must stay tiny and never slow the swarm down. This is real data, trimmed: one worker, one issue, about 25 minutes from claim to submit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>What the timeline revealed</h2>
+<div class="fn-timeline artifact">
+  <div class="artifact-bar"><span>one lane per agent</span><span>time →</span></div>
+  <div class="fn-lane"><b>coordinator</b><div><i class="w" style="left:2%;width:94%"></i><em class="m" style="left:30%"></em><em class="m" style="left:52%"></em><em class="m" style="left:88%"></em><em class="sb" style="left:70%"></em></div></div>
+  <div class="fn-lane"><b>spruce</b><div><i class="w" style="left:6%;width:22%"></i><i class="w" style="left:34%;width:16%"></i><i class="dup" style="left:56%;width:12%"></i></div></div>
+  <div class="fn-lane"><b>larch</b><div><i class="w" style="left:10%;width:18%"></i><i class="ab" style="left:40%;width:20%"></i><i class="w" style="left:66%;width:20%"></i></div></div>
+  <div class="fn-lane"><b>rowan · mac</b><div><i class="w" style="left:20%;width:26%"></i><i class="sbk" style="left:50%;width:18%"></i></div></div>
+  <div class="fn-lane dead"><b>alder</b><div><i class="w" style="left:4%;width:30%"></i><i class="dead" style="left:34%;width:40%"></i></div></div>
+  <div class="fn-legend"><span><i class="w"></i>work</span><span><i class="dup"></i>duplicate</span><span><i class="ab"></i>abandoned</span><span><i class="sbk"></i>sent back</span><span><i class="dead"></i>dead session</span><span><em class="m"></em>merge</span></div>
+</div>
+<aside class="notes">
+<p>Swarm B turns those lines into a timeline, one lane per agent. This is an illustration of what it shows, not a screenshot.</p>
+<p>Seeing it laid out was humbling. Two workers on the same issue. Work that was abandoned partway. Merge requests sent back. And sessions that had quietly died while still holding a claim, which is why the inspector now tells dead lanes from waiting ones from active ones.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Waste is a metric</h2>
+<div class="fn-waste">
+  <div class="fn-w"><span class="eyebrow">DUPLICATE</span><b>Overlapping claims</b><small>the work each duplicate threw away, and a redundancy figure</small></div>
+  <div class="fn-w"><span class="eyebrow">ABANDONED</span><b>Why each span ended</b><small>duplicate · released · blocked · sent back · dead agent</small></div>
+  <div class="fn-w"><span class="eyebrow">SENT BACK</span><b>A state of its own</b><small>visible on the board while the worker is still in session</small></div>
+  <div class="fn-w"><span class="eyebrow">STUCK</span><b>Dead, waiting, or active?</b><small>the coordinator can close a dead session's claim</small></div>
+</div>
+<p class="fn-caption">Credit goes to the merge that landed, not to the effort.</p>
+<aside class="notes">
+<p>Once the waste was visible, it became something to measure and reduce.</p>
+<p>Duplicate work shows up as overlapping claims, with the span each duplicate threw away and an overall redundancy figure. Abandoned work is labelled with why it ended. Sent-back work gets its own state on the board. Stale lanes are classified as dead, waiting or active, and the coordinator can close a dead session.</p>
+<p>And credit is strict: a released or abandoned stretch only gets credit for a merge if its own merge request is the one that landed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Capacity is measured, not guessed</h2>
+<div class="fn-capacity">
+  <div class="fn-gauge">
+    <div class="fn-gauge-n">3</div>
+    <div class="fn-gauge-l">workers per swarm<br>on one desktop</div>
+  </div>
+  <div class="fn-cap-rules">
+    <div><b>Ask first</b><span>each worker checks capacity before its full gate</span></div>
+    <div><b>Zero means wait</b><span>or check only what changed</span></div>
+    <div><b>Build vs read helpers</b><span>read helpers are never refused for build load; at most 4 per worker</span></div>
+    <div><b>Heavy tests sparingly</b><span>slow tests once, twice to confirm; repeats belong in CI</span></div>
+  </div>
+</div>
+<p class="fn-caption">The worker count came from measuring builds on the machine, not from a guess.</p>
+<aside class="notes">
+<p>It’s tempting to keep adding workers. On one desktop, builds and heavy tests compete for the same cores, memory and devices, and past a point you just slow everyone down.</p>
+<p>So capacity became a command with a measured rule, not a guess. Each worker asks it before running the full gate; if it says zero, the worker waits or runs only the checks for what changed. Helper sub-agents are split into build helpers and read helpers: readers are cheap and never refused, but capped at four per worker.</p>
+<p>The measured answer was three workers per swarm on my desktop.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Rules written in pain</h2>
+<div class="fn-pain">
+  <div><b>End what you launch</b><span>no test apps, windows or crash dialogs left behind</span></div>
+  <div><b>Failures must be loud</b><span>I hit a silent failure; now the UI must say so</span></div>
+  <div><b>Scrub what you spill</b><span>no user or host names in output files</span></div>
+  <div><b>Clean up worktrees</b><span>and their build directories, when the issue closes</span></div>
+  <div><b>Leave my checkout alone</b><span>it stays on main; agents work in worktrees</span></div>
+  <div><b>No dead controls</b><span>a control that does nothing on a tab isn't shown there</span></div>
+</div>
+<aside class="notes">
+<p>Many of the directions are rules I only wrote after something went wrong.</p>
+<p>Test runs left windows and crash dialogs all over the desktop, so every test now ends what it launched. I hit a failure that the UI didn’t report, so failures must be visible. Output files contained user and host names, so they’re scrubbed. Worktrees and build directories piled up, so workers remove them when their issue closes. An agent switched my own checkout off main, so agents work only in worktrees. And controls that did nothing on some tabs got hidden there.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Risky code lives at named seams</h2>
+<div class="fn-seams">
+  <div class="fn-seam-core">
+    <div class="eyebrow">DEFAULT</div>
+    <b>Safe code everywhere</b>
+    <span>unsafe denied across the workspace</span>
+  </div>
+  <div class="fn-seam-list">
+    <div><b>Approved modules only</b><span>each exception named, planned, and signed off by the owner</span></div>
+    <div><b>Every block justified</b><span>a SAFETY comment on each one; none in generated code</span></div>
+    <div><b>Decisions stay safe</b><span>layout and ordering are decided in safe code above the seam</span></div>
+    <div><b>Only our own processes</b><span>launch what we create; never touch a running one</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Some code has to do risky things: call native APIs, talk to the OS, launch other processes. The rule was that unsafe code is denied everywhere by default, and each exception is a named module that I approve as part of a plan.</p>
+<p>Inside those modules, every unsafe block carries a safety comment, and none appears in generated code. The decisions, like memory layout and ordering, are made in safe code above the seam. And the launcher only ever starts processes it creates; it never attaches to one that’s already running.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Two swarms in step</h2>
+<div class="fn-step2">
+  <div class="fn-repo a"><b>Swarm A</b><span>the product</span></div>
+  <div class="fn-mid">
+    <div class="fn-contract">versioned tracking contract</div>
+    <div class="fn-sync"><span>→ tracking format, nested sessions</span></div>
+    <div class="fn-sync back"><span>← helpers, capacity rule, worker count</span></div>
+    <div class="fn-mid-notes"><span>a twin sync issue for every shared change</span><span>a lint that catches drift</span></div>
+  </div>
+  <div class="fn-repo b"><b>Swarm B</b><span>the inspector</span></div>
+</div>
+<aside class="notes">
+<p>Two swarms sharing a process will drift apart unless something holds them together.</p>
+<p>The tracking format became a versioned contract. Every shared change gets a twin sync issue in the other repository, and a lint checks for drift.</p>
+<p>Improvements really did flow both ways. The tracking format and nested sessions went from the product swarm to the inspector. The helper rules, the measured capacity rule and the worker count were worked out in the inspector swarm, then pulled back into the product swarm a day later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>The owner’s job</h2>
+<div class="fn-owner">
+  <div class="fn-quote">“Keep going without waiting for prompts.”</div>
+  <div class="fn-quote">“Give headlines when batches land.”</div>
+  <div class="fn-quote">“Keep going until it's a nice stable feature set.”</div>
+  <div class="fn-quote">“Sweep every command and pane; fix; sweep again.”</div>
+</div>
+<div class="fn-owner-roles"><span>direction</span><span>approvals</span><span>quality bars</span><span>headlines, not transcripts</span></div>
+<aside class="notes">
+<p>These are real directions from the ledger, and together they describe the job.</p>
+<p>The swarm runs autonomously. I don’t want to approve every step; I want headlines when a batch lands. My part is direction, approving plans and risky changes, and setting the quality bar.</p>
+<p>The quality bar matters most near the end. “A nice stable feature set” turned into a stability sweep of every command and pane, the defects fixed, then a second sweep to confirm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 final-slide center">
+<h2>Field notes, in one slide</h2>
+<div class="recipe">
+  <div><i>01</i><b>Keep a dated ledger</b><span>Every owner decision, one line, newest wins.</span></div>
+  <div><i>02</i><b>Copy something real</b><span>A golden reference and an oracle beat a spec.</span></div>
+  <div><i>03</i><b>Test on real workloads</b><span>Toy targets bend the code around them.</span></div>
+  <div><i>04</i><b>Keep shared files cold</b><span>Progress in the MR; summaries per batch.</span></div>
+  <div><i>05</i><b>Log every claim</b><span>A tiny event stream makes the swarm visible.</span></div>
+  <div><i>06</i><b>Measure the waste</b><span>Duplicate, abandoned and sent-back work.</span></div>
+  <div><i>07</i><b>Measure capacity</b><span>More workers is not more progress.</span></div>
+  <div><i>08</i><b>Answer questions</b><span>The owner decides; the swarm plans and builds.</span></div>
+</div>
+<aside class="notes">
+<p>If I had to keep only eight lessons, these are them.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
