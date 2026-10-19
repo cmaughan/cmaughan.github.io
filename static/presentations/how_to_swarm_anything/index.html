@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-39a97eedfdcd6a39a422282055559917.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-efafd18437adb71b873940271edaeb60.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -1007,6 +1007,277 @@ ui_screenshot { live_window }</code></pre></div>
 <p>These are real directions from the ledger, and together they describe the job.</p>
 <p>The swarm runs autonomously. I don’t want to approve every step; I want headlines when a batch lands. My part is direction, approving plans and risky changes, and setting the quality bar.</p>
 <p>The quality bar matters most near the end. “A nice stable feature set” turned into a stability sweep of every command and pane, the defects fixed, then a second sweep to confirm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Start a new swarm from an old one</h2>
+<div class="fn2-clone">
+  <div class="fn2-box a"><div class="eyebrow">SWARM A</div><b>A working swarm</b><span>a week of hard-won process</span></div>
+  <div class="fn2-carry">
+    <div class="eyebrow">COPIED ACROSS</div>
+    <div class="fn-chips"><span>AGENTS.md</span><span>architecture</span><span>command layer</span><span>UI shell</span><span>control channel</span><span>agent tools</span><span>claim → merge process</span><span>labels</span><span>templates</span><span>CI layout</span></div>
+    <div class="fn2-left">Left behind: the old product's domain code</div>
+  </div>
+  <div class="fn2-box b"><div class="eyebrow">SWARM B</div><b>A clean starter</b><span>~420 commits in its first three days</span></div>
+</div>
+<p class="fn-caption">The second swarm started fast because its process came ready-made.</p>
+<aside class="notes">
+<p>Swarm B didn’t start from nothing. It started from a clean copy of Swarm A’s guidance and architecture: the AGENTS.md, the command layer, the UI shell, the control channel and agent tools, and the whole claim-to-merge process. Its project even got the same labels, templates and CI layout.</p>
+<p>What it left behind was Swarm A’s domain code. The new product only needed the scaffolding.</p>
+<p>The result was a swarm that was productive within hours, because none of the process had to be rediscovered.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Set the pace, and stage per feature</h2>
+<div class="fn2-pace">
+  <div class="fn2-targets">
+    <div class="eyebrow">THE OWNER'S PACE TARGETS</div>
+    <div class="fn2-target"><b>12 h</b><span>first major feature working</span></div>
+    <div class="fn2-target"><b>18 h</b><span>the second feature</span></div>
+    <div class="fn2-days"><span><b>Day 2</b> alpha</span><span><b>Day 3</b> beta for the first feature</span></div>
+  </div>
+  <div class="fn2-stages">
+    <div class="eyebrow">STAGES ARE PER FEATURE</div>
+    <div class="fn2-stage"><span>Feature 1</span><i class="beta">beta</i></div>
+    <div class="fn2-stage"><span>Feature 2</span><i class="alpha">alpha</i></div>
+    <div class="fn2-stage"><span>Feature 3</span><i class="pre">pre-alpha</i></div>
+    <div class="fn2-stage"><span>Feature 4</span><i class="pre">pre-alpha</i></div>
+  </div>
+</div>
+<aside class="notes">
+<p>I gave the swarm explicit pace targets: the first major feature working within 12 hours, and the second within 18. They were ambitious, and having a number changed how the work was planned.</p>
+<p>The project went alpha on its second day, and the first feature reached beta the day after. But a single stage for the whole product stopped making sense quickly. Stages are tracked per feature instead, so one part can be beta while another is still pre-alpha, and everyone, agents included, knows how much to trust each one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Real data from the first milestone</h2>
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">TEMPTING</div>
+    <b>Fixtures only</b>
+    <ul>
+      <li>Hand-made sample data</li>
+      <li>Always tidy, always small</li>
+      <li>Looks finished in a demo</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">THE FIRST MILESTONE</div>
+    <b>The real swarm, live</b>
+    <ul>
+      <li>One lane per real agent</li>
+      <li>Refreshed as it works</li>
+      <li>Tests keep data of their own</li>
+    </ul>
+  </div>
+</div>
+<p class="fn-caption">The same lesson as toy targets, applied from the very start.</p>
+<aside class="notes">
+<p>For Swarm B, the first milestone wasn’t allowed to be a demo on made-up data. It had to show Swarm A’s real tracking data, one lane per agent, refreshed live.</p>
+<p>That’s the toy-target lesson applied up front. Real data is messy, large and surprising, and it found problems that fixtures never would. Tests still use repositories of their own, so they stay repeatable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Two machines, one swarm</h2>
+<div class="fn2-machines">
+  <div class="fn2-machine"><b>Desktop</b><span>workers + coordinator</span><span>the heavy tests</span></div>
+  <div class="fn2-hub"><div class="eyebrow">THE TRACKER</div><b>Live claims</b><span>labels and comments, not files in the repo</span></div>
+  <div class="fn2-machine mac"><b>Mac</b><span>workers of its own</span><span>claims like everyone else</span></div>
+</div>
+<p class="fn-caption">The coordinator merges the Mac's work as it's ready, like any other worker's.</p>
+<aside class="notes">
+<p>Both swarms ran on more than one machine: a desktop doing the heavy lifting, and a Mac taking work too.</p>
+<p>The Mac’s workers claim issues exactly like the desktop’s, and the coordinator merges their merge requests as they’re ready. This is the real reason the issue tracker stayed the board. A checked-in Kanban folder can’t give two machines a shared, live view of who has claimed what.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Keep the record honest</h2>
+<div class="fn2-honest">
+  <div class="artifact fn-jsonl">
+    <div class="artifact-bar"><span>fix history, and mark it</span><span>retro</span></div>
+<pre><code>{"event":"claim","issue":12}
+{"event":"work","issue":12,"retro":true}
+{"event":"submit","issue":12}</code></pre>
+    <p class="fn2-note">When the tracking rules changed, old data was amended to match, and every amended line says so.</p>
+  </div>
+  <div class="fn2-infer">
+    <div class="eyebrow">INFER WHAT WASN'T LOGGED</div>
+    <div class="fn2-mini"><i class="claim">claim</i><i class="gap">inferred work</i><i class="submit">submit</i></div>
+    <p class="fn2-note">A claim, then a submit, with no work logged between: the gap is drawn as work, but dimmer.</p>
+  </div>
+</div>
+<aside class="notes">
+<p>Tracking data is only useful if it’s honest about its own gaps.</p>
+<p>When the tracking rules changed, the swarm went back and amended its old data to the new rules. Every amended line is marked retro, so nobody mistakes a reconstruction for a live record.</p>
+<p>And when an agent claimed an issue and later submitted it without logging any work in between, the inspector infers that work happened, but draws it dimmer. It fills the gap, and still shows that it’s a guess.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Measure the agents, not just the code</h2>
+<div class="fn2-insights">
+  <div><b>Where the time goes</b><span>across agents and issues</span></div>
+  <div><b>Pipelines</b><span>merge requests in CI</span></div>
+  <div><b>Alerts</b><span>when something needs attention</span></div>
+  <div><b>Time-lapse</b><span>watch the work unfold</span></div>
+  <div class="hi"><b>Compare</b><span>agents, roles and models</span></div>
+  <div><b>Daily report</b><span>a summary of each day</span></div>
+</div>
+<p class="fn-caption">Each session now records its model, so models can be compared on real work.</p>
+<aside class="notes">
+<p>Once the swarm was visible, the next question was how well it works, not just what it built. These are the ideas on the inspector’s backlog: where the time goes, merge-request pipelines, alerts, a time-lapse of the work, comparisons between agents, roles and models, and a daily report.</p>
+<p>The comparison needed one small change in the product swarm too: every session now records which model it ran. That turns “which model is better for this?” into something you can measure on real work.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Directions change, and that’s fine</h2>
+<div class="stage document-stage">
+  <div class="artifact paper fn-ledger">
+    <div class="artifact-bar"><span>revision history</span><span>newest first</span></div>
+    <div class="fn-line"><i>10-19</i><span>Three workers per swarm; gates wait for capacity</span></div>
+    <div class="fn-line"><i>10-19</i><span>Helpers in worktrees; capacity measured</span></div>
+    <div class="fn-line"><i>10-17</i><span>Every agent logs to the tracking branch</span></div>
+    <div class="fn-line"><i>10-16</i><span>Progress in the MR; summaries per batch</span></div>
+    <div class="fn-line"><i>10-15</i><span>The UI must report failures</span></div>
+    <div class="fn-line"><i>10-15</i><span>First version: the owner's notes, folded in</span></div>
+  </div>
+  <div class="side-copy">
+    <p class="big-claim compact">The ledger records direction as given, not as it should have been.</p>
+    <p>I changed my mind about layering, focus and process along the way.</p>
+    <p class="accent-note">A dated history beats a perfect plan.</p>
+  </div>
+</div>
+<aside class="notes">
+<p>I didn’t get the direction right first time. I updated the layering guidance, moved the focus off the toy target, and changed the process several times as problems showed up.</p>
+<p>The ledger doesn’t hide that. It records directions as I gave them, with dates, and a revision table shows how they changed. That’s more useful than pretending there was a perfect plan, because a new worker can see both the current rule and why it exists.</p>
+<p>The revision rows here are paraphrased from Swarm A’s ledger, with their real dates.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Environment traps</h2>
+<div class="fn2-trap">
+  <div class="fn2-chain">
+    <div><i>1</i><span>Launched as administrator</span></div>
+    <div><i>2</i><span>The app it started ran as administrator too</span></div>
+    <div><i>3</i><span>That app ignored our environment settings</span></div>
+    <div class="bad"><i>4</i><span>Nothing connected, and nothing said why</span></div>
+  </div>
+  <div class="fn2-fix">
+    <div class="eyebrow">THE FIXES</div>
+    <div class="fn-hop"><b>Launch with normal rights</b><span>as the original product does</span></div>
+    <div class="fn-hop"><b>Make failure loud</b><span>a target that crashes, exits or never connects must say so</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Not every failure is in the code. One of mine was the environment.</p>
+<p>Run as administrator, the tool launched its target as administrator too. An elevated process ignored the environment settings the tool relied on, so nothing ever connected, and nothing told me why.</p>
+<p>The fixes were to launch targets with normal rights, as the original product does, and to make the UI report any target that crashes, exits or never connects. That second rule is in the ledger because of this.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Small decisions that paid off</h2>
+<div class="fn-pain">
+  <div><b>Web from day one</b><span>keep the core browser-clean from the start</span></div>
+  <div><b>Borrow performance targets</b><span>take the numbers that transfer from the original's own code</span></div>
+  <div><b>Borrow the look and feel</b><span>familiar to the original's users; small accessibility fixes kept for review</span></div>
+  <div><b>Defer on purpose</b><span>code signing and CI runners waited, and the ledger says so</span></div>
+  <div><b>Ask the original's owners</b><span>an open question becomes a ticket for them, not a guess</span></div>
+  <div><b>Merge on the local gate</b><span>don't wait for CI; stop merging while main is red</span></div>
+</div>
+<aside class="notes">
+<p>A handful of smaller calls that turned out well.</p>
+<p>Swarm B kept its core clean enough to build for the browser from day one. Performance targets that made sense were copied from the original product’s code, rather than invented. The look and feel follows the original, so its users feel at home, with a few accessibility fixes kept aside for review.</p>
+<p>Some things were deferred deliberately, like code signing and CI runners, and the ledger records that, so nobody wastes time on them. Where the original’s behaviour was unclear, the swarm filed a question for the original’s owners rather than guessing. And merges happen on a green local gate rather than waiting for the CI queue, with merging paused whenever main goes red.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
