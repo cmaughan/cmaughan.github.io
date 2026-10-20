@@ -36,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-efafd18437adb71b873940271edaeb60.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-0df02d81bf4c3ee9b8729f9feac8b077.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -836,7 +836,7 @@ ui_screenshot { live_window }</code></pre></div>
   <div class="fn-lane"><b>coordinator</b><div><i class="w" style="left:2%;width:94%"></i><em class="m" style="left:30%"></em><em class="m" style="left:52%"></em><em class="m" style="left:88%"></em><em class="sb" style="left:70%"></em></div></div>
   <div class="fn-lane"><b>spruce</b><div><i class="w" style="left:6%;width:22%"></i><i class="w" style="left:34%;width:16%"></i><i class="dup" style="left:56%;width:12%"></i></div></div>
   <div class="fn-lane"><b>larch</b><div><i class="w" style="left:10%;width:18%"></i><i class="ab" style="left:40%;width:20%"></i><i class="w" style="left:66%;width:20%"></i></div></div>
-  <div class="fn-lane"><b>rowan · mac</b><div><i class="w" style="left:20%;width:26%"></i><i class="sbk" style="left:50%;width:18%"></i></div></div>
+  <div class="fn-lane"><b>aspen · mac</b><div><i class="w" style="left:20%;width:26%"></i><i class="sbk" style="left:50%;width:18%"></i></div></div>
   <div class="fn-lane dead"><b>alder</b><div><i class="w" style="left:4%;width:30%"></i><i class="dead" style="left:34%;width:40%"></i></div></div>
   <div class="fn-legend"><span><i class="w"></i>work</span><span><i class="dup"></i>duplicate</span><span><i class="ab"></i>abandoned</span><span><i class="sbk"></i>sent back</span><span><i class="dead"></i>dead session</span><span><em class="m"></em>merge</span></div>
 </div>
@@ -1278,6 +1278,653 @@ ui_screenshot { live_window }</code></pre></div>
 <p>A handful of smaller calls that turned out well.</p>
 <p>Swarm B kept its core clean enough to build for the browser from day one. Performance targets that made sense were copied from the original product’s code, rather than invented. The look and feel follows the original, so its users feel at home, with a few accessibility fixes kept aside for review.</p>
 <p>Some things were deferred deliberately, like code signing and CI runners, and the ledger records that, so nobody wastes time on them. Where the original’s behaviour was unclear, the swarm filed a question for the original’s owners rather than guessing. And merges happen on a green local gate rather than waiting for the CI queue, with merging paused whenever main goes red.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>More field notes</h2>
+<div class="fn-divider">
+  <div class="eyebrow">APPENDIX II · FROM THE REPOSITORIES</div>
+  <p class="big-claim">What the process documents, tools and logs show.</p>
+  <p class="fn-divider-sub">Every rule here was added after something went wrong.</p>
+</div>
+</section>
+<section class="slide level2 center">
+<h2>A swarm, in numbers</h2>
+<div class="fn3-numbers">
+  <div class="fn3-col">
+    <div class="eyebrow">SWARM B · FIRST 4 DAYS</div>
+    <div class="fn3-big"><b>661</b><span>commits</span></div>
+    <div class="fn3-grid">
+      <div><b>~87</b><span>agent sessions</span></div>
+      <div><b>168</b><span>claims</span></div>
+      <div><b>160</b><span>merges</span></div>
+      <div><b>148</b><span>helper runs</span></div>
+    </div>
+  </div>
+  <div class="fn3-col">
+    <div class="eyebrow green">SWARM A · FIRST 8 DAYS</div>
+    <div class="fn3-big"><b>259</b><span>merges to main</span></div>
+    <div class="fn3-grid">
+      <div><b>52</b><span>on its busiest day</span></div>
+      <div><b>363</b><span>issues filed</span></div>
+      <div><b>1,260</b><span>tests, all passing</span></div>
+      <div><b>11 min</b><span>full local gate</span></div>
+    </div>
+  </div>
+</div>
+<p class="fn-caption">Only 4 of Swarm B's 168 claims were released.  Most work that started, landed.</p>
+<aside class="notes">
+<p>Some scale, counted from the repositories and their tracking data on 20 October.</p>
+<p>Swarm B made 661 commits in its first four days, across about 87 agent sessions: 168 claims, 160 merges, and 148 helper runs. Only four claims were released unfinished.</p>
+<p>Swarm A merged 259 changes to main in its first eight days, 52 on its busiest day, with 1,260 tests passing and an 11-minute full local gate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Claims race</h2>
+<div class="fn3-race">
+  <div class="fn3-race-tl">
+    <div class="eyebrow red">WHAT HAPPENED</div>
+    <div class="fn3-ev"><i>0 min</i><span>Agent A lists open issues</span></div>
+    <div class="fn3-ev"><i>5 min</i><span>Agent B claims issue 12</span></div>
+    <div class="fn3-ev bad"><i>20 min</i><span>Agent A claims 12 from its old list; its work is thrown away</span></div>
+  </div>
+  <div class="fn3-race-fix">
+    <div class="eyebrow green">ONE CLAIM COMMAND</div>
+    <div class="fn3-seq"><b>Check</b><span>label · open MRs · live claims in the log</span></div>
+    <div class="fn3-seq"><b>Take</b><span>branch · draft MR · label · comment · event</span></div>
+    <div class="fn3-seq"><b>Check again</b><span>the earlier MR keeps it; the loser closes its own and logs a duplicate</span></div>
+  </div>
+</div>
+<p class="fn-caption">Never claim from a list you made earlier.</p>
+<aside class="notes">
+<p>Claims race. In one swarm, four claims raced on a single day. In the other, the coordinator started an issue from a listing twenty minutes old, after another agent had already claimed it, and that work was thrown away.</p>
+<p>The fix was one claim command that does everything at the moment you start. It checks the label, any open merge request, and live claims on the tracking branch. Then it creates the branch, the draft merge request, the label, the comment and the event. Then it checks again: if two agents got through at once, the earlier merge request keeps the issue, and the loser closes its own and logs the release as a duplicate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>A waiting coordinator isn’t running</h2>
+<div class="fn3-awake">
+  <div class="fn3-clock">
+    <span class="t t15">:15</span><span class="t t45">:45</span>
+    <span class="t b t03">:03</span><span class="t b t33">:33</span>
+    <div class="fn3-clock-c"><b>every 30 min</b><small>a merge-only check per swarm, interleaved</small></div>
+  </div>
+  <div class="fn3-awake-rules">
+    <div class="eyebrow red">THE PROBLEM</div>
+    <p class="fn3-story">Ready MRs sat overnight: nothing woke the coordinator.</p>
+    <div class="fn-hop"><b>While active</b><span>a 2-minute watcher wakes it when an MR is ready</span></div>
+    <div class="fn-hop"><b>Always</b><span>a scheduled merge-only session that survives restarts and remembers nothing</span></div>
+    <div class="fn-hop"><b>One gate at a time</b><span>a lock file; a stale lock is ignored</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>An agent only acts when something wakes it. A coordinator sitting in a session, waiting, isn’t actually coordinating, and one night ready merge requests sat until morning because nothing polled them.</p>
+<p>Now there are two heartbeats. While a coordinator is active, a small watcher checks every two minutes and wakes it when a merge request is ready. And always, a scheduled merge-only session runs every 30 minutes. It survives restarts, and its prompt is self-contained, because each run remembers nothing. The two swarms’ checks are interleaved so they don’t gate at the same time, and a lock makes sure only one gate runs at once.</p>
+<p>One more rule from this: keep the machine awake. A sleeping machine stops everything on it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>A red main stops the whole swarm</h2>
+<div class="fn3-red">
+  <div class="fn3-light"><i class="on"></i><i></i><i></i></div>
+  <div class="fn3-red-steps">
+    <div><b>File it</b><span>the coordinator opens a “main is red” issue</span></div>
+    <div><b>Freeze</b><span>the claim command refuses new work while it's open</span></div>
+    <div><b>Warn</b><span>branch checks say a failure may not be the branch's own</span></div>
+    <div><b>Recover</b><span>fix forward, or revert the batch</span></div>
+  </div>
+</div>
+<p class="fn-caption">The tools enforce the stop, so no agent has to remember it.</p>
+<aside class="notes">
+<p>If main is broken, every new branch starts broken, and every worker wastes time on a failure that isn’t theirs.</p>
+<p>So a red main stops the swarm, and the tools enforce it. The coordinator files a “main is red” issue; while it’s open, the claim command refuses new work. Branch checks warn that a failure might not be the branch’s own. The coordinator either fixes forward or reverts the batch that broke it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Finished isn’t merged</h2>
+<div class="fn3-pager artifact">
+  <div class="artifact-bar"><span>mrwatch · every 150 s · prints only changes</span><span>wakes the worker</span></div>
+  <div class="fn3-row"><code>base merged</code><span>rebase what's stacked on it</span></div>
+  <div class="fn3-row"><code>conflict</code><span>resolve it now</span></div>
+  <div class="fn3-row"><code>needs rebase</code><span>nothing: the coordinator rebases</span></div>
+  <div class="fn3-row"><code>pipeline failed</code><span>fix it, or say whose failure it is</span></div>
+  <div class="fn3-row"><code>new notes</code><span>read them: it's a send-back</span></div>
+</div>
+<p class="fn-caption">Added after two of one worker's MRs sat in conflict until the owner noticed.</p>
+<aside class="notes">
+<p>A worker that submits a merge request and stops isn’t finished. Other merges land, stacked branches go stale, and conflicts appear. Two of one worker’s merge requests sat in conflict until I happened to ask.</p>
+<p>Now workers watch their own merge requests. A small watcher polls every 150 seconds with two API calls and prints only what changed, and each line has a defined action. Because every line wakes the agent, it reacts in minutes rather than whenever someone notices.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Batch the merge gate</h2>
+<div class="fn3-batch">
+  <div class="fn3-mrs"><span>MR</span><span>MR</span><span>MR</span><span>MR</span></div>
+  <div class="fn3-arrow">↓ rebased and stacked on main</div>
+  <div class="fn3-gate">ONE GATE</div>
+  <div class="fn3-split">
+    <div class="ok"><b>Green</b><span>merge in dependency order</span></div>
+    <div class="no"><b>Red</b><span>split the batch to find the MR</span></div>
+  </div>
+</div>
+<p class="fn-caption">One gate at a time, and only when the machine has capacity for it.</p>
+<aside class="notes">
+<p>Gating every merge request separately is slow. So the coordinator stacks the ready ones on main, runs one gate over the whole batch, and merges them in dependency order. If the batch goes red, it splits it to find the one that broke.</p>
+<p>Only one gate runs at a time, and it waits for spare capacity, counted across both swarms on the machine. One swarm was on its twenty-first numbered batch by its third day.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Three tiers of tests</h2>
+<div class="fn3-tiers">
+  <div class="fn3-tier t1"><b>Worker loop</b><span>only what the change touches, plus what depends on it</span><i>seconds to minutes</i></div>
+  <div class="fn3-tier t2"><b>Merge gate</b><span>the full suite; heavy tests two at a time</span><i>about 11 minutes</i></div>
+  <div class="fn3-tier t3"><b>Nightly</b><span>the hours-long suites; never block a merge</span><i>hours</i></div>
+</div>
+<p class="fn-caption">Speed comes from running each test where it pays, not from skipping it.</p>
+<aside class="notes">
+<p>Testing settled into three tiers. While working, an agent runs only the checks for what it changed, plus everything that depends on it, including tests that launch another program at runtime without a build dependency on it. The merge gate runs the full suite, with heavy tests two at a time; three at a time measured no faster. The hours-long suites run nightly or on demand, and never block a merge.</p>
+<p>Docs-only merges skip CI entirely, because each new pipeline on main cancels the one still running. They still pass a local gate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Memory decides, not cores</h2>
+<div class="fn3-chart">
+  <div class="fn3-bars">
+    <div class="fn3-bar"><div class="fill ok" style="height:44%"></div><b>1 build</b><span>8.6 min · passed</span></div>
+    <div class="fn3-bar"><div class="fill ok" style="height:53%"></div><b>2 builds</b><span>6.1 and 10.3 min · both passed</span></div>
+    <div class="fn3-bar"><div class="fill bad" style="height:100%"></div><b>4 builds</b><span>12.3–15.7 min · memory full · 3 of 4 failed</span></div>
+  </div>
+  <div class="fn3-chart-copy">
+    <div class="eyebrow">32 CORES · 32 GB · MEASURED</div>
+    <p class="big-claim compact">Four builds didn't run twice as fast.  Three of them failed.</p>
+    <p>The capacity rule counts memory per build, not cores.</p>
+    <p class="accent-note">Before blaming a change, ask whether the machine failed.</p>
+  </div>
+</div>
+<aside class="notes">
+<p>These are measured numbers from one desktop with 32 cores and 32 gigabytes, with another swarm building on it at the same time.</p>
+<p>One full gate took 8.6 minutes. Two at once took 6.1 and 10.3 and both passed. Four at once took 12 to 16 minutes each, filled memory completely, and three of the four failed: two timing tests and a linker error. None of those failures were the code’s fault.</p>
+<p>So the capacity rule counts memory per build, not cores. And a red gate is read before it’s believed: under load, the coordinator reruns the failing tests alone before sending anything back. Bar heights show relative gate time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Shared build caches lie</h2>
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">ONE CACHE, TWO WORKTREES</div>
+    <b>A green gate for code it never built</b>
+    <ul>
+      <li>The build tool saw newer outputs from another checkout</li>
+      <li>It skipped the rebuild</li>
+      <li>Tests passed against the wrong code</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">THE RULE</div>
+    <b>One build directory per worktree</b>
+    <ul>
+      <li>The gate records which checkout used it</li>
+      <li>It refuses a directory another checkout used last</li>
+      <li>Enforced, not remembered</li>
+    </ul>
+  </div>
+</div>
+<aside class="notes">
+<p>A nasty one. Two worktrees shared one build directory. The build tool decided a source file was older than the other checkout’s last build, and skipped rebuilding it. The gate went green for a tree it never actually built.</p>
+<p>The rule now is one build directory per worktree, and it’s enforced: the gate records which checkout used a directory and refuses one that another checkout used last.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Every flake becomes a rule</h2>
+<div class="fn3-ratchet">
+  <div class="fn3-rflow"><span>flaky test reaches a merge batch</span><i>→</i><span>a written rule</span><i>→</i><span>a lint that enforces it</span></div>
+  <div class="fn-pain">
+    <div><b>One test harness</b><span>shared setup, not copies</span></div>
+    <div><b>Fresh temp dirs</b><span>never named by process ID; IDs get reused</span></div>
+    <div><b>Settle the UI first</b><span>draw one more frame before reading it</span></div>
+    <div><b>No retry loops</b><span>and no timing asserts</span></div>
+    <div><b>Fix the cause</b><span>make the failing condition deterministic</span></div>
+    <div><b>Not 20 runs</b><span>re-running until green proves nothing</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Each test rule exists because a test-only failure reached a merge batch. Once that happens, the fix isn’t just the test: it’s a written rule, and where possible a lint that enforces it.</p>
+<p>Some of them: one shared test harness. Temp directories that are always fresh, and never named by process ID, because process IDs get reused. Draw one more frame before reading the UI. No retry loops and no timing assertions. And the rule for agents is to make the failing condition deterministic, rather than running the test twenty times until it passes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Design out the hotspots</h2>
+<div class="fn3-hot">
+  <div class="fn3-heat">
+    <div class="eyebrow red">MOST CONFLICTED FILES</div>
+    <div class="h5">root build manifest</div>
+    <div class="h4">command registry list</div>
+    <div class="h4">menus</div>
+    <div class="h3">translation catalog</div>
+    <div class="h3">architecture layer table</div>
+  </div>
+  <div class="fn3-hot-rules">
+    <div><b>New module, not a bigger file</b><span>new commands go in files of their own</span></div>
+    <div><b>Scripted resolution</b><span>registries: keep both sides; generated docs: regenerate</span></div>
+    <div><b>Write, then move</b><span>a half-written manifest breaks everyone's build</span></div>
+    <div><b>Don't fix their files</b><span>if someone's in-progress edit breaks the build, wait and retry</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>A handful of shared files cause most of the merge conflicts: the root build manifest, the command registry, the menus, the translation catalog and the architecture’s layer table.</p>
+<p>The answer is to design them out where possible. New commands go in new modules rather than growing a shared file. When conflicts do happen, the resolution is scripted: keep both sides for registries, regenerate generated documents. New manifests are written somewhere else and moved into place, because one broken manifest breaks every worker’s build. And if someone else’s half-finished edit breaks the build, you wait and retry; you don’t fix their files.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Tidy shared state on every merge</h2>
+<div class="fn3-ghost">
+  <div class="fn3-ghost-n"><b>216</b><span>closed issues still labeled “in progress”</span></div>
+  <div class="fn3-ghost-board">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <em>the board of work in progress was wrong</em>
+  </div>
+</div>
+<p class="fn-caption">The tracker closed the issues but left their labels.  Now a tidy step runs on every merge.</p>
+<aside class="notes">
+<p>Shared state goes wrong quietly. The issue tracker closes an issue when its merge request lands, but it leaves the labels. When I checked, 115 closed issues in one swarm and 101 in the other still carried the in-progress label, so the board of work in progress was simply wrong.</p>
+<p>A tidy step now runs inside the merge helper, and once per batch.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>One home for each fact</h2>
+<div class="fn3-home">
+  <div class="fn3-drift">
+    <div class="eyebrow red">BEFORE</div>
+    <div class="fn3-doc d1">roadmap</div><div class="fn3-doc d2">summary</div><div class="fn3-doc d3">gaps</div>
+    <p>The same progress, in three docs, <b>32 MRs apart</b>.</p>
+  </div>
+  <div class="fn3-rules">
+    <div class="eyebrow green">NOW</div>
+    <div><b>Detail lives once</b><span>other docs hold one line and a link</span></div>
+    <div><b>Measured beats estimated</b><span>every number says which, with source and date</span></div>
+    <div><b>Hours are agent-hours</b><span>say so</span></div>
+    <div><b>Never inflate</b><span>evidence, not adjectives</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>The same progress was written in three documents, and they drifted apart by 32 merge requests.</p>
+<p>Now each fact has one home. The detail lives once, and the other documents hold a single line linking to it, updated only when a headline number or a ranking moves. That also ended the merge conflicts on their headers.</p>
+<p>The progress documents have a few blunt rules. Measured beats estimated, and every number says which it is, with its source and date. Hours are agent-hours. Never inflate. Evidence, not adjectives.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Lint the swarm’s own log</h2>
+<div class="fn3-lint artifact">
+  <div class="artifact-bar"><span>tracking lint · one swarm's log, measured on one day</span><span>agents drift from protocol too</span></div>
+  <div class="fn3-finding"><code>mergeWithoutGate</code><b>59</b></div>
+  <div class="fn3-finding"><code>claimWithoutWork</code><b>35</b></div>
+  <div class="fn3-finding"><code>duplicateSubStop</code><b>14</b></div>
+  <div class="fn3-finding"><code>gateWithoutName</code><b>13</b></div>
+  <div class="fn3-finding"><code>deadNotClosed</code><b>1</b></div>
+</div>
+<p class="fn-caption">Then the event writer started refusing bad events, so they never reach the log.</p>
+<aside class="notes">
+<p>Agents drift from the protocol just like code drifts from its style guide, so the tracking log gets linted too.</p>
+<p>Run over one swarm’s log, the lint found 59 merges logged without a gate, 35 claims with no work, 14 duplicate helper stops, 13 gates without a name, and one dead session nobody had closed. The other swarm had 94 merges without a gate.</p>
+<p>After that, validation moved to write time: the event writer refuses malformed events, so they never reach the log in the first place.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>The swarm is a distributed system</h2>
+<div class="fn-pain">
+  <div><b>One file per agent</b><span>everyone appends to their own log, so pushes never conflict</span></div>
+  <div><b>Jitter the retries</b><span>two agents with the same back-off collided in lockstep</span></div>
+  <div><b>Queue offline</b><span>logging must never fail the task</span></div>
+  <div><b>Clocks disagree</b><span>bound each machine's skew from commit order: a child commit comes after its parent</span></div>
+  <div><b>Validate at write time</b><span>reject what the reader would drop</span></div>
+  <div><b>Assume silence isn't death</b><span>check a session is dead, not just quiet, before closing it</span></div>
+</div>
+<aside class="notes">
+<p>Several of these problems were textbook distributed-systems problems wearing a disguise.</p>
+<p>Every agent writes to its own log file, so pushes to the tracking branch never conflict. Two agents that retried with the same fixed back-off kept colliding in lockstep, so the retries got jitter. Events queue offline and flush later, because logging must never fail the agent’s actual task.</p>
+<p>Machines’ clocks disagree, so the inspector bounds each machine’s skew from the commit graph: a commit always comes after its parent. Events are validated when written, not when read. And a quiet session isn’t assumed dead until it’s checked.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>One refactoring pass per ticket</h2>
+<div class="fn3-refactor">
+  <div class="fn3-loop">
+    <div class="fn3-loop-x">refactor → score → refactor → score …</div>
+    <div class="fn3-loop-ok">1 pass · at most 3 refactorings · zero is fine</div>
+  </div>
+  <div class="fn3-ref-rules">
+    <div><b>Scope</b><span>only the functions the change touched</span></div>
+    <div><b>Named moves</b><span>catalog refactorings, tests between each</span></div>
+    <div><b>Scores suggest</b><span>a complexity tool picks where, never whether</span></div>
+    <div><b>Recorded</b><span>a Refactoring line in every MR; missing it is a send-back</span></div>
+  </div>
+</div>
+<p class="fn-caption">A guardrail against chasing the metric.</p>
+<aside class="notes">
+<p>Every ticket now ends with exactly one refactoring pass over the code it changed. Each refactoring is a named one from the standard catalog, with the tests run between each. At most three, and zero is a perfectly good outcome. It’s one pass, not a loop.</p>
+<p>A complexity analyzer suggests where to look, but agents are told not to re-run it to chase the score: code quality wins over the number. Every merge request records what was refactored, and the coordinator sends back any that doesn’t say.</p>
+<p>A dedicated refactoring wave moved one codebase’s overall complexity grade from D to C.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>The MR template is the hand-off</h2>
+<div class="fn3-template">
+  <div class="artifact paper">
+    <div class="artifact-bar"><span>merge request · Progress</span><span>read at merge, never lands</span></div>
+    <div class="rule"><b>Measured</b><span>numbers, each with its source and date</span></div>
+    <div class="rule"><b>Moves</b><span>which gaps and scorecard rows change</span></div>
+    <div class="rule"><b>Still open</b><span>what this doesn't do</span></div>
+    <div class="rule"><b>Refactoring</b><span>what was refactored, or none</span></div>
+    <div class="rule"><b>Notes</b><span>anything the coordinator could miss from the diff alone</span></div>
+  </div>
+  <div class="fn3-review">
+    <div class="eyebrow">THE COORDINATOR CHECKS</div>
+    <div class="fn-hop"><b>Scope</b><span>no creep beyond the issue</span></div>
+    <div class="fn-hop"><b>Evidence</b><span>claims backed by an oracle, not just its own tests</span></div>
+    <div class="fn-hop"><b>Bookkeeping</b><span>the right issue closes; summaries untouched</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>The merge request description became the hand-off protocol between a worker and the coordinator. The Progress section is a note for the coordinator, read at merge; it never lands in the repository. It has fixed fields: what was measured, with sources and dates; which gaps and scorecard rows move; what’s still open; what was refactored; and anything the coordinator could miss from the diff alone.</p>
+<p>On review, the coordinator checks for scope creep, that claims are backed by real evidence and not just the worker’s own tests, and that the right issue closes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Sessions die: leave a trail</h2>
+<div class="fn3-trail">
+  <div class="fn3-crumbs"><span>dev log</span><span>pushed branch</span><span>green tree</span></div>
+  <div class="fn-pain">
+    <div><b>Push often</b><span>an unpushed branch dies with the session</span></div>
+    <div><b>Give up cleanly</b><span>comment what you learned, drop the label, close the draft</span></div>
+    <div><b>Stale after 24 hours</b><span>a draft with no commits can be taken over, after a comment</span></div>
+    <div><b>Never take real work</b><span>a branch with commits on it isn't up for grabs</span></div>
+    <div><b>Coordinators crash too</b><span>the next one rebuilds from the merged MRs' notes</span></div>
+    <div><b>Dead, not quiet</b><span>presumed-dead sessions listed every batch</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Sessions end abruptly, so every rule assumes they will. The dev log, a pushed branch and a green tree are how the next agent picks up the work cold.</p>
+<p>Push often. If you give up, do it cleanly: comment what you learned, drop the label, close the draft. A draft with no commits for 24 hours can be taken over, but only after a comment, and a branch with real commits on it is never taken. Even the coordinator’s batch summary survives a crash, because the notes stay on the merged merge requests and the next coordinator starts from there.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Ready work caps parallelism</h2>
+<div class="fn3-funnel">
+  <div class="fn3-f f1">agents available</div>
+  <div class="fn3-f f2">independent, ready issues</div>
+  <div class="fn3-f f3">CI runners · one pipeline at a time</div>
+</div>
+<p class="fn-caption">The coordinator's most valuable job is splitting work so more of it is independent.</p>
+<aside class="notes">
+<p>Adding agents doesn’t help if there’s nothing independent for them to do. The real cap on parallelism was the number of ready, independent issues, and, further down, CI: the shared runners served about one pipeline at a time.</p>
+<p>So draft merge requests don’t get pipelines, merges land on the local gate, and the coordinator’s most valuable job is splitting large issues into pieces one worker can finish in a session, and that don’t depend on each other.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>A short, fixed brief</h2>
+<div class="fn3-brief">
+  <div class="artifact fn-jsonl">
+    <div class="artifact-bar"><span>worker brief · about 25 lines</span><span>paraphrased</span></div>
+<pre><code>You are worker &lt;name&gt;. Use your own build dir.
+Your machine can do: &lt;capabilities&gt;.
+Pick the highest-ranked unclaimed issue.
+Claim it with the claim command.
+Build it; one refactoring pass.
+Check capacity, then run the full gate.
+Fill in Progress. Watch your MR.
+Do not merge.</code></pre>
+  </div>
+  <div class="fn3-verbs">
+    <div class="eyebrow">THE OWNER'S VERBS</div>
+    <div class="fn3-verb"><code>pause</code><span>watchers off; nothing new starts</span></div>
+    <div class="fn3-verb"><code>resume</code><span>watchers on first, then work</span></div>
+    <div class="fn3-verb"><code>no new work</code><span>gate, merge, fold progress, watch main; file nothing</span></div>
+  </div>
+</div>
+<aside class="notes">
+<p>Every worker gets the same short brief, about 25 lines, given verbatim by the coordinator. This is a paraphrase of its shape: your name and build directory, what your machine can do, pick the highest-ranked unclaimed issue, claim it, build it with one refactoring pass, check capacity, run the gate, fill in Progress, watch your merge request, and never merge.</p>
+<p>Capability labels let a worker skip issues its machine can’t do. A second issue is never a helper’s job; that needs another worker.</p>
+<p>The owner’s own words needed definitions too. Pause turns the watchers off. Resume turns them back on first. “No new work” means the coordinator still gates and merges, but files nothing and starts no workers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 center">
+<h2>Tooling surprises</h2>
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">STACKED, EMPTY DRAFT</div>
+    <b>Merged by accident</b>
+    <ul>
+      <li>A draft MR with no commits, stacked on another branch</li>
+      <li>When the base merged, the tracker marked it merged too</li>
+      <li>And closed its issue</li>
+      <li>Fix: every claim starts with a commit</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">CANCELLED PIPELINES</div>
+    <b>Each new pipeline on main cancels the last</b>
+    <ul>
+      <li>Docs-only merges skip CI</li>
+      <li>They still pass a local gate</li>
+    </ul>
+  </div>
+</div>
+<aside class="notes">
+<p>Two surprises from the tools themselves.</p>
+<p>A draft merge request with no commits, stacked on another branch, was marked merged when its base merged, and that closed its issue. So every claim now starts with a small claim commit.</p>
+<p>And each new pipeline on main cancels the one still running, so a stream of small documentation merges would starve real checks. Docs-only merges skip CI, after still passing a local gate.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
