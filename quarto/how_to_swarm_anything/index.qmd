@@ -982,13 +982,13 @@ Some things were deferred deliberately, like code signing and CI runners, and th
 ```{=html}
 <div class="fn3-numbers">
   <div class="fn3-col">
-    <div class="eyebrow">SWARM B · FIRST 4 DAYS</div>
-    <div class="fn3-big"><b>661</b><span>commits</span></div>
+    <div class="eyebrow">SWARM B · FIRST 6 DAYS</div>
+    <div class="fn3-big"><b>914</b><span>commits</span></div>
     <div class="fn3-grid">
-      <div><b>~87</b><span>agent sessions</span></div>
-      <div><b>168</b><span>claims</span></div>
-      <div><b>160</b><span>merges</span></div>
-      <div><b>148</b><span>helper runs</span></div>
+      <div><b>133</b><span>agent sessions, 3 machines</span></div>
+      <div><b>210</b><span>issues claimed</span></div>
+      <div><b>208</b><span>issues merged</span></div>
+      <div><b>208</b><span>gates run</span></div>
     </div>
   </div>
   <div class="fn3-col">
@@ -1002,13 +1002,13 @@ Some things were deferred deliberately, like code signing and CI runners, and th
     </div>
   </div>
 </div>
-<p class="fn-caption">Only 4 of Swarm B's 168 claims were released.  Most work that started, landed.</p>
+<p class="fn-caption">Only 4 of Swarm B's 210 claimed issues were released.  Most work that started, landed.</p>
 ```
 
 ::: {.notes}
-Some scale, counted from the repositories and their tracking data on 20 October.
+Some scale, counted from the repositories and their tracking data: Swarm B on 22 October, Swarm A on 20 October.
 
-Swarm B made 661 commits in its first four days, across about 87 agent sessions: 168 claims, 160 merges, and 148 helper runs.  Only four claims were released unfinished.
+Swarm B made 914 commits in its first six days, across 133 agent sessions on three machines: 210 issues claimed, 208 merged, and 208 gates run.  Only four claims were released unfinished.
 
 Swarm A merged 259 changes to main in its first eight days, 52 on its busiest day, with 1,260 tests passing and an 11-minute full local gate.
 :::
@@ -1497,6 +1497,361 @@ Two surprises from the tools themselves.
 A draft merge request with no commits, stacked on another branch, was marked merged when its base merged, and that closed its issue.  So every claim now starts with a small claim commit.
 
 And each new pipeline on main cancels the one still running, so a stream of small documentation merges would starve real checks.  Docs-only merges skip CI, after still passing a local gate.
+:::
+
+## The process lives in the tool
+
+```{=html}
+<div class="fn-divider">
+  <div class="eyebrow">APPENDIX III · ENFORCEMENT</div>
+  <p class="big-claim">Prompts drift.  Tools refuse.</p>
+  <p class="fn-divider-sub">Every rule that mattered moved out of the instructions and into the build tool.</p>
+</div>
+```
+
+## Sixteen commands run the swarm
+
+```{=html}
+<div class="fn4-groups">
+  <div class="fn4-g blue"><div class="eyebrow">CLAIM &amp; LOG</div><code>claim</code><code>event</code><code>mrwatch</code><code>tidy</code></div>
+  <div class="fn4-g green"><div class="eyebrow">ROOM &amp; LOCKS</div><code>capacity</code><code>lock</code><code>machine lock</code></div>
+  <div class="fn4-g cream"><div class="eyebrow">GATES</div><code>ci --changed</code><code>ci --smoke</code><code>gate</code><code>gate --rerun-failed</code><code>fullgate</code></div>
+  <div class="fn4-g coral"><div class="eyebrow">LANDING</div><code>stack</code><code>land</code></div>
+  <div class="fn4-g blue"><div class="eyebrow">QUALITY</div><code>layers</code><code>scorecard</code><code>health</code><code>cross-platform lint</code></div>
+</div>
+<p class="fn-caption">Almost every refusal in them cites the dated incident that caused it.</p>
+```
+
+::: {.notes}
+By the end, most of the process didn't live in AGENTS.md any more.  It lived in sixteen commands in the repository's own build tool, about thirty counting their modes.
+
+They fall into five groups: claiming and logging work; checking room on the machine and taking locks; running gates; landing merges; and measuring quality.
+
+The striking thing reading the code is that nearly every refusal has a comment pointing at the incident that caused it, with a date.  The tool is the swarm's memory of what went wrong.
+:::
+
+## A worker's path
+
+```{=html}
+<div class="fn4-path">
+  <div class="fn4-step"><i>1</i><b>session.start</b><span>logged with role, parent, model and effort</span></div>
+  <div class="fn4-step"><i>2</i><b>claim</b><span>may first run a due full gate of main</span></div>
+  <div class="fn4-step"><i>3</i><b>build + one refactoring pass</b><span>in its own worktree and build dir</span></div>
+  <div class="fn4-step"><i>4</i><b>capacity</b><span>wait if the machine is full</span></div>
+  <div class="fn4-step"><i>5</i><b>ci --changed</b><span>checkout guard · claim check · both platforms' lint · tests · layers</span></div>
+  <div class="fn4-step"><i>6</i><b>push</b><span>a hook re-checks the claim</span></div>
+  <div class="fn4-step"><i>7</i><b>submit + mrwatch</b><span>ready MR, Progress filled in, then watch</span></div>
+</div>
+```
+
+::: {.notes}
+This is a worker's whole path, and every step is a command.
+
+It logs its session, with its role, parent, model and effort.  It claims an issue, and the claim may first make it run a full gate of main if one is due.  It builds in its own worktree and build directory, does its one refactoring pass, asks for capacity, and runs the changed-scope gate.  That gate itself guards the build directory, re-checks the claim, lints for both platforms, and runs the tests and layer checks.  A push hook checks the claim again.  Then the worker submits and watches its merge request.
+:::
+
+## The coordinator's path
+
+```{=html}
+<div class="fn4-path coord">
+  <div class="fn4-step"><i>1</i><b>mrwatch --ready</b><span>every 2 min, plus a scheduled run every 30</span></div>
+  <div class="fn4-step"><i>2</i><b>stack</b><span>rebase the ready MRs into one stack, under the gate lock</span></div>
+  <div class="fn4-step"><i>3</i><b>gate</b><span>pick the strength, wait for room, run, classify the result</span></div>
+  <div class="fn4-step"><i>4</i><b>land</b><span>push, verify, merge, confirm, log, tidy, then delete</span></div>
+  <div class="fn4-step"><i>5</i><b>gate --stop</b><span>close the gate and drop the lock</span></div>
+  <div class="fn4-step"><i>6</i><b>per batch</b><span>fold progress · measure health · regenerate the scorecard · tidy</span></div>
+</div>
+<p class="fn-caption">With nothing to merge, the coordinator takes tasks like a worker.</p>
+```
+
+::: {.notes}
+The coordinator's loop is just as mechanical.  A watcher tells it when merge requests are ready.  It stacks them, rebasing each onto the one below under the gate lock.  It gates the stack, then lands it, then closes the gate.  Once per batch it folds the Progress notes into the summaries, measures code health, regenerates the scorecard and tidies stale labels.
+
+And when there's nothing to merge, it doesn't sit idle: it picks up tasks like any other worker, including a due full gate.
+:::
+
+## What a claim refuses
+
+```{=html}
+<div class="fn4-refuse">
+  <div class="fn4-list no">
+    <div class="eyebrow red">REFUSED WHEN</div>
+    <div>the issue already carries the in-progress label</div>
+    <div>an open MR already names the issue</div>
+    <div>another agent's claim in the log is under 24 h old</div>
+    <div>the issue is blocked or closed</div>
+    <div>main is red</div>
+  </div>
+  <div class="fn4-list yes">
+    <div class="eyebrow green">OTHERWISE, IN ONE STEP</div>
+    <div>branch from the latest main, with an empty claim commit</div>
+    <div>draft MR from the template · label · comment</div>
+    <div>claim and work events in the log</div>
+    <div>then check again: the earlier MR wins the race</div>
+    <div>re-running finishes a half-done claim</div>
+  </div>
+</div>
+```
+
+::: {.notes}
+Here's the claim command in detail.  It refuses if the issue already has the in-progress label, if any open merge request already names it, if another agent has a live claim in the tracking log from the last 24 hours, if the issue is blocked or closed, or if main is red.
+
+Otherwise it does everything in one step: a branch from the latest main with an empty claim commit, a draft merge request from the template, the label, a comment, and the claim and work events.  Then it checks again, and if it lost a race, it closes its own merge request.  It's also idempotent: running it again finishes a claim that was interrupted halfway.
+:::
+
+## The gate picks its own strength
+
+```{=html}
+<div class="fn4-kinds">
+  <div class="fn4-k"><b>docs</b><span>only Markdown changed</span><i>layers, no build</i></div>
+  <div class="fn4-k"><b>tooling</b><span>only scripts, templates, skills, the build tool</span><i>lighter checks</i></div>
+  <div class="fn4-k strong"><b>smoke</b><span>anything else, or whenever it's unsure</span><i>format · lint · build · golden tests · CLI run</i></div>
+  <div class="fn4-k strongest"><b>full</b><span>on request, and on main every hour</span><i>everything</i></div>
+</div>
+<p class="fn-caption">When in doubt, gate stronger.  A stack takes the strongest kind any of its MRs needs.</p>
+```
+
+::: {.notes}
+The gate decides how much checking a change needs from the diff itself.  Markdown only gets a docs gate.  Changes only to scripts, templates, skills and the build tool get a tooling gate.  Anything else gets a smoke gate: format, lint, build, golden tests and a headless run of the command-line tool.
+
+The rule is that uncertainty means a stronger gate: no plan, or no change seen, means smoke.  And a stack of merge requests gets the strongest gate that any one of them needs.
+:::
+
+## Merge on a smoke, verify main later
+
+```{=html}
+<div class="fn4-later">
+  <div class="fn4-tl">
+    <div class="fn4-bar smoke"><b>smoke gate</b><span>minutes</span></div>
+    <div class="fn4-bar merge"><b>merge</b></div>
+    <div class="fn4-bar smoke"><b>smoke</b></div>
+    <div class="fn4-bar merge"><b>merge</b></div>
+    <div class="fn4-bar full"><b>full gate of main</b><span>at most hourly · whoever claims next</span></div>
+  </div>
+  <div class="fn4-later-copy">
+    <div class="fn-hop"><b>Fast path</b><span>merge after the smoke gate, not the 15-minute suite</span></div>
+    <div class="fn-hop"><b>Safety net</b><span>the full suite runs on main when it's due</span></div>
+    <div class="fn-hop"><b>On failure</b><span>a main-red issue names the commits since the last green; claims freeze</span></div>
+  </div>
+</div>
+```
+
+::: {.notes}
+The full gate had grown to about fifteen minutes, which throttled merging.  So merges now land after the smoke gate, and the full suite runs on main itself, at most once an hour, by whichever capable agent claims next.
+
+If that full gate fails for a real reason, it files a main-red issue naming the failing commit, the last green one and the merges in between, and claims freeze until it's fixed.  So far, every full gate of main has passed.
+:::
+
+## Read the failure before blaming the change
+
+```{=html}
+<div class="fn4-classify">
+  <div class="fn4-col machine">
+    <div class="eyebrow">THE MACHINE · RETRY ONCE</div>
+    <div>out of memory</div><div>linker can't open its output</div><div>toolchain lost its standard library</div><div>git temp-file errors</div>
+  </div>
+  <div class="fn4-col code">
+    <div class="eyebrow red">THE CODE · SEND IT BACK</div>
+    <div>a test failed</div><div>the build failed</div><div>anything else</div>
+  </div>
+  <div class="fn4-rerun">
+    <div class="eyebrow green">RERUN JUST THE FAILURES</div>
+    <p>Each failed test alone, same commit, at most 12, once.  Never for a build or lint failure.</p>
+    <p class="accent-note">One flaky test no longer costs a second 11–15 minute gate.</p>
+  </div>
+</div>
+```
+
+::: {.notes}
+When a gate fails, the tool reads the log and classifies the cause.  Out-of-memory errors, a linker that can't open its output file, a toolchain that lost its standard library, and git temp-file errors are the machine's fault, and get one automatic retry.  A failing test or build is the code's fault.
+
+For a test failure there's one more step: rerun just the failed tests, each on its own, on the same commit.  It's allowed once per commit, for at most twelve tests, and never for a build or lint failure, because those aren't flakes.  A pass is recorded as evidence on the merge request.  That saves a whole second gate of eleven to fifteen minutes.
+:::
+
+## Land is a checklist of incidents
+
+```{=html}
+<div class="fn4-land">
+  <div class="fn4-ls"><i>1</i><b>Push, then verify the remote</b><span>an MR once merged without its fix: the push hadn't landed</span></div>
+  <div class="fn4-ls"><i>2</i><b>Never overwrite a worker</b><span>refuse if the branch moved since it was stacked</span></div>
+  <div class="fn4-ls"><i>3</i><b>Rebase on the server, wait until mergeable</b><span>then merge at the exact head it saw</span></div>
+  <div class="fn4-ls"><i>4</i><b>Confirm it really merged</b><span>before logging anything</span></div>
+  <div class="fn4-ls"><i>5</i><b>Log, tidy, update the owner's checkout</b><span>only if it's on main and clean</span></div>
+  <div class="fn4-ls"><i>6</i><b>Delete the branch last</b><span>a branch deleted after a merge that hadn't happened closed its MR</span></div>
+</div>
+```
+
+::: {.notes}
+Landing a merge sounds simple.  The land command is eight checked steps, and most of them trace to an incident.
+
+One merge request merged without its fix, because a push hadn't actually landed, so now the tool verifies the remote matches after pushing.  It refuses if a worker pushed newer commits since the stack was built.  It rebases on the server, waits until the merge request is mergeable, merges at the exact head it saw, and confirms the merge really happened before logging it.  And it deletes the branch last, because once a branch deleted too early closed its merge request.
+
+The step order is tested with a fake, so it can't quietly change.
+:::
+
+## Leader election, without a server
+
+```{=html}
+<div class="fn4-elect">
+  <div class="fn4-agents">
+    <div class="fn4-a win"><b>agent 1</b><span>start 10:02:11</span><em>wins</em></div>
+    <div class="fn4-a"><b>agent 2</b><span>start 10:02:14</span><em>superseded</em></div>
+    <div class="fn4-a"><b>agent 3</b><span>start 10:02:30</span><em>superseded</em></div>
+  </div>
+  <div class="fn4-elect-copy">
+    <p class="big-claim compact">Push your start.  Read again.  The earliest open start wins.</p>
+    <p>Ties break on the instance id.  A start older than 3 hours is abandoned.</p>
+    <p class="accent-note">The same pattern as the claim race, reused.</p>
+  </div>
+</div>
+```
+
+::: {.notes}
+The periodic full gate of main should be run by exactly one agent, but there's no lock server: each agent only appends to its own log file.
+
+So it's an election through the logs.  Each candidate pushes a start event, re-reads the branch, and the earliest open start wins, with the instance id breaking ties.  The losers log that they were superseded and go back to their own tasks.  A start that never finishes is abandoned after three hours.  It's the claim race pattern, reused.
+:::
+
+## Three locks
+
+```{=html}
+<div class="fn4-locks">
+  <div class="fn4-lock"><div class="eyebrow">GATE LOCK · PER REPO</div><b>One coordinator gates</b><span>shared by every worktree; stale after 2 h</span></div>
+  <div class="fn4-lock"><div class="eyebrow">MACHINE LOCK · PER MACHINE</div><b>One gate builds at a time</b><span>whichever swarm it belongs to; one gate's links held ~30 of 32 GB</span></div>
+  <div class="fn4-lock"><div class="eyebrow">WORKTREE · NAMED IN THE LOCK</div><b>Hands off the gate's tree</b><span>a manual checkout swapped it under a running gate, twice</span></div>
+</div>
+<p class="fn-caption">Build parallelism comes from free memory: one job per 1.5 GB.  Docs gates skip the wait: 10+ minutes became 0.1.</p>
+```
+
+::: {.notes}
+Three locks keep the gates from hurting each other.
+
+A per-repository gate lock means only one coordinator gates at a time; it's shared by every worktree of the clone, and goes stale after two hours.  A machine-wide lock, outside both repositories, means only one gate builds at once, whichever swarm it belongs to: one gate's links alone held about 30 of the desktop's 32 gigabytes.  And the lock names its worktree, because twice a manual checkout swapped the tree out from under a running gate.
+
+The build tool's parallelism is set from free memory, one job per one and a half gigabytes.  Docs-only gates skip the machine lock entirely: a docs fold that had waited ten minutes behind the other swarm's gate then took a tenth of a minute.
+:::
+
+## The pipe that defeated the safety check
+
+```{=html}
+<div class="fn4-pipe">
+  <div class="artifact fn-jsonl">
+    <div class="artifact-bar"><span>what an agent typed</span><span>to trim the output</span></div>
+<pre><code>stack 211 212 213 | tail -3 &amp;&amp; gate --sub g42</code></pre>
+  </div>
+  <div class="fn4-pipe-copy">
+    <p class="big-claim compact">A pipeline's exit status is its last command's.</p>
+    <p><code>stack</code> was refused, <code>tail</code> succeeded, and <code>gate</code> ran anyway.</p>
+    <div class="fn-hop"><b>Saved by</b><span>every command re-checks for itself</span></div>
+    <div class="fn-hop"><b>Rule</b><span>pipefail, or no filter; check the lock first</span></div>
+    <div class="fn-hop"><b>Also</b><span>a piped 15-minute command looks like a hang; announce it</span></div>
+  </div>
+</div>
+```
+
+::: {.notes}
+My favorite small incident.  An agent trimmed a noisy command by piping it through tail, then chained the next step with "and".  But a pipeline's exit status is its last command's.  The stack command was refused, tail succeeded, and the gate ran anyway on the wrong tree.
+
+It was caught only because every command checks its own preconditions instead of trusting the one before.  The rule now is pipefail or no filter.
+
+A related one: piping a long command through tail or head hides all its output until it ends, so a fifteen-minute full gate looks exactly like a hang.  Agents now announce when they start one, and report the result.
+:::
+
+## A ratchet in the linter
+
+```{=html}
+<div class="fn4-ratchet">
+  <div class="fn4-limits">
+    <div><b>10</b><span>max cognitive complexity</span></div>
+    <div><b>60</b><span>max lines per function</span></div>
+    <div><b>6</b><span>max parameters</span></div>
+  </div>
+  <div class="fn4-ratchet-copy">
+    <div class="fn-hop"><b>Exemptions carry a reason</b><span>and fail once the code is fixed, so they can't linger</span></div>
+    <div class="fn-hop"><b>The count can only fall</b><span>95 → 90 → 84 exemptions</span></div>
+    <div class="fn-hop"><b>Libraries can't panic</b><span>no unwrap, expect, panic or todo; no unsafe at all</span></div>
+  </div>
+</div>
+```
+
+::: {.notes}
+Code health is enforced as a ratchet.  Functions have hard limits: cognitive complexity of 10, 60 lines, six parameters.
+
+Anything over a limit needs an explicit exemption with a reason, and the exemption itself fails the build once the code is fixed, so stale ones can't linger.  The tool prints the count per crate, and it can only go down: 95, then 90, now 84.
+
+Every library also denies the panicking shortcuts, unwrap, expect, panic and todo, and forbids unsafe code entirely.
+:::
+
+## Did the refactoring pay off?
+
+```{=html}
+<div class="fn4-pay">
+  <div class="fn4-quote">“Bigger changes take longer; denser code, so far, doesn't.”</div>
+  <div class="fn4-pay-facts">
+    <div><b>40 tickets</b><span>claim-to-merge time against complexity and size</span></div>
+    <div><b>Paused</b><span>code-health work stopped until the data is read again</span></div>
+    <div><b>Look again later</b><span>a small, early sample: no victory declared either way</span></div>
+  </div>
+</div>
+```
+
+::: {.notes}
+Refactoring every ticket costs time, so I asked whether it was paying off.  The swarm measured claim-to-merge time against code complexity and change size over the first forty scored tickets.
+
+The finding, in its own words: bigger changes take longer; denser code, so far, doesn't.  So code-health work is paused until there's more data to re-read.  It's an early, small sample, which is exactly why the decision is to look again rather than to declare victory either way.
+:::
+
+## Make the gate cheap
+
+```{=html}
+<div class="fn4-cheap">
+  <div class="fn4-c"><b>576 s → 90 s</b><span>full check, with a parallel test runner</span></div>
+  <div class="fn4-c"><b>54 s → 17 s</b><span>37 tests, with fixtures built in one shot</span></div>
+  <div class="fn4-c"><b>19.3 → 10.3 GB</b><span>build directory, without debug info in tests</span></div>
+  <div class="fn4-c"><b>both platforms</b><span>lint the other OS's code from any machine</span></div>
+</div>
+<p class="fn-caption">Every minute off the gate is a minute off every merge, for every agent.</p>
+```
+
+::: {.notes}
+Because every merge goes through a gate, gate time multiplies across the whole swarm, so it's worth optimizing.
+
+Switching to a parallel test runner took the full check from 576 seconds to 90.  Building git fixtures in one shot took one group of 37 tests from 54 seconds to 17.  Dropping debug info from test builds nearly halved the build directory, from 19.3 to 10.3 gigabytes, which matters when several worktrees each have one.
+
+And the lint runs for the other operating system from any machine, so code that only compiles on one platform doesn't slip past workers on the other.
+:::
+
+## Caches lie, part two
+
+```{=html}
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">IN CI</div>
+    <b>A reused runner checkout</b>
+    <ul>
+      <li>A cache built later, from another MR</li>
+      <li>Looked newer than the source files</li>
+      <li>The build compiled against it</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">THE FIX</div>
+    <b>Don't trust timestamps</b>
+    <ul>
+      <li>Touch tracked files before building</li>
+      <li>Cache third-party dependencies only</li>
+      <li>Keep main's cache apart from MRs'</li>
+    </ul>
+  </div>
+</div>
+<p class="fn-caption">The same timestamp trap as shared worktrees, in a different place.</p>
+```
+
+::: {.notes}
+The shared build directory problem showed up in CI too.  The runner reused its checkout, and a cache built later from another merge request looked newer than the source files, so the build compiled against that other change.
+
+The fix was to stop trusting timestamps: touch the tracked files before building, cache only third-party dependencies, and keep main's cache separate from merge requests'.  It's the same trap as the shared worktrees, in a different place.
 :::
 
 ## Field notes, in one slide {.final-slide}
