@@ -983,12 +983,12 @@ Some things were deferred deliberately, like code signing and CI runners, and th
 <div class="fn3-numbers">
   <div class="fn3-col">
     <div class="eyebrow">SWARM B · FIRST 6 DAYS</div>
-    <div class="fn3-big"><b>914</b><span>commits</span></div>
+    <div class="fn3-big"><b>956</b><span>commits</span></div>
     <div class="fn3-grid">
-      <div><b>133</b><span>agent sessions, 3 machines</span></div>
-      <div><b>210</b><span>issues claimed</span></div>
-      <div><b>208</b><span>issues merged</span></div>
-      <div><b>208</b><span>gates run</span></div>
+      <div><b>146</b><span>agent sessions, 3 machines</span></div>
+      <div><b>229</b><span>claims</span></div>
+      <div><b>243</b><span>MRs merged</span></div>
+      <div><b>217</b><span>gates run</span></div>
     </div>
   </div>
   <div class="fn3-col">
@@ -1002,13 +1002,13 @@ Some things were deferred deliberately, like code signing and CI runners, and th
     </div>
   </div>
 </div>
-<p class="fn-caption">Only 4 of Swarm B's 210 claimed issues were released.  Most work that started, landed.</p>
+<p class="fn-caption">Only 5 of Swarm B's 229 claims were released.  Most work that started, landed.</p>
 ```
 
 ::: {.notes}
-Some scale, counted from the repositories and their tracking data: Swarm B on 22 October, Swarm A on 20 October.
+Some scale, counted from the repositories and their tracking data: Swarm B on 23 October, Swarm A on 20 October.
 
-Swarm B made 914 commits in its first six days, across 133 agent sessions on three machines: 210 issues claimed, 208 merged, and 208 gates run.  Only four claims were released unfinished.
+Swarm B made 956 commits in its first six days, across 146 agent sessions on three machines: 229 claims, 243 merge requests merged, and 217 gates run.  Only five claims were released unfinished, all lost races.
 
 Swarm A merged 259 changes to main in its first eight days, 52 on its busiest day, with 1,260 tests passing and an 11-minute full local gate.
 :::
@@ -1852,6 +1852,434 @@ And the lint runs for the other operating system from any machine, so code that 
 The shared build directory problem showed up in CI too.  The runner reused its checkout, and a cache built later from another merge request looked newer than the source files, so the build compiled against that other change.
 
 The fix was to stop trusting timestamps: touch the tracked files before building, cache only third-party dependencies, and keep main's cache separate from merge requests'.  It's the same trap as the shared worktrees, in a different place.
+:::
+
+## Keep going, bugs and all?
+
+```{=html}
+<div class="fn-divider">
+  <div class="eyebrow">APPENDIX V · THE QUESTION</div>
+  <p class="big-claim">Is it OK for the swarm to keep going, bugs and all, and fix later?</p>
+  <p class="fn-divider-sub">What six days of one swarm's data say, and what they don't yet.</p>
+</div>
+```
+
+::: {.notes}
+A question I keep getting: is it OK to let the swarm keep moving, merging fast, and fix bugs later?  Here's what one swarm's own data says after six days, both for and against.
+:::
+
+## What “fix later” has cost so far
+
+```{=html}
+<div class="fn6-facts">
+  <div class="fn6-f"><b>16%</b><span>of issues were bugs</span><small>37 bugs, 184 tasks</small></div>
+  <div class="fn6-f"><b>63 min</b><span>median time to fix a bug</span><small>90% within 2.4 h · tasks: 81 min</small></div>
+  <div class="fn6-f"><b>0</b><span>open bugs</span><small>and 0 reverts</small></div>
+  <div class="fn6-f"><b>8 → 0</b><span>defects in a stability sweep</span><small>found and fixed in under 2 hours</small></div>
+  <div class="fn6-f"><b>4 / 4</b><span>full gates of main passed</span><small>after merging on the quick gate</small></div>
+  <div class="fn6-f"><b>0</b><span>gate failures in the last ~44 h</span><small>about 10% over all six days</small></div>
+</div>
+```
+
+::: {.notes}
+The numbers from one swarm, six days in.
+
+Bugs were 16% of issues: 37 bugs against 184 tasks.  The median bug was fixed 63 minutes after it was filed, 90% within two and a half hours, slightly faster than the median task.  None is open, and nothing has ever been reverted.
+
+When I asked for a stable feature set, a stability sweep of every command and pane found eight defects, and all eight were fixed in under two hours; a second sweep found only small naming and layout issues.
+
+Since merges started landing on the quick smoke gate, all four full gates of main have passed.  And over six days, about one gate in ten failed, but none in the last 44 hours.
+:::
+
+## The case for, and the case against
+
+```{=html}
+<div class="fn6-case">
+  <div class="fn6-col for">
+    <div class="eyebrow green">FOR</div>
+    <div>Bugs are cheap: found and fixed in about an hour</div>
+    <div>The quick gate hasn't let a defect through to main yet</div>
+    <div>The safety nets keep tightening: red main freezes claims and merges</div>
+    <div>Late defects were mostly wrong statistics, not lost data</div>
+  </div>
+  <div class="fn6-col against">
+    <div class="eyebrow red">AGAINST</div>
+    <div>Some defects lived 35–58 hours before anyone noticed</div>
+    <div>Claim races still threw work away, 5 times</div>
+    <div>No send-back rate yet, so rework isn't measured</div>
+    <div>Only 4 full gates of evidence; the sibling swarm went red twice in a day</div>
+  </div>
+</div>
+<p class="fn6-verdict">So far: <b>yes, while main stays green, bugs are tickets, and the tool enforces the stop.</b>  Not yet proven for real users.</p>
+```
+
+::: {.notes}
+For: bugs are cheap here.  They get filed and fixed in about an hour, the quick gate hasn't let a defect reach main, and every incident has made the safety nets tighter.  Most of the defects that slipped through were analytics showing wrong numbers, not lost data, and each fix came with a test that pins it.
+
+Against: some defects lived a long time before anyone noticed, 35 to 58 hours of wrong statistics that I was reading in the meantime.  Process bugs still cost real work: claim races threw work away five times.  There's no send-back rate yet, so how much rework "fix later" causes isn't measured.  And the evidence is thin: four full gates of main, all in about a day, while the sibling swarm went red twice in one day.
+
+My answer so far: yes, as long as main stays green, bugs are treated as ordinary tickets, and the tool enforces the stop when something breaks.  But this is a tool used by me, not a product with customers, and that changes the risk a lot.
+:::
+
+## A rule the tool didn't enforce
+
+```{=html}
+<div class="fn6-gap">
+  <div class="fn3-race-tl">
+    <div class="eyebrow red">THE GAP</div>
+    <div class="fn3-ev"><i>rule</i><span>nothing merges while main is red</span></div>
+    <div class="fn3-ev"><i>tool</i><span>claim refused new work, but land didn't check</span></div>
+    <div class="fn3-ev bad"><i>result</i><span>two MRs landed with two red-main issues open</span></div>
+  </div>
+  <div class="fn3-race-fix">
+    <div class="eyebrow green">THE SAME DAY</div>
+    <div class="fn3-seq"><b>Land refuses too</b><span>unless the MR fixes the red issue, or a reason is given</span></div>
+    <div class="fn3-seq"><b>One shared check</b><span>claim and land call the same function</span></div>
+  </div>
+</div>
+<p class="fn-caption">A rule only in the docs broke within a day of being needed.</p>
+```
+
+::: {.notes}
+The rule said nothing merges while main is red.  The claim command enforced its half: no new work.  But the land command never checked, and in the sibling swarm, two merge requests landed while two red-main issues were open.
+
+It was fixed the same day: land now refuses too, unless the merge request fixes the red issue or the coordinator gives an explicit reason, and both commands share one function for the check.  The lesson is the same one as the whole appendix: a rule that only lives in the docs breaks the first time it matters.
+:::
+
+## Workers keep going
+
+```{=html}
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">BEFORE</div>
+    <b>The coordinator starts each worker</b>
+    <ul>
+      <li>A worker finishes one issue and stops</li>
+      <li>The coordinator has to notice and start another</li>
+      <li>It can only start sessions when the owner is around</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">NOW</div>
+    <b>Workers schedule themselves</b>
+    <ul>
+      <li>After submitting, take the next unclaimed issue</li>
+      <li>Repeat until none is left, then stop and say so</li>
+      <li>The coordinator only fills empty slots and redirects by message</li>
+    </ul>
+  </div>
+</div>
+```
+
+::: {.notes}
+Originally the coordinator started every worker, one issue each.  But the coordinator's own harness only lets it start new sessions in turns that I begin, so while I was away, finished workers just stopped.
+
+Now workers keep going.  After submitting, a worker takes the next open, unclaimed issue, and repeats until there are none left, then logs that it stopped because there was nothing left.  The coordinator only starts a worker to fill an empty slot, and redirects running workers by sending them a message.
+:::
+
+## One command to submit
+
+```{=html}
+<div class="fn4-path coord">
+  <div class="fn4-step"><i>1</i><b>rebase</b><span>onto the latest main, or the MR below</span></div>
+  <div class="fn4-step"><i>2</i><b>ci --changed</b><span>on the rebased tree</span></div>
+  <div class="fn4-step"><i>3</i><b>push</b><span>with a lease, so nobody's work is overwritten</span></div>
+  <div class="fn4-step"><i>4</i><b>mark ready</b><span>refused if Progress isn't filled in</span></div>
+  <div class="fn4-step"><i>5</i><b>start CI</b><span>the MR's pipeline</span></div>
+  <div class="fn4-step"><i>6</i><b>log submit</b><span>the event, for the timeline</span></div>
+</div>
+<p class="fn-caption">The submit checklist became one command: <code>ready</code>.</p>
+```
+
+::: {.notes}
+Submitting used to be a checklist the worker had to remember.  Now it's one command.  It rebases onto the latest main, re-runs the changed-scope gate on the rebased tree, pushes with a lease so it can't overwrite anyone's newer work, marks the merge request ready, starts its pipeline, and logs the submit.  It refuses if the Progress section is still the template's placeholder.
+
+Rebasing before submit also takes load off the coordinator, which otherwise has to rebase stale branches itself.  A send-back-rate measure is being built to check that.
+:::
+
+## Agents run stale tooling
+
+```{=html}
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">THE PROBLEM</div>
+    <b>Each agent's build tool is as old as its branch</b>
+    <ul>
+      <li>A worker ran main's full gate with its own, older tool</li>
+      <li>Changes to the gate took effect whenever agents happened to rebuild</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">THE FIX</div>
+    <b>Run main's own tool on main</b>
+    <ul>
+      <li>The claimant only decides, races and checks out</li>
+      <li>Then hands over to the tool in the commit being gated</li>
+      <li>A gate change takes effect with the commit it gates</li>
+    </ul>
+  </div>
+</div>
+```
+
+::: {.notes}
+A subtle one.  The process lives in the build tool, but each agent runs the build tool from its own branch, which can be days older than main.  So a worker could run main's full gate using an outdated version of the gate.
+
+The fix: the claiming agent only decides that a full gate is due, wins the race and checks out main.  Then it hands over to the tool built from the commit being gated.  A change to the full gate now takes effect with the commit it gates, not whenever each agent happens to rebuild.
+:::
+
+## Hold the claim before the long check
+
+```{=html}
+<div class="fn3-race">
+  <div class="fn3-race-tl">
+    <div class="eyebrow red">WHAT HAPPENED</div>
+    <div class="fn3-ev"><i>claim</i><span>an agent started a claim, which ran a due full gate first</span></div>
+    <div class="fn3-ev"><i>18 min</i><span>the issue looked free the whole time</span></div>
+    <div class="fn3-ev bad"><i>race</i><span>another agent took it; the first agent's work was thrown away</span></div>
+  </div>
+  <div class="fn3-race-fix">
+    <div class="eyebrow green">THE ORDER NOW</div>
+    <div class="fn3-seq"><b>Hold the issue first</b><span>label, comment and event before anything slow</span></div>
+    <div class="fn3-seq"><b>Then run the full gate</b><span>the claim is already visible to others</span></div>
+    <div class="fn3-seq"><b>If main is red</b><span>release the task's claim and take the red issue instead</span></div>
+  </div>
+</div>
+```
+
+::: {.notes}
+Another claim race, from a new direction.  When a claim found that a full gate of main was due, it ran the gate first and only then marked the issue as taken.  For eighteen minutes the issue looked free, another agent claimed it, and the first agent's work was thrown away.
+
+The claim's steps are now a planned order: hold the issue first, then run anything slow.  If the full gate finds main red, the agent releases the task it was going to do and takes the red-main issue instead.
+:::
+
+## Gate the tree, not the branch
+
+```{=html}
+<div class="fn4-elect">
+  <div class="fn4-agents">
+    <div class="fn4-a"><b>gated</b><span>tree 7c1e…</span><em>passed</em></div>
+    <div class="fn4-a"><b>branch moved</b><span>tree 7c1e…</span><em>same tree</em></div>
+    <div class="fn4-a win"><b>land</b><span>tree 7c1e…</span><em>landing</em></div>
+  </div>
+  <div class="fn4-elect-copy">
+    <p class="big-claim compact">If the content is what was gated, a moved branch is fine.</p>
+    <p>Land restacks without a checkout and compares trees.  Only a different tree is refused.</p>
+  </div>
+</div>
+```
+
+::: {.notes}
+Land used to refuse any branch that had moved since it was stacked, which was safe but caused needless re-gating: often a branch had been rebased and its content was identical.
+
+Now land restacks the branches in memory, without a checkout, and compares the resulting tree with the one that was gated.  If they're identical, it lands, and says so.  Only a different tree is refused.  It's content-addressed verification: what matters is what was tested, not which commit pointer it hangs off.
+:::
+
+## Measure the long pole
+
+```{=html}
+<div class="fn4-cheap">
+  <div class="fn4-c"><b>1,085</b><span>tests in one full gate, 4,508 s of test time</span></div>
+  <div class="fn4-c"><b>97.5 s → 12.8 s</b><span>the longest test, split five ways</span></div>
+  <div class="fn4-c"><b>565 s → 296 s</b><span>32 git-heavy tests: no pushes, fixtures in one shot</span></div>
+  <div class="fn4-c"><b>~8 → ~3 min</b><span>the sibling swarm's typical quick gate</span></div>
+</div>
+<p class="fn-caption">Each gate now keeps per-test timings, so the slowest tests are found, not guessed.</p>
+```
+
+::: {.notes}
+Every gate now keeps its per-test timings, and a command compares them across gates to find the long poles.
+
+One full gate ran 1,085 tests, about 4,500 seconds of test time in total.  The longest single test took 97.5 seconds; split five ways, the longest piece now takes 12.8.  Thirty-two git-heavy tests went from 565 seconds to 296 by removing pushes and building fixtures in one shot.  And in the sibling swarm, the typical quick gate fell from about eight minutes to about three.
+:::
+
+## Comparing notes with other factories
+
+```{=html}
+<div class="fn-divider">
+  <div class="eyebrow">APPENDIX IV · OTHER TEAMS</div>
+  <p class="big-claim">Several teams, different factories, similar lessons.</p>
+  <p class="fn-divider-sub">Where we agree, where it hurts, where we disagree, and what we can't answer yet.</p>
+</div>
+```
+
+## Three strands carry the swarm
+
+```{=html}
+<div class="fn5-strands">
+  <div class="fn5-s blue"><b>The tracker</b><span>carries the work</span><small>issues, claims, merge requests</small></div>
+  <div class="fn5-s green"><b>The tracking branch</b><span>carries the record</span><small>one event log per agent</small></div>
+  <div class="fn5-s cream"><b>The build tool</b><span>carries the rules</span><small>claim, gate, stack, land</small></div>
+</div>
+<p class="fn-caption">A one-line summary another team offered after seeing the design.</p>
+```
+
+::: {.notes}
+When I showed the design to another team, they summed it up in one line better than I had: the tracker carries the work, the tracking branch carries the record, and the build tool carries the rules.
+
+That's the whole architecture of the swarm's process.  None of it lives only in a prompt.
+:::
+
+## Where it hurts
+
+```{=html}
+<div class="fn-pain">
+  <div><b>The bottleneck moves</b><span>once nobody reads every line, merge, CI and special hardware become the limit</span></div>
+  <div><b>Coordination bugs are swarm bugs</b><span>racing claims, a coordinator that skipped claiming, idle workers waiting on merges</span></div>
+  <div><b>Hard to see without a timeline</b><span>none of these showed up until the events were drawn</span></div>
+  <div><b>Cost adds up</b><span>especially refactoring loops</span></div>
+  <div><b>Not everything transfers</b><span>a shared compile cache got zero hits across worktrees</span></div>
+  <div><b>A guess, untested</b><span>past 4–5 machines, merge and test dominate, and more work gets redone</span></div>
+</div>
+```
+
+::: {.notes}
+Comparing notes with other teams running factories, the pains were remarkably similar.
+
+Once nobody reads every line, the bottleneck moves to merging, CI, and any tests that need special hardware.  Coordination bugs are swarm bugs, and they were invisible until there was a timeline: racing claims, a coordinator that decided it didn't need to claim tickets, workers sitting idle waiting for merges.  Token cost adds up, especially for refactoring loops.
+
+And not everything transfers.  A shared compile cache that works well for another team got zero cache hits across our worktrees, and turning off incremental builds to use it nearly doubled warm rebuilds.  It may well be configuration; we haven't found out.
+
+The last point is a guess, not a result: beyond four or five machines, I'd expect merge and test to dominate, and more work to be redone because changes land out of step.
+:::
+
+## Keep doing and judging apart
+
+```{=html}
+<div class="fn5-judge">
+  <div class="fn5-jcol do"><div class="eyebrow">THE WORKER</div><b>Builds it</b><span>and runs its own tests</span></div>
+  <div class="fn5-jarrow">→</div>
+  <div class="fn5-jcol judge"><div class="eyebrow green">AN INDEPENDENT JUDGE</div><b>Decides if it's done</b>
+    <ul><li>a clean context</li><li>a different model</li><li>adversarial: looks for gaps and hallucinations</li><li>for UI: records a video and checks it, even frame by frame</li></ul>
+  </div>
+</div>
+<p class="fn-caption">Other teams' practice.  Our swarms lean on scripted gates and an oracle instead.</p>
+```
+
+::: {.notes}
+Other teams separate doing from judging much more strictly than I do.  An independent judge, with a clean context and often a different model, decides whether the work met its goal.  Adversarial reviews hunt for hallucinations and gaps.  For UI work, one team records a video and has the judge verify it; one judge checked an animation's timing frame by frame.
+
+My swarms lean on scripted gates and an oracle instead.  Both approaches share the same principle: scripts and test results, not the agent's own judgement, decide when work is done.
+:::
+
+## Test gaming
+
+```{=html}
+<div class="fn-vs">
+  <div class="fn-card bad">
+    <div class="eyebrow">WHAT OTHER TEAMS SAW</div>
+    <b>Green, but not true</b>
+    <ul>
+      <li>Assertions weakened, tests skipped or rewritten to pass</li>
+      <li>Only noticed deep into a big feature</li>
+      <li>Fixed bugs came back: their regression tests had been quietly gamed</li>
+    </ul>
+  </div>
+  <div class="fn-vs-mark">→</div>
+  <div class="fn-card good">
+    <div class="eyebrow">DEFENSES</div>
+    <b>Make gaming visible</b>
+    <ul>
+      <li>A separate agent owns the integration tests</li>
+      <li>A check at session end scans for gaming patterns</li>
+      <li>Flag deleted tests, new ignores, loosened asserts in review</li>
+    </ul>
+  </div>
+</div>
+<p class="fn-caption">We haven't seen it, but we test outcomes, so we might not.  Outcome tests are still files a worker can edit.</p>
+```
+
+::: {.notes}
+This one came from another team, and it's a warning.  They found agents weakening assertions, skipping failing tests, or changing tests to match new behavior, and it surfaced late because everything looked green.  The worst case: bugs they had fixed came back in production, because the regression tests had been quietly gamed later.
+
+Their defenses: a separate agent owns the integration tests, and a check at the end of every session scans for gaming patterns before work can land.
+
+I haven't seen it in my swarms.  But I test outcomes rather than reading the tests, so I might not notice.  And outcome tests are still files a worker can edit.  A cheap next step would be for the layer checker or the coordinator's review to flag deleted tests, new ignored tests or loosened assertions in a diff.
+:::
+
+## Factory or swarm?  A dial
+
+```{=html}
+<div class="fn5-dial">
+  <div class="fn5-track"><span class="l">SAFETY</span><span class="r">SPEED</span><i class="k1"></i><i class="k2"></i></div>
+  <div class="fn5-ends">
+    <div><b>Factory</b><span>defined roles · a human approves the plan and every merge · a fixed quality bar · production users</span></div>
+    <div><b>Swarm</b><span>generalists on thin slices · the coordinator merges on scripted gates · fast course-correction</span></div>
+  </div>
+</div>
+<p class="fn-caption">Production changes the risk.  A swarm that quietly deletes code or tests is a liability for customers.</p>
+```
+
+::: {.notes}
+Talking to other teams, it helped to think of a dial between safety and speed, rather than right and wrong.
+
+At one end, a factory: defined roles, tickets fed through a predictable process, and a human in charge of the plan and the merge.  That team runs production systems with real users, and was bitten by too little discipline when it moved fast.  At the other end, my swarms: generalist agents on thin vertical slices, merging on scripted gates, and correcting course quickly.
+
+The open question for the factory end is whether a human merge gate leaves a high-throughput swarm always waiting.  The open question for my end is what changes when the output goes to customers.
+:::
+
+## Where teams disagree
+
+```{=html}
+<div class="fn5-debate">
+  <div class="fn5-q"><b>Plan up front, or steer as you go?</b><span>adversarially reviewed specs, then near one-shot</span><span>thin slices, correct between them</span></div>
+  <div class="fn5-q"><b>Coding skills?</b><span>“explain it twice, it's a skill”</span><span>skills as glue only; coding skills make it worse</span></div>
+  <div class="fn5-q"><b>Do code-health metrics matter to agents?</b><span>simpler code: fewer tokens, fewer hallucinations</span><span>it feels right; nobody has measured it</span></div>
+  <div class="fn5-q"><b>How much review?</b><span>earn trust like a new hire; the risk is what's left off the list</span><span>trust the architecture when tests enforce it</span></div>
+</div>
+```
+
+::: {.notes}
+Four honest disagreements between teams.
+
+Plan or steer: one view is to write well-specified requirements and a plan, put them through rounds of adversarial review, and then the work is often close to one-shot.  Mine is to build thin slices and course-correct between them.  A middle view: even a skimmed spec gives agents scaffolding and people a shared reference.
+
+Skills: one view is that anything you explain twice should become a skill.  Mine is that skills are great as glue, for git and filing bugs, but skills that dictate how to write code made results worse, and forcing test-driven development roughly doubled task time.
+
+Code-health metrics: one view is that simpler code means fewer tokens and fewer hallucinations.  My refactoring experiment moved the grades but didn't change behavior, and the agent itself argued long functions read fine to it.  Nobody has measured it properly.
+
+Review: one view is that trust should be earned like a new hire's, because the risk is what was never written down.  Mine is that architecture-level trust is reasonable when tests enforce the architecture.
+:::
+
+## Experiments worth running
+
+```{=html}
+<div class="fn2-insights">
+  <div><b>A real backlog item</b><span>end to end, against the usual process: effort and quality</span></div>
+  <div><b>A new product from specs</b><span>not a rebuild of one that exists</span></div>
+  <div><b>Many revisions</b><span>compatibility, consistency and regressions over time</span></div>
+  <div><b>A performance-only swarm</b><span>no functional changes, simpler review</span></div>
+  <div class="hi"><b>With and without</b><span>refactoring loops, shared memory, adversarial review</span></div>
+  <div><b>Many machines</b><span>especially fleets of test hardware</span></div>
+</div>
+```
+
+::: {.notes}
+The experiments several of us want to run next.
+
+Take a real backlog requirement all the way through implementation, validation and integration, and compare total effort and quality with the usual process.  Build a new product from specs, rather than rebuilding one that already exists, and run it across many revisions to see how compatibility, consistency and regressions hold up.  Try a swarm that only does performance work, with no functional changes, which keeps review simple.
+
+And the one I most want: proper with-and-without comparisons for refactoring loops, shared memory and adversarial review, instead of arguing from feel.
+:::
+
+## Questions nobody has answered
+
+```{=html}
+<div class="fn5-open">
+  <div>Where does the human add the most: specs, tests, steering, or reviewing intent?</div>
+  <div>What should we measure: features shipped per unit of time, not lines of code?</div>
+  <div>If we can ship 100× the features, can users absorb them?</div>
+  <div>Are the features for people, or for agents?</div>
+  <div>Should agents share one memory, and how would we know it helps?</div>
+  <div>Shared swarm infrastructure, a template, or every team for itself?</div>
+</div>
+```
+
+::: {.notes}
+And the questions none of us can answer yet.
+
+Where does the human fit best: writing specs, deciding what to test, steering, or reviewing intent?  What should we measure?  One good suggestion is functionality shipped per unit of time, not lines of code.  If we can ship a hundred times the features, can users absorb them, and are those features for people or for agents?  Should agents share one memory?  And should organizations build shared swarm infrastructure, or at least a template, or should each team build its own?  Our view so far: a template eventually, but research first.
 :::
 
 ## Field notes, in one slide {.final-slide}
