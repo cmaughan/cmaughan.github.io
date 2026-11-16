@@ -1,11 +1,11 @@
 masonry();
 $(function () {
+    makeImagesResponsive();
     offCanvas();
     lightbox();
     carousels();
     utils();
     highlightCurrentPage();
-    makeImagesResponsive();
 });
 function highlightCurrentPage() {
   $("a[href='" + location.href + "']").parent().addClass("active");

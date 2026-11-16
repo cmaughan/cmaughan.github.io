@@ -145,3 +145,10 @@
 .sidebar-heading {
     font-size: 14px;
 }
+
+/* Inline images and videos never exceed the text column, even if a script fails. */
+.content-column-content img,
+.content-column-content video {
+  max-width: 100%;
+  height: auto;
+}
