@@ -1,6 +1,8 @@
+var windowWidth = $(window).width();
 masonry();
 $(function () {
     makeImagesResponsive();
+    enableContentImageLightbox();
     offCanvas();
     lightbox();
     carousels();
@@ -12,6 +14,23 @@ function highlightCurrentPage() {
 }
 function makeImagesResponsive() {
     $("img").addClass("img-responsive");
+}
+/* Clicking an inline image opens it full size; images that are already links are left alone. */
+function enableContentImageLightbox() {
+    $(".content-column-content img").each(function () {
+        var $img = $(this);
+        if ($img.closest("a").length) {
+            return;
+        }
+        var label = $img.attr("alt") ? "View full size: " + $img.attr("alt") : "View full size";
+        $img.wrap($("<a>", {
+            href: $img.attr("src"),
+            "class": "photo-lightbox-link",
+            "data-toggle": "lightbox",
+            "data-gallery": "page-images",
+            "aria-label": label
+        }));
+    });
 }
 /* =========================================
  *  carousels
