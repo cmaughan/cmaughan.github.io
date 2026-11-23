@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/megacity/live_coverage_pc.png"
+preview = "img/card/preview/megacity.mp4"
 date = "2026-08-17T08:30:00+01:00"
 title = "MegaCity"
 featured = true

@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/morse_beacon/morse_beacon.jpg"
+preview = "img/card/preview/morse_beacon.mp4"
 date = "2025-08-20T12:00:00+01:00"
 title = "Morse Beacon"
 description = "A compact RP2350-powered Morse beacon in a custom 3D-printed enclosure."

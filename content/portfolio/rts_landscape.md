@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/rts_landscape/rts.png"
+preview = "img/card/preview/rts_landscape.mp4"
 date = "2026-08-17T08:45:00+01:00"
 title = "RTS Landscape Generator"
 weight = 0

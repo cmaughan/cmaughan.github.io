@@ -17,7 +17,7 @@
               <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
               {{ with $page.Params.preview }}
               <video class="tile-preview" data-src="{{ . | absURL }}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i></span>
+              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i>Preview</span>
               {{ end }}
           </a>
           {{ else }}
@@ -25,7 +25,7 @@
               <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
               {{ with $page.Params.preview }}
               <video class="tile-preview" data-src="{{ . | absURL }}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i></span>
+              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i>Preview</span>
               {{ end }}
           </a>
           {{ end }}

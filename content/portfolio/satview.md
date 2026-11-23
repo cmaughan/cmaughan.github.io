@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/satview/satview.png"
+preview = "img/card/preview/satview.mp4"
 date = "2026-08-16T18:25:22+01:00"
 title = "SatView"
 featured = true

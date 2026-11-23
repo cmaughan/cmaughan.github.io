@@ -22,8 +22,21 @@ def serve() -> int:
     return subprocess.run(command, cwd=ROOT, check=False).returncode
 
 
-def preview_command(source: Path, output: Path, start: float, duration: float) -> list[str]:
-    """Build the ffmpeg command for a short, silent, looping tile preview."""
+def preview_command(
+    source: Path,
+    output: Path,
+    start: float,
+    duration: float,
+    crop: str | None = None,
+    crf: int = 28,
+) -> list[str]:
+    """Build the ffmpeg command for a short, silent, looping tile preview.
+
+    ``crop`` is an ffmpeg crop spec (``w:h:x:y``) applied before scaling, handy for
+    trimming a webcam inset out of a screen recording.  Small sources are not upscaled.
+    """
+    filters = [f"crop={crop}"] if crop else []
+    filters += [f"scale='min({PREVIEW_WIDTH},iw)':-2:flags=lanczos", "fps=30"]
     return [
         "ffmpeg",
         "-y",
@@ -35,13 +48,13 @@ def preview_command(source: Path, output: Path, start: float, duration: float) -
         str(source),
         "-an",
         "-vf",
-        f"scale={PREVIEW_WIDTH}:-2:flags=lanczos,fps=30",
+        ",".join(filters),
         "-c:v",
         "libx264",
         "-preset",
         "slow",
         "-crf",
-        "28",
+        str(crf),
         "-pix_fmt",
         "yuv420p",
         "-movflags",
@@ -50,9 +63,16 @@ def preview_command(source: Path, output: Path, start: float, duration: float) -
     ]
 
 
-def preview(source: Path, output: Path, start: float, duration: float) -> int:
+def preview(
+    source: Path,
+    output: Path,
+    start: float,
+    duration: float,
+    crop: str | None = None,
+    crf: int = 28,
+) -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
-    command = preview_command(source, output, start, duration)
+    command = preview_command(source, output, start, duration, crop, crf)
     return subprocess.run(command, cwd=ROOT, check=False).returncode
 
 
@@ -67,12 +87,16 @@ def main(argv: list[str] | None = None) -> int:
     preview_parser.add_argument("output", type=Path, help="output .mp4 path")
     preview_parser.add_argument("--start", type=float, default=0.0, help="start time in seconds")
     preview_parser.add_argument("--duration", type=float, default=5.0, help="loop length in seconds")
+    preview_parser.add_argument("--crop", help="ffmpeg crop w:h:x:y applied before scaling")
+    preview_parser.add_argument(
+        "--crf", type=int, default=28, help="x264 quality; raise it to shrink noisy clips"
+    )
 
     args = parser.parse_args(argv)
     if args.command == "serve":
         return serve()
     if args.command == "preview":
-        return preview(args.source, args.output, args.start, args.duration)
+        return preview(args.source, args.output, args.start, args.duration, args.crop, args.crf)
 
     parser.error(f"unknown command: {args.command}")
     return 2

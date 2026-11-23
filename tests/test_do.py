@@ -33,9 +33,19 @@ class PreviewCommandTests(unittest.TestCase):
 
         self.assertEqual(command[:7], ["ffmpeg", "-y", "-ss", "1.5", "-t", "4", "-i"])
         self.assertIn("-an", command)
-        self.assertIn("scale=720:-2:flags=lanczos,fps=30", command)
+        self.assertIn("scale='min(720,iw)':-2:flags=lanczos,fps=30", command)
         self.assertIn("+faststart", command)
         self.assertEqual(command[-1], "out.mp4")
+
+    def test_preview_command_crops_before_scaling(self):
+        command = do.preview_command(Path("in.mp4"), Path("out.mp4"), 0, 5, crop="720:540:360:90")
+
+        self.assertIn("crop=720:540:360:90,scale='min(720,iw)':-2:flags=lanczos,fps=30", command)
+
+    def test_preview_command_uses_requested_crf(self):
+        command = do.preview_command(Path("in.mp4"), Path("out.mp4"), 0, 5, crf=36)
+
+        self.assertEqual(command[command.index("-crf") + 1], "36")
 
     def test_preview_subcommand_runs_ffmpeg(self):
         with patch("subprocess.run") as run, patch.object(Path, "mkdir"):

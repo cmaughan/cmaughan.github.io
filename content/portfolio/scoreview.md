@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/scoreview/score.png"
+preview = "img/card/preview/scoreview.mp4"
 date = "2026-08-17T08:00:00+01:00"
 title = "ScoreView"
 featured = true

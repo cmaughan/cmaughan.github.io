@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/live_coding_experiments/live_coding_experiments.jpg"
+preview = "img/card/preview/live_coding_experiments.mp4"
 date = "2020-12-03T12:00:00+00:00"
 title = "Live Coding Experiments"
 description = "Experiments in live-coded music, audio visualization, profiling and small languages for sequencing and connecting modules."
