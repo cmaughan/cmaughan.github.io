@@ -10,8 +10,9 @@
       {{ end }}
     </ul>
     {{ partial "social_buttons_in_sidebar.html" . }}
+    <button type="button" class="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
 
-    <a class="fa" href="https://webring.xxiivv.com/#random" target="_blank" rel="noopener" aria-label="Visit a random XXIIVV webring site"><img src="https://webring.xxiivv.com/icon.black.svg" width="40" height="40" alt="XXIIVV webring"></a>
+    <a class="fa webring-link" href="https://webring.xxiivv.com/#random" target="_blank" rel="noopener" aria-label="Visit a random XXIIVV webring site"><img src="https://webring.xxiivv.com/icon.black.svg" width="40" height="40" alt="XXIIVV webring"></a>
     <div class="copyright">
       <p class="credit">
         {{ with .Site.Params.copyright }}

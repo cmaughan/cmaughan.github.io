@@ -2,7 +2,7 @@
 {{ $loading := .loading }}
 {{ $priority := .priority }}
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry-item">
-    <div class="box-masonry{{ if $page.Params.featured }} box-masonry-featured{{ end }}{{ if eq $page.Section "photos" }} box-masonry-photo{{ end }}">
+    <div class="box-masonry{{ if $page.Params.featured }} box-masonry-featured{{ end }}{{ if eq $page.Section "photos" }} box-masonry-photo{{ end }}{{ if $page.Params.preview }} has-preview{{ end }}">
         {{ if and (isset $page.Params "image") $page.Params.image }}
           {{ $cardBase := $page.Params.image | replaceRE "^img/" "img/card/" | replaceRE "\\.[^.]+$" "" }}
           {{ $card360 := printf "%s_360.webp" $cardBase }}
@@ -15,10 +15,18 @@
           {{ else if eq $page.Params.showonlyimage true }}
           <a href="{{ $page.Permalink }}" title="" class="box-masonry-image with-hover-overlay">
               <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
+              {{ with $page.Params.preview }}
+              <video class="tile-preview" data-src="{{ . | absURL }}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i></span>
+              {{ end }}
           </a>
           {{ else }}
           <a href="{{ $page.Permalink }}" title="" class="box-masonry-image with-hover-overlay with-hover-icon">
               <img src="{{ $card720 | absURL }}" srcset="{{ $card360 | absURL }} 360w, {{ $card720 | absURL }} 720w" sizes="(min-width: 1200px) 25vw, (min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw" width="{{ $cardImage.Width }}" height="{{ $cardImage.Height }}" loading="{{ $loading }}" decoding="async"{{ if $priority }} fetchpriority="high"{{ end }} alt="{{ $page.Title }}" class="img-responsive">
+              {{ with $page.Params.preview }}
+              <video class="tile-preview" data-src="{{ . | absURL }}" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="tile-preview-badge" aria-hidden="true"><i class="fa fa-play"></i></span>
+              {{ end }}
           </a>
           {{ end }}
         {{ end }}

@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/draxul/terminals_mac.png"
+preview = "img/card/preview/draxul.mp4"
 date = "2026-05-20T18:25:22+05:30"
 title = "Draxul"
 featured = true

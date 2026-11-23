@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/jorvik/live_code_sf_dashboard_desktop.jpg"
+preview = "img/card/preview/jorvik.mp4"
 date = "2023-09-13T18:18:22+05:32"
 title = "Rezonality"
 featured = true

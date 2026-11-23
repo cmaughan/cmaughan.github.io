@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/msynth/msynth.png"
+preview = "img/card/preview/msynth.mp4"
 date = "2026-08-17T10:45:00+01:00"
 title = "MSynth"
 weight = 0

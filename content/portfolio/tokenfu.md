@@ -2,6 +2,7 @@
 showonlyimage = false
 draft = false
 image = "img/portfolio/tokenfu/tokenfu.png"
+preview = "img/card/preview/tokenfu.mp4"
 date = "2026-08-17T09:00:00+01:00"
 title = "TokenFu"
 weight = 0
