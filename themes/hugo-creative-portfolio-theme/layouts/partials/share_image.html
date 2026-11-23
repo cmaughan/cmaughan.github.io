@@ -1,0 +1,24 @@
+{{/* Link-preview image tags.  Uses the page's `image`, else the site's
+     shareImage, resized to at most 1200px JPEG so Slack and friends will
+     actually fetch it.  Falls back to the original file if it can't be
+     processed. */}}
+{{ $src := .Params.image | default site.Params.shareImage }}
+{{ with $src }}
+  {{ $alt := cond (ne $.Params.image nil) $.Title site.Title }}
+  {{ $res := resources.Get (strings.TrimPrefix "/" .) }}
+  {{ if $res }}
+    {{ $img := $res }}
+    {{ if or (gt $res.Width 1200) (gt $res.Height 1200) (ne $res.MediaType.SubType "jpeg") }}
+      {{ $img = $res.Fit "1200x1200 q82 jpg" }}
+    {{ end }}
+<meta property="og:image" content="{{ $img.Permalink }}">
+<meta property="og:image:width" content="{{ $img.Width }}">
+<meta property="og:image:height" content="{{ $img.Height }}">
+<meta property="og:image:alt" content="{{ $alt }}">
+<meta name="twitter:image" content="{{ $img.Permalink }}">
+  {{ else }}
+<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:image:alt" content="{{ $alt }}">
+<meta name="twitter:image" content="{{ . | absURL }}">
+  {{ end }}
+{{ end }}

@@ -4,6 +4,16 @@ theme = "hugo-creative-portfolio-theme"
 languageCode = "en-us"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
+
+# Expose static/img to Hugo's image pipeline so share images can be resized
+# at build time.  Declaring mounts replaces the defaults, so static is re-added.
+[module]
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "static/img"
+    target = "assets/img"
 [params]
   # Style options: default (pink), blue, green, pink, red, sea, violet
   # Use custom.css for your custom styling
@@ -11,6 +21,8 @@ disableKinds = ["taxonomy", "term"]
   title = "ChrisMaughan.com"
   description = "Personal projects and presentations by Chris Maughan, spanning graphics, developer tools, agentic software, audio, and radio electronics."
   copyright = "Chris Maughan"
+  # Fallback link-preview image for pages without their own `image`.
+  shareImage = "img/share.jpg"
   sidebarAbout = [
     "I'm a programmer, working for NVIDIA.",
     "This site has my projects, talks, photos, and the radios I've been building.",
